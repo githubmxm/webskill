@@ -6,13 +6,14 @@
 
 <script>
 export default {
-  name: 'app',
-  data () {
+  name: "app",
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
+      msg: "Welcome to Your Vue.js App"
+    };
+  },
+  methods: {}
+};
 </script>
 
 <style>
@@ -52,7 +53,8 @@ table {
 textarea {
   resize: none;
 }
-fieldset,abbr,
+fieldset,
+abbr,
 acronym {
   border: 0;
 }
