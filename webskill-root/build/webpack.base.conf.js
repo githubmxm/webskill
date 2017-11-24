@@ -8,6 +8,7 @@ function resolve (dir) {
 }
 
 module.exports = {
+  //入口文件，可设置多个
   entry: {
     app: './src/main.js'
   },
@@ -27,6 +28,7 @@ module.exports = {
   },
   module: {
     rules: [
+      //代码检查
       // {
       //   test: /\.(js|vue)$/,
       //   loader: 'eslint-loader',
@@ -61,6 +63,10 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
       }
     ]
   }
