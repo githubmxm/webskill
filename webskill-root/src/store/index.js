@@ -8,8 +8,8 @@ export default new Vuex.Store({
     historyLength: 0
   },
   mutations: {
-    updateHistoryLength (state) {
-      state.historyLength++
+    updateHistoryLength(state) {
+      state.historyLength++;
     }
   }
 })
