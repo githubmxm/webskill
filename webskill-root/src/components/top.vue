@@ -1,6 +1,6 @@
 <template>
   <ul class="top">
-    <li>JS</li>
+    <li>sssss</li>
   </ul>
 </template>
 
@@ -17,14 +17,14 @@ export default {
 
 <style lang="scss" scoped>
   .top{
-    overflow: hidden;
-  }
-  .top li{
-    width:90px;
-    height: 28px;
-    line-height: 28px;
-    text-align: center;
-    cursor: pointer;
-    font-size: 18px;
+      overflow: hidden;
+      li{
+        width:90px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 18px;
+      }
   }
 </style>

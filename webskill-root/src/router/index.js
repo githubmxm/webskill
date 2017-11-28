@@ -16,8 +16,7 @@ const router = new Router({
     path: '/',
     name: 'Index',
     components: {
-      default: Index,
-      top:Top
+      default: Index
     },
     children: [{
       path: '/'

@@ -73,6 +73,12 @@ select:focus {
   outline-style: none;
 }
 
+/*IE输入框X屏蔽*/
+
+input::-ms-clear{display:none;}
+
+input::-ms-reveal{display:none;}
+
 
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 
@@ -150,7 +156,6 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 
 /*placeholder色值*/
 
