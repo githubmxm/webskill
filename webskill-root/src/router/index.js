@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Store from '@/store'
 import Index from '@/components'
-import Top from '@/components/top'
 
 
 Vue.use(Router)
