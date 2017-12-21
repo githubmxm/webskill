@@ -16,6 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+   @import '../assets/css/minxin';
   .top{
       overflow: hidden;
       li{
@@ -24,7 +25,8 @@ export default {
         line-height: 28px;
         text-align: center;
         cursor: pointer;
-        font-size: 18px;
+        @include sc(28px,#fff);
       }
+      
   }
 </style>

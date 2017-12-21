@@ -3,7 +3,7 @@
     <transition appear>
       <p class="title">这里有你想不到的和你想要的</p>
     </transition>
-    <ul>
+    <ul class="navLeft">
       <li>我是游客</li>
       <li>我是主宰</li>
     </ul>  
@@ -22,10 +22,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/css/minxin';
 .title{
   font-size: 30px;
   text-align: center;
   padding:10px 0;
+}
+.navLeft{
+  @include sc(20px,#fff);
 }
 .v-enter {
   opacity: 0
