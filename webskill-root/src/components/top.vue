@@ -5,13 +5,26 @@
 </template>
 
 <script>
-
+import {mapState,mapMutations,mapActions} from 'vuex'
 export default {
   name: "top",
   data() {
     return {
       msg: "公共头部导航"
     };
+  },
+  created () {
+    
+  },
+  computed: {
+    ...mapState({
+      navT:state=>state.mapState.navT,
+    })
+  },
+  methods: {
+    ...mapActions([
+      'getNav'
+    ])
   }
 };
 </script>

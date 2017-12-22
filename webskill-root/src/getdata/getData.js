@@ -1,4 +1,6 @@
 /**
  * 获取页签类型
  */
-export const navTabType=()=>{};
+export const navTabType=()=>{
+  
+};
