@@ -1,11 +1,11 @@
 <template>
   <ul class="top">
-    <li>sssss</li>
+    <li v-for="(k,v) in navT" :id="nav">{{v}}</li>
   </ul>
 </template>
 
 <script>
-import {mapState,mapMutations,mapActions} from 'vuex'
+// import {mapState,mapMutations,mapActions} from 'vuex'
 export default {
   name: "top",
   data() {
@@ -17,14 +17,19 @@ export default {
     
   },
   computed: {
-    ...mapState({
-      navT:state=>state.mapState.navT,
-    })
+    // ...mapState({
+    //   navT:Store=>Store.state.navT
+    // })
   },
   methods: {
-    ...mapActions([
-      'getNav'
-    ])
+    // ...mapActions([
+    //   'getNav'
+    // ])
+
+  },
+  mounted:function(){
+    console.log(Store.state.HeaderStore.navT.length);
+    // this.getNav("../json/headJson.json");
   }
 };
 </script>

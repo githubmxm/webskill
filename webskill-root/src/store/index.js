@@ -9,5 +9,7 @@ import HeaderStore from './headerStore'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    HeaderStore
+    modules:{
+        HeaderStore
+    }
 })
