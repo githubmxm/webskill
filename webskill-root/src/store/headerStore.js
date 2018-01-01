@@ -1,5 +1,6 @@
 import axios from 'axios'
-export default{
+
+const headerStore={
   state: {
     //页签
     navT:[]
@@ -15,9 +16,12 @@ export default{
         method:get,
         url:url
       }).then((res)=>{
+         console.log(res)
          let data=res.data.data
          commit('setNavs',data)
       })
     }
   }
 }
+
+export default headerStore

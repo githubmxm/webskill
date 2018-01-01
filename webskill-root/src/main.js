@@ -15,4 +15,3 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
-// console.log(Store.state.HeaderStore.navT.length);

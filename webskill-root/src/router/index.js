@@ -27,7 +27,7 @@ const router = new Router({
  * desc:全局监听
  */
 router.beforeEach((to, from, next) => {
-  Store.dispatch('updateHistoryLength')
+  // Store.dispatch('updateHistoryLength')
   next()
 })
 
