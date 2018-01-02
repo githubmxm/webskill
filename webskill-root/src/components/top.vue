@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import Store from '../store'
 import {mapState,mapMutations,mapActions} from 'vuex'
 export default {
   name: "top",
@@ -19,7 +18,7 @@ export default {
   },
   computed: {
     ...mapState({
-      navT:Store=>Store.state.navT
+      navT:state=>state.HeaderStore.navT
     })
   },
   methods: {
@@ -29,7 +28,7 @@ export default {
 
   },
   mounted:function(){
-    console.log(Store.state.headerStore.navT.length);
+    console.log(this.navT.length);
     // this.getNav("../json/headJson.json");
   }
 };

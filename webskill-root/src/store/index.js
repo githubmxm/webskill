@@ -4,10 +4,8 @@ import HeaderStore from './headerStore'
 
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
   modules: {
-    headerStore: HeaderStore
+   HeaderStore
   }
 })
-
-export default store

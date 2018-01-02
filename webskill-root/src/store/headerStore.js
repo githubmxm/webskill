@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const headerStore={
+export default {
   state: {
     //页签
     navT:[]
@@ -23,5 +23,3 @@ const headerStore={
     }
   }
 }
-
-export default headerStore
