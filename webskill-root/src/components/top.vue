@@ -1,6 +1,6 @@
 <template>
   <ul class="top">
-    <!-- <li v-for="(k,v) in navT" :id="nav">{{v}}</li> -->
+    <li v-for="(k,v) in navT" :id="k">{{v}}</li>
   </ul>
 </template>
 
@@ -22,14 +22,12 @@ export default {
     })
   },
   methods: {
-    // ...mapActions([
-    //   'getNav'
-    // ])
-
+    ...mapActions([
+      'getNav'
+    ])
   },
   mounted:function(){
-    console.log(this.navT.length);
-    // this.getNav("../json/headJson.json");
+    this.getNav("/static/headJson.json");
   }
 };
 </script>
@@ -44,7 +42,8 @@ export default {
         line-height: 28px;
         text-align: center;
         cursor: pointer;
-        @include sc(28px,#fff);
+        float: left;
+        @include sc(28px,#000);
       }
       
   }

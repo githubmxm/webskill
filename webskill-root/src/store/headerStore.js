@@ -13,12 +13,11 @@ export default {
   actions: {
     getNav({commit},url){
       axios({
-        method:get,
+        method:'get',
         url:url
       }).then((res)=>{
-         console.log(res)
          let data=res.data.data
-         commit('setNavs',data)
+         commit('setNav',data)
       })
     }
   }
