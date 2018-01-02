@@ -1,1 +1,16 @@
-{"data":["页签1","页签1","页签1","页签1","页签1"]}
+{
+  "status": "success",
+  "data": [{
+    "mainNavId": 1,
+    "mainNavName": "前端精选",
+    "deputyNav": [{
+        "deputyNavId": 1.1,
+        "deputyNavName": "JS精选"
+      },
+      {
+        "deputyNavId": 1.2,
+        "deputyNavName": "CSS精选"
+      }
+    ]
+  }]
+}
