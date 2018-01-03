@@ -1,5 +1,5 @@
 <template>
-  <ul class="top">
+  <ul class="top clear">
     <li class="mainNavList" v-for="navs in mainNavs" :id="navs.mainNavId" :navid="navs.mainNavId">
       <a class="mainName" href="">{{navs.mainNavName}}</a>
       <ul class="deputyNavs">
@@ -38,21 +38,26 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/css/minxin";
 .top {
-  overflow: hidden;
+  background:#acdcac;
   .mainNavList{
     text-align: center;
     cursor: pointer;
     float: left;
     position: relative;
+    padding: 10px;
     @include sc(18px,#000);
     .deputyNavs{
       display:none;
       position: absolute;
+      top: 44px;
+      li{
+        padding:3px;
+        background: #ccc;
+      }
     }
     &:hover .deputyNavs{
       display: block;
     }
-   
   }
 }
 </style>

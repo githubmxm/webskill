@@ -1,12 +1,6 @@
 <template>
   <div class="hello">
-    <transition appear>
-      <p class="title">这里有你想不到的和你想要的</p>
-    </transition>
-    <ul class="navLeft">
-      <li>我是游客</li>
-      <li>我是主宰</li>
-    </ul>  
+     
   </div>
 </template>
 

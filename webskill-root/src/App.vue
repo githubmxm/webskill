@@ -16,7 +16,6 @@ export default{
   components: {
      "app-header":AppHeader
   }
-
 }
 </script>
 
@@ -25,7 +24,6 @@ export default{
 
 .main_blog{
   width:1000px;
-  overflow: hidden;
   margin:0 auto;
 }
 </style>
