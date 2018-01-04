@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Store from '@/store'
 import Index from '@/components'
+import Login from '@/components/login'
 
 
 Vue.use(Router)
@@ -15,7 +16,7 @@ const router = new Router({
     path: '/',
     name: 'Index',
     components: {
-      default: Index
+      default: Login
     },
     children: [{
       path: '/'
