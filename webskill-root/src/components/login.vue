@@ -1,16 +1,24 @@
 <template>
-  <div class="login">
-      <p class="userAcount">
-        <span>账号: </span>
-        <input type="text" id="account" name="account" placeholder="账号" v-model="user.account"/>
-      </p>
-      <p class="userPassWord">
-        <span>密码: </span>
-        <input type="text" id="password" name="password" placeholder="密码" v-model="user.passWord" />
-      </p>
-      <p class="error" v-show="showError">{{errorMsg}}</p>
-      <span class="submit" @click="login">登录</span>
+  <div class="login_main">
+      <div class="login">
+        <p class="codeTitle">
+          <span>代码世界</br><i>code world</i></span>
+        </p>
+        <div class="rlog">
+            <p class="userAcount">
+                <span>账号: </span>
+                <input type="text" id="account" name="account" placeholder="账号" v-model="user.account"/>
+              </p>
+              <p class="userPassWord">
+                <span>密码: </span>
+                <input type="text" id="password" name="password" placeholder="密码" v-model="user.passWord" />
+              </p>
+              <p class="error" v-show="showError">{{errorMsg}}</p>
+              <span class="submit" @click="login">登录</span>
+        </div>
+      </div>
   </div>
+ 
 </template>
 
 <script>
@@ -69,15 +77,47 @@ export default {
   }
 };
 </script>
-
+<style>
+body{
+  background: url("../assets/images/bl.png") repeat-x;
+}
+</style>
 <style lang="scss" scoped>
 @import '../assets/css/minxin';
-.login{
-  width:400px;
-  height: 200px;
+body{
+  min-width: 1400px;
+}
+.login_main{
+  width:1400px;
+  height: 500px;
   margin: 0 auto;
-  text-align: center;
-  padding: 50px;
+  background: url("../assets/images/timg.jpg") no-repeat 0 0;
+  position: relative;
+}
+.login{
+  width:1400px;
+  height: 200px;
+  position:relative;
+  top: 282px;
+  .codeTitle{
+    display: inline-block;
+    position: absolute;
+    left: 540px;
+    top: 100px;
+    font-weight: bold;
+    font-size: 24px;
+    i{
+      font-size: 18px;
+      font-weight: bold;
+      color: #00FF40;
+      line-height: 20px;
+    }
+  }
+  .rlog{
+    top: 25px;
+    right: 245px;
+    position: absolute;
+  }
   p{
     margin:10px 0;
     font-size: 16px;
@@ -106,6 +146,7 @@ export default {
     line-height: 28px;
     cursor: pointer;
     margin-left: 42px;
+    text-align: center;
   }
 }
 
