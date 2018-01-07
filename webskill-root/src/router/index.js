@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Store from '@/store'
 import Index from '@/components'
+import Top from '@/components/top'
 import Login from '@/components/login'
 
 
@@ -14,13 +15,19 @@ const router = new Router({
   history: true, // 启用HTML5 history模式，可以使用pushState和replaceState来管理记录
   routes: [{
     path: '/',
-    name: 'Index',
+    name: 'login',
     components: {
       default: Login
     },
     children: [{
       path: '/'
     }]
+  },{
+    path:'/index',
+    name:'index',
+    components:{
+      default: Index
+    }
   }]
 })
 

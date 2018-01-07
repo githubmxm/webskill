@@ -1,6 +1,5 @@
 <template>
-  <div class="hello">
-     1111
+  <div class="hello">1111111111111
   </div>
 </template>
 
@@ -11,6 +10,9 @@ export default {
     return {
       msg: "Welcome to Your Vue.js App"
     };
+  },
+  components:{
+    
   }
 };
 </script>

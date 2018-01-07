@@ -20,7 +20,9 @@ export default {
       msg: "主导航和二级导航展示"
     };
   },
-  created() {},
+  created() {
+    
+  },
   computed: {
     ...mapState({
       mainNavs: state => state.HeaderStore.mainNavs
