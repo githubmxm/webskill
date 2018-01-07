@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Store from '@/store'
 import Index from '@/components'
-import Top from '@/components/top'
 import Login from '@/components/login'
 
 
@@ -17,7 +16,7 @@ const router = new Router({
     path: '/',
     name: 'login',
     components: {
-      default: Login
+      default: Login,
     },
     children: [{
       path: '/'
