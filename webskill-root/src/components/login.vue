@@ -93,8 +93,7 @@ body{
   margin: 0 auto;
   background: url("../assets/images/timg.jpg") no-repeat 0 0;
   position: relative;
-}
-.login{
+  .login{
   width:1400px;
   height: 200px;
   position:relative;
@@ -148,6 +147,7 @@ body{
     margin-left: 42px;
     text-align: center;
   }
+}
 }
 
 
