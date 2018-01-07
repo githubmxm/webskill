@@ -42,6 +42,9 @@ export default {
           let users = res.data;
           if(users.account==_this.user.account&&users.passWord==_this.user.passWord){
             location.href="/index"
+          }else{
+            this.errorMsg="账号或密码错误";
+            this.showError=true;
           }
         })
       }
