@@ -24,5 +24,10 @@ export default {
         }
       })
     }
-  }
+  },
+  getters: {
+  	mainNavs: state => {
+  		return state.mainNavs;
+  	}
+  },
 }

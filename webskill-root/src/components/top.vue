@@ -1,7 +1,7 @@
 <template>
   <ul class="top clear">
     <li class="mainNavList" v-for="navs in mainNavs" :id="navs.mainNavId" :navid="navs.mainNavId">
-      <a class="mainName" href="">{{navs.mainNavName}}</a>
+      <a class="mainName" href="/index">{{navs.mainNavName}}</a>
       <ul class="deputyNavs">
         <li class="deputyNavList" v-for="deputyNave in navs.deputyNav" :id="deputyNave.deputyNavId" :deputynavid="deputyNave.deputyNavId">
           <a class="deputName" href="">{{deputyNave.deputyNavName}}</a>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapMutations, mapActions,mapGetters } from "vuex";
 export default {
   name: "top",
   data() {
@@ -24,9 +24,7 @@ export default {
     
   },
   computed: {
-    ...mapState({
-      mainNavs: state => state.HeaderStore.mainNavs
-    })
+    ...mapGetters(['mainNavs'])
   },
   methods: {
     ...mapActions(["getNav"])
