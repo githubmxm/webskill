@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Store from '@/store'
 import Index from '@/components'
+import Privacy from '@/components/privacy'
 import Login from '@/components/login'
 
 
@@ -13,19 +14,25 @@ const router = new Router({
   hashbang: false, // 将路径格式化为#!开头
   history: true, // 启用HTML5 history模式，可以使用pushState和replaceState来管理记录
   routes: [{
-    path: '/',
+    path: '/login',
     name: 'login',
     components: {
       default: Login,
-    },
-    children: [{
-      path: '/'
-    }]
+    }
+  },{
+    path: '/',
+    redirect:'/login'
   },{
     path:'/index',
     name:'index',
     components:{
       default: Index
+    }
+  },{
+    path:'/privacy',
+    name:'privacy',
+    components:{
+      default: Privacy
     }
   }]
 })

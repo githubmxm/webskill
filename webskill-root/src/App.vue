@@ -1,29 +1,33 @@
 <template>
   <div id="app">
     <div class="main_blog">
-      <v-top v-if="topView"></v-top>
+      <v-top v-if="publicView"></v-top>
       <router-view></router-view>
     </div>
+    <v-footer v-if='publicView'></v-footer>
   </div>
 </template>
 <script>
 import Top from '@/components/top';
+import Footer from '@/components/footer';
+
 export default{
   data () {
     return {
-      topView:true
+      publicView:true
     }
   },
   methods: {
     
   },
   mounted () {
-    if(location.pathname=="/"){
-      this.topView=false
+    if(location.pathname=="/login"){
+      this.publicView=false
     }
   },
   components: {
-    'v-top':Top
+    'v-top':Top,
+    'v-footer':Footer
   }
 }
 </script>

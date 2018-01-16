@@ -13,8 +13,12 @@
                 <span>密码: </span>
                 <input type="text" id="password" name="password" placeholder="密码" v-model="user.passWord" />
               </p>
-              <p class="error" v-show="showError">{{errorMsg}}</p>
-              <span class="submit" @click="login">登录</span>
+              <p class="error" :class="{visible:showError}">{{errorMsg}}</p>
+              <p>
+                <span class="submit" @click="login">登录</span>
+                <a href="/index" class="goLook" >游客</a>
+              </p>
+              
         </div>
       </div>
   </div>
@@ -33,7 +37,7 @@ export default {
         passWord:""
       },
       errorMsg:"",
-      showError:false
+      showError:true
     };
   },
   methods: {
@@ -52,7 +56,7 @@ export default {
             location.href="/index"
           }else{
             this.errorMsg="账号或密码错误";
-            this.showError=true;
+            this.showError=false;
           }
         })
       }
@@ -61,10 +65,10 @@ export default {
     formValidata (){
       if(this.user.account==""||this.user.passWord==""){
         this.errorMsg="账号或密码不能为空";
-        this.showError=true;
+        this.showError=false;
         return false;
       }else{
-        this.showError=false;
+        this.showError=true;
         return true;
       }
     }
@@ -137,7 +141,10 @@ body{
     position: relative;
     top: -5px;
   }
-  .submit{
+  .visible{
+     visibility: hidden;
+  }
+  .submit,.goLook{
     width: 60px;
     height: 28px;
     border: 1px solid #ccc;
@@ -149,6 +156,4 @@ body{
   }
 }
 }
-
-
 </style>
