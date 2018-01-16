@@ -14,7 +14,11 @@
                 <input type="text" id="password" name="password" placeholder="密码" v-model="user.passWord" />
               </p>
               <p class="error" :class="{visible:showError}">{{errorMsg}}</p>
-              <span class="submit" @click="login">登录</span>
+              <p>
+                <span class="submit" @click="login">登录</span>
+                <a href="/index" class="goLook" >游客</a>
+              </p>
+              
         </div>
       </div>
   </div>
@@ -140,7 +144,7 @@ body{
   .visible{
      visibility: hidden;
   }
-  .submit{
+  .submit,.goLook{
     width: 60px;
     height: 28px;
     border: 1px solid #ccc;
