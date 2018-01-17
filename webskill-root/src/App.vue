@@ -4,7 +4,7 @@
       <!--顶部导航-->
       <v-top v-if="publicView"></v-top>
       <!--消息通知-->
-      <div class="newMsgAlert">
+      <div class="newMsgAlert" v-if="publicView">
           <span class="msging">持续更新中....</span>
       </div>
       <!--内容区-->
@@ -15,7 +15,7 @@
     <!--弹层提示-->
     <v-alert></v-alert>
     <!--留言入口-->
-    <div class="leaveWord" @click="setAalertMsgFn()" title="我要留言"></div>
+    <div class="leaveWord" v-if='publicView' @click="setAalertMsgFn()" title="我要留言"></div>
     <!--遮罩层-->
     <p class="maskZZ" v-show='maskZzShow'></p>
   </div>
