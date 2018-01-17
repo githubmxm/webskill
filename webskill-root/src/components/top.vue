@@ -7,8 +7,9 @@
           <span>技百讯</span>
         </a>
         <a class="indexView" href="/index" target="_blank" title="首页">首页</a>
-        <a class="myNotesView" href="/myNotes" target="_blank" title="技能摘要">技库</a>
-        <a class="newTitleView" href="/newTitle" target="_blank" title="技能快讯">资讯</a>
+        <!-- href="/myNotes" href="/newTitle"-->
+        <a class="myNotesView" title="技能摘要" @click="setAalertMsgFn()">技库</a>
+        <a class="newTitleView" title="技能快讯" @click="setAalertMsgFn()">资讯</a>
       </p>
       <!--用户已登录-->
       <p class="userLogin" v-if="isLogin==true">
@@ -52,7 +53,7 @@ export default {
     ...mapGetters(['mainNavs','isLogin'])
   },
   methods: {
-    ...mapActions(["getNav",'getLoginState'])
+    ...mapActions(["getNav",'getLoginState','setAalertMsgFn'])
   },
   mounted: function() {
     this.getNav();
@@ -82,6 +83,7 @@ export default {
     float: left;
     margin:0 15px;
     color:#fff;
+    cursor: pointer;
     .cur,&:hover{
       color:#5eaeef;
       background: #333;
