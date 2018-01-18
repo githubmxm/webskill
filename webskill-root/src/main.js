@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import animate from 'animate.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 import App from './App'
 import store from './store/index'
 import router from './router'
