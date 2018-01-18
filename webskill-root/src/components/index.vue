@@ -74,11 +74,26 @@
        </div>
        <div class="dynamicType left">
          <ul class="typeName clear">
-           <li class="jottings" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">最新随笔</li>
+           <li class="jottings" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">最新笔录</li>
            <li class="newSkill"  :class="{cur:dynamicTypeCur==1}"  @click="dynamicType(1)">技能快讯</li>
            <li class="wordDec"  :class="{cur:dynamicTypeCur==2}" @click="dynamicType(2)">留言动态</li>
            <li class="tools"  :class="{cur:dynamicTypeCur==3}"  @click="dynamicType(3)">推荐工具</li>
          </ul>
+         <div class="contentsForType">
+           <ul class="contentList">
+             <li class="zxbl">
+               <div class="cons">
+                 <p class="titles">
+                    <span class="intro">笔录标题</span>
+                    <span class="creatTime right">20180118</span>
+                 </p>
+                 <p class="Summarys">
+                   <a class="sum_con">摘要内容</a>
+                 </p>
+               </div>
+             </li>
+           </ul>
+         </div>
        </div>
      </div>
   </div>
@@ -268,6 +283,43 @@ export default {
             border-bottom: 2px solid #5eaeef;
             color: #5eaeef!important;
         }
+      }
+      .contentsForType{
+        width: 880px;
+        margin-top: 2px;
+        font-size: 18px;
+        .contentList{
+          .zxbl{
+            &:hover{
+              background: #e2e9e1;
+            }
+            .cons{
+              margin: 0 0 0 23px;
+              padding-bottom: 25px;
+              border-bottom: 1px dashed #ccc;
+              padding-right: 24px;
+              position: relative;
+              .titles{
+                padding-top: 25px;
+                margin-bottom: 8px;
+                .intro{
+                  color: #2d64b3;
+                }
+                .creatTime{
+                  color: #bdbdbd;
+                  font-size: 14px;
+                  float: right;
+                }
+              }
+              .Summarys{
+                .sum_con{
+                  font-size: 14px;
+                }
+              }
+            }
+          } 
+        }
+        
       }
     }
   }
