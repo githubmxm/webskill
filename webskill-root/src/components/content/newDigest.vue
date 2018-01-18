@@ -23,6 +23,7 @@ export default {
   width:310px;
   height:234px;
   padding:8px 15px;
+  background: url("../../assets/images/indexBgW.png") center center;
   .digList{
     height:30px;
     line-height: 30px;

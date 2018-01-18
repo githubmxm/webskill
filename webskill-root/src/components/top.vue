@@ -2,8 +2,8 @@
   <div class="top">
     <nav class="topType">
       <p class="alinks clear">
-        <a class="logo" href="/index">
-          <img src="" alt="技百讯" />
+        <a title="技百讯" class="logo" href="/index">
+          <img src="../assets/images/jbxLogo.png" alt="技百讯" />
           <span>技百讯</span>
         </a>
         <a class="indexView" href="/index" target="_blank" title="首页">首页</a>
