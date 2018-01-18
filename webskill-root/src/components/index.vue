@@ -10,9 +10,18 @@
         </div>
         <!--广告轮播-->
         <div class="carousels left">
-          <ul>
+          <swiper :options="swiperOption"  ref="carouselsSwiper">
+            <swiper-slide>
+             <li><a title="StarFire_xm的博客"><img src="../assets/images/starfire.png" alt=""></a></li>
+            </swiper-slide>
+            <swiper-slide>
+              <li><a title="点我吐槽" href=""><img src="../assets/images/tucao.png" alt=""></a></li>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div> 
+          </swiper>
+          <!-- <ul>
             <li><a title="点我吐槽" href=""><img src="../assets/images/tucao.png" alt=""></a></li>
-          </ul>
+          </ul> -->
         </div>
      </div>
      <div class="mainCon clear">
@@ -65,10 +74,10 @@
        </div>
        <div class="dynamicType left">
          <ul class="typeName clear">
-           <li class="jottings cur">最新随笔</li>
-           <li class="newSkill">技能快讯</li>
-           <li class="wordDec">留言动态</li>
-           <li class="tools">推荐工具</li>
+           <li class="jottings" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">最新随笔</li>
+           <li class="newSkill"  :class="{cur:dynamicTypeCur==1}"  @click="dynamicType(1)">技能快讯</li>
+           <li class="wordDec"  :class="{cur:dynamicTypeCur==2}" @click="dynamicType(2)">留言动态</li>
+           <li class="tools"  :class="{cur:dynamicTypeCur==3}"  @click="dynamicType(3)">推荐工具</li>
          </ul>
        </div>
      </div>
@@ -77,15 +86,37 @@
 
 <script>
 import NewDigest from './content/newDigest'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: "index",
   data() {
     return {
-      msg: "首页内容"
+      msg: "首页内容",
+      dynamicTypeCur:0,
+      swiperOption: {
+        pagination:'.swiper-pagination',
+        autoplay:true,//自动滚动
+        speed:3500,//滚动速度
+      }  
     };
   },
   components:{
-    'v-newDigest':NewDigest
+    'v-newDigest':NewDigest,
+     swiper,  
+     swiperSlide 
+  },
+  methods: {
+    dynamicType(index){
+      this.dynamicTypeCur=index;
+    }
+  },
+  computed: {
+    swiper() {  
+      return this.$refs.carouselsSwiper.swiper;  
+    }
+  },
+  mounted () {
+    this.swiper.slideTo(0, 3000, false);
   }
 };
 </script>

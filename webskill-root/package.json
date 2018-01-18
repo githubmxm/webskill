@@ -17,7 +17,10 @@
     "animate.css": "^3.5.2",
     "axios": "^0.16.1",
     "babel-preset-es2015": "^6.24.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
     "vue": "^2.2.2",
+    "vue-awesome-swiper": "^3.1.1",
     "vue-lazyload": "^1.1.4",
     "vue-router": "^2.3.1",
     "vuex": "^2.3.1"

@@ -1,4 +1,6 @@
 .DS_Store
 .vue-templates/
+node_modules/
+package.json
 webskill-root/node_modules/
 webskill-root/dist/

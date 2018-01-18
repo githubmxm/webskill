@@ -1,50 +1,85 @@
 <template>
   <ul class="newDigest clear">
-    <li class="digList">
+      <swiper :options="swiperOption"  ref="newDigestSwiper">
+        <swiper-slide>
+          <li class="digList">
+            <span class="digType left">[ js ]</span><a class="digCon ellipsis left" href="">等宽高计算</a> <span class="digetTime">20180117</span>
+         </li>
+        </swiper-slide>
+        <swiper-slide>
+          <li class="digList">
+            <span class="digType left">[ js ]</span><a class="digCon ellipsis left" href="">等宽高计算</a> <span class="digetTime">20180117</span>
+          </li>
+        </swiper-slide>
+        <div class="swiper-pagination2" slot="pagination"></div> 
+      </swiper>
+    <!-- <li class="digList">
       <span class="digType left">[ js ]</span><a class="digCon ellipsis left" href="">等宽高计算</a> <span class="digetTime">20180117</span>
-    </li>
+    </li> -->
   </ul>
 </template>
 
 <script>
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
-  name:'newDigest',
+  name: "newDigest",
   data() {
     return {
-      msg: "最新摘要"
+      msg: "最新摘要",
+      swiperOption: {
+        pagination:'.swiper-pagination2',
+        autoplay:true,//自动滚动
+        direction:'vertical',
+        speed:3500,//滚动速度,
+        height:30
+      } 
     };
   },
-
-}
+  components: {
+    swiper,
+    swiperSlide
+  },
+  computed: {
+    swiper() {
+      return this.$refs.newDigestSwiper.swiper;
+    }
+  },
+  mounted() {
+    this.swiper.slideTo(0, 3000, false);
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-.newDigest{
-  width:310px;
-  height:234px;
-  padding:8px 15px;
+.newDigest {
+  width: 310px;
+  height: 234px;
+  padding: 8px 15px;
   background: url("../../assets/images/indexBgW.png") center center;
-  .digList{
-    height:30px;
+  .digList {
+    height: 30px;
     line-height: 30px;
     font-size: 14px;
-    color:#fff;
-    .digType{
-      color: rgb(115, 60, 218)
+    color: #fff;
+    .digType {
+      color: rgb(115, 60, 218);
     }
-    .digCon{
-      width:165px;
+    .digCon {
+      width: 165px;
       margin-left: 8px;
-      &:hover{
+      &:hover {
         text-decoration: underline;
         color: #3498db;
       }
     }
-    .digetTime{
+    .digetTime {
       float: right;
-      color:#ababab;
+      color: #ababab;
     }
   }
+}
+.swiper-slide{
+  height:auto !important;
 }
 </style>
 

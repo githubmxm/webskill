@@ -2,11 +2,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import animate from 'animate.css'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 import App from './App'
 import store from './store/index'
 import router from './router'
 
 Vue.use(animate)
+Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
