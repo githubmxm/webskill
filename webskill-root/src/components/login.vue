@@ -148,11 +148,16 @@ body{
     width: 60px;
     height: 28px;
     border: 1px solid #ccc;
+    background: #FFF;
     display: inline-block;
     line-height: 28px;
     cursor: pointer;
     margin-left: 42px;
     text-align: center;
+    &:hover{
+      background: blueviolet;
+      color: #fff;
+    }
   }
 }
 }

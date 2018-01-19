@@ -2,12 +2,14 @@
   <div class="homePage">
      <div class="temp_01 clear">
         <!--最新摘要-->
-        <div class="newDigest left">
+      <transition name="animate_newdigest">
+        <div class="newDigest left" v-show="animationShow">
           <p class="stitle">
             <span>最新摘要</span>
           </p>
           <v-newDigest></v-newDigest>
         </div>
+      </transition>
         <!--广告轮播-->
         <div class="carousels left">
           <swiper :options="swiperOption"  ref="carouselsSwiper">
@@ -19,9 +21,6 @@
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div> 
           </swiper>
-          <!-- <ul>
-            <li><a title="点我吐槽" href=""><img src="../assets/images/tucao.png" alt=""></a></li>
-          </ul> -->
         </div>
      </div>
      <div class="mainCon clear">
@@ -81,17 +80,6 @@
          </ul>
          <div class="contentsForType">
            <ul class="contentList">
-             <!-- <li class="zxbl">
-               <div class="cons">
-                 <p class="titles">
-                    <span class="intro">笔录标题</span>
-                    <span class="creatTime right">20180118</span>
-                 </p>
-                 <p class="Summarys">
-                   <a class="sum_con">摘要内容</a>
-                 </p>
-               </div>
-             </li> -->
              <li class="zxbl"  v-if="dynamicTypeCur==0&&dynamicDataList.length>0"  v-for="item in dynamicDataList" :key="item.id" >
                <div class="cons">
                  <p class="titles">
@@ -103,15 +91,6 @@
                  </p>
                </div>
              </li>
-             <!-- <li v-if="dynamicTypeCur==1&&dynamicDataList.length>0">
-               1111111
-             </li>
-             <li v-if="dynamicTypeCur==2&&dynamicDataList.length>0">
-               2222222
-             </li>
-             <li v-if="dynamicTypeCur==3&&dynamicDataList.length>0">
-               3333333
-             </li> -->
              <p class="noCons" v-if="dynamicTypeCur!=0||dynamicDataList.length==0">敬请期待！</p>
            </ul>
          </div>
@@ -125,7 +104,7 @@
 import NewDigest from './content/newDigest'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Pagebar from '../components/unit/table-pagebar'
-import { mapGetters } from "vuex";
+import { mapGetters } from "vuex"
 export default {
   name: "index",
   data() {
@@ -145,7 +124,8 @@ export default {
       pageModel:{
         url:"/static/ajaxpage.json",
         againPost:0
-      }
+      },
+      animationShow:false
       // pageModelUrl:"/static/ajaxpage.json"
     };
   },
@@ -175,7 +155,7 @@ export default {
     
   },
   mounted () {
-
+    this.animationShow=true;
   },
   computed: {
     ...mapGetters(['dynamicDataList'])
@@ -185,6 +165,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/css/minxin';
+@import  '../assets/css/animation';
 .homePage{
   width:1200px;
   margin:0 auto;
