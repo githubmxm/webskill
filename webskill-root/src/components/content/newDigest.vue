@@ -1,6 +1,12 @@
 <template>
   <ul class="newDigest clear">
-      <swiper :options="swiperOption"  ref="newDigestSwiper">
+      <!-- <li class="digList">
+        <span class="digType left">[ js ]</span><a class="digCon ellipsis left" href="">等宽高计算</a> <span class="digetTime">20180117</span>
+      </li>
+      <li class="digList">
+        <span class="digType left">[ js ]</span><a class="digCon ellipsis left" href="">等宽高计算</a> <span class="digetTime">20180117</span>
+      </li> -->
+      <swiper :options="swiperOption2"  ref="newDigestSwiper">
         <swiper-slide>
           <li class="digList">
             <span class="digType left">[ js ]</span><a class="digCon ellipsis left" href="">等宽高计算</a> <span class="digetTime">20180117</span>
@@ -13,9 +19,6 @@
         </swiper-slide>
         <div class="swiper-pagination2" slot="pagination"></div> 
       </swiper>
-    <!-- <li class="digList">
-      <span class="digType left">[ js ]</span><a class="digCon ellipsis left" href="">等宽高计算</a> <span class="digetTime">20180117</span>
-    </li> -->
   </ul>
 </template>
 
@@ -26,26 +29,31 @@ export default {
   data() {
     return {
       msg: "最新摘要",
-      swiperOption: {
-        pagination:'.swiper-pagination2',
+      swiperOption2: {
+        direction : 'vertical',
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        paginationClickable: true,
         autoplay:true,//自动滚动
-        direction:'vertical',
-        speed:3500,//滚动速度,
+        loop: true,
+        notNextTick: true,
+        observer:true,//修改swiper自己或子元素时，自动初始化swiper
+        observeParents:true,//修改swiper的父元素时，自动初始化swiper
         height:30
       } 
     };
+  },
+  methods: {
+    // swiper() {
+    //   return this.$refs.newDigestSwiper.swiper;
+    // }
   },
   components: {
     swiper,
     swiperSlide
   },
-  computed: {
-    swiper() {
-      return this.$refs.newDigestSwiper.swiper;
-    }
-  },
   mounted() {
-    this.swiper.slideTo(0, 3000, false);
+    // this.swiper();
   }
 };
 </script>

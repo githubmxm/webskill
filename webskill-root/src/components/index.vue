@@ -35,7 +35,7 @@
             <p class="hei blogger"><span>被访问:</span> <span class="cor lookPv">0</span></p>
             <p class="hei blogger"><span>联系(qq,wx):</span> <span class="cor lookPv">1123360735</span></p>
             <p class="PlayTour clear">
-              <span>打赏支持:</span>
+              <span>微信打赏:</span>
               <img src="../assets/images/wxrwm.png" alt="二维码" />
             </p>
           </div>
@@ -43,16 +43,16 @@
           <div class="lfCon visitors left">
               <p class="titV">最新访客</p>
               <ul class="vList">
-                <li><img class="vPhoto" src="" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
               </ul>
           </div>
           <!--技能分类-->
@@ -74,11 +74,26 @@
        </div>
        <div class="dynamicType left">
          <ul class="typeName clear">
-           <li class="jottings" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">最新随笔</li>
+           <li class="jottings" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">最新笔录</li>
            <li class="newSkill"  :class="{cur:dynamicTypeCur==1}"  @click="dynamicType(1)">技能快讯</li>
            <li class="wordDec"  :class="{cur:dynamicTypeCur==2}" @click="dynamicType(2)">留言动态</li>
            <li class="tools"  :class="{cur:dynamicTypeCur==3}"  @click="dynamicType(3)">推荐工具</li>
          </ul>
+         <div class="contentsForType">
+           <ul class="contentList">
+             <li class="zxbl">
+               <div class="cons">
+                 <p class="titles">
+                    <span class="intro">笔录标题</span>
+                    <span class="creatTime right">20180118</span>
+                 </p>
+                 <p class="Summarys">
+                   <a class="sum_con">摘要内容</a>
+                 </p>
+               </div>
+             </li>
+           </ul>
+         </div>
        </div>
      </div>
   </div>
@@ -94,10 +109,15 @@ export default {
       msg: "首页内容",
       dynamicTypeCur:0,
       swiperOption: {
-        pagination:'.swiper-pagination',
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        paginationClickable: true,
         autoplay:true,//自动滚动
-        speed:3500,//滚动速度
-      }  
+        loop: true,
+        notNextTick: true,
+        observer:true,//修改swiper自己或子元素时，自动初始化swiper
+        observeParents:true,//修改swiper的父元素时，自动初始化swiper
+      }       
     };
   },
   components:{
@@ -108,15 +128,13 @@ export default {
   methods: {
     dynamicType(index){
       this.dynamicTypeCur=index;
-    }
-  },
-  computed: {
-    swiper() {  
-      return this.$refs.carouselsSwiper.swiper;  
-    }
+    },
+    // swiper() {
+    //     return this.$refs.carouselsSwiper.swiper;
+    // }
   },
   mounted () {
-    this.swiper.slideTo(0, 3000, false);
+    // this.swiper();
   }
 };
 </script>
@@ -222,6 +240,7 @@ export default {
           .vPhoto{
             width:15px;
             height:15px;
+            vertical-align: middle;
           }
           .vName{
             margin-left: 7px;
@@ -264,6 +283,43 @@ export default {
             border-bottom: 2px solid #5eaeef;
             color: #5eaeef!important;
         }
+      }
+      .contentsForType{
+        width: 880px;
+        margin-top: 2px;
+        font-size: 18px;
+        .contentList{
+          .zxbl{
+            &:hover{
+              background: #e2e9e1;
+            }
+            .cons{
+              margin: 0 0 0 23px;
+              padding-bottom: 25px;
+              border-bottom: 1px dashed #ccc;
+              padding-right: 24px;
+              position: relative;
+              .titles{
+                padding-top: 25px;
+                margin-bottom: 8px;
+                .intro{
+                  color: #2d64b3;
+                }
+                .creatTime{
+                  color: #bdbdbd;
+                  font-size: 14px;
+                  float: right;
+                }
+              }
+              .Summarys{
+                .sum_con{
+                  font-size: 14px;
+                }
+              }
+            }
+          } 
+        }
+        
       }
     }
   }
