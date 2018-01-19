@@ -44,7 +44,11 @@ export default {
       setTimeout(function(){
           that.newDegistList.push(that.newDegistList[0]);
           that.newDegistList.shift();
-          newDigest.style.marginTop='0px';
+          try {
+             newDigest.style.marginTop='0px';
+          } catch (error) {
+            
+          }
           that.animate=!that.animate;  
       },500)
     }
