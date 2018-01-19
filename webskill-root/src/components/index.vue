@@ -59,16 +59,16 @@
           <div class="lfCon blogType left">
               <p class="blogCl">分类</p>
               <ul class="blogClList">
-                <li><i>.</i>全部博文(<span class="allNums">100</span>)</li>
-                <li><i>.</i>全部博文(<span class="allNums">100</span>)</li>
-                <li><i>.</i>全部博文(<span class="allNums">100</span>)</li>
-                <li><i>.</i>全部博文(<span class="allNums">100</span>)</li>
-                <li><i>.</i>全部博文(<span class="allNums">100</span>)</li>
-                <li><i>.</i>全部博文(<span class="allNums">100</span>)</li>
-                <li><i>.</i>全部博文(<span class="allNums">100</span>)</li>
-                <li><i>.</i>全部博文(<span class="allNums">100</span>)</li>
-                <li><i>.</i>全部博文(<span class="allNums">100</span>)</li>
-                <li><i>.</i>全部博文(<span class="allNums">100</span>)</li>
+                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
+                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
+                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
+                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
+                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
+                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
+                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
+                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
+                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
+                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
               </ul>
           </div>
        </div>
@@ -81,7 +81,7 @@
          </ul>
          <div class="contentsForType">
            <ul class="contentList">
-             <li class="zxbl">
+             <!-- <li class="zxbl">
                <div class="cons">
                  <p class="titles">
                     <span class="intro">笔录标题</span>
@@ -91,9 +91,31 @@
                    <a class="sum_con">摘要内容</a>
                  </p>
                </div>
+             </li> -->
+             <li class="zxbl"  v-if="dynamicTypeCur==0&&dynamicDataList.length>0"  v-for="item in dynamicDataList" :key="item.id" >
+               <div class="cons">
+                 <p class="titles">
+                    <span class="intro">{{item.title}}</span>
+                    <span class="creatTime right">{{item.creatTime}}</span>
+                 </p>
+                 <p class="Summarys">
+                    <a class="sum_con">{{item.summary}}</a>
+                 </p>
+               </div>
              </li>
+             <!-- <li v-if="dynamicTypeCur==1&&dynamicDataList.length>0">
+               1111111
+             </li>
+             <li v-if="dynamicTypeCur==2&&dynamicDataList.length>0">
+               2222222
+             </li>
+             <li v-if="dynamicTypeCur==3&&dynamicDataList.length>0">
+               3333333
+             </li> -->
+             <p class="noCons" v-if="dynamicTypeCur!=0||dynamicDataList.length==0">敬请期待！</p>
            </ul>
          </div>
+         <Pagebar v-show="dynamicTypeCur==0&&dynamicDataList.length>0" :page-model="pageModel" ref="dynamicTypePage"></Pagebar>
        </div>
      </div>
   </div>
@@ -102,6 +124,8 @@
 <script>
 import NewDigest from './content/newDigest'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import Pagebar from '../components/unit/table-pagebar'
+import { mapGetters } from "vuex";
 export default {
   name: "index",
   data() {
@@ -117,24 +141,44 @@ export default {
         notNextTick: true,
         observer:true,//修改swiper自己或子元素时，自动初始化swiper
         observeParents:true,//修改swiper的父元素时，自动初始化swiper
-      }       
+      },
+      pageModel:{
+        url:"/static/ajaxpage.json",
+        againPost:0
+      }
+      // pageModelUrl:"/static/ajaxpage.json"
     };
   },
   components:{
     'v-newDigest':NewDigest,
      swiper,  
-     swiperSlide 
+     swiperSlide,
+     Pagebar
   },
   methods: {
     dynamicType(index){
       this.dynamicTypeCur=index;
+      if(index==0){
+        this.pageModel.url="/static/ajaxpage.json"
+      }else if(index==1){
+        this.pageModel.url="/static/ajaxpage.1.json"
+      }else if(index==2){
+        this.pageModel.url="/static/ajaxpage.2.json"
+      }else{
+        this.pageModel.url="/static/ajaxpage.3.json"
+      }
+      this.pageModel.againPost++;
     },
     // swiper() {
     //     return this.$refs.carouselsSwiper.swiper;
     // }
+    
   },
   mounted () {
-    // this.swiper();
+
+  },
+  computed: {
+    ...mapGetters(['dynamicDataList'])
   }
 };
 </script>
@@ -259,6 +303,10 @@ export default {
         li{
           height: 20px;
           line-height: 20px;
+          font-size: 14px;
+          .conName{
+            margin-left: 5px;
+          }
         }
       }
     }
@@ -289,6 +337,12 @@ export default {
         margin-top: 2px;
         font-size: 18px;
         .contentList{
+          .noCons{
+            font-size: 22px;
+            color: #19b77e;
+            text-align: center;
+            margin: 20px auto;
+          }
           .zxbl{
             &:hover{
               background: #e2e9e1;
