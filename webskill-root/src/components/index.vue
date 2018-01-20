@@ -1,20 +1,24 @@
+<!--
+首页
+-->
 <template>
   <div class="homePage">
      <div class="temp_01 clear">
+        <transition  enter-active-class="fadeInLeft" leave-active-class="fadeInLeft">
         <!--最新摘要-->
-      <transition name="animate_newdigest">
         <div class="newDigest left" v-show="animationShow">
           <p class="stitle">
             <span>最新摘要</span>
           </p>
           <v-newDigest></v-newDigest>
         </div>
-      </transition>
+        </transition>
         <!--广告轮播-->
-        <div class="carousels left">
+        <transition enter-active-class="fadeInRight" leave-active-class="fadeInRight">
+        <div class="carousels left" v-show="animationShow">
           <swiper :options="swiperOption"  ref="carouselsSwiper">
             <swiper-slide>
-             <li><a title="StarFire_xm的博客"><img src="../assets/images/starfire.png" alt=""></a></li>
+            <li><a title="StarFire_xm的博客"><img src="../assets/images/starfire.png" alt=""></a></li>
             </swiper-slide>
             <swiper-slide>
               <li><a title="点我吐槽" href=""><img src="../assets/images/tucao.png" alt=""></a></li>
@@ -22,9 +26,11 @@
             <div class="swiper-pagination" slot="pagination"></div> 
           </swiper>
         </div>
+        </transition>
      </div>
      <div class="mainCon clear">
-       <div class="conLf left">
+       <transition enter-active-class="fadeInLeft" leave-active-class="fadeInLeft">
+       <div class="conLf left" v-show="animationShow">
           <!--博主信息-->
           <div class="lfCon userInfo left">
             <p class="headImg"><img src="../assets/images/photo.png" alt="头像" /></p>
@@ -71,7 +77,9 @@
               </ul>
           </div>
        </div>
-       <div class="dynamicType left">
+       </transition>
+       <transition enter-active-class="fadeInRight" leave-active-class="fadeInRight">
+       <div class="dynamicType left" v-show="animationShow">
          <ul class="typeName clear">
            <li class="jottings" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">最新笔录</li>
            <li class="newSkill"  :class="{cur:dynamicTypeCur==1}"  @click="dynamicType(1)">技能快讯</li>
@@ -80,7 +88,8 @@
          </ul>
          <div class="contentsForType">
            <ul class="contentList">
-             <li class="zxbl"  v-if="dynamicTypeCur==0&&dynamicDataList.length>0"  v-for="item in dynamicDataList" :key="item.id" >
+             <transition-group v-if="dynamicTypeCur==0&&dynamicDataList.length>0" enter-active-class="fadeIn" leave-active-class="fadeIn" @before-enter="beforeEnter">
+             <li class="zxbl"  v-for="(item,index) in dynamicDataList" :key="index" :animate-delay="(0.3*index)" :animate-duration="0.5">
                <div class="cons">
                  <p class="titles">
                     <span class="intro">{{item.title}}</span>
@@ -91,11 +100,15 @@
                  </p>
                </div>
              </li>
-             <p class="noCons" v-if="dynamicTypeCur!=0||dynamicDataList.length==0">敬请期待！</p>
+             </transition-group>
+              <transition v-else enter-active-class="bounceIn" leave-active-class="bounceIn">
+              <p v-show="Math.random()" class="noCons">敬 请 期 待！</p>
+              </transition>
            </ul>
          </div>
          <Pagebar v-show="dynamicTypeCur==0&&dynamicDataList.length>0" :page-model="pageModel" ref="dynamicTypePage"></Pagebar>
        </div>
+       </transition>
      </div>
   </div>
 </template>
@@ -136,6 +149,26 @@ export default {
      Pagebar
   },
   methods: {
+    beforeEnter(el){
+       var delay = el.getAttribute('animate-delay'),
+          duration = el.getAttribute('animate-duration');
+      console.log('attr:' + delay, duration);
+      var cssObj = {
+          "animation-delay": delay+'s',
+          "-webkit-animation-delay": delay+'s',
+          "animation-duration": duration+'s',
+          "-webkit-animation-duration": duration+'s',
+          "visibility": "visible"
+      }
+      var getCssText = function(obj) {
+          var text = [];
+          for(var o in obj) {
+              text.push(o + ":" + obj[o])
+          }
+          return text.join(';')
+      }
+      el.style.cssText = getCssText(cssObj);
+    },
     dynamicType(index){
       this.dynamicTypeCur=index;
       if(index==0){
@@ -143,9 +176,9 @@ export default {
       }else if(index==1){
         this.pageModel.url="/static/ajaxpage.1.json"
       }else if(index==2){
-        this.pageModel.url="/static/ajaxpage.2.json"
+        this.pageModel.url="/static/ajaxpage.1.json"
       }else{
-        this.pageModel.url="/static/ajaxpage.3.json"
+        this.pageModel.url="/static/ajaxpage.1.json"
       }
       this.pageModel.againPost++;
     },
@@ -165,7 +198,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/css/minxin';
-@import  '../assets/css/animation';
 .homePage{
   width:1200px;
   margin:0 auto;
@@ -262,6 +294,7 @@ export default {
         li{
           height: 20px;
           line-height: 20px;
+          font-size: 14px;
           .vPhoto{
             width:15px;
             height:15px;

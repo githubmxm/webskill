@@ -1,8 +1,11 @@
+<!--
+橱窗单行滚动
+-->
 <template>
 <div id="box">
     <ul class="newDigest clear"  ref="newDigest" :class="{anim:animate==true}">
-        <li class="digList" v-for="diges in newDegistList" :key="diges.id">
-          <span class="digType left">[ {{diges.newDigestType}} ]</span><a class="digCon ellipsis left" href="">{{diges.newDigestCon}}</a> <span class="digetTime">{{diges.newDigestTime}}</span>
+      <li class="digList" v-for="diges in newDegistList" :key="diges.id">
+        <span class="digType left">[ {{diges.newDigestType}} ]</span><a class="digCon ellipsis left" href="">{{diges.newDigestCon}}</a> <span class="digetTime">{{diges.newDigestTime}}</span>
       </li>
     </ul>
   </div>

@@ -1,3 +1,6 @@
+<!--
+公用头部导航
+-->
 <template>
   <div class="top">
     <nav class="topType">

@@ -1,16 +1,64 @@
- .animate_newdigest-enter-active,
- .animate_newdigest-leave-active {
-   transition: 5s all ease;
- }
- .animate_newdigest-enter-active {
-   opacity: 1;
-   margin-right: 0px;
- }
- .animate_newdigest-leave-active {
-   opacity: 0;
- }
- .animate_newdigest-enter,
- .animate_newdigest-leave {
-   opacity: 0;
-   margin-right: -20px;
- }
+ 
+ //支持的动画
+ 
+ /*
+vue2-animate.min.css动画使用方式: name='以下动画名'
+ Bounce
+
+bounce
+bounceDown
+bounceLeft
+bounceRight
+bounceUp
+Fade
+
+fade
+fadeDown
+fadeDownBig
+fadeLeft
+fadeLeftBig
+fadeRight
+fadeRightBig
+fadeUp
+fadeUpBig
+
+
+rotate
+rotateDownLeft
+rotateDownRight
+rotateUpLeft
+rotateUpRight
+Slide
+
+slideDown
+slideLeft
+slideRight
+slideUp
+Zoom
+
+zoom
+zoomDown
+zoomLeft
+zoomRight
+zoomUp
+
+
+animate.css使用方式:
+enter-active-class="动画名" leave-active-class="动画名"
+ */
+
+//自定义动画方式
+//  @keyframes animate_newdigest{
+//    from{opacity: 0}
+//    to{opacity: 1}
+//  }
+//  .animate_newdigest-enter-active,
+//  .animate_newdigest-leave-active {
+//    transition: 5s all ease;
+//    animation: animate_newdigest 3s;
+//  }
+//  .animate_newdigest-enter,
+//  .animate_newdigest-leave {
+//    opacity: 0;
+//    margin-right: -20px;
+//  }

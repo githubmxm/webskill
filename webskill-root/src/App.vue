@@ -4,9 +4,11 @@
       <!--顶部导航-->
       <v-top v-if="publicView"></v-top>
       <!--消息通知-->
+      <!-- <transition enter-active-class="bounceInDown" leave-active-class="bounceInDown"> -->
       <div class="newMsgAlert" v-if="publicView">
           <span class="msging">持续更新中....</span>
       </div>
+      <!-- </transition> -->
       <!--内容区-->
       <router-view></router-view>
     </div>
@@ -29,15 +31,15 @@ import PopMsg from '@/components/content/popMsg';
 export default{
   data () {
     return {
-      publicView:true
+      publicView:false
     }
   },
   methods: {
     ...mapActions(["setAalertMsgFn"])
   },
   mounted () {
-    if(location.pathname=="/login"){
-      this.publicView=false
+    if(location.pathname!="/login"){
+      this.publicView=true
     }
   },
   computed: {

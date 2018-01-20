@@ -1,3 +1,6 @@
+<!--
+隐私提醒
+-->
 <template>
   <div class="copyright">
     <p>
