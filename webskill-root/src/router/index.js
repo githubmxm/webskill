@@ -5,6 +5,7 @@ import Index from '@/components'
 import Post from '@/components/post'
 import Privacy from '@/components/privacy'
 import Login from '@/components/login'
+import Leaveword from '@/components/leaveword'
 
 
 Vue.use(Router)
@@ -34,6 +35,12 @@ const router = new Router({
     name:'post',
     components:{
       default: Post
+    }
+  },{
+    path:'/leaveword',
+    name:'leaveword',
+    components:{
+      default: Leaveword
     }
   },{
     path:'/privacy',

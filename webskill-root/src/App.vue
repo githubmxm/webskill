@@ -20,10 +20,12 @@
     <v-alert v-if='publicView'></v-alert>
     <!--留言入口-->
     <!-- <div class="leaveWord" v-if='publicView' @click="setAalertMsgFn()" title="我要留言"></div> -->
-    <div class="leaveWord dot"  v-if='publicView' @click="setAalertMsgFn()" title="我要留言">
-      <div class="dot2">
-          <div class="dot3">我要留言</div>
-      </div>
+    <div class="leaveWord dot"  v-if='leaveWord' @click="setAalertMsgFn()" title="我要留言">
+      <a>
+        <div class="dot2">
+            <div class="dot3">我要留言</div>
+        </div>
+      </a>
     </div>
 
     <!--遮罩层-->
@@ -39,7 +41,8 @@ import PopMsg from '@/components/content/popMsg';
 export default{
   data () {
     return {
-      publicView:false
+      publicView:false,
+      leaveWord:false
     }
   },
   methods: {
@@ -47,7 +50,10 @@ export default{
   },
   mounted () {
     if(location.pathname!="/login"){
-      this.publicView=true
+      this.publicView=true;
+      if(location.pathname.indexOf("/leaveword")<0){
+        this.leaveWord=true;
+      }
     }
   },
   computed: {

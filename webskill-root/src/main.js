@@ -8,7 +8,12 @@ import 'swiper/dist/css/swiper.css'
 import App from './App'
 import store from './store/index'
 import router from './router'
-
+import 'font-awesome/css/font-awesome.min.css'
+import Mock from 'mockjs'
+import '../static/UE/ueditor.config.js'
+import '../static/UE/ueditor.all.min.js'
+import '../static/UE/lang/zh-cn/zh-cn.js'
+import '../static/UE/ueditor.parse.min.js'
 Vue.use(animate)
 Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false

@@ -5,7 +5,9 @@
         <h1 class="title">标题</h1>
         <div class="meta"><span class="creatTime">2018年1月7日</span> <span class="pageViewNum">0</span> 次浏览</div>
         <div class="details">
-          
+          <div class="editor-container">
+            <UE :defaultMsg=defaultMsg :config=config :id=ue1 ref="ue"></UE>
+          </div>
         </div>
       </article>
     </section>
@@ -13,8 +15,48 @@
 </template>
 
 <script>
+import UE from './ue/ue';
 export default {
-  
+  data () {
+    return {
+       defaultMsg: '',
+        config: {
+          initialFrameWidth: null,
+          //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+          toolbars:[['test','emotion']],
+          //focus时自动清空初始化时的内容
+          autoClearinitialContent:true,
+          maximumWords:300,
+          pasteplain:true,
+          //关闭字数统计
+          wordCount:true,
+          enableAutoSave:false,
+          //关闭elementPath
+          elementPathEnabled:false,
+          //默认的编辑区域高度
+          initialFrameHeight:200,
+          //更多其他参数，请参考ueditor.config.js中的配置项
+          serverUrl: '/server/ueditor/controller.php'
+        },
+        ue1: "ue1" // 不同编辑器必须不同的id
+        // ue2: "ue2"
+    }
+  },
+  components: {
+    UE
+  },
+  methods: {
+      //获取编辑器内容
+      getUEContent() {
+        let content = this.$refs.ue.getUEContent(); // 调用子组件方法
+        this.$notify({
+          title: '获取成功，可在控制台查看！',
+          message: content,
+          type: 'success'
+        });
+        console.log(content)
+      }
+  }
 }
 </script>
 
@@ -29,9 +71,11 @@ export default {
       .title{
         margin-bottom: 5px;
         font-weight: bold;
-        font-size: 1.8em;
+        font-size: 18px;
         font-family: Pmingliu,Mingliu;
-        line-height: 1em;
+      }
+      .details{
+        width:950px;
       }
       .meta{
         margin-top: 10px;
