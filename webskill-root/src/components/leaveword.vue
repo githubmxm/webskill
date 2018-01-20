@@ -17,7 +17,7 @@
           <div class="editor-container">
             <UE :defaultMsg=defaultMsg :config=config :id=ue2 ref="ue2"></UE>
           </div>
-          <span class="leaveWordSubmit" @click="leaveWordSubmitFn()">确认</span>
+          <span class="leaveWordSubmit" @click="leaveWordSubmitFn()">提交</span>
         </div>
       </article>
     </section>
