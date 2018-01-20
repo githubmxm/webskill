@@ -1,12 +1,23 @@
 <template>
   <div class="conDetails">
     <section>
-      <article class="conPost">
-        <h1 class="title">请输入您的留言:</h1>
-        <div class="details">
+      <article class="conPost clear">
+        <h1 class="title left">请选择您的输入的留言类型:</h1>
+        <div class="wordType">
+          <input class="chooseType" readonly type="text" :value="chooseTypeName" :typeId="chooseTypeId" @click="wordOneShowFn()" />
+          <p class="wordOne" v-show="wordOneShow">
+            <span @click="chooseTypeName='我要私密';chooseTypeId=0;wordOneShow=false">我要私密</span>
+            <span @click="chooseTypeName='我要提BUG';chooseTypeId=1;wordOneShow=false">我要提BUG</span>
+            <span @click="chooseTypeName='我要提建议';chooseTypeId=2;wordOneShow=false">我要提建议</span>
+            <span @click="chooseTypeName='随便说说';chooseTypeId=3;wordOneShow=false">随便说说</span>
+          </p>
+        </div>
+        <span class="error">{{error}}</span>
+        <div class="details left clear">
           <div class="editor-container">
             <UE :defaultMsg=defaultMsg :config=config :id=ue2 ref="ue2"></UE>
           </div>
+          <span class="leaveWordSubmit" @click="leaveWordSubmitFn()">确认</span>
         </div>
       </article>
     </section>
@@ -14,11 +25,17 @@
 </template>
 
 <script>
-import UE from './ue/ue';
+import { mapActions } from "vuex";
+import UE from './ue/ue'
+import axios from 'axios'
 export default {
   data () {
     return {
-       defaultMsg: '',
+        defaultMsg: '',
+        chooseTypeName:'',
+        chooseTypeId:'',
+        wordOneShow:false,
+        error:'',
         config: {
           initialFrameWidth: null,
           //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
@@ -44,15 +61,41 @@ export default {
     UE
   },
   methods: {
-      //获取编辑器内容
-      getUEContent() {
-        let content = this.$refs.ue.getUEContent(); // 调用子组件方法
-        this.$notify({
-          title: '获取成功，可在控制台查看！',
-          message: content,
-          type: 'success'
+      ...mapActions(["setAalertMsgFn"]),
+      wordOneShowFn(){
+        this.wordOneShow=!this.wordOneShow;
+      },
+      leaveWordSubmitFn(){
+        let _this=this;
+        let ueCon=this.$refs.ue2.getUEContent();
+        if(!this.chooseTypeName){
+          this.error='请选择留言类型';
+          return false;
+        }
+        if(!ueCon){
+          this.error='留言不能为空';
+          return false;
+        }
+        if(ueCon.length<10){
+          this.error='留言不能少于10个';
+          return false;
+        }
+        axios({
+          methods:'get',
+          url:'/static/leaveword.json',
+          data:{
+            chooseType:_this.chooseTypeId,
+            word:ueCon
+          }
+        }).then((res)=>{
+          let resData=res.data;
+          if(resData.status=="success"){
+            //提交成功,等待审核
+            _this.setAalertMsgFn("感谢您的留言！")
+          }
+        }).catch((err)=>{
+
         });
-        console.log(content)
       }
   }
 }
@@ -60,17 +103,59 @@ export default {
 
 <style lang="scss" scoped>
 .conDetails{
+  background: #fcfcfa;
+  box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
   section{
-    background: #fcfcfa;
-    box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
     .conPost{
-      margin-bottom: 20px;
+      position: relative;
       padding: 30px;
       .title{
         margin-bottom: 15px;
         font-weight: bold;
         font-size: 18px;
         font-family: Pmingliu,Mingliu;
+      }
+      .wordType{
+        position: absolute;
+        cursor: pointer;
+        left: 264px;
+        float: left;
+        width: 80px;
+        line-height: 30px;
+        color: #fff;
+        top: 28px;
+        .chooseType{
+          cursor: pointer;
+          width: 100%;
+          border: 0 none;
+          outline: 0;
+          text-align:center;
+          border: 1px solid #ccc;
+          height: 30px;
+          line-height: 30px;
+        }
+        .wordOne{
+          position: absolute;
+          z-index: 9999;
+          border:1px solid #ccc;
+          background: #fff;
+          span{
+            display: inline-block;
+            width:100%;
+            text-align:center;
+            border-bottom:1px solid #ccc;
+            &:hover{
+              background: rgb(213, 227, 239);
+            }
+          }
+        }
+      }
+      .error{
+        position: absolute;
+        left: 350px;
+        top: 34px;
+        color: red;
+        font-size: 14px;
       }
       .details{
         width:950px;
@@ -89,6 +174,18 @@ export default {
           margin-left: 30px;
         }
       }
+    }
+    .leaveWordSubmit{
+      display: inline-block;
+      height: 30px;
+      line-height: 30px;
+      width: 50px;
+      text-align: center;
+      background: blueviolet;
+      color: #fff;
+      float: right;
+      margin-top: 20px;
+      cursor:pointer;
     }
   }
 }

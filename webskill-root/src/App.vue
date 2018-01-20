@@ -20,8 +20,8 @@
     <v-alert v-if='publicView'></v-alert>
     <!--留言入口-->
     <!-- <div class="leaveWord" v-if='publicView' @click="setAalertMsgFn()" title="我要留言"></div> -->
-    <div class="leaveWord dot"  v-if='leaveWord' @click="setAalertMsgFn()" title="我要留言">
-      <a>
+    <div class="leaveWord dot"  v-if='leaveWord' title="我要留言">
+      <a href="/leaveword" target="_blank">
         <div class="dot2">
             <div class="dot3">我要留言</div>
         </div>

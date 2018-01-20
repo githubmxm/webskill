@@ -9,7 +9,6 @@ export default{
     setAalertMsg(state,msg){
       if(msg){
         state.alertMsg=msg;
-       
       }else{
         state.alertMsg='敬请期待!';
       }
