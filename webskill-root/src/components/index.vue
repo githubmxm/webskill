@@ -35,30 +35,14 @@
           <div class="lfCon userInfo left">
             <p class="headImg"><img src="../assets/images/photo.png" alt="头像" /></p>
             <p class="hei blogger"><span>博主:</span> <span class="cor blogName">StarFire_xm</span></p>
-            <p class="hei blogger"><span>被关注:</span> <span class="cor focus">0</span></p>
-            <p class="hei blogger"><span>被赞:</span> <span class="cor focus">0</span></p>
-            <p class="hei blogger"><span>被访问:</span> <span class="cor lookPv">0</span></p>
+            <p class="hei blogger"><span>职业:</span> <span class="cor lookPv">前端工程师</span></p>
+            <p class="hei blogger"><span>兴趣:</span> <span class="cor focus">技术,运动</span></p>
             <p class="hei blogger"><span>联系(qq,wx):</span> <span class="cor lookPv">1123360735</span></p>
+            <p class="hei blogger"><span>格言:</span> <span class="cor focus">择需,取上态为之</span></p>
             <p class="PlayTour clear">
               <span>微信打赏:</span>
               <img src="../assets/images/wxrwm.png" alt="二维码" />
             </p>
-          </div>
-          <!--最新访客-->
-          <div class="lfCon visitors left">
-              <p class="titV">最新访客</p>
-              <ul class="vList">
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-              </ul>
           </div>
           <!--技能分类-->
           <div class="lfCon blogType left">
@@ -76,18 +60,36 @@
                 <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
               </ul>
           </div>
+          <!--最新访客-->
+          <div class="lfCon visitors left">
+              <p class="titV">最新访客</p>
+              <ul class="vList">
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
+              </ul>
+          </div>
        </div>
        </transition>
        <transition enter-active-class="fadeInRight" leave-active-class="fadeInRight">
        <div class="dynamicType left" v-show="animationShow">
          <ul class="typeName clear">
            <li class="jottings" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">最新笔录</li>
-           <li class="newSkill"  :class="{cur:dynamicTypeCur==1}"  @click="dynamicType(1)">技能快讯</li>
+           <li class="newSkill" :class="{cur:dynamicTypeCur==1}"  @click="dynamicType(1)">技能快讯</li>
            <li class="wordDec"  :class="{cur:dynamicTypeCur==2}" @click="dynamicType(2)">留言动态</li>
-           <li class="tools"  :class="{cur:dynamicTypeCur==3}"  @click="dynamicType(3)">推荐工具</li>
+           <li class="tools" :class="{cur:dynamicTypeCur==3}"  @click="dynamicType(3)">推荐工具</li>
+           <li class="searchs" :class="{cur:dynamicTypeCur==4}"  @click="dynamicType(4)">搜索导航</li>
          </ul>
          <div class="contentsForType">
            <ul class="contentList">
+             <!--最新笔录-->
              <transition-group v-if="dynamicTypeCur==0&&dynamicDataList.length>0" enter-active-class="fadeIn" leave-active-class="fadeIn" @before-enter="beforeEnter">
              <li class="zxbl"  v-for="(item,index) in dynamicDataList" :key="index" :animate-delay="(0.3*index)" :animate-duration="0.5">
                <div class="cons">
@@ -101,12 +103,22 @@
                </div>
              </li>
              </transition-group>
-              <transition v-else enter-active-class="bounceIn" leave-active-class="bounceIn">
-              <p v-show="Math.random()" class="noCons">敬 请 期 待！</p>
-              </transition>
+             <!--留言动态-->
+              <div class="wordDynamic"  v-else-if="dynamicTypeCur==2">
+                <a class="goLeaveWords blink" @click="setAalertMsgFn()">我要留言</a>
+              </div>
+             <!--搜索导航-->
+            <div class="search"  v-else-if="dynamicTypeCur==4">
+              <input type="text" name="" id="searchCon" placeholder="输入您要搜索的内容" />
+              <span class="searchSubmit"  @click="setAalertMsgFn()">Find</span>
+            </div>
+             <!--敬请期待-->
+             <transition v-else enter-active-class="bounceIn" leave-active-class="bounceIn">
+             <p v-show="dynamicDataList.length==0" class="noCons">敬 请 期 待！</p>
+             </transition>
            </ul>
          </div>
-         <Pagebar v-show="dynamicTypeCur==0&&dynamicDataList.length>0" :page-model="pageModel" ref="dynamicTypePage"></Pagebar>
+         <Pagebar v-show="dynamicDataList.length>0" :page-model="pageModel" ref="dynamicTypePage"></Pagebar>
        </div>
        </transition>
      </div>
@@ -117,7 +129,7 @@
 import NewDigest from './content/newDigest'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Pagebar from '../components/unit/table-pagebar'
-import { mapGetters } from "vuex"
+import { mapGetters,mapActions } from "vuex"
 export default {
   name: "index",
   data() {
@@ -149,6 +161,7 @@ export default {
      Pagebar
   },
   methods: {
+    ...mapActions(['setAalertMsgFn']),
     beforeEnter(el){
        var delay = el.getAttribute('animate-delay'),
           duration = el.getAttribute('animate-duration');
@@ -198,9 +211,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/css/minxin';
+@import '../assets/css/animation';
 .homePage{
-  width:1200px;
-  margin:0 auto;
   .temp_01{
     margin-bottom: 38px;
     background: #fff;
@@ -385,7 +397,42 @@ export default {
                 }
               }
             }
-          } 
+          }
+          .search{
+             display: inline-block;
+             margin: 10px 0 8px 35px;
+             #searchCon{
+               height: 25px;
+               line-height: 25px;
+               border: 1px solid #ccc;
+               width: 300px;
+               padding-left: 8px;
+             }
+             .searchSubmit{
+               display: inline-block;
+               font-size: 14px;
+               cursor: pointer;
+               width:35px;
+               height: 25px;
+               line-height: 25px;
+               text-align: center;
+               background: #cddce0;
+               color: #000;
+               border-radius: 3px;
+               &:hover{
+                 background: #16E36A;
+                 color: #fff;
+               }
+             }
+          }
+          .wordDynamic{
+            .goLeaveWords{
+              display: inline-block;
+              margin: 10px 0 8px 35px;
+              cursor: pointer;
+              color: #1EC965;
+            }
+          }
         }
         
       }

@@ -1,3 +1,6 @@
+<!--
+弹层提示
+-->
 <template>
   <div class="popMsg" v-show="alertMsgShow">
     <p class="errTit">{{alertMsg}}</p>

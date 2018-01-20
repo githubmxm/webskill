@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Store from '@/store'
 import Index from '@/components'
+import Post from '@/components/post'
 import Privacy from '@/components/privacy'
 import Login from '@/components/login'
 
@@ -27,6 +28,12 @@ const router = new Router({
     name:'index',
     components:{
       default: Index
+    }
+  },{
+    path:'/post',
+    name:'post',
+    components:{
+      default: Post
     }
   },{
     path:'/privacy',

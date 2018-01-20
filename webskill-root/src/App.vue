@@ -10,14 +10,22 @@
       </div>
       <!-- </transition> -->
       <!--内容区-->
-      <router-view></router-view>
+      <div class="allConts">
+        <router-view></router-view>
+      </div>
     </div>
     <!--底部导航-->
     <v-footer v-if='publicView'></v-footer>
     <!--弹层提示-->
-    <v-alert></v-alert>
+    <v-alert v-if='publicView'></v-alert>
     <!--留言入口-->
-    <div class="leaveWord" v-if='publicView' @click="setAalertMsgFn()" title="我要留言"></div>
+    <!-- <div class="leaveWord" v-if='publicView' @click="setAalertMsgFn()" title="我要留言"></div> -->
+    <div class="leaveWord dot"  v-if='publicView' @click="setAalertMsgFn()" title="我要留言">
+      <div class="dot2">
+          <div class="dot3">我要留言</div>
+      </div>
+    </div>
+
     <!--遮罩层-->
     <p class="maskZZ" v-show='maskZzShow'></p>
   </div>
@@ -54,9 +62,13 @@ export default{
 </script>
 <style lang="scss">
 @import './assets/css/common.scss';
-
+@import './assets/css/animation';
 body{
   background: #fafafa;
+  .allConts{
+    width:1200px;
+    margin:0 auto;
+  }
   .newMsgAlert{
     width:1200px;
     height:30px;
@@ -76,9 +88,9 @@ body{
     top: 70%;
     left: 50px;
     cursor: pointer;
-    width: 48px;
-    height: 48px;
-    background:url('./assets/images/leaveWord.jpg') no-repeat 0 0;
+    // width: 48px;
+    // height: 48px;
+    // background:url('./assets/images/leaveWord.jpg') no-repeat 0 0;
     color: #fff;
     border-radius: 50%;
   }

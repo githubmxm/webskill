@@ -87,6 +87,7 @@ export default {
     margin:0 15px;
     color:#fff;
     cursor: pointer;
+    text-shadow: 3px 3px 3px #000;
     .cur,&:hover{
       color:#5eaeef;
       background: #333;

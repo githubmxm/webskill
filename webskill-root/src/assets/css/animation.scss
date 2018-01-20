@@ -62,3 +62,109 @@ enter-active-class="动画名" leave-active-class="动画名"
 //    opacity: 0;
 //    margin-right: -20px;
 //  }
+
+
+
+/* 定义keyframe动画--文字闪动，命名为blink */
+
+@keyframes blink{
+  0%{opacity: 1;}
+  50%{opacity: 1;}
+  50.01%{opacity: 0;} /* 注意这里定义50.01%立刻透明度为０，可以设置闪烁效果 */
+  100%{opacity: 0;} 
+}
+
+/* 添加兼容性前缀 */
+
+@-webkit-keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@-moz-keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@-ms-keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@-o-keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    50.01% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.blink{
+    animation: blink .75s linear infinite;  
+    /* 其它浏览器兼容性前缀 */
+    -webkit-animation: blink .75s linear infinite;
+    -moz-animation: blink .75s linear infinite;
+    -ms-animation: blink .75s linear infinite;
+    -o-animation: blink .75s linear infinite;
+}
+
+
+/*三级水波特效*/
+.dot {
+  animation: sploosh 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.dot2 {
+  animation: sploosh2 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.dot3 {
+  animation: sploosh3 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.dot,.dot2,.dot3{
+  height: 50px;
+  width: 50px;
+  font-size: 12px;
+  color: #fff;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 100%;
+  position: absolute;
+  z-index: 10;
+  animation-iteration-count:infinite;
+  animation-delay: 2s;
+  background: transparent;
+}
+@keyframes sploosh {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 30px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 0);
+  }
+}
+@keyframes sploosh2 {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 0.3);
+  }
+}
+@keyframes sploosh3 {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 1);
+  }
+}

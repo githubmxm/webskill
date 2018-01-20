@@ -1,3 +1,6 @@
+<!--
+页脚
+-->
 <template>
   <footer>
     <p>
