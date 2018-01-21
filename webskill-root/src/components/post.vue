@@ -202,16 +202,29 @@ export default {
                     color:#999;
                     background: url("../assets/images/comIcon.png") no-repeat;
                     margin: 0 12px;
+                    cursor: pointer;
                   }
                   .comLike{
-                    background-position: 0 -80px; 
+                    background-position: 0 -80px;
+                    &:hover{
+                      color: #61abe2;
+                      background-position: 0 -100px;
+                    }
                   }
                   .comTread{
-                    background-position: 0 -120px; 
+                    background-position: 0 -120px;
+                    &:hover{
+                      color: #61abe2;
+                      background-position: 0 -140px;
+                    }
                   }
                   .replay{
                     width: 47px;
                     background-position: left -200px; 
+                    &:hover{
+                      color: #61abe2;
+                      background-position: left -220px; 
+                    }
                   }
                 }
               }
