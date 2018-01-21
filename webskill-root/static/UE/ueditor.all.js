@@ -7998,6 +7998,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * ```
          */
         getActionUrl: function(action){
+            return false;
             var actionName = this.getOpt(action) || action,
                 imageUrl = this.getOpt('imageUrl'),
                 serverUrl = this.getOpt('serverUrl');
@@ -23861,7 +23862,9 @@ UE.plugin.register('autosave', function (){
         MIN_TIME = 20,
         //auto save key
         saveKey = null;
-
+    if (!me.getOpt('enableAutoSave')) {
+        return false;
+    }
     function save ( editor ) {
 
         var saveData;

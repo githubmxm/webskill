@@ -2,7 +2,7 @@
   <div class="conDetails">
     <section>
       <article class="conPost clear">
-        <h1 class="title left">请选择您的输入的留言类型:</h1>
+        <h1 class="title left">请选择您要输入的留言类型:</h1>
         <div class="wordType">
           <input class="chooseType" readonly type="text" :value="chooseTypeName" :typeId="chooseTypeId" @click="wordOneShowFn()" />
           <p class="wordOne" v-show="wordOneShow">
@@ -15,7 +15,7 @@
         <span class="error">{{error}}</span>
         <div class="details left clear">
           <div class="editor-container">
-            <UE :defaultMsg=defaultMsg :config=config :id=ue2 ref="ue2"></UE>
+            <UE :config=config :id=ue2 ref="ue2"></UE>
           </div>
           <span class="leaveWordSubmit" @click="leaveWordSubmitFn()">提交</span>
         </div>
@@ -31,7 +31,6 @@ import axios from 'axios'
 export default {
   data () {
     return {
-        defaultMsg: '',
         chooseTypeName:'',
         chooseTypeId:'',
         wordOneShow:false,
@@ -44,6 +43,7 @@ export default {
           autoClearinitialContent:true,
           maximumWords:300,
           pasteplain:true,
+          initialContent:'<span style="color:#ccc; onlyRed">说说你的看法...</span>',
           //关闭字数统计
           wordCount:true,
           enableAutoSave:false,
