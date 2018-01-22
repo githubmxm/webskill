@@ -34,6 +34,7 @@
 </template>
 <script>
 import { mapGetters,mapActions } from "vuex";
+import axios from 'axios';
 import Top from '@/components/top';
 import Footer from '@/components/footer';
 import PopMsg from '@/components/content/popMsg';
@@ -54,7 +55,18 @@ export default{
       if(location.pathname.indexOf("/leaveword")<0){
         this.leaveWord=true;
       }
+    }else{
+      axios({
+          method: 'get',
+          url: '/webskill/loginStatus'
+        }).then((res) => {
+          let loginstatus = res.data;
+          if(loginstatus.data.loginStatus){
+            location.href="/index"
+          }
+      })
     }
+
   },
   computed: {
     ...mapGetters(['maskZzShow'])

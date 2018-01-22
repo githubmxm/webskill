@@ -18,7 +18,7 @@
                     <i class="icon iconfont icon-yonghu"></i>
                   </span>
                   <span class="txt">
-                    目前您尚未登录，请 <a href="/login">登录</a> 后进行评论
+                    您还未登录， <a href="/login">登录</a> 后可进行评论
                    <!-- 评论专区&nbsp;&nbsp;<a>【点我去评论 】</a> -->
                   </span>
                   </div>

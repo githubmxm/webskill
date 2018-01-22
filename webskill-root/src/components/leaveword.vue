@@ -43,7 +43,7 @@ export default {
           autoClearinitialContent:true,
           maximumWords:300,
           pasteplain:true,
-          initialContent:'<span style="color:#ccc; onlyRed">说说你的看法...</span>',
+          initialContent:'<span style="color:#ccc; onlyRed">在此输入留言...</span>',
           //关闭字数统计
           wordCount:true,
           enableAutoSave:false,

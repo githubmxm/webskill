@@ -105,7 +105,7 @@
              </transition-group>
              <!--留言动态-->
               <div class="wordDynamic"  v-else-if="dynamicTypeCur==2">
-                <a class="goLeaveWords blink" @click="setAalertMsgFn()">我要留言</a>
+                <a class="goLeaveWords blink" href="/leaveword" target="_blank">我要留言</a>
               </div>
              <!--搜索导航-->
             <div class="search"  v-else-if="dynamicTypeCur==4">
