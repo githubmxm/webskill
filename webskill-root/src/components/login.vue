@@ -73,7 +73,7 @@ export default {
           }
         }).then((res) => {
           let logindata = res.data;
-          if(logindata.status=="success"){
+          if(logindata.status=="success"||logindata.message=="注册成功"){
             if(logindata.loginStatus){
               location.href="/index"
             }else{
@@ -88,6 +88,7 @@ export default {
       }
     },
     formValidata (){
+      this.errorMsg="";
       //正则
       var inP1=/^[A-Za-z0-9]+$/,
           allEi=/^([A-Za-z0-9]|[\u4E00-\u9FA5])+$/,
@@ -120,9 +121,19 @@ export default {
       }else if(!this.user.account||!this.user.accoutPwd||!inP1.test(this.user.accoutPwd)||this.user.accoutPwd.length>20||this.user.accoutPwd.length<6||!inP1.test(this.user.account)||this.user.account.length<2||this.user.account.length>20){
          this.errorMsg="账号或密码格式不对";
          this.showError=false;
-      }else if(this.loginTypeCur==1&&!exp.test(this.user.accoutEmail)){
-         this.errorMsg="邮箱格式不正确";
-         this.showError=false;
+      }else if(this.loginTypeCur==1){
+        if(!this.user.accoutEmail){
+          this.errorMsg="请输入注册邮箱";
+          this.showError=false;
+          return false;
+        }
+        if(!exp.test(this.user.accoutEmail)){
+          this.errorMsg="邮箱格式不正确";
+          this.showError=false;
+          return false;
+        }
+        this.showError=true;
+        return true;
       }else{
         this.showError=true;
         return true;
