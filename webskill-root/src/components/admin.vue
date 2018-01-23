@@ -57,6 +57,17 @@ export default {
         ue3: "ue3"
     }
   },
+  created () {
+    axios({
+      method: 'get',
+      url: '/webskill/webSkillAdmin'
+    }).then((res) => {
+      let userState = res.data
+      if (userState.message == "权限认证失败") {
+        location.href="/index";
+      }
+    })
+  },
   components: {
     UE
   },
