@@ -72,6 +72,9 @@ export default{
 @import './assets/css/common.scss';
 @import './assets/css/animation';
 body{
+  #app{
+    min-width: 1200px;
+  }
   background: #fafafa;
   .allConts{
     width:1200px;

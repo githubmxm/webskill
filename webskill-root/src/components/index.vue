@@ -21,7 +21,7 @@
             <li><a title="StarFire_xm的博客"><img src="../assets/images/starfire.png" alt=""></a></li>
             </swiper-slide>
             <swiper-slide>
-              <li><a title="点我吐槽" href=""><img src="../assets/images/tucao.png" alt=""></a></li>
+              <li><a title="点我吐槽" href="/leaveword" target="_blcank"><img src="../assets/images/tucao.png" alt=""></a></li>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div> 
           </swiper>

@@ -4,9 +4,9 @@
 <template>
   <div class="login_main" v-if="loginShow">
       <div class="login">
-        <p class="codeTitle">
+        <!-- <p class="codeTitle">
           <span>代码世界</br><i>code world</i></span>
-        </p>
+        </p> -->
         <div class="usersLogin">
           <p class="loginType">
             <span class="submit" :class="{cur:loginTypeCur==0}" @click="loginType(0)">登录</span>
@@ -174,26 +174,15 @@ body{
 }
 </style>
 <style lang="scss" scoped>
-@import '../assets/css/minxin';
-body{
-  min-width: 1400px;
-}
 .login_main{
-  width:1400px;
-  height: 500px;
+  display: block;
+  width: 300px;
   margin: 0 auto;
-  background: url("../assets/images/timg.jpg") no-repeat 0 0;
-  position: relative;
+  text-align: center;
+  margin-top: 242px;
   .login{
-  width:1400px;
-  height: 200px;
-  position:relative;
-  top: 317px;
     .codeTitle{
     display: inline-block;
-    position: absolute;
-    left: 540px;
-    top: 75px;
     font-weight: bold;
     font-size: 24px;
     i{
@@ -205,9 +194,6 @@ body{
    }
   .usersLogin{
     display: inline-block;
-    position: absolute;
-    right: 258px;
-    top: -19px;
   .surSubmit{
     display: inline-block;
     font-size: 14px;
@@ -228,6 +214,7 @@ body{
     margin:10px 0;
     font-size: 16px;
     #account,#password{
+      width: 165px;
       height: 28px;
       line-height: 28px;   
       border: 1px solid #ccc;
