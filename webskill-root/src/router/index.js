@@ -6,6 +6,7 @@ import Post from '@/components/post'
 import Privacy from '@/components/privacy'
 import Login from '@/components/login'
 import Leaveword from '@/components/leaveword'
+import Admin from '@/components/admin'
 
 
 Vue.use(Router)
@@ -23,7 +24,7 @@ const router = new Router({
     }
   },{
     path: '/',
-    redirect:'/login'
+    redirect:'/index'
   },{
     path:'/index',
     name:'index',
@@ -48,6 +49,12 @@ const router = new Router({
     components:{
       default: Privacy
     }
+  },{
+    path:'/webSkillAdmin',
+    name:'webSkillAdmin',
+    components:{
+      default: Admin
+    }
   }]
 })
 
@@ -55,6 +62,10 @@ const router = new Router({
  * desc:全局监听
  */
 router.beforeEach((to, from, next) => {
+  //页面404处理
+  if(!to.name){
+    location.href="/index";
+  }
   // Store.dispatch('updateHistoryLength')
   next()
 })

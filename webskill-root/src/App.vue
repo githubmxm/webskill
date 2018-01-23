@@ -55,16 +55,6 @@ export default{
       if(location.pathname.indexOf("/leaveword")<0){
         this.leaveWord=true;
       }
-    }else{
-      axios({
-          method: 'get',
-          url: '/webskill/loginStatus'
-        }).then((res) => {
-          let loginstatus = res.data;
-          if(loginstatus.data.loginStatus){
-            location.href="/index"
-          }
-      })
     }
 
   },

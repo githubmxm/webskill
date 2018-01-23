@@ -3,9 +3,7 @@ import axios from 'axios'
 export default {
   state: {
     //主导航和二级导航
-    mainNavs: [],
-    //用户登录状态,默认false未登录
-    isLogin: false
+    mainNavs: []
   },
   mutations: {
     setNav(state, nav) {
@@ -29,28 +27,11 @@ export default {
           commit('setNav', nav.data)
         }
       })
-    },
-    //获取用户登录状态
-    getLoginState({
-      commit
-    }) {
-      axios({
-        method: 'get',
-        url: '/static/userState.json'
-      }).then((res) => {
-        let userState = res.data
-        if (userState.status == "success") {
-          commit('setIsLogin', userState.data.loginStatue)
-        }
-      })
     }
   },
   getters: {
   	mainNavs: state => {
   		return state.mainNavs;
-    },
-    isLogin: state => {
-  		return state.isLogin;
-  	}
+    }
   },
 }

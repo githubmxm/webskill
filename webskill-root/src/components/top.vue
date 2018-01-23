@@ -16,7 +16,8 @@
       </p>
       <!--用户已登录-->
       <p class="userLogin" v-if="isLogin==true">
-         <span class="userInfo"></span>
+        <span class="loginExit right" @click="loginExit()">退出</span>
+         <span class="userInfo right">[{{username}}]</span>
       </p>
       <!--未登录或异常-->
       <div class="noLogin" v-else>
@@ -40,27 +41,55 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { mapActions,mapGetters } from "vuex";
+
 export default {
   name: "top",
   data() {
     return {
       msg: "主导航和二级导航展示",
-      jbx: true
+      jbx: true,
+      isLogin:false,
+      username:""
     };
   },
   created() {
     
   },
   computed: {
-    ...mapGetters(['mainNavs','isLogin'])
+    ...mapGetters(['mainNavs'])
   },
   methods: {
-    ...mapActions(["getNav",'getLoginState','setAalertMsgFn'])
+    ...mapActions(["getNav",'setAalertMsgFn']),
+    loginExit(){
+      var _this=this;
+      axios({
+        method: 'post',
+        url: '/webskill/loginExit'
+      }).then((res) => {
+        let userState = res.data
+        if (userState.status == "success") {
+          _this.isLogin=false;
+          _this.username="";
+        }
+      })
+    }
   },
   mounted: function() {
     this.getNav();
-    this.getLoginState();
+    axios({
+      method: 'get',
+      url: '/webskill/loginStatus'
+    }).then((res) => {
+      let userState = res.data
+      if (userState.status == "success") {
+        if(userState.data.loginStatus){
+          this.isLogin=true;
+          this.username=userState.data.userName;
+        }
+      }
+    })
   }
 };
 </script>
@@ -120,6 +149,11 @@ export default {
     height: 100%;
     .userInfo{
       color:#fff;
+    }
+    .loginExit{
+      cursor: pointer;
+      color:#fff;
+      margin-left: 10px;
     }
   }
   .noLogin{

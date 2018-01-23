@@ -2,7 +2,7 @@
 登录
 -->
 <template>
-  <div class="login_main">
+  <div class="login_main" v-if="loginShow">
       <div class="login">
         <p class="codeTitle">
           <span>代码世界</br><i>code world</i></span>
@@ -48,8 +48,23 @@ export default {
       },
       errorMsg:"",
       showError:true,
-      loginTypeCur:0
+      loginTypeCur:0,
+      loginShow:false
     };
+  },
+  created () {
+    let _this=this;
+    axios({
+        method: 'get',
+        url: '/webskill/loginStatus'
+      }).then((res) => {
+        let loginstatus = res.data;
+        if(loginstatus.data.loginStatus){
+          location.href="/index"
+        }else{
+          _this.loginShow=true;
+        }
+    })
   },
   methods: {
     /*
@@ -73,16 +88,21 @@ export default {
           }
         }).then((res) => {
           let logindata = res.data;
-          if(logindata.status=="success"||logindata.message=="注册成功"){
-            if(logindata.loginStatus){
-              location.href="/index"
+          if(this.loginTypeCur==1){
+              logindata.message=="注册成功";
+              location.href="/index";
+          }else{
+            if(logindata.status=="success"){
+              if(logindata.loginStatus){
+                location.href="/index";
+              }else{
+                this.errorMsg=logindata.message;
+                this.showError=false;
+              }
             }else{
               this.errorMsg=logindata.message;
               this.showError=false;
             }
-          }else{
-            this.errorMsg=logindata.message;
-            this.showError=false;
           }
         })
       }
@@ -144,7 +164,7 @@ export default {
 
   },
   mounted () {
-
+   
   }
 };
 </script>
