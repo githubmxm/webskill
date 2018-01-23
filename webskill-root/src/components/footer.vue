@@ -4,7 +4,7 @@
 <template>
   <footer>
     <p>
-     <a href="/aboutWe" target="_blank">关于我们</a>
+     <a href="/about" target="_blank">关于我们</a>
      <a href="/privacy" target="_blank">版权隐私</a>
     </p>
   </footer>

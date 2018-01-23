@@ -7,10 +7,14 @@
         <transition  enter-active-class="fadeInLeft" leave-active-class="fadeInLeft">
         <!--最新摘要-->
         <div class="newDigest left" v-show="animationShow">
-          <p class="stitle">
+          <!-- <p class="stitle">
             <span>最新摘要</span>
           </p>
-          <v-newDigest></v-newDigest>
+          <v-newDigest></v-newDigest> -->
+          <p class="stitle">
+            <span>云标签</span>
+          </p>
+          <v-cloudTag></v-cloudTag>
         </div>
         </transition>
         <!--广告轮播-->
@@ -126,7 +130,8 @@
 </template>
 
 <script>
-import NewDigest from './content/newDigest'
+// import NewDigest from './content/newDigest'
+import CloudTag from './content/cloudTag'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Pagebar from '../components/unit/table-pagebar'
 import { mapGetters,mapActions } from "vuex"
@@ -155,7 +160,8 @@ export default {
     };
   },
   components:{
-    'v-newDigest':NewDigest,
+    // 'v-newDigest':NewDigest,
+    'v-cloudTag':CloudTag,
      swiper,  
      swiperSlide,
      Pagebar
@@ -402,8 +408,8 @@ export default {
              display: inline-block;
              margin: 10px 0 8px 35px;
              #searchCon{
-               height: 25px;
-               line-height: 25px;
+               height: 27px;
+               line-height: 27px;
                border: 1px solid #ccc;
                width: 300px;
                padding-left: 8px;

@@ -5,6 +5,7 @@ import Index from '@/components'
 import Post from '@/components/post'
 import Privacy from '@/components/privacy'
 import Login from '@/components/login'
+import About from '@/components/about'
 import Leaveword from '@/components/leaveword'
 import Admin from '@/components/admin'
 
@@ -48,6 +49,12 @@ const router = new Router({
     name:'privacy',
     components:{
       default: Privacy
+    }
+  },{
+    path:'/about',
+    name:'about',
+    components:{
+      default: About
     }
   },{
     path:'/webSkillAdmin',

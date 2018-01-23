@@ -117,12 +117,25 @@ enter-active-class="动画名" leave-active-class="动画名"
 /*三级水波特效*/
 .dot {
   animation: sploosh 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+      /* 其它浏览器兼容性前缀 */
+  -webkit-animation: sploosh 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -moz-animation: sploosh 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -ms-animation:sploosh 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -o-animation:sploosh 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .dot2 {
   animation: sploosh2 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -webkit-animation: sploosh2 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -moz-animation:sploosh2 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -ms-animation:sploosh2 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -o-animation:sploosh2 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .dot3 {
   animation: sploosh3 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -webkit-animation:sploosh3 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);;
+  -moz-animation:sploosh3 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);;
+  -ms-animation:sploosh3 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -o-animation:sploosh3 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .dot,.dot2,.dot3{
   height: 50px;
@@ -136,9 +149,57 @@ enter-active-class="动画名" leave-active-class="动画名"
   z-index: 10;
   animation-iteration-count:infinite;
   animation-delay: 2s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-delay: 2s;
+  -moz-animation-iteration-count:infinite;
+  -moz-animation-delay: 2s;
+  -ms-animation-iteration-count:infinite;
+  -ms-animation-delay: 2s;
+  -o-animation-iteration-count:infinite;
+  -o-animation-delay: 2s;
   background: transparent;
 }
 @keyframes sploosh {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 30px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 0);
+  }
+}
+@-webkit-keyframes sploosh {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 30px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 0);
+  }
+}
+@-moz-keyframes sploosh {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 30px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 0);
+  }
+}
+@-ms-keyframes sploosh {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 30px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 0);
+  }
+}
+@-o-keyframes sploosh {
   0% {
     box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
     background: rgba(255, 220, 1, 0.7);
@@ -158,6 +219,46 @@ enter-active-class="动画名" leave-active-class="动画名"
     background: rgba(255, 220, 1, 0.3);
   }
 }
+@-webkit-keyframes sploosh2 {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 0.3);
+  }
+}
+@-moz-keyframes sploosh2 {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 0.3);
+  }
+}
+@-ms-keyframes sploosh2 {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 0.3);
+  }
+}
+@-o-keyframes sploosh2 {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 0.3);
+  }
+}
 @keyframes sploosh3 {
   0% {
     box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
@@ -167,6 +268,96 @@ enter-active-class="动画名" leave-active-class="动画名"
     box-shadow: 0 0 0 10px rgba(255, 220, 1, 0);
     background: rgba(255, 220, 1, 1);
   }
+}
+@-webkit-keyframes sploosh3 {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 1);
+  }
+}
+@-moz-keyframes sploosh3 {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 1);
+  }
+}
+@-ms-keyframes sploosh3 {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 1);
+  }
+}
+@-o-keyframes sploosh3 {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 220, 1, 0.7);
+    background: rgba(255, 220, 1, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(255, 220, 1, 0);
+    background: rgba(255, 220, 1, 1);
+  }
+}
+/*文字左右微倾斜*/
+@keyframes textrotate {
+  from {
+    transform: rotateY(-20deg);
+  }
+  to {
+    transform: rotateY(20deg);
+  }
+}
+@-moz-keyframes textrotate {
+  from {
+    transform: rotateY(-20deg);
+  }
+  to {
+    transform: rotateY(20deg);
+  }
+}
+@-webkit-keyframes textrotate {
+  from {
+    transform: rotateY(-20deg);
+  }
+  to {
+    transform: rotateY(20deg);
+  }
+}
+@-ms-keyframes textrotate {
+  from {
+    transform: rotateY(-20deg);
+  }
+  to {
+    transform: rotateY(20deg);
+  }
+}
+@-o-keyframes textrotate {
+  from {
+    transform: rotateY(-20deg);
+  }
+  to {
+    transform: rotateY(20deg);
+  }
+}
+
+.textrotate{
+  animation:textrotate 2s ease-in-out alternate infinite;  
+  /* 其它浏览器兼容性前缀 */
+  -webkit-animation: textrotate 2s ease-in-out alternate infinite;  
+  -moz-animation: textrotate 2s ease-in-out alternate infinite;  
+  -ms-animation: textrotate 2s ease-in-out alternate infinite;  
+  -o-animation: textrotate 2s ease-in-out alternate infinite;  
 }
 
 //http://fontawesome.io/cheatsheet/   http://fontawesome.io/icons/#  图标使用方式  <i class="fa fa-weixin"></i>
