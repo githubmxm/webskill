@@ -5,7 +5,7 @@
   <div class="top container-fluid">
     <nav class="topType row">
       <p class="alinks clear col-lg-4">
-        <a title="技百讯" class="logo col-lg-4" href="/index">
+        <a title="技百讯" class="logo col-lg-5" href="/index">
           <img src="../assets/images/jbxLogo.png" alt="技百讯" />
           <span>技百讯</span>
         </a>

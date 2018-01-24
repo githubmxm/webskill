@@ -113,7 +113,7 @@ export default {
     transition: all 0.5s;
   }
   .newDigest {
-    padding: 8px 15px;
+    padding: 8px 0;
     background: url("../../assets/images/indexBgW.png") center center;
     overflow: hidden;
     .digList {

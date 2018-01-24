@@ -64,6 +64,8 @@ export default {
       if (userState.message == "权限认证失败") {
         location.href="/index";
       }
+    }).catch(function(error){
+      location.href="/index";
     })
   },
   components: {

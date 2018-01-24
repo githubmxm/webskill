@@ -208,6 +208,8 @@ export default {
 @import '../assets/css/minxin';
 @import '../assets/css/animation';
 .homePage{
+  margin-left:0;
+  margin-right: 0;
   .temp_01{
     margin-bottom: 38px;
     background: #fff;
@@ -257,7 +259,6 @@ export default {
   }
   .mainCon{
     .conLf{
-      padding-left: 0px;
       .lfCon{
         margin-bottom: 15px;
       }
@@ -362,10 +363,11 @@ export default {
     }
     .dynamicType{
       // background: url("../assets/images/indexBgW3.png") center center;
-      background: #fff;
       .typeName{
+        background: #fff;
         padding: 5px 0;
         border-bottom: 1px solid #e8e8e8;
+        height: 35px;
         li{
           display: inline-block;
           font-size: 18px;
@@ -377,17 +379,19 @@ export default {
         li.cur{
             border-bottom: 2px solid #5eaeef;
             color: #5eaeef!important;
+            height:30px;
         }
       }
       .contentsForType{
-        margin-top: 2px;
         font-size: 18px;
+        background: #fff;
         .contentList{
+          padding-top: 8px;
+          padding-bottom:8px;
           .noCons{
             font-size: 22px;
             color: #19b77e;
             text-align: center;
-            margin: 20px auto;
           }
           .zxbl{
             &:hover{
@@ -481,6 +485,9 @@ export default {
  }
 }
 @media (max-width: 630px) {
+  .top .topType .alinks .logo span{
+    font-size:15px;
+  }
   .homePage .mainCon .dynamicType .typeName li{
     font-size: 13px;
   }
@@ -502,5 +509,8 @@ export default {
 //   .contentsForType .sum_con{
 //     font-size: 11px !important;
 //   }
+     .noCons,.goLeaveWords{
+       font-size: 12px !important;
+     }
 // }
 </style>
