@@ -5,9 +5,9 @@
       <v-top v-if="publicView"></v-top>
       <!--消息通知-->
       <!-- <transition enter-active-class="bounceInDown" leave-active-class="bounceInDown"> -->
-      <div class="newMsgAlert container" v-if="publicView">
+      <!-- <div class="newMsgAlert container" v-if="publicView">
           <span class="msging">持续更新中....</span>
-      </div>
+      </div> -->
       <!-- </transition> -->
       <!--内容区-->
       <div class="allConts container">
@@ -81,6 +81,9 @@ export default{
 @import './assets/css/animation';
 body{
   background: #fafafa;
+  .allConts{
+    margin-top: 35px;
+  }
   .newMsgAlert{
     height:30px;
     position: relative;
