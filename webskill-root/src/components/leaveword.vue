@@ -1,5 +1,5 @@
 <template>
-  <div class="conDetails">
+  <div class="conDetails row">
     <section>
       <article class="conPost clear">
         <h1 class="title left">请选择您要输入的留言类型:</h1>
@@ -123,7 +123,7 @@ export default {
         width: 80px;
         line-height: 30px;
         color: #fff;
-        top: 28px;
+        top: 24px;
         .chooseType{
           cursor: pointer;
           width: 100%;
@@ -158,7 +158,7 @@ export default {
         font-size: 14px;
       }
       .details{
-        width:950px;
+        width:100%;
       }
       .meta{
         margin-top: 10px;

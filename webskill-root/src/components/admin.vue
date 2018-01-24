@@ -1,5 +1,5 @@
 <template>
-  <div class="conDetails">
+  <div class="conDetails row">
     <section>
       <article class="conPost clear">
         <h1 class="title left">请选择您要输入的留言类型:</h1>
@@ -37,8 +37,6 @@ export default {
         error:'',
         config: {
           initialFrameWidth: null,
-          //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
-          toolbars:[['test','emotion']],
           //focus时自动清空初始化时的内容
           autoClearinitialContent:true,
           maximumWords:300,
@@ -134,7 +132,7 @@ export default {
         width: 80px;
         line-height: 30px;
         color: #fff;
-        top: 28px;
+        top: 24px;
         .chooseType{
           cursor: pointer;
           width: 100%;
@@ -169,7 +167,7 @@ export default {
         font-size: 14px;
       }
       .details{
-        width:950px;
+        width:100%;
       }
       .meta{
         margin-top: 10px;

@@ -113,8 +113,6 @@ export default {
     transition: all 0.5s;
   }
   .newDigest {
-    width: 310px;
-    height: 225px;
     padding: 8px 15px;
     background: url("../../assets/images/indexBgW.png") center center;
     overflow: hidden;
@@ -141,6 +139,11 @@ export default {
         color: #ababab;
       }
     }
+  }
+}
+@media (max-width: 415px) {
+  .newDigest{
+    margin-bottom: 15px;
   }
 }
 </style>

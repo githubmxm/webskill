@@ -2,16 +2,16 @@
 首页
 -->
 <template>
-  <div class="homePage">
-     <div class="temp_01 clear">
+  <div class="homePage row">
+     <div class="temp_01 clear row">
         <transition  enter-active-class="fadeInLeft" leave-active-class="fadeInLeft">
         <!--最新摘要-->
-        <div class="newDigest left" v-show="animationShow">
+        <div class="newDigest col-lg-3 col-md-4 col-xs-12 col-sm-5" v-show="animationShow">
           <!-- <p class="stitle">
             <span>最新摘要</span>
           </p>
           <v-newDigest></v-newDigest> -->
-          <p class="stitle">
+          <p class="stitle ">
             <span>云标签</span>
           </p>
           <v-cloudTag></v-cloudTag>
@@ -19,7 +19,7 @@
         </transition>
         <!--广告轮播-->
         <transition enter-active-class="fadeInRight" leave-active-class="fadeInRight">
-        <div class="carousels left" v-show="animationShow">
+        <div class="carousels col-lg-9 col-md-8 col-sm-7" v-show="animationShow">
           <swiper :options="swiperOption"  ref="carouselsSwiper">
             <swiper-slide>
             <li><a title="StarFire_xm的博客"><img src="../assets/images/starfire.png" alt=""></a></li>
@@ -32,67 +32,56 @@
         </div>
         </transition>
      </div>
-     <div class="mainCon clear">
+     <div class="mainCon clear row">
        <transition enter-active-class="fadeInLeft" leave-active-class="fadeInLeft">
-       <div class="conLf left" v-show="animationShow">
+       <div class="conLf left col-lg-3 col-sm-4 col-xs-12" v-show="animationShow">
           <!--博主信息-->
-          <div class="lfCon userInfo left">
-            <p class="headImg"><img src="../assets/images/photo.png" alt="头像" /></p>
-            <p class="hei blogger"><span>博主:</span> <span class="cor blogName">StarFire_xm</span></p>
-            <p class="hei blogger"><span>职业:</span> <span class="cor lookPv">前端工程师</span></p>
-            <p class="hei blogger"><span>兴趣:</span> <span class="cor focus">技术,运动</span></p>
-            <p class="hei blogger"><span>联系(qq,wx):</span> <span class="cor lookPv">1123360735</span></p>
-            <p class="hei blogger"><span>格言:</span> <span class="cor focus">择需,取上态而为之</span></p>
-            <p class="PlayTour clear">
-              <span>微信打赏:</span>
-              <img src="../assets/images/wxrwm.png" alt="二维码" />
-            </p>
+          <div class="lfCon userInfo left col-lg-10 col-sm-12 col-xs-12">
+            <div class="heipad col-lg-offset-1 col-sm-offset-1">
+              <p class="headImg"><img src="../assets/images/photo.png" alt="头像" /></p>
+              <p class="hei blogger"><span>博主:</span> <span class="cor blogName">StarFire_xm</span></p>
+              <p class="hei blogger"><span>职业:</span> <span class="cor lookPv">前端工程师</span></p>
+              <p class="hei blogger"><span>兴趣:</span> <span class="cor focus">技术,运动</span></p>
+              <p class="hei blogger"><span>联系(qq,wx):</span> <span class="cor lookPv">1123360735</span></p>
+              <p class="hei blogger"><span>格言:</span> <span class="cor focus">择需,取上态而为之</span></p>
+              <!-- <p class="PlayTour clear">
+                <span>微信打赏:</span>
+                <img src="../assets/images/wxrwm.png" alt="二维码" />
+              </p> -->
+            </div>
           </div>
           <!--技能分类-->
-          <div class="lfCon blogType left">
-              <p class="blogCl">分类</p>
-              <ul class="blogClList">
+          <div class="lfCon blogType left col-lg-10 col-sm-12 col-xs-12">
+              <p class="blogCl">博客简介</p>
+              <p class="conTxt">
+                前端博客(zshome.com),关注各类技术走向,探讨技术与分享学习。本博客因初次成型,不足点较多,若有优化等提议欢迎来件.
+                感谢您的加入！
+              </p>
+              <!-- <ul class="blogClList">
                 <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
-                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
-                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
-                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
-                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
-                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
-                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
-                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
-                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
-                <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
-              </ul>
+              </ul> -->
+              
           </div>
           <!--最新访客-->
-          <div class="lfCon visitors left">
+          <!-- <div class="lfCon visitors left col-lg-10 col-sm-12 col-xs-12">
               <p class="titV">最新访客</p>
               <ul class="vList">
                 <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
-                <li><img class="vPhoto" src="../assets/images/defaPhoto.png" alt="pho"><span class="vName">访客1</span><span class="vTime">20180118</span></li>
               </ul>
-          </div>
+          </div> -->
        </div>
        </transition>
        <transition enter-active-class="fadeInRight" leave-active-class="fadeInRight">
-       <div class="dynamicType left" v-show="animationShow">
+       <div class="dynamicType left col-lg-9 col-sm-8 col-xs-12" v-show="animationShow">
          <ul class="typeName clear">
-           <li class="jottings" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">最新笔录</li>
-           <li class="newSkill" :class="{cur:dynamicTypeCur==1}"  @click="dynamicType(1)">技能快讯</li>
-           <li class="wordDec"  :class="{cur:dynamicTypeCur==2}" @click="dynamicType(2)">留言动态</li>
-           <li class="tools" :class="{cur:dynamicTypeCur==3}"  @click="dynamicType(3)">推荐工具</li>
-           <li class="searchs" :class="{cur:dynamicTypeCur==4}"  @click="dynamicType(4)">搜索导航</li>
+           <li class="jottings col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">最新笔录</li>
+           <li class="newSkill col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==1}"  @click="dynamicType(1)">技能快讯</li>
+           <li class="wordDec col-sm-2 col-xs-2"  :class="{cur:dynamicTypeCur==2}" @click="dynamicType(2)">留言动态</li>
+           <li class="tools col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==3}"  @click="dynamicType(3)">推荐工具</li>
+           <li class="searchs col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==4}"  @click="dynamicType(4)">搜索导航</li>
          </ul>
-         <div class="contentsForType">
-           <ul class="contentList">
+         <div class="contentsForType clear">
+           <ul class="contentList clear">
              <!--最新笔录-->
              <transition-group v-if="dynamicTypeCur==0&&dynamicDataList.length>0" enter-active-class="fadeIn" leave-active-class="fadeIn" @before-enter="beforeEnter">
              <li class="zxbl"  v-for="(item,index) in dynamicDataList" :key="index" :animate-delay="(0.3*index)" :animate-duration="0.5">
@@ -108,7 +97,7 @@
              </li>
              </transition-group>
              <!--留言动态-->
-              <div class="wordDynamic"  v-else-if="dynamicTypeCur==2">
+              <div class="wordDynamic clear"  v-else-if="dynamicTypeCur==2">
                 <a class="goLeaveWords blink" href="/leaveword" target="_blank">我要留言</a>
               </div>
              <!--搜索导航-->
@@ -219,11 +208,11 @@ export default {
 @import '../assets/css/minxin';
 @import '../assets/css/animation';
 .homePage{
+  overflow: hidden;
   .temp_01{
     margin-bottom: 38px;
     background: #fff;
     .newDigest{
-      width:310px;
       .stitle{
         padding-bottom: 5px;
         border-bottom: 1px solid #ccc;
@@ -238,9 +227,22 @@ export default {
       }
     }
     .carousels{
-      margin-left:28px;
-      width:860px;
-      height:278px;
+      margin:0;
+      padding: 0;
+      .swiper-container{
+        width:100%;
+        height:100%;
+        .swiper-wrapper,.swiper-slide{
+          height: 100%;
+          li{
+            height: 100%;
+          }
+        }
+        img{
+          width:100%;
+          height: 100%;
+        }
+      }
       ul{
         height: 100%;
         li{
@@ -256,16 +258,16 @@ export default {
   }
   .mainCon{
     .conLf{
-      width:230px;
       .lfCon{
-        width: 100%;
-        padding: 10px 30px;
-        border: 1px solid #ccc;
         margin-bottom: 15px;
       }
     }
     .userInfo{
-      background: url("../assets/images/bloogerBg.png") center center;
+      background: url("../assets/images/bloogerBg.png") no-repeat 0 0;
+      padding-bottom: 23px;
+      .heipad{
+        padding-top: 15px;
+      }
       .headImg{
         width:60px;
         height: 60px;
@@ -303,6 +305,7 @@ export default {
       }
     }
     .visitors{
+      border: 1px solid #ccc;
       padding:10px !important;
       .titV{
         color: #000;
@@ -329,7 +332,21 @@ export default {
       }
     }
     .blogType{
+      border: 1px solid #ccc;
       padding:10px !important;
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid #e6e6e6;
+      .blogCl{
+        font-size: 15px;
+        color: #000;
+      }
+      .conTxt{
+        margin-top: 12px;
+        line-height: 22px;
+        font-size: 13px;
+      }
       .blogClList{
         margin-top: 10px;
         li{
@@ -343,16 +360,12 @@ export default {
       }
     }
     .dynamicType{
-      width:950px;
-      margin-left: 20px;
       background: url("../assets/images/indexBgW3.png") center center;
       .typeName{
-        height: 42px;
-        line-height: 42px;
+        padding: 5px 0;
         border-bottom: 1px solid #e8e8e8;
         li{
           display: inline-block;
-          width: 144px;
           font-size: 18px;
           float: left;
           text-align: center;
@@ -365,7 +378,6 @@ export default {
         }
       }
       .contentsForType{
-        width: 880px;
         margin-top: 2px;
         font-size: 18px;
         .contentList{
@@ -444,6 +456,47 @@ export default {
       }
     }
   }
-
 }
+@media (max-width: 993px) {
+   .homePage .mainCon .dynamicType .typeName li{
+    font-size: 12px;
+  }
+  .contentsForType .intro{
+    font-size: 12px;
+  }
+  .contentsForType .sum_con{
+    font-size: 12px !important;
+  }
+}
+@media (max-width: 767px) {
+  .homePage .mainCon .userInfo{
+    background: none;
+  }
+ .homePage .mainCon .userInfo .heipad{
+   text-align: center;
+ }
+}
+@media (max-width: 630px) {
+  .homePage .mainCon .dynamicType .typeName li{
+    font-size: 13px;
+  }
+  .contentsForType .intro{
+    font-size: 13px;
+  }
+  .contentsForType .sum_con{
+    font-size: 12px !important;
+  }
+  
+}
+// @media (max-width: 512px) {
+//   .homePage .mainCon .dynamicType .typeName li{
+//     font-size: 12px;
+//   }
+//   .contentsForType .intro{
+//     font-size: 12px;
+//   }
+//   .contentsForType .sum_con{
+//     font-size: 11px !important;
+//   }
+// }
 </style>

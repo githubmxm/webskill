@@ -2,25 +2,25 @@
 公用头部导航
 -->
 <template>
-  <div class="top">
-    <nav class="topType">
-      <p class="alinks clear">
-        <a title="技百讯" class="logo" href="/index">
+  <div class="top container-fluid">
+    <nav class="topType row">
+      <p class="alinks clear col-lg-4">
+        <a title="技百讯" class="logo col-lg-4" href="/index">
           <img src="../assets/images/jbxLogo.png" alt="技百讯" />
           <span>技百讯</span>
         </a>
-        <a class="indexView" href="/index" target="_blank" title="首页">首页</a>
+        <a class="indexView col-lg-2" href="/index" target="_blank" title="首页">首页</a>
         <!-- href="/myNotes" href="/newTitle"-->
-        <a class="myNotesView" title="技能摘要" @click="setAalertMsgFn()">技库</a>
-        <a class="newTitleView" title="技能快讯" @click="setAalertMsgFn()">资讯</a>
+        <a class="myNotesView col-lg-2" title="技能摘要" @click="setAalertMsgFn()">技库</a>
+        <a class="newTitleView col-lg-2" title="技能快讯" @click="setAalertMsgFn()">资讯</a>
       </p>
       <!--用户已登录-->
-      <p class="userLogin" v-if="isLogin==true">
+      <p class="userLogin  col-lg-2 right" v-if="isLogin==true">
         <span class="loginExit right" @click="loginExit()">退出</span>
          <span class="userInfo right">[{{username}}]</span>
       </p>
       <!--未登录或异常-->
-      <div class="noLogin" v-else>
+      <div class="noLogin col-lg-1 right" v-else>
         <p>
           <a href="/login" class="goLogin">登录</a>
         </p>
@@ -105,18 +105,16 @@ export default {
   line-height: 50px;
   font-size: 14px;
   .alinks{
-    width:80%;
     height: 100%;
     float: left;
     a{
     display: block;
     height: 100%;
-    padding: 0 8px;
     float: left;
-    margin:0 15px;
-    color:#fff;
+    color: #fff;
     cursor: pointer;
     text-shadow: 3px 3px 3px #000;
+    text-align: center;
     .cur,&:hover{
       color:#5eaeef;
       background: #333;
@@ -143,9 +141,6 @@ export default {
   }
   }
   .userLogin,.noLogin{
-    display: block;
-    float: left;
-    width:20%;
     height: 100%;
     .userInfo{
       color:#fff;
@@ -165,9 +160,7 @@ export default {
   .goLogin{
     display: block;
     color:#fff;
-    margin: 0 8px;
     height: 100%;
-    padding: 0 8px;
     cursor: pointer;
     &:hover{
       color:#5eaeef;
@@ -200,4 +193,12 @@ export default {
 //     }
 //   }
 // }
+@media (max-width: 375px) {
+ .top .topType .alinks a{
+   padding:0 6px;
+ }
+ .top .topType .alinks .logo img{
+   margin-right: 8px;
+ }
+}
 </style>

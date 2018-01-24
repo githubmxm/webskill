@@ -10,6 +10,7 @@ function resolve (dir) {
 module.exports = {
   //入口文件，可设置多个
   entry: {
+    'babel-polyfill': 'babel-polyfill',
     app: './src/main.js'
   },
   output: {

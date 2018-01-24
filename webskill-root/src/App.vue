@@ -5,12 +5,12 @@
       <v-top v-if="publicView"></v-top>
       <!--消息通知-->
       <!-- <transition enter-active-class="bounceInDown" leave-active-class="bounceInDown"> -->
-      <div class="newMsgAlert" v-if="publicView">
+      <div class="newMsgAlert container" v-if="publicView">
           <span class="msging">持续更新中....</span>
       </div>
       <!-- </transition> -->
       <!--内容区-->
-      <div class="allConts">
+      <div class="allConts container">
         <router-view></router-view>
       </div>
     </div>
@@ -46,20 +46,28 @@ export default{
       leaveWord:false
     }
   },
+  created () {
+    if (navigator.platform.indexOf('Win32') != -1 || navigator.platform.indexOf('Win64') != -1 || navigator.platform.indexOf('MacPPC') != -1 || navigator.platform.indexOf('MacIntel') != -1) {
+      //PC
+      this.setwapOrPcFn("pc")
+    } else {
+      //Wap
+      this.setwapOrPcFn("sap")
+    }
+  },
   methods: {
-    ...mapActions(["setAalertMsgFn"])
+    ...mapActions(["setAalertMsgFn","setwapOrPcFn"])
   },
   mounted () {
-    if(location.pathname!="/login"){
+    if(location.pathname!="/login"||!location.pathname=="/webSkillAdmin"){
       this.publicView=true;
       if(location.pathname.indexOf("/leaveword")<0){
         this.leaveWord=true;
       }
     }
-
   },
   computed: {
-    ...mapGetters(['maskZzShow'])
+    ...mapGetters(['maskZzShow','wapOrPc'])
   },
   components: {
     'v-top':Top,
@@ -72,16 +80,8 @@ export default{
 @import './assets/css/common.scss';
 @import './assets/css/animation';
 body{
-  #app{
-    min-width: 1200px;
-  }
   background: #fafafa;
-  .allConts{
-    width:1200px;
-    margin:0 auto;
-  }
   .newMsgAlert{
-    width:1200px;
     height:30px;
     position: relative;
     line-height: 30px;
