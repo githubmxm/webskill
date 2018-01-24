@@ -76,7 +76,6 @@ export default {
   .newDigest {
     width: 310px;
     height: 225px;
-    padding: 8px 15px;
     background: url("../../assets/images/indexBgW.png") center center;
     overflow: hidden;
     .digList {

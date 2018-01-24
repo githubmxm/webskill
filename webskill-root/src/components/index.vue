@@ -55,7 +55,7 @@
               <p class="blogCl">博客简介</p>
               <p class="conTxt">
                 前端博客(zshome.com),关注各类技术走向,探讨技术与分享学习。本博客因初次成型,不足点较多,若有优化等提议欢迎来件.
-                感谢您的加入！
+                欢迎您的加入！
               </p>
               <!-- <ul class="blogClList">
                 <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
@@ -208,7 +208,6 @@ export default {
 @import '../assets/css/minxin';
 @import '../assets/css/animation';
 .homePage{
-  overflow: hidden;
   .temp_01{
     margin-bottom: 38px;
     background: #fff;
@@ -258,13 +257,16 @@ export default {
   }
   .mainCon{
     .conLf{
+      padding-left: 0px;
       .lfCon{
         margin-bottom: 15px;
       }
     }
     .userInfo{
-      background: url("../assets/images/bloogerBg.png") no-repeat 0 0;
+      // background: url("../assets/images/bloogerBg.png") no-repeat 0 0;
+      background: #fff;
       padding-bottom: 23px;
+      border: 1px solid #e6e6e6;
       .heipad{
         padding-top: 15px;
       }
@@ -332,7 +334,6 @@ export default {
       }
     }
     .blogType{
-      border: 1px solid #ccc;
       padding:10px !important;
       background: #fff;
       padding: 15px;
@@ -360,7 +361,8 @@ export default {
       }
     }
     .dynamicType{
-      background: url("../assets/images/indexBgW3.png") center center;
+      // background: url("../assets/images/indexBgW3.png") center center;
+      background: #fff;
       .typeName{
         padding: 5px 0;
         border-bottom: 1px solid #e8e8e8;
@@ -389,7 +391,9 @@ export default {
           }
           .zxbl{
             &:hover{
-              background: #e2e9e1;
+              // background: #e2e9e1;
+               box-shadow: 2px 2px 8px rgba(0,0,0,.2);
+               border-color: #d6d6d6;
             }
             .cons{
               margin: 0 0 0 23px;
