@@ -122,7 +122,7 @@
                 axios({
                     method: _this.method,
                     url: _this.url,
-                    data: _this.param,
+                    params: _this.param,
                 }).then((res) => {
                     let dataResult=res.data;
                     if(dataResult.status=="success"){

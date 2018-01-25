@@ -86,11 +86,11 @@
              <li class="zxbl"  v-for="(item,index) in dynamicDataList" :key="index" :animate-delay="(0.3*index)" :animate-duration="0.5">
                <div class="cons">
                  <p class="titles">
-                    <span class="intro">{{item.title}}</span>
-                    <span class="creatTime right">{{item.creatTime}}</span>
+                    <span class="intro">{{item.newNoteTitle}}</span>
+                    <span class="creatTime right">{{item.newNoteTime}}</span>
                  </p>
                  <p class="Summarys">
-                    <a class="sum_con">{{item.summary}}</a>
+                    <a class="sum_con">{{item.newNoteCont}}</a>
                  </p>
                </div>
              </li>
@@ -202,6 +202,7 @@ export default {
   },
   mounted () {
     this.animationShow=true;
+    console.log(this.dynamicDataList)
   },
   computed: {
     ...mapGetters(['dynamicDataList','wapOrPc'])
