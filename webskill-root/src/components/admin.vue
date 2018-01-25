@@ -1,23 +1,35 @@
+<!--
+后台文章发表管理
+-->
 <template>
   <div class="conDetails row">
     <section>
       <article class="conPost clear">
-        <h1 class="title left">请选择您要输入的留言类型:</h1>
-        <div class="wordType">
-          <input class="chooseType" readonly type="text" :value="chooseTypeName" :typeId="chooseTypeId" @click="wordOneShowFn()" />
-          <p class="wordOne" v-show="wordOneShow">
-            <span @click="chooseTypeName='我要私密';chooseTypeId=0;wordOneShow=false">我要私密</span>
-            <span @click="chooseTypeName='我要提BUG';chooseTypeId=1;wordOneShow=false">我要提BUG</span>
-            <span @click="chooseTypeName='我要提建议';chooseTypeId=2;wordOneShow=false">我要提建议</span>
-            <span @click="chooseTypeName='随便说说';chooseTypeId=3;wordOneShow=false">随便说说</span>
-          </p>
+        <div class="clear">
+           <h1 class="title left">请选择您要发表的内容类型:</h1>
+           <div class="left">
+            <div class="wordType">
+              <input class="chooseType" readonly type="text" :value="chooseTypeName" :typeId="chooseTypeId" @click="postType()" />
+              <p class="wordOne" v-show="wordOneShow">
+                <span @click="chooseTypeName='最新笔录';chooseTypeId=0;wordOneShow=false">最新笔录</span>
+                <span @click="chooseTypeName='技能快讯';chooseTypeId=1;wordOneShow=false">技能快讯</span>
+                <span @click="chooseTypeName='推荐工具';chooseTypeId=2;wordOneShow=false">推荐工具</span>
+              </p>
+            </div>
+           </div>
         </div>
-        <span class="error">{{error}}</span>
+        <div class="clear">
+          <h1 class="title left">标题:</h1>
+          <input class="conTitle" type="text" v-model="contitle" maxlength="50"  />
+        </div>
+        <div>
+          <span class="error">{{error}}</span>
+        </div>
         <div class="details left clear">
           <div class="editor-container">
             <UE :config=config :id=ue3 ref="ue3"></UE>
           </div>
-          <span class="leaveWordSubmit" @click="leaveWordSubmitFn()">提交</span>
+          <span class="leaveWordSubmit" @click="postArticle()">发布</span>
         </div>
       </article>
     </section>
@@ -35,22 +47,21 @@ export default {
         chooseTypeId:'',
         wordOneShow:false,
         error:'',
+        contitle:"",
         config: {
           initialFrameWidth: null,
           //focus时自动清空初始化时的内容
           autoClearinitialContent:true,
-          maximumWords:300,
+          maximumWords:5000,
           pasteplain:true,
-          initialContent:'<span style="color:#ccc; onlyRed">在此输入留言...</span>',
+          initialContent:'<span style="color:#ccc; onlyRed">在此输入发布内容...</span>',
           //关闭字数统计
           wordCount:true,
           enableAutoSave:false,
           //关闭elementPath
           elementPathEnabled:false,
           //默认的编辑区域高度
-          initialFrameHeight:200,
-          //更多其他参数，请参考ueditor.config.js中的配置项
-          serverUrl: '/server/ueditor/controller.php'
+          initialFrameHeight:200
         },
         ue3: "ue3"
     }
@@ -73,39 +84,49 @@ export default {
   },
   methods: {
       ...mapActions(["setAalertMsgFn"]),
-      wordOneShowFn(){
+      postType(){
         this.wordOneShow=!this.wordOneShow;
       },
-      leaveWordSubmitFn(){
+      postArticle(){
+        this.error="";
         let _this=this;
         let ueCon=this.$refs.ue3.getUEContent();
-        if(!this.chooseTypeName){
-          this.error='请选择留言类型';
+        if(this.chooseTypeId===""){
+          console.log(100)
+          this.error='请选择发布内容类型';
           return false;
         }
-        if(!ueCon){
-          this.error='留言不能为空';
+        if(!this.contitle){
+          console.log(100)
+          this.error='请输入内容标题';
           return false;
         }
-        if(ueCon.length<10){
-          this.error='留言不能少于10个';
+        if(!ueCon||ueCon=='<p id="initContent"><span style="color:#ccc; onlyRed">在此输入发布内容...</span></p>'){
+          this.error='发布内容不能为空';
+          return false;
+        }
+        if(ueCon.length>5000){
+          this.error='文章发布不能大于5000个';
           return false;
         }
         axios({
-          methods:'get',
-          url:'/static/leaveword.json',
+          method: 'post',
+          url:'/webskill/posts',
           data:{
-            chooseType:_this.chooseTypeId,
-            word:ueCon
+            contitle:_this.contitle, 
+            contype:_this.chooseTypeId,
+            conConts:ueCon
           }
         }).then((res)=>{
           let resData=res.data;
-          if(resData.status=="success"){
+          if(resData.message=="文章发表成功"){
             //提交成功,等待审核
-            _this.setAalertMsgFn("感谢您的留言！")
+            location.href="/index"
+          }else{
+              _this.error=resData.message;
           }
         }).catch((err)=>{
-
+           _this.error="发表异常";
         });
       }
   }
@@ -125,6 +146,17 @@ export default {
         font-weight: bold;
         font-size: 18px;
         font-family: Pmingliu,Mingliu;
+      }
+      .conTitle{
+        cursor: pointer;
+        width: 264px;
+        outline: 0;
+        border: 1px solid #ccc;
+        height: 30px;
+        line-height: 30px;
+        padding-left: 8px;
+        margin-top: -4px;
+        margin-left: 8px;
       }
       .wordType{
         position: absolute;
@@ -162,9 +194,8 @@ export default {
         }
       }
       .error{
-        position: absolute;
-        left: 350px;
-        top: 34px;
+         display: block;
+        margin-bottom: 10px;
         color: red;
         font-size: 14px;
       }

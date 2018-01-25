@@ -12,8 +12,10 @@
 
 <style lang="scss" scoped>
   footer{
+    height: 80px;
+    line-height: 80px;
     text-align: center;
-    margin-top: 0 10px;;
+    margin-top: 0 10px;
     p{
       font-size:12px;
       color:#333;

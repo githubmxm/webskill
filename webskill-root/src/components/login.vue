@@ -89,8 +89,12 @@ export default {
         }).then((res) => {
           let logindata = res.data;
           if(this.loginTypeCur==1){
-              logindata.message=="注册成功";
-              location.href="/index";
+              if(logindata.message=="注册成功"){
+                location.href="/index";
+              }else{
+                this.errorMsg=logindata.message;
+                this.showError=false;
+              }
           }else{
             if(logindata.status=="success"){
               if(logindata.loginStatus){

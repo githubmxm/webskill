@@ -11,22 +11,40 @@
         Css
       </li>
       <li class="digList textrotate">
+        Ejs
+      </li>
+      <li class="digList textrotate">
+        Vue
+      </li>
+      <li class="digList textrotate">
+        Php
+      </li>
+      <li class="digList textrotate">
         Html
-      </li>
-      <li class="digList textrotate">
-        Jquery
-      </li>
-      <li class="digList textrotate">
-        Bootstrap
-      </li>
-      <li class="digList textrotate">
-        Nodejs
       </li>
       <li class="digList textrotate">
         Java
       </li>
       <li class="digList textrotate">
-        Php
+        Ubb
+      </li>
+      <li class="digList textrotate">
+        Xss
+      </li>
+      <li class="digList textrotate">
+        Json
+      </li>
+      <li class="digList textrotate">
+        http
+      </li>
+      <li class="digList textrotate">
+        Jquery
+      </li>
+      <li class="digList textrotate">
+        Nodejs
+      </li>
+      <li class="digList textrotate">
+        Bootstrap
       </li>
       <li class="digList textrotate">
         MongoDb
@@ -41,16 +59,10 @@
         Angularjs
       </li>
       <li class="digList textrotate">
-        Ejs
-      </li>
-      <li class="digList textrotate">
         Requirejs
       </li>
       <li class="digList textrotate">
         Seajs
-      </li>
-      <li class="digList textrotate">
-        Vue
       </li>
       <li class="digList textrotate">
         Ueidtor
@@ -62,25 +74,13 @@
         Github
       </li>
       <li class="digList textrotate">
-        Xss
-      </li>
-      <li class="digList textrotate">
         EasyUi
       </li>
       <li class="digList textrotate">
         JqueryUi
       </li>
       <li class="digList textrotate">
-        Ubb
-      </li>
-      <li class="digList textrotate">
-        Json
-      </li>
-      <li class="digList textrotate">
         Touch.js
-      </li>
-      <li class="digList textrotate">
-        http
       </li>
     </ul>
   </div>
@@ -120,7 +120,7 @@ export default {
       font-size: 13px;
       color: #2e7cb6;
       display: inline-block;
-      padding: 5px 10px;
+      padding: 5px 0px;
       text-align: center;
       text-transform: uppercase;
       .digType {

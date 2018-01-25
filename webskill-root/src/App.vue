@@ -34,7 +34,6 @@
 </template>
 <script>
 import { mapGetters,mapActions } from "vuex";
-import axios from 'axios';
 import Top from '@/components/top';
 import Footer from '@/components/footer';
 import PopMsg from '@/components/content/popMsg';
@@ -52,7 +51,7 @@ export default{
       this.setwapOrPcFn("pc")
     } else {
       //Wap
-      this.setwapOrPcFn("sap")
+      this.setwapOrPcFn("wap")
     }
   },
   methods: {

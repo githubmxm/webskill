@@ -54,13 +54,12 @@
           <div class="lfCon blogType left col-lg-10 col-sm-12 col-xs-12">
               <p class="blogCl">博客简介</p>
               <p class="conTxt">
-                前端博客(zshome.com),关注各类技术走向,探讨技术与分享学习。本博客因初次成型,不足点较多,若有优化等提议欢迎来件.
+                前端博客(zshom.com),关注各类技术走向,探讨技术与分享学习。本博客因初次成型,不足点较多,若有优化等提议欢迎来件.
                 欢迎您的加入！
               </p>
               <!-- <ul class="blogClList">
                 <li><i>.</i><span class="conName">全部博文</span>(<span class="allNums">100</span>)</li>
               </ul> -->
-              
           </div>
           <!--最新访客-->
           <!-- <div class="lfCon visitors left col-lg-10 col-sm-12 col-xs-12">
@@ -141,7 +140,8 @@ export default {
         observeParents:true,//修改swiper的父元素时，自动初始化swiper
       },
       pageModel:{
-        url:"/static/ajaxpage.json",
+        url:"/webskill/newestNote",
+        dynamicTypeCur:0,
         againPost:0
       },
       animationShow:false
@@ -154,6 +154,11 @@ export default {
      swiper,  
      swiperSlide,
      Pagebar
+  },
+  created () {
+    // if(this.wapOrPc=="wap"){
+
+    // }
   },
   methods: {
     ...mapActions(['setAalertMsgFn']),
@@ -199,7 +204,7 @@ export default {
     this.animationShow=true;
   },
   computed: {
-    ...mapGetters(['dynamicDataList'])
+    ...mapGetters(['dynamicDataList','wapOrPc'])
   }
 };
 </script>
@@ -211,6 +216,8 @@ export default {
   margin-left:0;
   margin-right: 0;
   .temp_01{
+    margin-left:0;
+    margin-right: 0;
     margin-bottom: 38px;
     background: #fff;
     .newDigest{
@@ -230,6 +237,7 @@ export default {
     .carousels{
       margin:0;
       padding: 0;
+      height: 100%;
       .swiper-container{
         width:100%;
         height:100%;
@@ -363,11 +371,11 @@ export default {
     }
     .dynamicType{
       // background: url("../assets/images/indexBgW3.png") center center;
+      background: #fff;
       .typeName{
-        background: #fff;
         padding: 5px 0;
         border-bottom: 1px solid #e8e8e8;
-        height: 35px;
+        height: 42px;
         li{
           display: inline-block;
           font-size: 18px;
@@ -375,19 +383,19 @@ export default {
           text-align: center;
           color: #000;
           cursor: pointer;
+           height:38px;
+           min-width: 60px;
         }
         li.cur{
             border-bottom: 2px solid #5eaeef;
             color: #5eaeef!important;
-            height:30px;
         }
       }
       .contentsForType{
         font-size: 18px;
         background: #fff;
         .contentList{
-          padding-top: 8px;
-          padding-bottom:8px;
+          padding: 8px 0px;;
           .noCons{
             font-size: 22px;
             color: #19b77e;
@@ -408,7 +416,10 @@ export default {
               .titles{
                 padding-top: 25px;
                 margin-bottom: 8px;
+                width:100%;
                 .intro{
+                  display: inline-block;
+                  max-width:75%;
                   color: #2d64b3;
                 }
                 .creatTime{
@@ -420,18 +431,19 @@ export default {
               .Summarys{
                 .sum_con{
                   font-size: 14px;
+                  &:hover{
+                    color:#333;
+                  }
                 }
               }
             }
           }
           .search{
              display: inline-block;
-             margin: 10px 0 8px 35px;
              #searchCon{
                height: 27px;
                line-height: 27px;
                border: 1px solid #ccc;
-               width: 300px;
                padding-left: 8px;
              }
              .searchSubmit{
@@ -454,7 +466,6 @@ export default {
           .wordDynamic{
             .goLeaveWords{
               display: inline-block;
-              margin: 10px 0 8px 35px;
               cursor: pointer;
               color: #1EC965;
             }
@@ -467,19 +478,16 @@ export default {
 }
 @media (max-width: 993px) {
    .homePage .mainCon .dynamicType .typeName li{
-    font-size: 12px;
+    font-size: 14px;
   }
   .contentsForType .intro{
-    font-size: 12px;
+    font-size: 14px;
   }
   .contentsForType .sum_con{
-    font-size: 12px !important;
+    font-size: 14px !important;
   }
 }
 @media (max-width: 767px) {
-  .homePage .mainCon .userInfo{
-    background: none;
-  }
  .homePage .mainCon .userInfo .heipad{
    text-align: center;
  }
@@ -489,17 +497,17 @@ export default {
     font-size:15px;
   }
   .homePage .mainCon .dynamicType .typeName li{
-    font-size: 13px;
+    font-size: 14px;
   }
   .contentsForType .intro{
-    font-size: 13px;
+    font-size: 14px;
   }
   .contentsForType .sum_con{
-    font-size: 12px !important;
+    font-size: 14px !important;
   }
   
 }
-// @media (max-width: 512px) {
+@media (max-width: 512px) {
 //   .homePage .mainCon .dynamicType .typeName li{
 //     font-size: 12px;
 //   }
@@ -512,5 +520,5 @@ export default {
      .noCons,.goLeaveWords{
        font-size: 12px !important;
      }
-// }
+}
 </style>

@@ -55,6 +55,8 @@
                 end: 0,
                 // 总页数
                 totalPage: 0,
+                //查询类型
+                dynamicTypeCur:0,
                 // 记录总数
                 totalSize: 0,
                 // 分页请求返回数据
@@ -116,6 +118,7 @@
                 let _this = this;
                 this.param[this.pageParamName[0]] = this.cur;
                 this.param[this.pageParamName[1]] = this.limit;
+                this.param["dynamicTypeCur"]=this.dynamicTypeCur;
                 axios({
                     method: _this.method,
                     url: _this.url,
@@ -188,6 +191,7 @@
         watch: {
           isAgainAjax(){
             this.url=this.pageModel.url;
+            this.dynamicTypeCur=this.pageModel.dynamicTypeCur;
             this.getData();
           }
         },

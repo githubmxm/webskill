@@ -50,9 +50,7 @@ export default {
           //关闭elementPath
           elementPathEnabled:false,
           //默认的编辑区域高度
-          initialFrameHeight:200,
-          //更多其他参数，请参考ueditor.config.js中的配置项
-          serverUrl: '/server/ueditor/controller.php'
+          initialFrameHeight:200
         },
         ue2: "ue2"
     }
