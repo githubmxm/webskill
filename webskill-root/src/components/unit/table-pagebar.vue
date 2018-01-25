@@ -17,7 +17,7 @@
                 </li>
                 <li><a v-on:click="nextClick()" v-bind:class="{ 'disabled': cur == totalPage}">下一页</a></li>
                 <li><a v-on:click="lastClick()" v-bind:class="{ 'disabled': cur == totalPage}">尾页</a></li>
-                <li><a>共<i>{{totalPage}}</i>页</a></li>
+                <!-- <li><a>共<i>{{totalPage}}</i>页</a></li> -->
             </ul>
         </div>
         <div class="clear-both"></div>
@@ -130,7 +130,7 @@
                       this.dataList = dataResult.data;
                       _this.setDynamicDataListFn(this.dataList)
                       // 返回总记录数
-                      _this.totalSize = dataResult.totalSize;
+                      _this.totalSize = dataResult.data.length;
                       _this.totalPage = Math.ceil(_this.totalSize / _this.limit);
                       _this.refreshPageCon();
                       // this.$options.methods.successFn();

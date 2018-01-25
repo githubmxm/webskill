@@ -165,7 +165,6 @@ export default {
     beforeEnter(el){
        var delay = el.getAttribute('animate-delay'),
           duration = el.getAttribute('animate-duration');
-      console.log('attr:' + delay, duration);
       var cssObj = {
           "animation-delay": delay+'s',
           "-webkit-animation-delay": delay+'s',
@@ -185,7 +184,7 @@ export default {
     dynamicType(index){
       this.dynamicTypeCur=index;
       if(index==0){
-        this.pageModel.url="/static/ajaxpage.json"
+        this.pageModel.url="/webskill/newestNote"
       }else if(index==1){
         this.pageModel.url="/static/ajaxpage.1.json"
       }else if(index==2){
@@ -202,7 +201,6 @@ export default {
   },
   mounted () {
     this.animationShow=true;
-    console.log(this.dynamicDataList)
   },
   computed: {
     ...mapGetters(['dynamicDataList','wapOrPc'])
@@ -430,6 +428,7 @@ export default {
                 }
               }
               .Summarys{
+                cursor: pointer;
                 .sum_con{
                   font-size: 14px;
                   &:hover{

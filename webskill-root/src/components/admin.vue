@@ -148,7 +148,6 @@ export default {
         font-family: Pmingliu,Mingliu;
       }
       .conTitle{
-        cursor: pointer;
         width: 264px;
         outline: 0;
         border: 1px solid #ccc;
