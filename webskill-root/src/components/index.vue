@@ -83,14 +83,14 @@
            <ul class="contentList clear">
              <!--最新笔录-->
              <transition-group v-if="dynamicTypeCur==0&&dynamicDataList.length>0" enter-active-class="fadeIn" leave-active-class="fadeIn" @before-enter="beforeEnter">
-             <li class="zxbl"  v-for="(item,index) in dynamicDataList" :key="index" :animate-delay="(0.3*index)" :animate-duration="0.5">
+             <li class="zxbl"  v-for="(item,index) in dynamicDataList" :key="index" :arid="item.newNoteId" :animate-delay="(0.3*index)" :animate-duration="0.5">
                <div class="cons">
                  <p class="titles">
-                    <span class="intro">{{item.newNoteTitle}}</span>
+                    <a class="intro" target="_blank" :href="'/post?id='+item.newNoteId">{{item.newNoteTitle}}</a>
                     <span class="creatTime right">{{item.newNoteTime}}</span>
                  </p>
                  <p class="Summarys">
-                    <a class="sum_con">{{item.newNoteCont}}</a>
+                    <span class="sum_con">{{item.newNoteCont}}</span>
                  </p>
                </div>
              </li>
@@ -396,7 +396,7 @@ export default {
         .contentList{
           padding: 8px 0px;;
           .noCons{
-            font-size: 22px;
+            font-size: 20px;
             color: #19b77e;
             text-align: center;
           }
@@ -417,9 +417,15 @@ export default {
                 margin-bottom: 8px;
                 width:100%;
                 .intro{
+                  cursor: pointer;
                   display: inline-block;
-                  max-width:75%;
+                  max-width:65%;
                   color: #2d64b3;
+                  font-size: 16px;
+                  text-decoration: none;
+                  &:hover{
+                    color:#e80d06;
+                  }
                 }
                 .creatTime{
                   color: #bdbdbd;
@@ -428,7 +434,6 @@ export default {
                 }
               }
               .Summarys{
-                cursor: pointer;
                 .sum_con{
                   font-size: 14px;
                   &:hover{
