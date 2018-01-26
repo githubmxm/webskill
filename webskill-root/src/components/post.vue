@@ -5,13 +5,11 @@
   <div class="conDetails">
     <section>
       <article class="conPost">
-        <h1 class="title">标题</h1>
-        <div class="meta"><span class="creatTime">2018年1月7日</span><span class="pageViewNum">0</span> 次浏览<span class="commentNum">0</span> 次评论<span class="commentLabel">标签: <i class="labelName">标签名</i> </span></div>
+        <h1 class="title">{{arTitle}}</h1>
+        <div class="meta"><span class="creatTime">{{arTime}}</span><span class="pageViewNum">0</span> 次浏览<span class="commentNum">0</span> 次评论<span class="commentLabel">标签: <i class="labelName">{{arType}}</i> </span></div>
         <div class="details">
           <!--文章内容-->
-          <div class="detCon" v-html="contents">
-
-          </div>
+          <div class="detCon" v-html="arCons"></div>
           <!--评论内容-->
           <div class="comments">
             <div id="comment_form">
@@ -58,6 +56,7 @@
 
 <script>
 import UE from './ue/ue';
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -81,9 +80,13 @@ export default {
           serverUrl: '/server/ueditor/controller.php'
         },
         ue1: "ue1", // 不同编辑器必须不同的id,
-        contents:"发表内容区域",
+        arCons:"发表内容区域",
         commentsList:[],
-        firstSofaShow:true
+        firstSofaShow:true,
+        postId:this.$route.params.id,
+        arTitle:"",
+        arTime:"",
+        arType:""
     }
   },
   components: {
@@ -94,6 +97,33 @@ export default {
       getUEContent() {
         let content = this.$refs.ue.getUEContent(); // 调用子组件方法
       }
+  },
+  mounted () {
+    var _this=this;
+    axios({
+      method: 'get',
+      url: '/webskill/post/show',
+      params:{
+        id:_this.postId
+      }
+    }).then((res) => {
+      let postshow = res.data;
+      if(postshow.status=="success"){
+        _this.arCons=postshow.data.newNoteCont;
+        _this.arTitle=postshow.data.newNoteTitle;
+        _this.arTime=postshow.data.newNoteTime;
+        switch(postshow.data.newNoteType)
+        {
+           case "0":_this.arType="最新笔录"
+                  break;
+           case "1":_this.arType="技能快讯"
+                  break;
+        }
+
+      }else{
+
+      }
+    })
   }
 }
 </script>

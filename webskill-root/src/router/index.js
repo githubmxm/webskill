@@ -33,7 +33,7 @@ const router = new Router({
       default: Index
     }
   },{
-    path:'/post',
+    path:'/post/:id',
     name:'post',
     components:{
       default: Post

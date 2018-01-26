@@ -86,7 +86,8 @@
              <li class="zxbl"  v-for="(item,index) in dynamicDataList" :key="index" :arid="item.newNoteId" :animate-delay="(0.3*index)" :animate-duration="0.5">
                <div class="cons">
                  <p class="titles">
-                    <a class="intro" target="_blank" :href="'/post?id='+item.newNoteId">{{item.newNoteTitle}}</a>
+                    <!-- <a class="intro" target="_blank" :href="'/post?id='+item.newNoteId">{{item.newNoteTitle}}</a> -->
+                    <router-link :to="'/post/'+item.newNoteId" target="_blank">{{item.newNoteTitle}}</router-link>
                     <span class="creatTime right">{{item.newNoteTime}}</span>
                  </p>
                  <p class="Summarys">
@@ -374,7 +375,7 @@ export default {
       .typeName{
         padding: 5px 0;
         border-bottom: 1px solid #e8e8e8;
-        height: 42px;
+        height: 49px;
         li{
           display: inline-block;
           font-size: 18px;
@@ -382,7 +383,7 @@ export default {
           text-align: center;
           color: #000;
           cursor: pointer;
-           height:38px;
+           height:43px;
            min-width: 60px;
         }
         li.cur{
