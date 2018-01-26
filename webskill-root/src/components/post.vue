@@ -80,7 +80,7 @@ export default {
           serverUrl: '/server/ueditor/controller.php'
         },
         ue1: "ue1", // 不同编辑器必须不同的id,
-        arCons:"发表内容区域",
+        arCons:"",
         commentsList:[],
         firstSofaShow:true,
         postId:this.$route.params.id,
@@ -142,7 +142,6 @@ export default {
         margin-bottom: 5px;
         font-weight: bold;
         font-size: 20px;
-        font-family: Pmingliu,Mingliu;
       }
       .details{
         .detCon{
@@ -184,7 +183,6 @@ export default {
                   vertical-align: top;
                   i{
                     color: #e2e9ef;
-                    font-family: iconfont!important;
                     -webkit-font-smoothing: antialiased;
                     -moz-osx-font-smoothing: grayscale;
                     font-style: normal;

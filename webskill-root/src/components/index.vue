@@ -87,12 +87,14 @@
                <div class="cons">
                  <p class="titles">
                     <!-- <a class="intro" target="_blank" :href="'/post?id='+item.newNoteId">{{item.newNoteTitle}}</a> -->
-                    <router-link :to="'/post/'+item.newNoteId" target="_blank">{{item.newNoteTitle}}</router-link>
+                    <router-link :to="'/post/'+item.newNoteId" target="_blank" class="intro" v-html="item.newNoteTitle"></router-link>
                     <span class="creatTime right">{{item.newNoteTime}}</span>
                  </p>
-                 <p class="Summarys">
-                    <span class="sum_con">{{item.newNoteCont}}</span>
-                 </p>
+                 <div class="Summarys">
+                    <div class="sum_con">
+                       <div v-html="item.newNoteCont"></div>
+                    </div>
+                 </div>
                </div>
              </li>
              </transition-group>

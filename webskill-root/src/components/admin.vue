@@ -52,7 +52,7 @@ export default {
           initialFrameWidth: null,
           //focus时自动清空初始化时的内容
           autoClearinitialContent:true,
-          maximumWords:5000,
+          maximumWords:100000,
           pasteplain:true,
           initialContent:'<span style="color:#ccc; onlyRed">在此输入发布内容...</span>',
           //关闭字数统计
@@ -97,7 +97,6 @@ export default {
           return false;
         }
         if(!this.contitle){
-          console.log(100)
           this.error='请输入内容标题';
           return false;
         }
@@ -105,10 +104,10 @@ export default {
           this.error='发布内容不能为空';
           return false;
         }
-        if(ueCon.length>5000){
-          this.error='文章发布不能大于5000个';
-          return false;
-        }
+        // if(ueCon.length>10000){
+        //   this.error='文章发布不能大于5000个';
+        //   return false;
+        // }
         axios({
           method: 'post',
           url:'/webskill/posts',
