@@ -14,7 +14,7 @@
 </template>
 <style lang="scss" scoped>
 .copyright{
-  font-size: 18px;
+  font-size: .18rem;
   text-align: center;
 }
 </style>

@@ -15,7 +15,7 @@
         <a class="newTitleView col-lg-2" title="技能快讯" @click="setAalertMsgFn()">资讯</a>
       </p>
       <!--用户已登录-->
-      <p class="userLogin  col-lg-2 right" v-if="isLogin==true">
+      <p class="userLogin  col-lg-2 right" v-if="loginStatue">
         <span class="loginExit right" @click="loginExit()">退出</span>
          <span class="userInfo right">[{{username}}]</span>
       </p>
@@ -50,7 +50,6 @@ export default {
     return {
       msg: "主导航和二级导航展示",
       jbx: true,
-      isLogin:false,
       username:""
     };
   },
@@ -58,10 +57,10 @@ export default {
     
   },
   computed: {
-    ...mapGetters(['mainNavs'])
+    ...mapGetters(['mainNavs','loginStatue'])
   },
   methods: {
-    ...mapActions(["getNav",'setAalertMsgFn']),
+    ...mapActions(["getNav",'setAalertMsgFn','setLoginStatueFn']),
     loginExit(){
       var _this=this;
       axios({
@@ -70,13 +69,14 @@ export default {
       }).then((res) => {
         let userState = res.data
         if (userState.status == "success") {
-          _this.isLogin=false;
+          _this.setLoginStatueFn(false)
           _this.username="";
         }
       })
     }
   },
   mounted: function() {
+    let _this=this;
     this.getNav();
     axios({
       method: 'get',
@@ -84,13 +84,14 @@ export default {
     }).then((res) => {
       let userState = res.data
       if (userState.status == "success") {
-        if(userState.data.loginStatus){
-          this.isLogin=true;
-          this.username=userState.data.userName;
-        }
+        _this.setLoginStatueFn(true);
+        _this.username=userState.data.userName;
+      }else{
+        _this.setLoginStatueFn(false);
       }
     })
   }
+ 
 };
 </script>
 
@@ -103,7 +104,7 @@ export default {
   .topType{
   height: 50px;
   line-height: 50px;
-  font-size: 14px;
+  font-size: .14rem;
   .alinks{
     height: 100%;
     float: left;
@@ -135,7 +136,7 @@ export default {
       float: left;
     }
     span{
-      font-size: 22px;
+      font-size: .22rem;
       color: #fff;
     }
   }

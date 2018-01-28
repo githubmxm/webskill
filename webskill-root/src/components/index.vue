@@ -73,7 +73,7 @@
        <transition enter-active-class="fadeInRight" leave-active-class="fadeInRight">
        <div class="dynamicType left col-lg-9 col-sm-8 col-xs-12" v-show="animationShow">
          <ul class="typeName clear">
-           <li class="jottings col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">最新笔录</li>
+           <li class="jottings col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">全部笔录</li>
            <li class="newSkill col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==1}"  @click="dynamicType(1)">技能快讯</li>
            <li class="wordDec col-sm-2 col-xs-2"  :class="{cur:dynamicTypeCur==2}" @click="dynamicType(2)">留言动态</li>
            <li class="tools col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==3}"  @click="dynamicType(3)">推荐工具</li>
@@ -81,19 +81,21 @@
          </ul>
          <div class="contentsForType clear">
            <ul class="contentList clear">
-             <!--最新笔录-->
+             <!--全部笔录-->
              <transition-group v-if="dynamicTypeCur==0&&dynamicDataList.length>0" enter-active-class="fadeIn" leave-active-class="fadeIn" @before-enter="beforeEnter">
              <li class="zxbl"  v-for="(item,index) in dynamicDataList" :key="index" :arid="item.newNoteId" :animate-delay="(0.3*index)" :animate-duration="0.5">
                <div class="cons">
                  <p class="titles">
                     <!-- <a class="intro" target="_blank" :href="'/post?id='+item.newNoteId">{{item.newNoteTitle}}</a> -->
-                    <router-link :to="'/post/'+item.newNoteId" target="_blank" class="intro" v-html="item.newNoteTitle"></router-link>
+                    <!-- <span class="left noteType">{{item.newNoteType|newNoteTypeFilter}}</span> -->
+                    <router-link :to="'/post/'+item.newNoteId" target="_blank" class="intro" v-html="newNoteContSlice(item.newNoteTitle,28)"></router-link>
                     <span class="creatTime right">{{item.newNoteTime}}</span>
                  </p>
                  <div class="Summarys">
                     <div class="sum_con">
-                       <div v-html="item.newNoteCont"></div>
+                       <div v-html="newNoteContSlice(item.newNoteConts,117)"></div>
                     </div>
+                    <!-- <span>[阅读全部]</span> -->
                  </div>
                </div>
              </li>
@@ -158,6 +160,14 @@ export default {
      swiperSlide,
      Pagebar
   },
+  filters: {
+    //文章类型分类
+    newNoteTypeFilter:function(type){
+      if(type==1){
+        return "技能快讯"
+      }
+    }
+  },
   created () {
     // if(this.wapOrPc=="wap"){
 
@@ -165,6 +175,13 @@ export default {
   },
   methods: {
     ...mapActions(['setAalertMsgFn']),
+    newNoteContSlice:function(con,len){
+      if(con.length>len){
+        return con.slice(0,len)+'...';
+      }else{
+        return con;
+      }
+    },
     beforeEnter(el){
        var delay = el.getAttribute('animate-delay'),
           duration = el.getAttribute('animate-duration');
@@ -196,7 +213,7 @@ export default {
         this.pageModel.url="/static/ajaxpage.1.json"
       }
       this.pageModel.againPost++;
-    },
+    }
     // swiper() {
     //     return this.$refs.carouselsSwiper.swiper;
     // }
@@ -294,13 +311,13 @@ export default {
       .hei{
         height: 30px;
         line-height: 30px;
-        font-size: 14px;
+        font-size: .14rem;
       }
       .PlayTour{
         margin: 15px auto;
         span{
           display: inline-block;
-          font-size: 14px;
+          font-size: .14rem;
           margin-bottom: 8px;
         }
         img{
@@ -328,7 +345,7 @@ export default {
         li{
           height: 20px;
           line-height: 20px;
-          font-size: 14px;
+          font-size: .14rem;
           .vPhoto{
             width:15px;
             height:15px;
@@ -351,20 +368,20 @@ export default {
       margin-bottom: 20px;
       border: 1px solid #e6e6e6;
       .blogCl{
-        font-size: 15px;
+        font-size: .15rem;
         color: #000;
       }
       .conTxt{
-        margin-top: 12px;
-        line-height: 22px;
-        font-size: 13px;
+        margin-top: .12rem;
+        line-height: .24rem;
+        font-size: .14rem;
       }
       .blogClList{
         margin-top: 10px;
         li{
           height: 20px;
           line-height: 20px;
-          font-size: 14px;
+          font-size: .14rem;
           .conName{
             margin-left: 5px;
           }
@@ -375,18 +392,17 @@ export default {
       // background: url("../assets/images/indexBgW3.png") center center;
       background: #fff;
       .typeName{
-        padding: 5px 0;
+        padding: .05rem 0;
         border-bottom: 1px solid #e8e8e8;
-        height: 49px;
         li{
           display: inline-block;
-          font-size: 18px;
+          font-size: .17rem;
           float: left;
           text-align: center;
           color: #000;
           cursor: pointer;
-           height:43px;
            min-width: 60px;
+           padding-bottom:2px;
         }
         li.cur{
             border-bottom: 2px solid #5eaeef;
@@ -394,12 +410,12 @@ export default {
         }
       }
       .contentsForType{
-        font-size: 18px;
+        font-size: .17rem;
         background: #fff;
         .contentList{
           padding: 8px 0px;;
           .noCons{
-            font-size: 20px;
+            font-size: .18rem;
             color: #19b77e;
             text-align: center;
           }
@@ -424,21 +440,24 @@ export default {
                   display: inline-block;
                   max-width:65%;
                   color: #2d64b3;
-                  font-size: 16px;
+                  font-size: .16rem;
                   text-decoration: none;
                   &:hover{
                     color:#e80d06;
+                    text-decoration: underline;
                   }
                 }
                 .creatTime{
                   color: #bdbdbd;
-                  font-size: 14px;
+                  font-size: .14rem;
                   float: right;
                 }
               }
               .Summarys{
                 .sum_con{
-                  font-size: 14px;
+                  display:inline-block;
+                  font-size: .14rem;
+                  word-wrap: break-word;
                   &:hover{
                     color:#333;
                   }
@@ -456,7 +475,7 @@ export default {
              }
              .searchSubmit{
                display: inline-block;
-               font-size: 14px;
+               font-size: .14rem;
                cursor: pointer;
                width:35px;
                height: 25px;
@@ -484,7 +503,7 @@ export default {
     }
   }
 }
-@media (max-width: 993px) {
+/* @media (max-width: 993px) {
    .homePage .mainCon .dynamicType .typeName li{
     font-size: 14px;
   }
@@ -494,13 +513,13 @@ export default {
   .contentsForType .sum_con{
     font-size: 14px !important;
   }
-}
+} */
 @media (max-width: 767px) {
  .homePage .mainCon .userInfo .heipad{
    text-align: center;
  }
 }
-@media (max-width: 630px) {
+/* @media (max-width: 630px) {
   .top .topType .alinks .logo span{
     font-size:15px;
   }
@@ -514,8 +533,8 @@ export default {
     font-size: 14px !important;
   }
   
-}
-@media (max-width: 512px) {
+} */
+/* @media (max-width: 512px) {
 //   .homePage .mainCon .dynamicType .typeName li{
 //     font-size: 12px;
 //   }
@@ -528,5 +547,5 @@ export default {
      .noCons,.goLeaveWords{
        font-size: 12px !important;
      }
-}
+} */
 </style>

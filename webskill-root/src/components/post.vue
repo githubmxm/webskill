@@ -9,10 +9,19 @@
         <div class="meta"><span class="creatTime">{{arTime}}</span><span class="pageViewNum">0</span> 次浏览<span class="commentNum">0</span> 次评论<span class="commentLabel">标签: <i class="labelName">{{arType}}</i> </span></div>
         <div class="details">
           <!--文章内容-->
-          <div class="detCon" v-html="arCons"></div>
+          <div class="detcom">
+            <div class="detCon" v-html="arCons"></div>
+            <div class="commentHandle clear">
+              <p class="commentHandleType right">
+                <span class="comLike">{{arLikeNum}}</span>
+                <span class="comTread">{{arDownNum}}</span>
+                <!-- <span class="replay">回复</span> -->
+              </p>
+            </div>
+          </div>
           <!--评论内容-->
           <div class="comments">
-            <div id="comment_form">
+            <div id="comment_form" v-if="!loginStatue">
               <div id="commentsbmitarear">
                 <div class="guest_link">
                   <span class="log_ico">
@@ -26,28 +35,25 @@
                 </div>
             </div>
             <ul class="commentList">
-              <li class="commentD">
+              <li class="commentD" v-for="comment in commentList" :key="comment.commentId">
                 <p class="commentInfo clear">
-                  <span class="commentUser left">maoxiangmin</span>
-                  <span class="commentTime right">评论于 <i class="time">20180121</i></span>
+                  <span class="commentUser left">{{comment.commentAuthor}}</span>
+                  <span class="commentTime right">评论于 <i class="time">{{comment.commentTime}}</i></span>
                 </p>
-                <div class="comcon">
-                  评论内容
-                </div>
-                <div class="commentHandle clear">
-                  <p class="commentHandleType right">
-                    <span class="comLike">1</span>
-                    <span class="comTread">1</span>
-                    <span class="replay">回复</span>
-                  </p>
-                </div>
+                <div class="comcon" v-html="comment.commentCon"></div>
               </li>
             </ul>
           </div>
           <div class="editor-container" id="editor-container">
             <UE  :config=config :id=ue1 ref="ue"></UE>
           </div>
-          <p class="firstSofa" v-show="firstSofaShow">还没有评论哦，来抢个沙发吧！</p>
+          <div class="clear errorMsg">
+              {{error}}
+          </div>
+          <div class="clear">
+            <span data-v-7ddd7f1e="" class="leaveWordSubmit" @click="postComment()">提交</span>
+          </div>
+          <p class="firstSofa" v-show="commentList.length==0">还没有评论哦，来抢个沙发吧！</p>
         </div>
       </article>
     </section>
@@ -56,7 +62,8 @@
 
 <script>
 import UE from './ue/ue';
-import axios from 'axios'
+import axios from 'axios';
+import { mapGetters } from "vuex";
 export default {
   data () {
     return {
@@ -86,7 +93,11 @@ export default {
         postId:this.$route.params.id,
         arTitle:"",
         arTime:"",
-        arType:""
+        arType:"",
+        arDownNum:0,
+        arLikeNum:0,
+        error:"",
+        commentList:[]
     }
   },
   components: {
@@ -96,7 +107,32 @@ export default {
       //获取编辑器内容
       getUEContent() {
         let content = this.$refs.ue.getUEContent(); // 调用子组件方法
+      },
+      //提交评论内容
+      postComment(){
+        this.error="";
+        let content = this.$refs.ue.getUEContent();
+        if(content==""||content=='<p id="initContent"><span style="color:#ccc; onlyRed">畅言一下吧...</span></p>'){
+          this.error="评论内容不能为空";
+          return false;
+        }
+        axios({
+          method: 'post',
+          url: '/webskill/post/comment',
+          data:{
+            commentId:_this.postId,
+            commentCons:content
+          }
+        }).then((res) => {
+          let commentdata = res.data;
+          if(commentdata.status=="success"){
+            //文章发表成功
+          }
+        })
       }
+  },
+  computed: {
+    ...mapGetters(['loginStatue'])
   },
   mounted () {
     var _this=this;
@@ -109,21 +145,15 @@ export default {
     }).then((res) => {
       let postshow = res.data;
       if(postshow.status=="success"){
-        _this.arCons=postshow.data.newNoteCont;
-        _this.arTitle=postshow.data.newNoteTitle;
-        _this.arTime=postshow.data.newNoteTime;
-        switch(postshow.data.newNoteType)
-        {
-           case "0":_this.arType="最新笔录"
-                  break;
-           case "1":_this.arType="技能快讯"
-                  break;
+        if(postshow.data){
+          _this.arCons=postshow.data.newNoteCont;
+          _this.arTitle=postshow.data.newNoteTitle;
+          _this.arTime=postshow.data.newNoteTime;
+          _this.arDownNum=postshow.data.newNoteLikeNum;
+          _this.arLikeNum=postshow.data.newNoteDownNum;
         }
-
-      }else{
-
       }
-    })
+    });
   }
 }
 </script>
@@ -134,94 +164,24 @@ export default {
     background: #fcfcfa;
     box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
     .conPost{
-      width: 920px;
       background: #fff;
       margin-bottom: 20px;
       padding: 30px;
       .title{
         margin-bottom: 5px;
         font-weight: bold;
-        font-size: 20px;
+        font-size: .2rem;
       }
       .details{
-        .detCon{
-          font-size: 16px;
-          padding:20px 20px 20px 0;
-          border-bottom:1px solid #ccc;
+        .detcom{
+          padding:20px 20px 5px 0;
+           border-bottom:1px solid #ccc;
         }
-        .comments{
-          padding:20px 20px 20px 0;
-          border-bottom: 1px solid #ccc;
-          margin-bottom: 35px;
-          .conTitle{
-            padding: 15px 0;
-            text-align:center;
-            font-size:14px;
-          }
-          #comment_form{
-            #commentsbmitarear{
-              .guest_link{
-                margin-bottom: 20px;
-                clear: both;
-                overflow: hidden;
-                height: 80px;
-                font-family: MicrosoftYaHei;
-                font-size: 14px;
-                color: #4f4f4f;
-                text-align: center;
-                background: #e7ecf0;
-                .log_ico{
-                  width: 40px;
-                  height: 40px;
-                  border-radius: 20px;
-                  line-height: 40px;
-                  margin-top: 20px;
-                  margin-right: 20px;
-                  text-align: center;
-                  background: #afbac3;
-                  display: inline-block;
-                  vertical-align: top;
-                  i{
-                    color: #e2e9ef;
-                    -webkit-font-smoothing: antialiased;
-                    -moz-osx-font-smoothing: grayscale;
-                    font-style: normal;
-                    font-size: 16px;
-                  }
-                }
-                .txt{
-                  display: inline-block;
-                  margin-top: 28px;
-                  a{
-                    color: #e73131;
-                    text-decoration: underline;
-                  }
-                }
-              }
-            }
-          }
-          .commentList{
-            .commentD{
-              padding: 10px 0;
-              margin-bottom:10px;
-              .commentInfo{
-                margin: 10px 0;
-                font-size:14px;
-                border-bottom: 1px dashed #ccc;
-                padding-bottom: 8px;
-                .commentUser{
-                  color: #4093c6;
-                }
-                .commentTime,.time{
-                  color: #ccc;
-                }
-
-              }
-              .comcon{
-                margin-top: 12px;
-              }
-              .commentHandle{
-                margin:8px 0;
+        .detCon{
+          font-size: .16rem;
+        }
+        .commentHandle{
+                margin:13px 0 8px 0;
                 .commentHandleType{
                   display:inline-block;
                   .comTread,.comLike,.replay{
@@ -229,9 +189,10 @@ export default {
                     padding-left: 22px;
                     width: 20px;
                     height: 20px;
+                    line-height: 20px;
                     margin-left:8px;
                     color:#999;
-                    background: url("../assets/images/comIcon.png") no-repeat;
+                    background: url("../assets/images/comIcon.png") no-repeat 0 0;
                     margin: 0 12px;
                     cursor: pointer;
                   }
@@ -259,16 +220,105 @@ export default {
                   }
                 }
               }
+        .comments{
+          padding:20px 20px 20px 0;
+          margin-bottom: 35px;
+          .conTitle{
+            padding: 15px 0;
+            text-align:center;
+            font-size:.14rem;
+          }
+          #comment_form{
+            #commentsbmitarear{
+              .guest_link{
+                margin-bottom: 20px;
+                clear: both;
+                overflow: hidden;
+                height: 80px;
+                font-family: MicrosoftYaHei;
+                font-size: .14rem;
+                color: #4f4f4f;
+                text-align: center;
+                background: #e7ecf0;
+                .log_ico{
+                  width: 40px;
+                  height: 40px;
+                  border-radius: 20px;
+                  line-height: 40px;
+                  margin-top: 20px;
+                  margin-right: 20px;
+                  text-align: center;
+                  background: #afbac3;
+                  display: inline-block;
+                  vertical-align: top;
+                  i{
+                    color: #e2e9ef;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    font-style: normal;
+                    font-size: .16rem;
+                  }
+                }
+                .txt{
+                  display: inline-block;
+                  margin-top: 28px;
+                  a{
+                    color: #e73131;
+                    text-decoration: underline;
+                  }
+                }
+              }
+            }
+          }
+          .commentList{
+            .commentD{
+              padding: 10px 0;
+              border-bottom: 1px solid #ccc;
+              margin-bottom:10px;
+              .commentInfo{
+                margin: 10px 0;
+                font-size:.14rem;
+                border-bottom: 1px dashed #ccc;
+                padding-bottom: 8px;
+                .commentUser{
+                  color: #4093c6;
+                }
+                .commentTime,.time{
+                  color: #ccc;
+                }
+
+              }
+              .comcon{
+                margin-top: 12px;
+                font-size:.135rem;
+              }
             }
           }
         }
+      .leaveWordSubmit{
+        display: inline-block;
+        height: 30px;
+        line-height: 30px;
+        width: 50px;
+        text-align: center;
+        background: blueviolet;
+        color: #fff;
+        float: right;
+        margin-top: 10px;
+        cursor:pointer;
+       }
+       .errorMsg{
+         color: red;
+         text-align: right;
+         margin-top: 10px;
+       }
         .firstSofa{
           background: #f0f0f0;
           color: #999;
           text-align: center;
           padding: 5px 0;
-          font-size: 12px;
-          margin-top: 30px;
+          font-size: .12rem;
+          margin-top: 20px;
         }
       }
       .meta{
@@ -276,11 +326,11 @@ export default {
         border-bottom: 1px dashed #ccc;
         padding-bottom: 18px;
         color: #777;
-        font-size: 12px;
+        font-size: .12rem;
         .creatTime{
           margin-bottom: 15px;
           color: #777;
-          font-size: 12px;
+          font-size: .12rem;
         }
         .pageViewNum{
           margin-left: 20px;

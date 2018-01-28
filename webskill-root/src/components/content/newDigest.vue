@@ -81,7 +81,7 @@ export default {
     .digList {
       height: 30px;
       line-height: 30px;
-      font-size: 14px;
+      font-size: .14rem;
       color: #fff;
       .digType {
         color: rgb(115, 60, 218);

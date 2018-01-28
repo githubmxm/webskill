@@ -2,15 +2,19 @@
   <div class="conDetails row">
     <section>
       <article class="conPost clear">
-        <h1 class="title left">请选择您要输入的留言类型:</h1>
-        <div class="wordType">
-          <input class="chooseType" readonly type="text" :value="chooseTypeName" :typeId="chooseTypeId" @click="wordOneShowFn()" />
-          <p class="wordOne" v-show="wordOneShow">
-            <span @click="chooseTypeName='我要私密';chooseTypeId=0;wordOneShow=false">我要私密</span>
-            <span @click="chooseTypeName='我要提BUG';chooseTypeId=1;wordOneShow=false">我要提BUG</span>
-            <span @click="chooseTypeName='我要提建议';chooseTypeId=2;wordOneShow=false">我要提建议</span>
-            <span @click="chooseTypeName='随便说说';chooseTypeId=3;wordOneShow=false">随便说说</span>
-          </p>
+        <div class="conlists left">
+            <h1 class="title left">留言类型:</h1>
+            <div class="leaves">
+              <div class="wordType">
+                  <input class="chooseType" readonly type="text" :value="chooseTypeName" :typeId="chooseTypeId" @click="wordOneShowFn()" />
+                  <p class="wordOne" v-show="wordOneShow">
+                    <span @click="chooseTypeName='我要私密';chooseTypeId=0;wordOneShow=false">我要私密</span>
+                    <span @click="chooseTypeName='我要提BUG';chooseTypeId=1;wordOneShow=false">我要提BUG</span>
+                    <span @click="chooseTypeName='我要提建议';chooseTypeId=2;wordOneShow=false">我要提建议</span>
+                    <span @click="chooseTypeName='随便说说';chooseTypeId=3;wordOneShow=false">随便说说</span>
+                  </p>
+              </div>
+            </div>
         </div>
         <span class="error">{{error}}</span>
         <div class="details left clear">
@@ -59,7 +63,7 @@ export default {
     UE
   },
   methods: {
-      ...mapActions(["setAalertMsgFn"]),
+      ...mapActions(["setAalertMsgFn","setLoginStatueFn"]),
       wordOneShowFn(){
         this.wordOneShow=!this.wordOneShow;
       },
@@ -70,8 +74,8 @@ export default {
           this.error='请选择留言类型';
           return false;
         }
-        if(!ueCon){
-          this.error='留言不能为空';
+        if(!ueCon||ueCon=='<p id="initContent"><span style="color:#ccc; onlyRed">在此输入留言...</span></p>'){
+          this.error='留言内容不能为空';
           return false;
         }
         if(ueCon.length<10){
@@ -79,18 +83,26 @@ export default {
           return false;
         }
         axios({
-          methods:'get',
-          url:'/static/leaveword.json',
+          method:'post',
+          url:'/webskill/leaveWord',
           data:{
-            chooseType:_this.chooseTypeId,
-            word:ueCon
+            leaveWordType:_this.chooseTypeId,
+            leaveWordCon:ueCon
           }
         }).then((res)=>{
           let resData=res.data;
+          if(resData.status=="incorrect-login"){
+            _this.setLoginStatueFn(false);
+          }
           if(resData.status=="success"){
             //提交成功,等待审核
             _this.setAalertMsgFn("感谢您的留言！")
+            location.href="/index";
+          }else{
+            this.error=resData.message;
+            return false;
           }
+
         }).catch((err)=>{
 
         });
@@ -107,21 +119,28 @@ export default {
     .conPost{
       position: relative;
       padding: 30px;
+      .conlists{
+        display: inline-block;
+      }
       .title{
-        margin-bottom: 15px;
+        margin-bottom: .3rem;
         font-weight: bold;
-        font-size: 18px;
+        font-size: .18rem;
         font-family: Pmingliu,Mingliu;
       }
+      .leaves{
+        position: relative;
+        float: left;
+        margin-top: -7px;
+      }
       .wordType{
-        position: absolute;
         cursor: pointer;
         left: 264px;
         float: left;
+        margin-left: 10px;
         width: 80px;
         line-height: 30px;
         color: #fff;
-        top: 24px;
         .chooseType{
           cursor: pointer;
           width: 100%;
@@ -149,11 +168,11 @@ export default {
         }
       }
       .error{
-        position: absolute;
-        left: 350px;
-        top: 34px;
         color: red;
-        font-size: 14px;
+        font-size: .14rem;
+        margin-left: 5px;
+        margin-top: -10px;
+        display: inline-block;
       }
       .details{
         width:100%;

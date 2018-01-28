@@ -127,10 +127,10 @@
                     let dataResult=res.data;
                     if(dataResult.status=="success"){
                       // 返回结果数据集
-                      this.dataList = dataResult.data;
-                      _this.setDynamicDataListFn(this.dataList)
+                      _this.dataList = dataResult.data;
+                      _this.setDynamicDataListFn(_this.dataList)
                       // 返回总记录数
-                      _this.totalSize = dataResult.data.length;
+                      _this.totalSize = dataResult.count;
                       _this.totalPage = Math.ceil(_this.totalSize / _this.limit);
                       _this.refreshPageCon();
                       // this.$options.methods.successFn();
@@ -235,7 +235,7 @@
         font-style: normal;
         color: #d44950;
         margin: 0px 4px;
-        font-size: 12px;
+        font-size: .12rem;
     }
     .page-bar .page-con ul {
       text-align: center;
@@ -246,7 +246,7 @@
     }
 
     .page-bar .page-size div {
-        font-size: 14px;
+        font-size: .14rem;
     }
 
     a.disabled {

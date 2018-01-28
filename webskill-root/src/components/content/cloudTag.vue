@@ -117,7 +117,7 @@ export default {
     background: url("../../assets/images/indexBgW.png") center center;
     overflow: hidden;
     .digList {
-      font-size: 13px;
+      font-size: .13rem;
       color: #2e7cb6;
       display: inline-block;
       padding: 5px 0px;

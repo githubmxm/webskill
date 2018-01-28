@@ -59,7 +59,7 @@ export default {
         url: '/webskill/loginStatus'
       }).then((res) => {
         let loginstatus = res.data;
-        if(loginstatus.data.loginStatus){
+        if(loginstatus.status=="success"){
           location.href="/index"
         }else{
           _this.loginShow=true;
@@ -88,25 +88,11 @@ export default {
           }
         }).then((res) => {
           let logindata = res.data;
-          if(this.loginTypeCur==1){
-              if(logindata.message=="注册成功"){
-                location.href="/index";
-              }else{
-                this.errorMsg=logindata.message;
-                this.showError=false;
-              }
+          if(logindata.status=="success"){
+            location.href="/index";
           }else{
-            if(logindata.status=="success"){
-              if(logindata.loginStatus){
-                location.href="/index";
-              }else{
-                this.errorMsg=logindata.message;
-                this.showError=false;
-              }
-            }else{
-              this.errorMsg=logindata.message;
-              this.showError=false;
-            }
+            this.errorMsg=logindata.message;
+            this.showError=false;
           }
         })
       }
@@ -216,7 +202,7 @@ body{
   }
     p{
     margin:10px 0;
-    font-size: 16px;
+    font-size: .16rem;
     #account,#password{
       width: 165px;
       height: 28px;
