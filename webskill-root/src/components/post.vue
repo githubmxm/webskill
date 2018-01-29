@@ -90,7 +90,7 @@ export default {
         arCons:"",
         commentsList:[],
         firstSofaShow:true,
-        postId:this.$route.params.id,
+        postId:parseInt(this.$route.params.id),
         arTitle:"",
         arTime:"",
         arType:"",
@@ -111,6 +111,7 @@ export default {
       //提交评论内容
       postComment(){
         this.error="";
+        let _this=this;
         let content = this.$refs.ue.getUEContent();
         if(content==""||content=='<p id="initContent"><span style="color:#ccc; onlyRed">畅言一下吧...</span></p>'){
           this.error="评论内容不能为空";
@@ -146,11 +147,12 @@ export default {
       let postshow = res.data;
       if(postshow.status=="success"){
         if(postshow.data){
-          _this.arCons=postshow.data.newNoteCont;
-          _this.arTitle=postshow.data.newNoteTitle;
-          _this.arTime=postshow.data.newNoteTime;
-          _this.arDownNum=postshow.data.newNoteLikeNum;
-          _this.arLikeNum=postshow.data.newNoteDownNum;
+          _this.arCons=postshow.data.newNoteDetail.newNoteCont;
+          _this.arTitle=postshow.data.newNoteDetail.newNoteTitle;
+          _this.arTime=postshow.data.newNoteDetail.newNoteTime;
+          _this.arDownNum=postshow.data.newNoteDetail.newNoteLikeNum;
+          _this.arLikeNum=postshow.data.newNoteDetail.newNoteDownNum;
+          _this.commentList=postshow.data.articleComment;
         }
       }
     });
@@ -222,7 +224,7 @@ export default {
               }
         .comments{
           padding:20px 20px 20px 0;
-          margin-bottom: 35px;
+          margin:60px 0 35px 0;
           .conTitle{
             padding: 15px 0;
             text-align:center;
