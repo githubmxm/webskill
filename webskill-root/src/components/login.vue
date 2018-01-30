@@ -14,17 +14,21 @@
           </p>
           <div class="rlog">
               <p class="userAcount">
-                  <span>账号: </span>
+                  <span>账&nbsp;&nbsp;&nbsp;号: </span>
                   <input type="text" id="account" name="account" placeholder="2-20位中英文" v-model="user.account"/>
                 </p>
                 <p class="userPassWord">
-                  <span>密码: </span>
+                  <span>密&nbsp;&nbsp;&nbsp;码: </span>
                   <input type="text" id="password" name="password" placeholder="6-10位中英文" v-model="user.accoutPwd" />
                 </p>
                 <p class="userPassWord" v-show="loginTypeCur==1">
-                  <span>邮箱: </span>
-                  <input type="text" id="password" name="password" placeholder="注册邮箱" v-model="user.accoutEmail" />
+                  <span>邮&nbsp;&nbsp;&nbsp;箱: </span>
+                  <input type="text" id="email" name="email" placeholder="注册邮箱" v-model="user.accoutEmail" />
                   <span class="emailCode" @click="emailCode()">获取认证码</span>
+                </p>
+                <p class="userPassWord" v-show="loginTypeCur==1">
+                  <span>认证码: </span>
+                  <input type="text" id="emailcode" name="emailcode" placeholder="邮箱认证码" v-model="user.accoutEmailCode" />
                 </p>
                 <p class="error" :class="{visible:showError}">{{errorMsg}}</p>
           </div>
@@ -45,7 +49,8 @@ export default {
       user:{
         account:"",
         accoutPwd:"",
-        accoutEmail:""
+        accoutEmail:"",
+        accoutEmailCode:""
       },
       errorMsg:"",
       showError:true,
@@ -104,7 +109,8 @@ export default {
             accoutType:_this.loginTypeCur,
             account:_this.user.account,
             accoutPwd:_this.user.accoutPwd,
-            accoutEmail:_this.user.accoutEmail
+            accoutEmail:_this.user.accoutEmail,
+            accoutEmailCode:_this.user.accoutEmailCode
           }
         }).then((res) => {
           let logindata = res.data;
@@ -221,7 +227,7 @@ body{
     width: 166px;
     height: 28px;
     line-height: 28px;
-    margin-left: 38px;
+    margin-left: .57rem;
     text-align: center;
     cursor: pointer;
     &:hover{
@@ -232,7 +238,7 @@ body{
     p{
     margin:10px 0;
     font-size: .16rem;
-    #account,#password{
+    #account,#password,#email,#emailcode{
       width: 165px;
       height: 28px;
       line-height: 28px;   
@@ -251,7 +257,7 @@ body{
     top: -5px;
     width: 165px;
     display: inline-block;
-    margin-left: 39px;
+    margin-left: 51px;
   }
   .visible{
      visibility: hidden;
@@ -264,12 +270,15 @@ body{
     display: inline-block;
     line-height: 28px;
     cursor: pointer;
-    margin-left: 39px;
     text-align: center;
     &:hover{
       background: blueviolet;
       color: #fff;
     }
+  }
+  .submit{
+    margin-left: .53rem;
+    margin-right: .41rem;
   }
   .submit.cur,.goLook.cur{
      background: blueviolet;
