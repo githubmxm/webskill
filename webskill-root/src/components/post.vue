@@ -12,7 +12,7 @@
           <div class="detcom">
             <div class="detCon" v-html="arCons"></div>
             <div class="commentHandle clear">
-              <p class="commentHandleType right">
+              <p class="commentHandleType right" v-if="false">
                 <span class="comLike">{{arLikeNum}}</span>
                 <span class="comTread">{{arDownNum}}</span>
                 <!-- <span class="replay">回复</span> -->
@@ -308,6 +308,9 @@ export default {
         float: right;
         margin-top: 10px;
         cursor:pointer;
+        &:hover{
+          background: #a876d6;
+        }
        }
        .errorMsg{
          color: red;

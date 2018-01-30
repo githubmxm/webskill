@@ -24,6 +24,7 @@
                 <p class="userPassWord" v-show="loginTypeCur==1">
                   <span>邮箱: </span>
                   <input type="text" id="password" name="password" placeholder="注册邮箱" v-model="user.accoutEmail" />
+                  <span class="emailCode" @click="emailCode()">获取认证码</span>
                 </p>
                 <p class="error" :class="{visible:showError}">{{errorMsg}}</p>
           </div>
@@ -73,6 +74,25 @@ export default {
     loginType(index){
       this.loginTypeCur=index;
       this.errorMsg=""
+    },
+    emailCode(){
+      let _this=this;
+      if(this.formValidata()){
+        axios({
+          method: 'post',
+          url: '/webskill/register',
+          data:{
+            accoutType:_this.loginTypeCur,
+            account:_this.user.account,
+            accoutPwd:_this.user.accoutPwd,
+            accoutEmail:_this.user.accoutEmail
+          }
+        }).then((res) => {
+          let registerdata = res.data;
+          this.errorMsg=registerdata.message;
+          this.showError=false;
+        })
+      }
     },
     login (){
       let _this=this;
@@ -168,7 +188,6 @@ body{
   display: block;
   width: 300px;
   margin: 0 auto;
-  text-align: center;
   margin-top: 242px;
   .login{
     .codeTitle{
@@ -184,6 +203,16 @@ body{
    }
   .usersLogin{
     display: inline-block;
+    .emailCode{
+      font-size:10px;
+      padding:5px;
+      background:#188034;
+      color: #fff;
+      cursor: pointer;
+      &:hover{
+        background: #399652;
+      }
+    }
   .surSubmit{
     display: inline-block;
     font-size: 14px;
