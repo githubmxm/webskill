@@ -24,7 +24,7 @@
                 <p class="userPassWord" v-show="loginTypeCur==1">
                   <span>邮&nbsp;&nbsp;&nbsp;箱: </span>
                   <input type="text" id="email" name="email" placeholder="注册邮箱" v-model="user.accoutEmail" />
-                  <span class="emailCode" @click="emailCode()">获取认证码</span>
+                  <input class="emailCode" @click="emailCode($event)" readonly="readonly" :disabled="emailcodevalue!='获取认证码'"  :value="emailcodevalue"></input>
                 </p>
                 <p class="userPassWord" v-show="loginTypeCur==1">
                   <span>认证码: </span>
@@ -55,7 +55,9 @@ export default {
       errorMsg:"",
       showError:true,
       loginTypeCur:0,
-      loginShow:false
+      loginShow:false,
+      emailcodevalue:"获取认证码",
+      keepRepetition:false
     };
   },
   created () {
@@ -80,9 +82,28 @@ export default {
       this.loginTypeCur=index;
       this.errorMsg=""
     },
-    emailCode(){
+    countDown:function(event,time){
+      var _this=this;
+      event.target.style.background="#ccc";
+      var timeInt=setInterval(function(){
+        if(time>0){
+          time--;
+          _this.emailcodevalue=time;
+        }else{
+          clearInterval(timeInt);
+          event.target.style.background="#188034";
+          _this.emailcodevalue="获取认证码";
+           _this.keepRepetition=false;
+        }
+      },1000)
+    },
+    emailCode(event){
       let _this=this;
-      if(this.formValidata()){
+      if(this.formValidata("nocode")){
+        if(this.keepRepetition){
+          return false;
+        }
+        this.keepRepetition=true;
         axios({
           method: 'post',
           url: '/webskill/register',
@@ -94,8 +115,16 @@ export default {
           }
         }).then((res) => {
           let registerdata = res.data;
-          this.errorMsg=registerdata.message;
-          this.showError=false;
+          _this.errorMsg=registerdata.message;
+          _this.showError=false;
+          if(registerdata.status=="success"){
+             _this.countDown(event,60);
+          }
+          if(_this.errorMsg=="未达到下次发送时间"){
+            _this.countDown(event,registerdata.data);
+          }else{
+             _this.keepRepetition=false;
+          }
         })
       }
     },
@@ -123,7 +152,7 @@ export default {
         })
       }
     },
-    formValidata (){
+    formValidata (code){
       this.errorMsg="";
       //正则
       var inP1=/^[A-Za-z0-9]+$/,
@@ -165,6 +194,11 @@ export default {
         }
         if(!exp.test(this.user.accoutEmail)){
           this.errorMsg="邮箱格式不正确";
+          this.showError=false;
+          return false;
+        }
+        if(code!="nocode"&&!this.user.accoutEmailCode){
+          this.errorMsg="认证码不能为空";
           this.showError=false;
           return false;
         }
@@ -215,6 +249,9 @@ body{
       background:#188034;
       color: #fff;
       cursor: pointer;
+      display: inline-block;
+      width: 70px;
+      text-align: center;
       &:hover{
         background: #399652;
       }
@@ -257,7 +294,7 @@ body{
     top: -5px;
     width: 165px;
     display: inline-block;
-    margin-left: 51px;
+    margin-left: .58rem;
   }
   .visible{
      visibility: hidden;

@@ -30,6 +30,9 @@
       getUEContent() { // 获取内容方法
       	var expDelStr = new RegExp("java|script|ajax|\\.post|\\.get|\\$|jquery|\\.js|document|write|eval|iframe|frame|alert|console","gi");  //脚本有关单词
         return this.editor.getContent().replace(expDelStr,"")
+      },
+      clearContent(uec){//清除内容
+        this.editor.setContent('');
       }
     },
     destroyed() {

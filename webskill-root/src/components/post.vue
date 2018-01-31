@@ -6,7 +6,7 @@
     <section>
       <article class="conPost">
         <h1 class="title">{{arTitle}}</h1>
-        <div class="meta"><span class="creatTime">{{arTime}}</span><span class="pageViewNum">0</span> 次浏览<span class="commentNum">0</span> 次评论<span class="commentLabel">标签: <i class="labelName">{{arType}}</i> </span></div>
+        <div class="meta"><span class="creatTime">{{arTime}}</span><span class="pageViewNum">{{arViewNum}}</span> 次浏览<span class="commentNum">{{arComeNum}}</span> 次评论<span class="commentLabel">标签: <i class="labelName">{{arType}}</i> </span></div>
         <div class="details">
           <!--文章内容-->
           <div class="detcom">
@@ -93,9 +93,11 @@ export default {
         postId:parseInt(this.$route.params.id),
         arTitle:"",
         arTime:"",
-        arType:"",
+        arType:"内容详情",
         arDownNum:0,
         arLikeNum:0,
+        arComeNum:0,
+        arViewNum:0,
         error:"",
         commentList:[]
     }
@@ -107,6 +109,31 @@ export default {
       //获取编辑器内容
       getUEContent() {
         let content = this.$refs.ue.getUEContent(); // 调用子组件方法
+      },
+      //获取文章详情
+      getArticleDetail(){
+         var _this=this;
+          axios({
+            method: 'get',
+            url: '/webskill/post/show',
+            params:{
+              id:_this.postId
+            }
+          }).then((res) => {
+            let postshow = res.data;
+            if(postshow.status=="success"){
+              if(postshow.data){
+                _this.arCons=postshow.data.newNoteDetail.newNoteCont;
+                _this.arTitle=postshow.data.newNoteDetail.newNoteTitle;
+                _this.arTime=postshow.data.newNoteDetail.newNoteTime;
+                _this.arDownNum=postshow.data.newNoteDetail.newNoteLikeNum;
+                _this.arLikeNum=postshow.data.newNoteDetail.newNoteDownNum;
+                _this.arComeNum=postshow.data.newNoteDetail.newNoteComeNum;
+                _this.arViewNum=postshow.data.newNoteDetail.newNoteViewNum;
+                _this.commentList=postshow.data.articleComment;
+              }
+            }
+          });
       },
       //提交评论内容
       postComment(){
@@ -127,7 +154,9 @@ export default {
         }).then((res) => {
           let commentdata = res.data;
           if(commentdata.status=="success"){
-            //文章发表成功
+            //文章评论成功
+            _this.getArticleDetail();
+            _this.$refs.ue.clearContent();
           }
         })
       }
@@ -136,26 +165,7 @@ export default {
     ...mapGetters(['loginStatue'])
   },
   mounted () {
-    var _this=this;
-    axios({
-      method: 'get',
-      url: '/webskill/post/show',
-      params:{
-        id:_this.postId
-      }
-    }).then((res) => {
-      let postshow = res.data;
-      if(postshow.status=="success"){
-        if(postshow.data){
-          _this.arCons=postshow.data.newNoteDetail.newNoteCont;
-          _this.arTitle=postshow.data.newNoteDetail.newNoteTitle;
-          _this.arTime=postshow.data.newNoteDetail.newNoteTime;
-          _this.arDownNum=postshow.data.newNoteDetail.newNoteLikeNum;
-          _this.arLikeNum=postshow.data.newNoteDetail.newNoteDownNum;
-          _this.commentList=postshow.data.articleComment;
-        }
-      }
-    });
+   this.getArticleDetail();
   }
 }
 </script>

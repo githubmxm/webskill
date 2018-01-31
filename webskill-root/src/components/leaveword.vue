@@ -3,15 +3,15 @@
     <section>
       <article class="conPost clear">
         <div class="conlists left">
-            <h1 class="title left">留言类型:</h1>
+            <h1 class="title left">发表类型:</h1>
             <div class="leaves">
               <div class="wordType">
                   <input class="chooseType" readonly type="text" :value="chooseTypeName" :typeId="chooseTypeId" @click="wordOneShowFn()" />
                   <p class="wordOne" v-show="wordOneShow">
-                    <span @click="chooseTypeName='我要私密';chooseTypeId=0;wordOneShow=false">我要私密</span>
-                    <span @click="chooseTypeName='我要提BUG';chooseTypeId=1;wordOneShow=false">我要提BUG</span>
-                    <span @click="chooseTypeName='我要提建议';chooseTypeId=2;wordOneShow=false">我要提建议</span>
-                    <span @click="chooseTypeName='随便说说';chooseTypeId=3;wordOneShow=false">随便说说</span>
+                    <span @click="chooseTypeName='私密';chooseTypeId=0;wordOneShow=false">私密</span>
+                    <span @click="chooseTypeName='提BUG';chooseTypeId=1;wordOneShow=false">提BUG</span>
+                    <span @click="chooseTypeName='提建议';chooseTypeId=2;wordOneShow=false">提建议</span>
+                    <span @click="chooseTypeName='技能寻解答';chooseTypeId=3;wordOneShow=false">技能寻解答</span>
                   </p>
               </div>
             </div>
@@ -47,7 +47,7 @@ export default {
           autoClearinitialContent:true,
           maximumWords:300,
           pasteplain:true,
-          initialContent:'<span style="color:#ccc; onlyRed">在此输入留言...</span>',
+          initialContent:'<span style="color:#ccc; onlyRed">在此输入发表内容...</span>',
           //关闭字数统计
           wordCount:true,
           enableAutoSave:false,
@@ -71,15 +71,15 @@ export default {
         let _this=this;
         let ueCon=this.$refs.ue2.getUEContent();
         if(!this.chooseTypeName){
-          this.error='请选择留言类型';
+          this.error='请选择发表类型';
           return false;
         }
-        if(!ueCon||ueCon=='<p id="initContent"><span style="color:#ccc; onlyRed">在此输入留言...</span></p>'){
-          this.error='留言内容不能为空';
+        if(!ueCon||ueCon=='<p id="initContent"><span style="color:#ccc; onlyRed">在此输入发表内容...</span></p>'){
+          this.error='发表内容不能为空';
           return false;
         }
         if(ueCon.length<10){
-          this.error='留言不能少于10个';
+          this.error='发表内容不能少于10个字';
           return false;
         }
         axios({
@@ -96,7 +96,7 @@ export default {
           }
           if(resData.status=="success"){
             //提交成功,等待审核
-            _this.setAalertMsgFn("感谢您的留言！")
+            _this.setAalertMsgFn("感谢您的发表！")
             location.href="/index";
           }else{
             this.error=resData.message;

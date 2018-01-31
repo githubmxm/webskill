@@ -75,7 +75,7 @@
          <ul class="typeName clear">
            <li class="jottings col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">全部笔录</li>
            <li class="newSkill col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==1}"  @click="dynamicType(1)">技能快讯</li>
-           <li class="wordDec col-sm-2 col-xs-2"  :class="{cur:dynamicTypeCur==2}" @click="dynamicType(2)">留言动态</li>
+           <li class="wordDec col-sm-2 col-xs-2"  :class="{cur:dynamicTypeCur==2}" @click="dynamicType(2)">互动专区</li>
            <li class="tools col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==3}"  @click="dynamicType(3)">推荐工具</li>
            <li class="searchs col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==4}"  @click="dynamicType(4)">搜索导航</li>
          </ul>
@@ -102,7 +102,7 @@
              </transition-group>
              <!--留言动态-->
               <div class="wordDynamic clear"  v-else-if="dynamicTypeCur==2">
-                <a class="goLeaveWords blink" href="/leaveword" target="_blank">我要留言</a>
+                <a class="goLeaveWords blink" href="/leaveword" target="_blank">我要发表</a>
               </div>
              <!--搜索导航-->
             <div class="search"  v-else-if="dynamicTypeCur==4">
