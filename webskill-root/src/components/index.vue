@@ -82,8 +82,9 @@
          <div class="contentsForType clear">
            <ul class="contentList clear">
              <!--全部笔录-->
-             <transition-group v-if="dynamicTypeCur==0&&dynamicDataList.length>0" enter-active-class="fadeIn" leave-active-class="fadeIn" @before-enter="beforeEnter">
-             <li class="zxbl"  v-for="(item,index) in dynamicDataList" :key="index" :arid="item.newNoteId" :animate-delay="(0.3*index)" :animate-duration="0.5">
+             <!-- <transition-group  enter-active-class="fadeIn" leave-active-class="fadeIn" @before-enter="beforeEnter"> -->
+            <div v-if="dynamicTypeCur==0&&dynamicDataList.length>0">
+             <li class="zxbl"   v-for="(item,index) in dynamicDataList" :key="index" :arid="item.newNoteId" :animate-delay="(0.3*index)" :animate-duration="0.5">
                <div class="cons">
                  <p class="titles">
                     <!-- <a class="intro" target="_blank" :href="'/post?id='+item.newNoteId">{{item.newNoteTitle}}</a> -->
@@ -99,8 +100,9 @@
                  </div>
                </div>
              </li>
-             </transition-group>
-             <!--留言动态-->
+             </div>
+             <!-- </transition-group> -->
+             <!--互动专区-->
               <div class="wordDynamic clear"  v-else-if="dynamicTypeCur==2">
                 <a class="goLeaveWords blink" href="/leaveword" target="_blank">我要发表</a>
               </div>
@@ -176,7 +178,10 @@ export default {
   methods: {
     ...mapActions(['setAalertMsgFn']),
     newNoteContSlice:function(con,len){
-      if(con.length>len){
+      con=con.replace(/<\/?[^>]*>/g,'').replace(/\n[\s| | ]*\r/g,'\n').replace(/&nbsp;/ig,'');
+      if(!con.length){
+        return con="<a class='readAll'>[阅读全部]</a>"
+      }else if(con.length>len){
         return con.slice(0,len)+'...';
       }else{
         return con;
@@ -455,7 +460,7 @@ export default {
               }
               .Summarys{
                 .sum_con{
-                  display:inline-block;
+                  display:block;
                   font-size: .14rem;
                   word-wrap: break-word;
                   &:hover{

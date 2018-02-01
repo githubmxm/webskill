@@ -130,8 +130,7 @@
                       _this.dataList = dataResult.data;
                       _this.setDynamicDataListFn(_this.dataList)
                       // 返回总记录数
-                      _this.totalSize = dataResult.count;
-                      _this.totalPage = Math.ceil(_this.totalSize / _this.limit);
+                      _this.totalPage = dataResult.count;
                       _this.refreshPageCon();
                       // this.$options.methods.successFn();
                     }else{

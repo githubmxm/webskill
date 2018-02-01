@@ -41,6 +41,14 @@
                   <span class="commentTime right">评论于 <i class="time">{{comment.commentTime}}</i></span>
                 </p>
                 <div class="comcon" v-html="comment.commentCon"></div>
+                <p class="clear">
+                  <span class="replayComment right" @click="replayComment(comment.commentAuthor,comment.commentId)">回复</span>
+                </p>
+                <div class="clear" v-if="comment.commentId==replayUeId">
+                  <UE  :config=config2 :id="'replay'+comment.commentId" :ref="'uec'+comment.commentId"></UE>
+                  <p class="errUeLi">{{errUeLi}}</p>
+                  <span class="right replayCommentSure" @click="replayCommentSure('uec'+comment.commentId)">确认</span>
+                </div>
               </li>
             </ul>
           </div>
@@ -86,8 +94,27 @@ export default {
           //更多其他参数，请参考ueditor.config.js中的配置项
           serverUrl: '/server/ueditor/controller.php'
         },
+        config2: {
+          initialFrameWidth: null,
+          //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+          toolbars:[['test','emotion']],
+          //focus时自动清空初始化时的内容
+          autoClearinitialContent:true,
+          maximumWords:200,
+          pasteplain:true,
+          initialContent:'<span style="color:#ccc; onlyRed">回复:</span>',
+          //关闭字数统计
+          wordCount:true,
+          enableAutoSave:false,
+          //关闭elementPath
+          elementPathEnabled:false,
+          //默认的编辑区域高度
+          initialFrameHeight:60
+        },
         ue1: "ue1", // 不同编辑器必须不同的id,
+        errUeLi:"",
         arCons:"",
+        replayUeId:null,
         commentsList:[],
         firstSofaShow:true,
         postId:parseInt(this.$route.params.id),
@@ -159,6 +186,18 @@ export default {
             _this.$refs.ue.clearContent();
           }
         })
+      },
+      //回复评论
+      replayComment(author,commentid){
+        this.replayUeId=commentid;
+      },
+      //确认回复评论内容
+      replayCommentSure(refcom){
+        this.errUeLi="";
+        var refcomCon=this.$refs[refcom][0].getUEContent();
+        if(refcomCon==""||refcomCon=='<p id="initContent"><span style="color:#ccc; onlyRed">回复:</span></p>'){
+          this.errUeLi="回复内容不能为空";
+        }
       }
   },
   computed: {
@@ -303,6 +342,29 @@ export default {
               .comcon{
                 margin-top: 12px;
                 font-size:.135rem;
+              }
+              .errUeLi{
+                color: red;
+               text-align: right;
+               margin-top: 10px
+              }
+              .replayComment{
+                display: inline-block;
+                margin: 8px 0;
+                color:#5d9fec;
+                cursor: pointer;
+              }
+              .replayCommentSure{
+                 display: inline-block;
+                margin: 8px 0;
+                color:#5d9fec;
+                cursor: pointer;
+                padding: 5px;
+                background: aliceblue;
+                &:hover{
+                  color: #fff;
+                  background: #000;
+                }
               }
             }
           }
