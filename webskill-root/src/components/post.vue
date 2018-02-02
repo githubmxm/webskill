@@ -35,19 +35,28 @@
                 </div>
             </div>
             <ul class="commentList">
-              <li class="commentD" v-for="comment in commentList" :key="comment.commentId">
+              <li class="commentD" v-for="(comment,index) in commentList" :key="index">
                 <p class="commentInfo clear">
-                  <span class="commentUser left">{{comment.commentAuthor}}</span>
+                  <span class="commentUser left">{{comment.commentAuthor}}.<i>[F{{index+1}}]</i></span>
                   <span class="commentTime right">评论于 <i class="time">{{comment.commentTime}}</i></span>
                 </p>
                 <div class="comcon" v-html="comment.commentCon"></div>
+                <ul class="replayCommentList">
+                    <li class="commentD" v-for="replayComment in comment.replayComment" :key="replayComment.replayCommentId">
+                      <p class="commentInfo clear">
+                        <span class="commentUser left">@{{replayComment.replayCommentAuthor}}</span>
+                        <span class="commentTime right">评论于 <i class="time">{{replayComment.replayCommentTime}}</i></span>
+                      </p>
+                      <div class="comcon" v-html="replayComment.replayCommentCon"></div>
+                    </li>
+                </ul>
                 <p class="clear">
-                  <span class="replayComment right" @click="replayComment(comment.commentAuthor,comment.commentId)">回复</span>
+                  <span class="replayComment right" @click="replayComment(comment.commentAuthor,comment.commentId)">回复楼主</span>
                 </p>
                 <div class="clear" v-if="comment.commentId==replayUeId">
                   <UE  :config=config2 :id="'replay'+comment.commentId" :ref="'uec'+comment.commentId"></UE>
                   <p class="errUeLi">{{errUeLi}}</p>
-                  <span class="right replayCommentSure" @click="replayCommentSure('uec'+comment.commentId)">确认</span>
+                  <span class="right replayCommentSure" @click="replayCommentSure('uec'+comment.commentId,comment.commentAuthor)">确认</span>
                 </div>
               </li>
             </ul>
@@ -72,6 +81,7 @@
 import UE from './ue/ue';
 import axios from 'axios';
 import { mapGetters } from "vuex";
+import FormatDataTime from '../tool/formatDataTime';
 export default {
   data () {
     return {
@@ -157,7 +167,25 @@ export default {
                 _this.arLikeNum=postshow.data.newNoteDetail.newNoteDownNum;
                 _this.arComeNum=postshow.data.newNoteDetail.newNoteComeNum;
                 _this.arViewNum=postshow.data.newNoteDetail.newNoteViewNum;
-                _this.commentList=postshow.data.articleComment;
+                let cclist=postshow.data.articleComment;
+                for(let i=0;i<cclist.length;i++){
+                  axios({
+                    method: 'get',
+                    url: '/webskill/post/replayCommentFloor',
+                    params:{
+                      articleId:_this.postId,
+                      commentUserFloor:cclist[i].commentId
+                    }
+                  }).then((res) => {
+                    let replayComData=res.data;
+                    if(replayComData.status=="success"){
+                      cclist[i].replayComment=replayComData.data;
+                      if(i==cclist.length-1){
+                        _this.commentList=cclist;
+                      }
+                    }
+                  });
+                }
               }
             }
           });
@@ -167,6 +195,10 @@ export default {
         this.error="";
         let _this=this;
         let content = this.$refs.ue.getUEContent();
+        if(!this.loginStatue){
+          this.error="请先登录";
+          return false;
+        }
         if(content==""||content=='<p id="initContent"><span style="color:#ccc; onlyRed">畅言一下吧...</span></p>'){
           this.error="评论内容不能为空";
           return false;
@@ -182,26 +214,56 @@ export default {
           let commentdata = res.data;
           if(commentdata.status=="success"){
             //文章评论成功
-            _this.getArticleDetail();
+            _this.commentList.push({"commentAuthor":_this.loginUser,"commentTime":FormatDataTime(new Date().getTime()),"commentCon":content});
             _this.$refs.ue.clearContent();
+            _this.replayUeId=10000000000;
+          }else{
+            _this.error=commentdata.message;
           }
         })
       },
       //回复评论
       replayComment(author,commentid){
+        this.replayUeId=10000000;
+        this.errUeLi="";
         this.replayUeId=commentid;
       },
       //确认回复评论内容
-      replayCommentSure(refcom){
+      replayCommentSure(refcom,replayAuthor){
+        let _this=this;
         this.errUeLi="";
-        var refcomCon=this.$refs[refcom][0].getUEContent();
-        if(refcomCon==""||refcomCon=='<p id="initContent"><span style="color:#ccc; onlyRed">回复:</span></p>'){
-          this.errUeLi="回复内容不能为空";
+        let refcomCon=this.$refs[refcom][0].getUEContent();
+        if(!this.loginStatue){
+          this.error="请先登录";
+          return false;
         }
+        if(refcomCon==""||refcomCon=='<p id="initContent"><span style="color:#ccc; onlyRed">回复:</span></p>'){
+          this.errUeLi="回复评论内容不能为空";
+          return false;
+        }
+        axios({
+          method: 'post',
+          url: '/webskill/post/replayComment',
+          data:{
+            replayCommentId:_this.postId,
+            replayCommentFloor:_this.replayUeId,
+            replayCommentAuthor:replayAuthor,
+            replayCommentCons:refcomCon
+          }
+        }).then((res) => {
+          let replayCommentdata = res.data;
+          if(replayCommentdata.status=="success"){
+            //回复评论成功
+            _this.commentList[_this.replayUeId].replayComment.push({"replayCommentId":_this.replayUeId,"replayCommentAuthor":_this.loginUser,"replayCommentTime":FormatDataTime(new Date().getTime()),"replayCommentCon":refcomCon})
+            _this.$refs[refcom][0].clearContent();
+          }else{
+             _this.errUeLi=replayCommentdata.message;
+          }
+        })
       }
   },
   computed: {
-    ...mapGetters(['loginStatue'])
+    ...mapGetters(['loginStatue','loginUser'])
   },
   mounted () {
    this.getArticleDetail();
@@ -326,6 +388,12 @@ export default {
               padding: 10px 0;
               border-bottom: 1px solid #ccc;
               margin-bottom:10px;
+              .replayCommentList{
+                padding-left:.2rem;
+                .commentUser{
+                  color:#b231b3 !important;
+                }
+              }
               .commentInfo{
                 margin: 10px 0;
                 font-size:.14rem;
@@ -333,6 +401,9 @@ export default {
                 padding-bottom: 8px;
                 .commentUser{
                   color: #4093c6;
+                  i{
+                    color:#ed143d;
+                  }
                 }
                 .commentTime,.time{
                   color: #ccc;

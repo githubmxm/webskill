@@ -60,7 +60,7 @@ export default {
     ...mapGetters(['mainNavs','loginStatue'])
   },
   methods: {
-    ...mapActions(["getNav",'setAalertMsgFn','setLoginStatueFn']),
+    ...mapActions(["getNav",'setAalertMsgFn','setLoginStatueFn','setLoginUserFn']),
     loginExit(){
       var _this=this;
       axios({
@@ -71,6 +71,7 @@ export default {
         if (userState.status == "success") {
           _this.setLoginStatueFn(false)
           _this.username="";
+          _this.setLoginUserFn(_this.username);
         }
       })
     }
@@ -86,8 +87,10 @@ export default {
       if (userState.status == "success") {
         _this.setLoginStatueFn(true);
         _this.username=userState.data.userName;
+        _this.setLoginUserFn(_this.username)
       }else{
         _this.setLoginStatueFn(false);
+        _this.setLoginUserFn("");
       }
     })
   }

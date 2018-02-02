@@ -15,20 +15,25 @@
           <div class="rlog">
               <p class="userAcount">
                   <span>账&nbsp;&nbsp;&nbsp;号: </span>
-                  <input type="text" id="account" name="account" placeholder="2-20位中英文" v-model="user.account"/>
+                  <input type="text" id="account" name="account" placeholder="2-20位中英文" maxlength="20" v-model="user.account"/>
                 </p>
                 <p class="userPassWord">
                   <span>密&nbsp;&nbsp;&nbsp;码: </span>
-                  <input type="text" id="password" name="password" placeholder="6-10位中英文" v-model="user.accoutPwd" />
+                  <input type="text" id="password" name="password" placeholder="6-20位中英文" maxlength="20" v-model="user.accoutPwd" />
                 </p>
                 <p class="userPassWord" v-show="loginTypeCur==1">
                   <span>邮&nbsp;&nbsp;&nbsp;箱: </span>
-                  <input type="text" id="email" name="email" placeholder="注册邮箱" v-model="user.accoutEmail" />
+                  <input type="text" id="email" name="email" placeholder="注册邮箱" v-model="user.accoutEmail" maxlength="30" />
                   <input class="emailCode" @click="emailCode($event)" readonly="readonly" :disabled="emailcodevalue!='获取认证码'"  :value="emailcodevalue"></input>
                 </p>
                 <p class="userPassWord" v-show="loginTypeCur==1">
                   <span>认证码: </span>
-                  <input type="text" id="emailcode" name="emailcode" placeholder="邮箱认证码" v-model="user.accoutEmailCode" />
+                  <input type="text" id="emailcode" name="emailcode" placeholder="邮箱认证码" v-model="user.accoutEmailCode" maxlength="8" />
+                </p>
+                <p class="userCode">
+                  <span>验证码: </span>
+                  <input type="text" id="userCode" name="verification code" placeholder="验证码" maxlength="6" v-model="user.accoutVcode" />
+                  <span class="imgCode" @click="refreshVcode()" v-html="vcode"></span>
                 </p>
                 <p class="error" :class="{visible:showError}">{{errorMsg}}</p>
           </div>
@@ -50,14 +55,16 @@ export default {
         account:"",
         accoutPwd:"",
         accoutEmail:"",
-        accoutEmailCode:""
+        accoutEmailCode:"",
+        accoutVcode:"",
       },
       errorMsg:"",
       showError:true,
       loginTypeCur:0,
       loginShow:false,
       emailcodevalue:"获取认证码",
-      keepRepetition:false
+      keepRepetition:false,
+      vcode:""
     };
   },
   created () {
@@ -75,12 +82,25 @@ export default {
     })
   },
   methods: {
-    /*
-    *desc:获取用户登录信息
-    */
     loginType(index){
       this.loginTypeCur=index;
-      this.errorMsg=""
+      this.errorMsg="";
+      this.getVcode();
+    },
+    getVcode:function(){
+      let _this=this;
+      axios({
+          method: 'get',
+          url: '/webskill/vcode',
+          params:{
+            r:Math.random()
+          }
+        }).then((res) => {
+          _this.vcode=res.data;
+      })
+    },
+    refreshVcode:function(){
+      this.getVcode();
     },
     countDown:function(event,time){
       var _this=this;
@@ -139,7 +159,8 @@ export default {
             account:_this.user.account,
             accoutPwd:_this.user.accoutPwd,
             accoutEmail:_this.user.accoutEmail,
-            accoutEmailCode:_this.user.accoutEmailCode
+            accoutEmailCode:_this.user.accoutEmailCode,
+            vcode:_this.user.accoutVcode
           }
         }).then((res) => {
           let logindata = res.data;
@@ -204,6 +225,10 @@ export default {
         }
         this.showError=true;
         return true;
+      }else if(this.user.accoutVcode==""){
+          this.errorMsg="验证码不能为空";
+          this.showError=false;
+          return false;
       }else{
         this.showError=true;
         return true;
@@ -214,7 +239,7 @@ export default {
 
   },
   mounted () {
-   
+      this.getVcode();
   }
 };
 </script>
@@ -275,7 +300,7 @@ body{
     p{
     margin:10px 0;
     font-size: .16rem;
-    #account,#password,#email,#emailcode{
+    #account,#password,#email,#emailcode,#userCode{
       width: 165px;
       height: 28px;
       line-height: 28px;   
@@ -283,6 +308,18 @@ body{
       padding-left: 10px;
       color: #000;
    }
+   .userCode{
+     margin-top: -7px;
+   }
+   #userCode{
+     width:95px;
+   }
+   .imgCode{
+       display: inline-block;
+       cursor: pointer;
+       position: relative;
+       top: .08rem;
+     }
   }
   .error{
     height: 20px;
@@ -314,14 +351,20 @@ body{
     }
   }
   .submit{
-    margin-left: .53rem;
+    margin-left: .54rem;
     margin-right: .41rem;
   }
+
   .submit.cur,.goLook.cur{
      background: blueviolet;
-    color: #fff;
+     color: #fff;
   }
   }
 }
 }
+ @media (max-width: 413px) {
+   .submit{
+      margin-left: .62rem !important;
+   }
+ }
 </style>
