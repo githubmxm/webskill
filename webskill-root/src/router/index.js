@@ -8,6 +8,9 @@ import Login from '@/components/login'
 import About from '@/components/about'
 import Leaveword from '@/components/leaveword'
 import Admin from '@/components/admin'
+import Cooperation from '@/components/cooperation'
+import FindPassWord from '@/components/findpassword'
+import ArticleList from '@/components/articlelist'
 
 
 Vue.use(Router)
@@ -31,6 +34,24 @@ const router = new Router({
     name:'index',
     components:{
       default: Index
+    }
+  },{
+    path:'/findpassword',
+    name:'findpassword',
+    components:{
+      default: FindPassWord
+    }
+  },{
+    path:'/articlelist/:skilltype',
+    name:'articlelist',
+    components:{
+      default: ArticleList
+    }
+  },{
+    path:'/cooperation',
+    name:'cooperation',
+    components:{
+      default: Cooperation
     }
   },{
     path:'/post/:id',

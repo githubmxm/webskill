@@ -33,6 +33,7 @@ import { mapActions } from "vuex";
 import UE from './ue/ue'
 import axios from 'axios'
 export default {
+  name:'leaveword',
   data () {
     return {
         chooseTypeName:'',

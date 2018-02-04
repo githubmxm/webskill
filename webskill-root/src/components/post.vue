@@ -11,6 +11,10 @@
           <!--文章内容-->
           <div class="detcom">
             <div class="detCon" v-html="arCons"></div>
+            <div class="nextPrev">
+              <a class="prevAD left" :class="{disableP:prevArticle=='javascript:void(0)'}" :href="prevArticle">上一篇</a>
+              <a class="nextAD right" :class="{disableN:nextArticle=='javascript:void(0)'}" :href="nextArticle">下一篇</a>
+            </div>
             <div class="commentHandle clear">
               <p class="commentHandleType right" v-if="false">
                 <span class="comLike">{{arLikeNum}}</span>
@@ -136,7 +140,9 @@ export default {
         arComeNum:0,
         arViewNum:0,
         error:"",
-        commentList:[]
+        commentList:[],
+        prevArticle:"javascript:void(0)",
+        nextArticle:"javascript:void(0)"
     }
   },
   components: {
@@ -160,13 +166,16 @@ export default {
             let postshow = res.data;
             if(postshow.status=="success"){
               if(postshow.data){
-                _this.arCons=postshow.data.newNoteDetail.newNoteCont;
-                _this.arTitle=postshow.data.newNoteDetail.newNoteTitle;
-                _this.arTime=postshow.data.newNoteDetail.newNoteTime;
-                _this.arDownNum=postshow.data.newNoteDetail.newNoteLikeNum;
-                _this.arLikeNum=postshow.data.newNoteDetail.newNoteDownNum;
-                _this.arComeNum=postshow.data.newNoteDetail.newNoteComeNum;
-                _this.arViewNum=postshow.data.newNoteDetail.newNoteViewNum;
+                let postShowDetailData=postshow.data.newNoteDetail;
+                _this.arCons=postShowDetailData.newNoteCont;
+                _this.arTitle=postShowDetailData.newNoteTitle;
+                _this.arTime=postShowDetailData.newNoteTime;
+                _this.arDownNum=postShowDetailData.newNoteLikeNum;
+                _this.arLikeNum=postShowDetailData.newNoteDownNum;
+                _this.arComeNum=postShowDetailData.newNoteComeNum;
+                _this.arViewNum=postShowDetailData.newNoteViewNum;
+                _this.nextArticle=postShowDetailData.newNoteNext?"/post/"+(_this.postId+1):"javascript:void(0)";
+                _this.prevArticle=postShowDetailData.newNotePrev?"/post/"+(_this.postId-1):"javascript:void(0)";
                 let cclist=postshow.data.articleComment;
                 for(let i=0;i<cclist.length;i++){
                   axios({
@@ -283,7 +292,7 @@ export default {
       .title{
         margin-bottom: 5px;
         font-weight: bold;
-        font-size: .2rem;
+        font-size: .22rem;
       }
       .details{
         .detcom{
@@ -291,7 +300,19 @@ export default {
            border-bottom:1px solid #ccc;
         }
         .detCon{
-          font-size: .16rem;
+          font-size: .18rem;
+        }
+        .nextPrev{
+          margin-top:30px;
+          font-size: .14rem;
+          .disableP,.disableN{
+            color:#ccc;
+            &:hover{
+              color: #ccc;
+              text-decoration: none;
+              cursor:default;
+            }
+          }
         }
         .commentHandle{
                 margin:13px 0 8px 0;

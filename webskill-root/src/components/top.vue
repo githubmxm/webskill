@@ -4,8 +4,8 @@
 <template>
   <div class="top container-fluid">
     <nav class="topType row">
-      <p class="alinks clear col-lg-4">
-        <a title="技百讯" class="logo col-lg-5" href="/index">
+      <p class="alinks clear col-lg-5">
+        <a title="技百讯" class="logo col-lg-4" href="/index">
           <img src="../assets/images/jbxLogo.png" alt="技百讯" />
           <span>技百讯</span>
         </a>
@@ -13,6 +13,7 @@
         <!-- href="/myNotes" href="/newTitle"-->
         <a class="myNotesView col-lg-2" title="技能摘要" @click="setAalertMsgFn()">技库</a>
         <a class="newTitleView col-lg-2" title="技能快讯" @click="setAalertMsgFn()">资讯</a>
+        <a class="coTitleView col-lg-2" href="/cooperation" target="_blank" title="商务合作">合作</a>
       </p>
       <!--用户已登录-->
       <p class="userLogin  col-lg-2 right" v-if="loginStatue">

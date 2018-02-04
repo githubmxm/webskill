@@ -5,82 +5,85 @@
 <div id="box">
     <ul class="newDigest clear">
       <li class="digList textrotate">
-        Js
+        <a href="/articlelist/Js" target="_blank">Js</a>
       </li>
       <li class="digList textrotate">
-        Css
+          <a href="/articlelist/Js" target="_blank">H5</a>
       </li>
       <li class="digList textrotate">
-        Ejs
+          <a href="/articlelist/Css" target="_blank">Css</a>
       </li>
       <li class="digList textrotate">
-        Vue
+          <a href="/articlelist/Ejs" target="_blank">Ejs</a>
       </li>
       <li class="digList textrotate">
-        Php
+          <a href="/articlelist/Vue" target="_blank">Vue</a>
       </li>
       <li class="digList textrotate">
-        Html
+          <a href="/articlelist/Php" target="_blank">Php</a>
       </li>
       <li class="digList textrotate">
-        Java
+          <a href="/articlelist/Html" target="_blank">Html</a>
       </li>
       <li class="digList textrotate">
-        Ubb
+          <a href="/articlelist/Java" target="_blank">Java</a>
       </li>
       <li class="digList textrotate">
-        Xss
+          <a href="/articlelist/Ubb" target="_blank">Ubb</a>
       </li>
       <li class="digList textrotate">
-        Json
+          <a href="/articlelist/Xss" target="_blank">Xss</a>
       </li>
       <li class="digList textrotate">
-        http
+          <a href="/articlelist/Json" target="_blank">Json</a>
       </li>
       <li class="digList textrotate">
-        Jquery
+          <a href="/articlelist/Http" target="_blank">Http</a>
       </li>
       <li class="digList textrotate">
-        Nodejs
+          <a href="/articlelist/Jquery" target="_blank">Jquery</a>
       </li>
       <li class="digList textrotate">
-        Bootstrap
+          <a href="/articlelist/NodeJs" target="_blank">NodeJs</a>
       </li>
       <li class="digList textrotate">
-        MongoDb
+          <a href="/articlelist/BootStrap" target="_blank">BootStrap</a>
       </li>
       <li class="digList textrotate">
-        Express
+          <a href="/articlelist/MongoDb" target="_blank">MongoDb</a>
       </li>
       <li class="digList textrotate">
-        Reactjs
+          <a href="/articlelist/Express" target="_blank">Express</a>
       </li>
       <li class="digList textrotate">
-        Angularjs
+        <a href="/articlelist/Reactjs" target="_blank">Reactjs</a>
       </li>
       <li class="digList textrotate">
-        Requirejs
+          <a href="/articlelist/Angularjs" target="_blank">Angularjs</a>
       </li>
       <li class="digList textrotate">
-        Seajs
+          <a href="/articlelist/Requirejs" target="_blank">Requirejs</a>
       </li>
       <li class="digList textrotate">
-        Ueidtor
+        <a href="/articlelist/Seajs" target="_blank">Seajs</a>
       </li>
       <li class="digList textrotate">
-        Swiper
+        <a href="/articlelist/Ueidtor" target="_blank">Ueidtor</a>
       </li>
       <li class="digList textrotate">
-        Github
+        <a href="/articlelist/Swiper" target="_blank">Swiper</a>
       </li>
       <li class="digList textrotate">
-        EasyUi
+        <a href="/articlelist/Github" target="_blank">Github</a>
       </li>
       <li class="digList textrotate">
-        JqueryUi
+          <a href="/articlelist/EasyUi" target="_blank">EasyUi</a>
       </li>
       <li class="digList textrotate">
-        Touch.js
+          <a href="/articlelist/JqueryUi" target="_blank">JqueryUi</a>
+      </li>
+      <li class="digList textrotate">
+          <a href="/articlelist/TouchJs" target="_blank">TouchJs</a>
       </li>
     </ul>
   </div>
@@ -125,6 +128,10 @@ export default {
       text-transform: uppercase;
       .digType {
         color: rgb(115, 60, 218);
+      }
+      a{
+        font-size: .13rem;
+      color: #2e7cb6;
       }
       .digCon {
         width: 165px;

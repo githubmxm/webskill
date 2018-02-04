@@ -20,6 +20,7 @@
                 <p class="userPassWord">
                   <span>密&nbsp;&nbsp;&nbsp;码: </span>
                   <input type="text" id="password" name="password" placeholder="6-20位中英文" maxlength="20" v-model="user.accoutPwd" />
+                  <a target="_blank" href="/findpassword" class="findPass">找回密码</a>
                 </p>
                 <p class="userPassWord" v-show="loginTypeCur==1">
                   <span>邮&nbsp;&nbsp;&nbsp;箱: </span>
@@ -139,8 +140,7 @@ export default {
           _this.showError=false;
           if(registerdata.status=="success"){
              _this.countDown(event,60);
-          }
-          if(_this.errorMsg=="未达到下次发送时间"){
+          }else if(_this.errorMsg=="未达到下次发送时间"){
             _this.countDown(event,registerdata.data);
           }else{
              _this.keepRepetition=false;
@@ -150,7 +150,7 @@ export default {
     },
     login (){
       let _this=this;
-      if(this.formValidata()){
+      if(this.formValidata("","login")){
           axios({
           method: 'post',
           url: '/webskill/login',
@@ -173,7 +173,7 @@ export default {
         })
       }
     },
-    formValidata (code){
+    formValidata (code,source){
       this.errorMsg="";
       //正则
       var inP1=/^[A-Za-z0-9]+$/,
@@ -218,6 +218,11 @@ export default {
           this.showError=false;
           return false;
         }
+        if(code!="nocode"&&!this.user.accoutVcode&&source=="login"){
+          this.errorMsg="验证码不能为空";
+          this.showError=false;
+          return false;
+        }
         if(code!="nocode"&&!this.user.accoutEmailCode){
           this.errorMsg="认证码不能为空";
           this.showError=false;
@@ -225,11 +230,14 @@ export default {
         }
         this.showError=true;
         return true;
-      }else if(this.user.accoutVcode==""){
+      }else{
+        if(source=="login"){
+          if(!this.user.accoutVcode){
           this.errorMsg="验证码不能为空";
           this.showError=false;
           return false;
-      }else{
+         }
+        }
         this.showError=true;
         return true;
       }
@@ -265,6 +273,14 @@ body{
       color: #00FF40;
       line-height: 20px;
     }
+   }
+   .findPass{
+     color:#3929b5;
+     cursor: pointer;
+     &:hover{
+      text-decoration: underline;
+      color:red;
+     }
    }
   .usersLogin{
     display: inline-block;

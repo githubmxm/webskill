@@ -55,7 +55,7 @@
     <div class="aboutTaat">
       <h1 class="aboutTitle">博主联系</h1>
       <div class="aboutCon">
-         QQ,WX:1123360735(注明来意哦)
+         QQ,WX:1123360735(注明来意哦),您也可通过留言与我们联系！
       </div>
     </div>
     <p class="thanks">
