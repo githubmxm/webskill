@@ -12,8 +12,8 @@
           <div class="detcom">
             <div class="detCon" v-html="arCons"></div>
             <div class="nextPrev">
-              <a class="prevAD left" :class="{disableP:prevArticle=='javascript:void(0)'}" :href="prevArticle">上一篇</a>
-              <a class="nextAD right" :class="{disableN:nextArticle=='javascript:void(0)'}" :href="nextArticle">下一篇</a>
+              <a class="prevAD left" :class="{disableP:prevArticle=='javascript:void(0)'}" :href="prevArticle"><i class="fa fa-angle-double-left"></i> 上一篇</a>
+              <a class="nextAD right" :class="{disableN:nextArticle=='javascript:void(0)'}" :href="nextArticle">下一篇 <i class="fa fa-angle-double-right"></i></a>
             </div>
             <div class="commentHandle clear">
               <p class="commentHandleType right" v-if="false">
@@ -301,10 +301,14 @@ export default {
         }
         .detCon{
           font-size: .18rem;
+          word-wrap: break-word;
         }
         .nextPrev{
           margin-top:30px;
           font-size: .14rem;
+          .prevAD,.nextAD{
+            color:#5d9fec;
+          }
           .disableP,.disableN{
             color:#ccc;
             &:hover{
