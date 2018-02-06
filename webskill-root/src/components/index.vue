@@ -75,8 +75,8 @@
          <ul class="typeName clear">
            <li class="jottings col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==0}"  @click="dynamicType(0)">全部笔录</li>
            <li class="newSkill col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==1}"  @click="dynamicType(1)">技能快讯</li>
-           <li class="wordDec col-sm-2 col-xs-2"  :class="{cur:dynamicTypeCur==2}" @click="dynamicType(2)">互动专区</li>
-           <li class="tools col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==3}"  @click="dynamicType(3)">推荐工具</li>
+           <li class="wordDec col-sm-2 col-xs-2"  :class="{cur:dynamicTypeCur==2}" @click="dynamicType(2)">推荐工具</li>
+           <li class="tools col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==3}"  @click="dynamicType(3)">互动专区</li>
            <li class="searchs col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==4}"  @click="dynamicType(4)">搜索导航</li>
          </ul>
          <div class="contentsForType clear">

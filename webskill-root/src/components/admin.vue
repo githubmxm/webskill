@@ -27,7 +27,7 @@
                  <!-- <span @click="chooseTypeName='最新笔录';chooseTypeId=0;wordOneShow=false">最新笔录</span> -->
                  <span @click="tabTypeName='置顶';tabTypeId=1;tabOneShow=false">置顶</span>
                  <span @click="tabTypeName='精品';tabTypeId=2;tabOneShow=false">精品</span>
-                 <span @click="tabTypeName='无';tabTypeId=2;tabOneShow=false">无</span>
+                 <span @click="tabTypeName='无';tabTypeId=3;tabOneShow=false">无</span>
                </p>
              </div>
             </div>
