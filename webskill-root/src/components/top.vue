@@ -120,6 +120,7 @@ export default {
     cursor: pointer;
     text-shadow: 3px 3px 3px #000;
     text-align: center;
+    font-size:.16rem;
     .cur,&:hover{
       color:#5eaeef;
       background: #333;
