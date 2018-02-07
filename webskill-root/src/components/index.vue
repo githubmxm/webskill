@@ -83,7 +83,7 @@
            <ul class="contentList clear">
              <!--全部笔录-->
              <!-- <transition-group  enter-active-class="fadeIn" leave-active-class="fadeIn" @before-enter="beforeEnter"> -->
-            <div v-if="dynamicDataList.length>0">
+            <div v-if="dynamicDataList!=4&&dynamicDataList.length>0">
               <li class="zxbl"   v-for="(item,index) in dynamicDataList" :key="index" :arid="item.newNoteId" :animate-delay="(0.3*index)" :animate-duration="0.5">
                 <div class="cons">
                   <p class="titles">
@@ -107,10 +107,10 @@
                 <a class="goLeaveWords blink" href="/leaveword" target="_blank">我要发表</a>
               </div> -->
              <!--搜索导航-->
-            <!-- <div class="search"  v-else-if="dynamicTypeCur==4">
+            <div class="search"  v-else-if="dynamicTypeCur==4">
               <input type="text" name="" id="searchCon" placeholder="输入您要搜索的内容" />
               <span class="searchSubmit"  @click="setAalertMsgFn()">Find</span>
-            </div> -->
+            </div>
              <!--敬请期待-->
              <transition v-else enter-active-class="bounceIn" leave-active-class="bounceIn">
              <p v-show="dynamicDataList.length==0" class="noCons">敬 请 期 待！</p>
