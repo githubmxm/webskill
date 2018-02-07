@@ -14,7 +14,16 @@
                 <!-- <span @click="chooseTypeName='最新笔录';chooseTypeId=0;wordOneShow=false">最新笔录</span> -->
                 <span @click="chooseTypeName='技能快讯';chooseTypeId=1;wordOneShow=false">技能快讯</span>
                 <span @click="chooseTypeName='推荐工具';chooseTypeId=2;wordOneShow=false">推荐工具</span>
+                <span @click="chooseTypeName='随便说说';chooseTypeId=200;wordOneShow=false">随便说说</span>
               </p>
+            </div>
+           </div>
+        </div>
+        <div class="clear tabsPost left">
+           <h1 class="title left">技能类型:</h1>
+           <div class="words left">
+            <div class="wordType">
+              <input class="chooseType skillType" placeholder="可为空" type="text" maxlength="30" v-model="skillType" />
             </div>
            </div>
         </div>
@@ -59,6 +68,7 @@ export default {
     return {
         chooseTypeName:'',
         chooseTypeId:'',
+        skillType:'',
         wordOneShow:false,
         error:'',
         contitle:"",
@@ -137,7 +147,8 @@ export default {
           method: 'post',
           url:'/webskill/posts',
           data:{
-            contitle:_this.contitle, 
+            contitle:_this.contitle,
+            contskilltype:_this.skillType.toLocaleLowerCase(),
             contype:_this.chooseTypeId,
             contlabel:_this.tabTypeName,
             conConts:ueCon
@@ -207,6 +218,11 @@ export default {
           border: 1px solid #ccc;
           height: 30px;
           line-height: 30px;
+        }
+        .skillType{
+          text-align: left;
+          cursor: initial;
+          padding-left: .1rem;
         }
         .wordOne{
           position: absolute;

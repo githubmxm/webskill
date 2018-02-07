@@ -6,26 +6,26 @@
         <div class="left col-lg-9 col-sm-8 col-xs-12">
             <div class="conLf col-lg-11 col-sm-11 col-xs-12">
                 <p class="noList" v-if="!skillListDetail.length">
-                        内容更新中...敬请期待！！！
+                  内容更新中...敬请期待！！！
                 </p>
                 <section class="clear skillListCon"  v-else>
-                    <div class="skillDigetList">
+                    <div class="skillDigetList" v-for="item in skillListDetail">
                         <article class="articles">
                            <div class="arBoder">
                                 <header class="articleHeader">
-                                    <h1><a class="headerTitle" href="">文章标题</a></h1>
+                                    <h1><router-link :to="'/post/'+item.newNoteId" target="_blank" class="headerTitle">{{item.newNoteTitle}}</router-link></h1>
                                 </header>
                                 <div class="articleCons">
-                                    <p class="articleDigest">摘要</p>
+                                    <p class="articleDigest">{{item.newNoteConts}}</p>
                                 </div>
                                 <p class="articleReadAll">
-                                    <a href="">阅读全文</a>
+                                  <router-link class="reda" :to="'/post/'+item.newNoteId" target="_blank">阅读全文</router-link>
                                 </p>
                            </div>
                            <footer class="articleFooter clear">
-                                <span class="arTit left">js#win使用</span>
+                                <span class="arTit left">#js#{{item.newNoteLabel}}</span>
                                 <p class="arItem right">
-                                    <span class="time">2018-01-10</span>&nbsp;&nbsp;<span class="comment"><i class="itRed">0</i>次评论</span>&nbsp;&nbsp;<span class="readed"><i class="itRed">0</i>次阅览</span>
+                                    <span class="time">{{item.newNoteTime}}</span>&nbsp;&nbsp;<span class="comment"><i class="itRed">{{item.newNoteCommentAll}}</i>次评论</span>&nbsp;&nbsp;<span class="readed"><i class="itRed">{{item.newNoteViewNum}}</i>次阅览</span>
                                 </p>
                             </footer>
                         </article> 
@@ -34,24 +34,40 @@
             </div>
         </div>
         <div class="adverLf left col-lg-3 col-sm-4 col-xs-12">
-            222
+            待发布
         </div>
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default{
     name:'articlelist',
     data() {
         return {
             articelSkillType:this.$route.params.skilltype,
-            skillListDetail:[1]
+            skillListDetail:[]
         }
     },
     methods: {
         
     },
     mounted () {
-        
+      let _this=this;
+      axios({
+        method: 'get',
+        url: '/webskill/articleTypeList',
+        params:{
+          r:Math.random(),
+          skillType:_this.articelSkillType
+        }
+      }).then((res) => {
+        let articleList = res.data;
+        if (articleList.status == "success") {
+          _this.skillListDetail=articleList.data;
+        }else{
+         _this.skillListDetail=[];
+        }
+      })
     }
 }
 </script>
@@ -104,7 +120,7 @@ export default{
                         color: #999;
                         text-shadow: 0 1px #fff;
                         text-decoration: none;
-                        a{
+                        .reda{
                             font-size:.16rem;
                             color:#999;
                         }

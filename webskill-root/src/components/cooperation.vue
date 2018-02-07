@@ -2,14 +2,15 @@
 关于我们
 -->
 <template>
-        <div class="aboutWe">
-          <div class="aboutHead">
+        <section class="aboutWe">
+          <header class="aboutHead">
              <h1 class="aboutTitle headTitle">本站商务合作 </h1>
-          </div>
+          </header>
           <div class="aboutTaat">
             <h1 class="aboutTitle">合作</h1>
             <div class="aboutCon">
-                为适应网络打造及推广,开通的合同通道。
+                为适应网络打造及推广,开通的合作通道。<br/>
+                因采用的技术类型问题，本站暂时只能接受ie9以上及其他高版本浏览器与移动端可正常访问.此版本网站具体访问兼容性问题还未做出明确列表。您也可自主尝试，我们将在后续进行可能的优化！感谢您的理解。
             </div>
           </div>
           <div class="aboutTaat">
@@ -38,7 +39,7 @@
           <p class="thanks">
             此致：谢礼！！！
           </p>
-        </div>
+        </section>
       </template>
       
       <style lang="scss" scoped>

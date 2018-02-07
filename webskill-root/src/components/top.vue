@@ -2,7 +2,7 @@
 公用头部导航
 -->
 <template>
-  <div class="top container-fluid">
+  <header class="top container-fluid">
     <nav class="topType row">
       <p class="alinks clear col-lg-5">
         <a title="技百讯" class="logo col-lg-4" href="/index">
@@ -27,7 +27,7 @@
         </p>
       </div>
     </nav>
-  </div>
+  </header>
  
   <!-- <ul class="top clear">
     <li class="mainNavList" v-for="navs in mainNavs" :id="navs.mainNavId" :navid="navs.mainNavId">

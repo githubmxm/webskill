@@ -64,7 +64,9 @@ table {
 textarea {
   resize: none;
 }
-
+a:link,a:visited,a:hover,a:active {
+  text-decoration: none;
+} 
 img {
   vertical-align: bottom;
   border-style: none;

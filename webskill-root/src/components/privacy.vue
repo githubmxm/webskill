@@ -2,7 +2,7 @@
 版权隐私
 -->
 <template>
-  <div class="copyright">
+  <section class="copyright">
      <h1 class="crTitle">关于本站</h1>
       <div class="crCon">
          本站点所有页面的版式、图片版权、代码等均为本站所有，未经授权，不得用于除本此之外的任何场所及转载,对于注明可转载的请务必转载时注明来源。
@@ -16,7 +16,7 @@
       <p class="thanks">
         此致：谢礼！！！
       </p>
-  </div>
+  </section>
   
 </template>
 <style lang="scss" scoped>

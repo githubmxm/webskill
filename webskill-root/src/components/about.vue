@@ -7,9 +7,9 @@
        <h1 class="aboutTitle">关于我们</h1>
        <span>前端博客 . StarFire_xm</span>
     </div>
-    <div class="aboutTaat">
+    <section class="aboutTaat">
       <h1 class="aboutTitle">关于本站</h1>
-      <div class="aboutCon">
+      <article class="aboutCon">
         欢迎来到技百讯前端博客（<a class="red" target="_blank" href="/index">zshom.com</a>）,本博客建立于2018.2.1起步上线,存在或多或少的各类问题，欢迎大家的踊跃提出与建议等(<a class="red" target="_blank" href="/leaveword">前往发表看法</a>)。我们将极力改进。
         <br/>
         <br/>
@@ -21,8 +21,8 @@
         <br/>
         <br/>
         本站采用vue,nodejs,h5,bootStarp为主要前后端开发技术,因此设计较多PC端低浏览器版本兼容问题,推荐使用IE9及更高浏览器查阅,对于低版本可能无法打开该站点或存在各类可能的其他问题，敬请谅解！！！
-      </div>
-    </div>
+      </article>
+    </section>
     <div class="aboutTaat">
       <h1 class="aboutTitle">本站历程</h1>
       <div class="aboutCon">
@@ -30,7 +30,7 @@
         <br/>
       </div>
     </div>
-    <div class="aboutTaat">
+    <section class="aboutTaat">
       <h1 class="aboutTitle">站长简介</h1>
       <div class="aboutCon">
          <ul class="aboutme">
@@ -51,7 +51,7 @@
            </li>
          </ul>
       </div>
-    </div>
+    </section>
     <div class="aboutTaat">
       <h1 class="aboutTitle">博主联系</h1>
       <div class="aboutCon">
