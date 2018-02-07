@@ -6,7 +6,7 @@
     <nav class="topType row">
       <p class="alinks clear col-lg-5">
         <a title="技百讯" class="logo col-lg-4" href="/index">
-          <img src="../assets/images/jbxLogo.png" alt="技百讯" />
+          <img src="http://mxm.static.cn/static/images/jbxLogo.png" alt="技百讯" />
           <span>技百讯</span>
         </a>
         <a class="indexView col-lg-2" href="/index" target="_blank" title="首页">首页</a>
@@ -28,17 +28,6 @@
       </div>
     </nav>
   </header>
- 
-  <!-- <ul class="top clear">
-    <li class="mainNavList" v-for="navs in mainNavs" :id="navs.mainNavId" :navid="navs.mainNavId">
-      <a class="mainName" href="/index">{{navs.mainNavName}}</a>
-      <ul class="deputyNavs">
-        <li class="deputyNavList" v-for="deputyNave in navs.deputyNav" :id="deputyNave.deputyNavId" :deputynavid="deputyNave.deputyNavId">
-          <a class="deputName" href="">{{deputyNave.deputyNavName}}</a>
-        </li>
-      </ul>
-    </li>
-  </ul> -->
 </template>
 
 <script>
@@ -58,10 +47,10 @@ export default {
     
   },
   computed: {
-    ...mapGetters(['mainNavs','loginStatue'])
+    ...mapGetters(['loginStatue'])
   },
   methods: {
-    ...mapActions(["getNav",'setAalertMsgFn','setLoginStatueFn','setLoginUserFn']),
+    ...mapActions(['setAalertMsgFn','setLoginStatueFn','setLoginUserFn']),
     loginExit(){
       var _this=this;
       axios({
@@ -79,7 +68,6 @@ export default {
   },
   mounted: function() {
     let _this=this;
-    this.getNav();
     axios({
       method: 'get',
       url: '/webskill/loginStatus'
