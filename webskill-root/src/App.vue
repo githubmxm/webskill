@@ -64,6 +64,9 @@ export default{
         this.leaveWord=true;
       }
     }
+    if(location.pathname=="/login"){
+      document.body.style.background =' url("http://mxm.static.cn/static/images/bl.png") repeat-x';
+    }
   },
   computed: {
     ...mapGetters(['maskZzShow','wapOrPc'])

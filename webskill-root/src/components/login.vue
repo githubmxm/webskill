@@ -251,11 +251,6 @@ export default {
   }
 };
 </script>
-<style>
-  body{
-    background: url("http://mxm.static.cn/static/images/bl.png") repeat-x;
-  }
-  </style>
 <style lang="scss" scoped>
 .login_main{
   display: block;
