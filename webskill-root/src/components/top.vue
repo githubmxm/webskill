@@ -6,7 +6,7 @@
     <nav class="topType row">
       <p class="alinks clear col-lg-5">
         <a title="技百讯" class="logo col-lg-4" href="/index">
-          <img src="http://mxm.static.cn/static/images/jbxLogo.png" alt="技百讯" />
+          <img src="/webskill/images/jbxLogo.png" alt="技百讯" />
           <span>技百讯</span>
         </a>
         <a class="indexView col-lg-2" href="/index" target="_blank" title="首页">首页</a>

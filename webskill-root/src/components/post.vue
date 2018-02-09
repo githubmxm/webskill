@@ -330,7 +330,7 @@ export default {
                     line-height: 20px;
                     margin-left:8px;
                     color:#999;
-                    background: url("http://mxm.static.cn/static/images/comIcon.png") no-repeat 0 0;
+                    background: url("/webskill/images/comIcon.png") no-repeat 0 0;
                     margin: 0 12px;
                     cursor: pointer;
                   }

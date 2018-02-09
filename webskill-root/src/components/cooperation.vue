@@ -25,8 +25,8 @@
             <div class="aboutCon">
                 支付宝,微信赞助,感谢您的支持,我们将持续改进及完善。
                 <p class="zzimgs">
-                    <img src="http://mxm.static.cn/static/images/zfb.png" width=150 alt="">
-                    <img class="wxzf" src="http://mxm.static.cn/static/images/wxrwm.png" width=150 alt="">
+                    <img src="/webskill/images/zfb.png" width=150 alt="">
+                    <img class="wxzf" src="/webskill/images/wxrwm.png" width=150 alt="">
                 </p>
             </div>
           </div>

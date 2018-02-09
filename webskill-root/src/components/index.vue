@@ -22,10 +22,10 @@
         <div class="carousels col-lg-9 col-md-8 col-sm-7" v-show="animationShow">
           <swiper :options="swiperOption"  ref="carouselsSwiper">
             <swiper-slide>
-            <li><a title="StarFire_xm的博客"><img src="http://mxm.static.cn/static/images/starfire.png" alt=""></a></li>
+            <li><a title="StarFire_xm的博客"><img src="/webskill/images/starfire.png" alt=""></a></li>
             </swiper-slide>
             <swiper-slide>
-              <li><a title="点我吐槽" href="/leaveword" target="_blcank"><img src="http://mxm.static.cn/static/images/tucao.png" alt=""></a></li>
+              <li><a title="点我吐槽" href="/leaveword" target="_blcank"><img src="/webskill/images/tucao.png" alt=""></a></li>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div> 
           </swiper>
@@ -38,7 +38,7 @@
           <!--博主信息-->
           <div class="lfCon userInfo left col-lg-10 col-sm-12 col-xs-12">
             <div class="heipad col-lg-offset-1 col-sm-offset-1">
-              <p class="headImg"><img src="http://mxm.static.cn/static/images/photo.png" alt="头像" /></p>
+              <p class="headImg"><img src="/webskill/images/photo.png" alt="头像" /></p>
               <p class="hei blogger"><span>博主:</span> <span class="cor blogName">StarFire_xm</span></p>
               <p class="hei blogger"><span>职业:</span> <span class="cor lookPv">前端工程师</span></p>
               <p class="hei blogger"><span>兴趣:</span> <span class="cor focus">技术,运动</span></p>
@@ -288,7 +288,7 @@ export default {
       }
     }
     .userInfo{
-      // background: url("http://mxm.static.cn/static/images/bloogerBg.png") no-repeat 0 0;
+      // background: url("/webskill/images/bloogerBg.png") no-repeat 0 0;
       background: #fff;
       padding-bottom: 23px;
       border: 1px solid #e6e6e6;
@@ -386,7 +386,7 @@ export default {
       }
     }
     .dynamicType{
-      // background: url("http://mxm.static.cn/static/images/indexBgW3.png") center center;
+      // background: url("/webskill/images/indexBgW3.png") center center;
       background: #fff;
       .typeName{
         padding: .05rem 0;
