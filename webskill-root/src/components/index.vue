@@ -113,7 +113,7 @@
             </div>
              <!--敬请期待-->
              <transition v-else enter-active-class="bounceIn" leave-active-class="bounceIn">
-             <p v-show="dynamicDataList.length==0" class="noCons">敬 请 期 待！</p>
+             <p v-show="dynamicDataList.length==0" class="noCons">暂 无 数 据！</p>
              </transition>
            </ul>
          </div>
