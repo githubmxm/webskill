@@ -127,7 +127,7 @@ export default {
         },
         ue1: "ue1", // 不同编辑器必须不同的id,
         errUeLi:"",
-        arCons:"",
+        arCons:"Y,内容丢失啦！，亲客君这就去报告修复.",
         replayUeId:null,
         commentsList:[],
         firstSofaShow:true,
