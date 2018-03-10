@@ -2,19 +2,30 @@
 页脚
 -->
 <template>
-  <footer>
-    <p>
-     <a href="/about" target="_blank">关于我们</a>
-     <a href="/privacy" target="_blank">版权隐私</a>
-     <br/>
-     <a href="http://www.miitbeian.gov.cn" target="_blank">浙ICP备15005896号-1</a>
-     <span>技百讯版权所有</span>
-    </p>
-  </footer>
+  <div class="footer">
+      <footer>
+          <div>
+            <p>
+              <a href="/about" target="_blank">关于我们</a>
+              <a href="/privacy" target="_blank">版权隐私</a>
+              <br/>
+              <a href="http://www.miitbeian.gov.cn" target="_blank">浙ICP备15005896号-1</a>
+              <span>技百讯版权所有</span>
+              </p>
+          </div>
+        </footer>
+  </div>
 </template>
 
 <style lang="scss" scoped>
+  .footer{
+    position: relative;
+    height: 84px;
+  }
   footer{
+    position:fixed;
+    width: 100%;
+    bottom: 0;
     line-height: .28rem;
     text-align: center;
     margin-top: 30px;
