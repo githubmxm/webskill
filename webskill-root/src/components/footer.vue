@@ -21,6 +21,7 @@
   .footer{
     position: relative;
     height: 84px;
+    z-index: 999;
   }
   footer{
     position:fixed;

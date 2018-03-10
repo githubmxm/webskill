@@ -127,7 +127,7 @@ export default {
         },
         ue1: "ue1", // 不同编辑器必须不同的id,
         errUeLi:"",
-        arCons:"Y,内容丢失啦！，亲客君这就去报告修复.",
+        arCons:"<span class='noConRedirct' style='color:red'>内容未找到...(5)</span>",
         replayUeId:null,
         commentsList:[],
         firstSofaShow:true,
@@ -195,7 +195,21 @@ export default {
                     }
                   });
                 }
+              }else{
+                //内容不存在
+                let times=5;
+                let noConInterval=setInterval(function(){
+                  _this.arCons="<span class='noConRedirct' style='color:red'>内容未找到...("+times+")</span>";
+                  times--;
+                  if(times==0){
+                    clearInterval(noConInterval);
+                    location.href="/index";
+                  }
+                },1000)
+                _this.arCons
               }
+            }else{
+              location.href="/index";
             }
           });
       },
@@ -302,6 +316,9 @@ export default {
         .detCon{
           font-size: .18rem;
           word-wrap: break-word;
+        }
+        .noConRedirct{
+          color: red;
         }
         .nextPrev{
           margin-top:30px;
