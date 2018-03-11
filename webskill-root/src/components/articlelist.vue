@@ -39,8 +39,9 @@
                         </article> 
                     </div>
                 </section>
+                <Pagebar v-show="skillListDetail.length>0" :page-model="pageModel" ref="skillListTypePage"></Pagebar>
             </div>
-            <!-- <Pagebar v-show="skillListDetail.length>0" :page-model="pageModel" ref="skillListTypePage"></Pagebar> -->
+           
         </div>
         <div class="adverLf left col-lg-3 col-sm-4 col-xs-12">
             待发布
@@ -48,40 +49,46 @@
     </div>
 </template>
 <script>
+import Pagebar from '../components/unit/table-pagebar'
 import axios from 'axios'
+import { mapGetters,mapActions } from "vuex"
 export default{
     name:'articlelist',
     data() {
         return {
-            articelSkillType:this.$route.params.skilltype,
-            skillListDetail:[],
-            // pageModel:{
-            //     url:"/webskill/newestNote",
-            //     dynamicTypeCur:0,
-            //     againPost:0
-            // },
+            // articelSkillType:this.$route.params.skilltype,
+            // skillListDetail:[],
+            pageModel:{
+                url:"/webskill/articleTypeList"
+            },
         }
     },
     methods: {
         
     },
+    components:{
+      Pagebar
+    },
     mounted () {
       let _this=this;
-      axios({
-        method: 'get',
-        url: '/webskill/articleTypeList',
-        params:{
-          r:Math.random(),
-          skillType:_this.articelSkillType
-        }
-      }).then((res) => {
-        let articleList = res.data;
-        if (articleList.status == "success") {
-          _this.skillListDetail=articleList.data;
-        }else{
-         _this.skillListDetail=[];
-        }
-      })
+    //   axios({
+    //     method: 'get',
+    //     url: '/webskill/articleTypeList',
+    //     params:{
+    //       r:Math.random(),
+    //       skillType:_this.articelSkillType
+    //     }
+    //   }).then((res) => {
+    //     let articleList = res.data;
+    //     if (articleList.status == "success") {
+    //       _this.skillListDetail=articleList.data;
+    //     }else{
+    //      _this.skillListDetail=[];
+    //     }
+    //   })
+    },
+    computed: {
+       ...mapGetters(['skillListDetail'])
     }
 }
 </script>

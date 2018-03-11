@@ -42,7 +42,7 @@
                 // 请求方法 默认为GET请求
                 method: this.pageModel.method ? this.pageModel.method : 'GET',
                 // 每页显示数量 默认每页显示10条
-                limit: this.pageModel.limit ? this.pageModel.limit : 5,
+                limit: this.pageModel.limit ? this.pageModel.limit : 10,
                 // 底部分页基数 默认5
                 perSize: this.pageModel.perSize ? this.pageModel.perSize : 5,
                 // 每页显示数量 下拉选项
@@ -55,6 +55,8 @@
                 end: 0,
                 // 总页数
                 totalPage: 0,
+                //查询技能类型
+                skillType:this.$route.params.skilltype,
                 //查询类型
                 dynamicTypeCur:0,
                 // 记录总数
@@ -67,7 +69,7 @@
             this.getData();
         },
         methods: {
-            ...mapActions(['setDynamicDataListFn']),
+            ...mapActions(['setDynamicDataListFn','setSkillListDetailFn']),
             // 首页
             firstClick: function () {
                 if (this.cur > 1) {
@@ -119,6 +121,7 @@
                 this.param[this.pageParamName[0]] = this.cur;
                 this.param[this.pageParamName[1]] = this.limit;
                 this.param["dynamicTypeCur"]=this.dynamicTypeCur;
+                this.param["skillType"]=this.skillType;
                 axios({
                     method: _this.method,
                     url: _this.url,
@@ -128,17 +131,20 @@
                     if(dataResult.status=="success"){
                       // 返回结果数据集
                       _this.dataList = dataResult.data;
-                      _this.setDynamicDataListFn(_this.dataList)
+                      _this.setDynamicDataListFn(_this.dataList);
+                      _this.setSkillListDetailFn(_this.dataList);
                       // 返回总记录数
                       _this.totalPage = dataResult.count;
                       _this.refreshPageCon();
                       // this.$options.methods.successFn();
                     }else{
                        _this.setDynamicDataListFn([]);
+                       _this.setSkillListDetailFn([]);
                     }
                     //  this.$options.methods.successFn(dataResult);//method方法互调用
                 }).catch((err)=>{
                    _this.setDynamicDataListFn([]);
+                   _this.setSkillListDetailFn([]);
                 })
             },
             // 每页显示记录数 下拉
