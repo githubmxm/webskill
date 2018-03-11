@@ -314,7 +314,7 @@ export default {
            border-bottom:1px solid #ccc;
         }
         .detCon{
-          font-size: .18rem;
+          font-size: .16rem;
           word-wrap: break-word;
         }
         .noConRedirct{
