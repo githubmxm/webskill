@@ -52,7 +52,11 @@
           <div class="editor-container">
             <UE :config=config :id=ue3 ref="ue3"></UE>
           </div>
-          <span class="leaveWordSubmit" @click="postArticle()">发布</span>
+          <div class="buttonEror clear">
+              <router-link v-show="viewNewPost"  class="submitResult" :to="'/post/'+subPostId" target="_blank">提交成功,点击阅览,确认发布</router-link>
+              <span class="leaveWordSubmit" @click="postArticle()">提交</span>
+          </div>
+         
         </div>
       </article>
     </section>
@@ -75,6 +79,8 @@ export default {
         tabTypeName:"",
         tabTypeId:"",
         tabOneShow:"",
+        subPostId:0,
+        viewNewPost:false,
         config: {
           initialFrameWidth: null,
           //focus时自动清空初始化时的内容
@@ -157,8 +163,10 @@ export default {
           let resData=res.data;
           if(resData.message=="文章发表成功"){
             //提交成功,等待审核
-            location.href="/index"
+            _this.subPostId=resData.data.postId;
+            _this.viewNewPost=true;
           }else{
+              _this.viewNewPost=false;
               _this.error=resData.message;
           }
         }).catch((err)=>{
@@ -248,6 +256,27 @@ export default {
       }
       .details{
         width:100%;
+        .buttonEror{
+          display: inline-block;
+          margin-top:20px;
+          float: right;
+          .submitResult{
+            float: left;
+            display: inline-block;
+            position: relative;
+            margin-right: 10px;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 10px;
+            text-align: center;
+            background: blueviolet;
+            color: #fff;
+            cursor: pointer;
+            &:hover{
+              background: black;
+            }
+          }
+        }
       }
       .meta{
         margin-top: 10px;
@@ -272,9 +301,11 @@ export default {
       text-align: center;
       background: blueviolet;
       color: #fff;
-      float: right;
-      margin-top: 20px;
+      float: left;
       cursor:pointer;
+      &:hover{
+        background: black;
+      }
     }
   }
 }

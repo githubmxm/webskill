@@ -143,6 +143,9 @@ export default {
       cursor: pointer;
       color:#fff;
       margin-left: 10px;
+      &:hover{
+        color: #deeadc;
+      }
     }
   }
   .noLogin{

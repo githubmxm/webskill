@@ -23,6 +23,9 @@
               </p>
             </div>
           </div>
+          <div class="surePostPublish" v-if="surePostPublishButton" @click="postPublishAjax()">
+            确认发布
+          </div>
           <!--评论内容-->
           <div class="comments">
             <div id="comment_form" v-if="!loginStatue">
@@ -125,6 +128,7 @@ export default {
           //默认的编辑区域高度
           initialFrameHeight:60
         },
+        surePostPublishButton:this.$route.name=="previewpost"? true : false,
         ue1: "ue1", // 不同编辑器必须不同的id,
         errUeLi:"",
         arCons:"<span class='noConRedirct' style='color:red'>内容未找到...(5)</span>",
@@ -281,6 +285,22 @@ export default {
             _this.$refs[refcom][0].clearContent();
           }else{
              _this.errUeLi=replayCommentdata.message;
+          }
+        })
+      },
+      //确认文章发布
+      postPublishAjax:function(){
+        let _this=this;
+        axios({
+          method: 'post',
+          url: '/webskill/post/surePublish',
+          data:{
+            surePostId:_this.postId
+          }
+        }).then((res) => {
+          var result=res.data;
+          if(result.status=="success"){
+            location.href="/index";
           }
         })
       }
@@ -481,6 +501,23 @@ export default {
               }
             }
           }
+        }
+        .surePostPublish{
+            float: right;
+            display: inline-block;
+            position: relative;
+            margin-right: 10px;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 10px;
+            text-align: center;
+            background: blueviolet;
+            color: #fff;
+            cursor: pointer;
+            margin-top:20px;
+            &:hover{
+              background: black;
+            }
         }
       .leaveWordSubmit{
         display: inline-block;

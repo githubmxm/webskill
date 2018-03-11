@@ -54,6 +54,12 @@ const router = new Router({
       default: Cooperation
     }
   },{
+    path:'/previewpost/:id',
+    name:'previewpost',
+    components:{
+      default: Post
+    }
+  },,{
     path:'/post/:id',
     name:'post',
     components:{
