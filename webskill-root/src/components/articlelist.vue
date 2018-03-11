@@ -18,12 +18,11 @@
                                     </div>
                                    <div class="arBorderDetail left">
                                         <header class="articleHeader">
-                                            <h1><router-link :to="'/post/'+item.newNoteId" target="_blank" class="headerTitle">{{item.newNoteTitle}}</router-link></h1>
+                                            <h1><router-link :to="'/post/'+item.newNoteId" target="_blank" class="headerTitle">{{[item.newNoteTitle,20] | conLenFillter}}</router-link></h1>
                                         </header>
                                         <div class="articleCons">
-                                            <p class="articleDigest">{{item.newNoteConts}}</p>
+                                            <p class="articleDigest">{{[item.newNoteConts,100] |  conLenFillter}}</p>
                                         </div>
-                                       
                                    </div>
                              </div>
                                <p class="articleReadAll">
@@ -64,7 +63,19 @@ export default{
         }
     },
     methods: {
-        
+       
+    },
+    filters: {
+        //文章类型分类
+        conLenFillter:function([con,len]){
+            console.log(len)
+            con=con.replace(/<\/?[^>]*>/g,'').replace(/\n[\s| | ]*\r/g,'\n').replace(/&nbsp;/ig,'');
+            if(con.length>len){
+                return con.slice(0,len)+'...';
+            }else{
+                return con;
+            }
+        }
     },
     components:{
       Pagebar
@@ -114,6 +125,10 @@ export default{
             font-size:.18rem;
             padding:.1rem;
             padding-bottom: 25px;
+            &:hover{
+               box-shadow: 2px 2px 8px rgba(0,0,0,.2);
+               border-color: #d6d6d6;
+            }
             .articles{
                 border-bottom: 1px solid #ccc;
                 padding-bottom: .2rem;
@@ -132,13 +147,16 @@ export default{
                             overflow: hidden;
                             word-wrap: break-word;
                             font-size:.20rem;
+                            color: #3d3d3d;
+                            font-weight: bolder;
                         }
                     }
                     .articleCons{
                         font-size:.16rem;
                         margin-top: 5px;
+                        word-wrap: break-word;
                         .articleDigest{
-
+                            color: #526163;
                         }
                     }
                     .articleReadAll{
@@ -183,7 +201,6 @@ export default{
                 }
                 
             }
-            
         }
     }
     
