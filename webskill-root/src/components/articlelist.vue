@@ -11,15 +11,23 @@
                 <section class="clear skillListCon"  v-else>
                     <div class="skillDigetList" v-for="item in skillListDetail">
                         <article class="articles">
-                           <div class="arBoder">
-                                <header class="articleHeader">
-                                    <h1><router-link :to="'/post/'+item.newNoteId" target="_blank" class="headerTitle">{{item.newNoteTitle}}</router-link></h1>
-                                </header>
-                                <div class="articleCons">
-                                    <p class="articleDigest">{{item.newNoteConts}}</p>
-                                </div>
-                                <p class="articleReadAll">
-                                  <router-link class="reda" :to="'/post/'+item.newNoteId" target="_blank">阅读全文</router-link>
+                           <div class="arBoder clear">
+                             <div class="clear">
+                                    <div style="width:20%" class="arBoderImg left">
+                                            <img src="/webskill/upload/1520744020321.png" width=100% title="" alt="">
+                                    </div>
+                                   <div class="arBorderDetail left">
+                                        <header class="articleHeader">
+                                            <h1><router-link :to="'/post/'+item.newNoteId" target="_blank" class="headerTitle">{{item.newNoteTitle}}</router-link></h1>
+                                        </header>
+                                        <div class="articleCons">
+                                            <p class="articleDigest">{{item.newNoteConts}}</p>
+                                        </div>
+                                       
+                                   </div>
+                             </div>
+                               <p class="articleReadAll">
+                                    <router-link class="reda" :to="'/post/'+item.newNoteId" target="_blank">阅读全文</router-link>
                                 </p>
                            </div>
                            <footer class="articleFooter clear">
@@ -32,6 +40,7 @@
                     </div>
                 </section>
             </div>
+            <!-- <Pagebar v-show="skillListDetail.length>0" :page-model="pageModel" ref="skillListTypePage"></Pagebar> -->
         </div>
         <div class="adverLf left col-lg-3 col-sm-4 col-xs-12">
             待发布
@@ -45,7 +54,12 @@ export default{
     data() {
         return {
             articelSkillType:this.$route.params.skilltype,
-            skillListDetail:[]
+            skillListDetail:[],
+            // pageModel:{
+            //     url:"/webskill/newestNote",
+            //     dynamicTypeCur:0,
+            //     againPost:0
+            // },
         }
     },
     methods: {
@@ -94,32 +108,44 @@ export default{
             padding:.1rem;
             padding-bottom: 25px;
             .articles{
+                border-bottom: 1px solid #ccc;
+                padding-bottom: .2rem;
                 .arBoder{
-                    border-bottom: 1px solid #ccc;
-                    padding-bottom: .2rem;
+                    .arBorderImg{
+                        width:20%;
+                    }
+                    .arBorderDetail{
+                        width: 80%;
+                        padding-left: 2%;
+                    }
                     .articleHeader{
                         .headerTitle{
                             display: inline-block;
-                            font-size:.22rem;
-                            margin:10px 0;
+                            width: 100%;
+                            overflow: hidden;
+                            word-wrap: break-word;
+                            font-size:.20rem;
                         }
                     }
                     .articleCons{
-                        margin: .1rem 0 .2rem 0;
                         font-size:.16rem;
+                        margin-top: 5px;
                         .articleDigest{
 
                         }
                     }
                     .articleReadAll{
                         display: inline-block;
-                        line-height: 1em;
+                        height: .3rem;
+                        line-height: .17rem;
                         padding: .06rem .15rem;
                         border-radius: .15rem;
                         background: #eee;
                         color: #999;
                         text-shadow: 0 1px #fff;
                         text-decoration: none;
+                        margin-top: 15px;
+                        float: right;
                         .reda{
                             font-size:.16rem;
                             color:#999;
