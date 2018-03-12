@@ -8,7 +8,7 @@
                 记录/页，显示第 {{start}} 至 {{end}} 项记录，共 {{totalSize}} 项
             </div>
         </div> -->
-        <div class="page-con">
+        <div class="page-con" v-if="totalPage>1">
             <ul class="clear">
                 <li><a v-on:click="firstClick()" v-bind:class="{ 'disabled': cur == 1}">首页</a></li>
                 <li><a v-on:click="preClick()" v-bind:class="{ 'disabled': cur == 1}">上一页</a></li>
@@ -42,7 +42,7 @@
                 // 请求方法 默认为GET请求
                 method: this.pageModel.method ? this.pageModel.method : 'GET',
                 // 每页显示数量 默认每页显示10条
-                limit: this.pageModel.limit ? this.pageModel.limit : 10,
+                limit: this.pageModel.limit ? this.pageModel.limit : 5,
                 // 底部分页基数 默认5
                 perSize: this.pageModel.perSize ? this.pageModel.perSize : 5,
                 // 每页显示数量 下拉选项

@@ -68,7 +68,6 @@ export default{
     filters: {
         //文章类型分类
         conLenFillter:function([con,len]){
-            console.log(len)
             con=con.replace(/<\/?[^>]*>/g,'').replace(/\n[\s| | ]*\r/g,'\n').replace(/&nbsp;/ig,'');
             if(con.length>len){
                 return con.slice(0,len)+'...';

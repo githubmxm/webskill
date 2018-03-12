@@ -53,7 +53,7 @@
             <UE :config=config :id=ue3 ref="ue3"></UE>
           </div>
           <div class="buttonEror clear">
-              <router-link v-show="viewNewPost"  class="submitResult" :to="'/post/'+subPostId" target="_blank">提交成功,点击阅览,确认发布</router-link>
+              <router-link v-show="viewNewPost"  class="submitResult" :to="'/previewpost/'+subPostId" target="_blank">提交成功,点击阅览,确认发布</router-link>
               <span class="leaveWordSubmit" @click="postArticle()">提交</span>
           </div>
          
