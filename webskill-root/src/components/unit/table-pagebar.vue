@@ -197,6 +197,7 @@
           isAgainAjax(){
             this.url=this.pageModel.url;
             this.dynamicTypeCur=this.pageModel.dynamicTypeCur;
+            this.cur=this.pageModel.cur;
             this.getData();
           }
         },

@@ -149,6 +149,7 @@ export default {
       pageModel:{
         url:"/webskill/newestNote",
         dynamicTypeCur:0,
+        cur:1,
         againPost:0
       },
       animationShow:false
