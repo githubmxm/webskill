@@ -11,7 +11,7 @@
         </a>
         <a class="indexView col-lg-2" href="/index" target="_blank" title="首页">首页</a>
         <!-- href="/myNotes" href="/newTitle"-->
-        <a class="myNotesView col-lg-2" title="技能摘要" @click="setAalertMsgFn()">技库</a>
+        <a class="myNotesView col-lg-2" title="技能摘要" target="_blank" href="/articlelist/all">技库</a>
         <a class="newTitleView col-lg-2" title="技能快讯" @click="setAalertMsgFn()">资讯</a>
         <a class="coTitleView col-lg-2" href="/cooperation" target="_blank" title="商务合作">合作</a>
       </p>

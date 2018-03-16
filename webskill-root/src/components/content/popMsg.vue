@@ -50,6 +50,9 @@ export default {
     border: none;
     display: block;
     color: #fff;
+    &:hover{
+      background: #128ce7;
+    }
   }
 }
 </style>

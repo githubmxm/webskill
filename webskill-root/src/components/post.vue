@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="surePostPublish" v-if="surePostPublishButton" @click="postPublishAjax()">
-            确认发布
+            确认发布{{postAjaxError}}
           </div>
           <!--评论内容-->
           <div class="comments">
@@ -63,7 +63,7 @@
                 <div class="clear" v-if="comment.commentId==replayUeId">
                   <UE  :config=config2 :id="'replay'+comment.commentId" :ref="'uec'+comment.commentId"></UE>
                   <p class="errUeLi">{{errUeLi}}</p>
-                  <span class="right replayCommentSure" @click="replayCommentSure('uec'+comment.commentId,comment.commentAuthor)">确认</span>
+                  <span class="right replayCommentSure" @click="replayCommentSure('uec'+comment.commentId,comment.commentAuthor,index)">确认</span>
                 </div>
               </li>
             </ul>
@@ -131,6 +131,7 @@ export default {
         surePostPublishButton:this.$route.name=="previewpost"? true : false,
         ue1: "ue1", // 不同编辑器必须不同的id,
         errUeLi:"",
+        postAjaxError:"",//确认发布按钮错误提示
         arCons:"<span class='noConRedirct' style='color:red'>内容未找到...(5)</span>",
         replayUeId:null,
         commentsList:[],
@@ -174,6 +175,7 @@ export default {
                 _this.arCons=postShowDetailData.newNoteCont;
                 _this.arTitle=postShowDetailData.newNoteTitle;
                 _this.arTime=postShowDetailData.newNoteTime;
+                _this.arType=postShowDetailData.newNoteLabel!=""?postShowDetailData.newNoteLabel:'内容详情';
                 _this.arDownNum=postShowDetailData.newNoteLikeNum;
                 _this.arLikeNum=postShowDetailData.newNoteDownNum;
                 _this.arComeNum=postShowDetailData.newNoteComeNum;
@@ -251,12 +253,12 @@ export default {
       },
       //回复评论
       replayComment(author,commentid){
-        this.replayUeId=10000000;
+        this.replayUeId=10000000;  //隐藏回复成功后的耳机回复确认按钮
         this.errUeLi="";
         this.replayUeId=commentid;
       },
       //确认回复评论内容
-      replayCommentSure(refcom,replayAuthor){
+      replayCommentSure(refcom,replayAuthor,index){
         let _this=this;
         this.errUeLi="";
         let refcomCon=this.$refs[refcom][0].getUEContent();
@@ -281,7 +283,8 @@ export default {
           let replayCommentdata = res.data;
           if(replayCommentdata.status=="success"){
             //回复评论成功
-            _this.commentList[_this.replayUeId].replayComment.push({"replayCommentId":_this.replayUeId,"replayCommentAuthor":_this.loginUser,"replayCommentTime":FormatDataTime(new Date().getTime()),"replayCommentCon":refcomCon})
+            console.log(_this.commentList)
+            _this.commentList[index].replayComment.push({"replayCommentId":_this.replayUeId,"replayCommentAuthor":_this.loginUser,"replayCommentTime":FormatDataTime(new Date().getTime()),"replayCommentCon":refcomCon})
             _this.$refs[refcom][0].clearContent();
           }else{
              _this.errUeLi=replayCommentdata.message;
@@ -301,6 +304,8 @@ export default {
           var result=res.data;
           if(result.status=="success"){
             location.href="/index";
+          }else{
+            _this.postAjaxError="-"+result.message;
           }
         })
       }
