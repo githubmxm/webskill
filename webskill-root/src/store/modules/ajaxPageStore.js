@@ -3,7 +3,9 @@ export default{
     //首页列表-最新笔录....推荐工具
     dynamicDataList:[],
     //技能类型列表
-    skillListDetail:[]
+    skillListDetail:[],
+    //待确认发布文章列表
+    publishListDetail:[]
   },
   mutations:{
     setDynamicDataList(state,list){
@@ -12,6 +14,9 @@ export default{
     setSkillListDetail(state,list){
       state.skillListDetail=list;
     },
+    setPublishListDetail(state,list){
+      state.publishListDetail=list;
+    }
   },
   actions:{
     setDynamicDataListFn({commit},list){
@@ -19,6 +24,9 @@ export default{
     },
     setSkillListDetailFn({commit},list){
       commit('setSkillListDetail',list);
+    },
+    setPublishListFn({commit},list){
+      commit('setPublishListDetail',list);
     }
   },
   getters: {
@@ -27,7 +35,9 @@ export default{
     },
     skillListDetail: state => {
   		return state.skillListDetail;
+    },
+    publishListDetail: state => {
+  		return state.publishListDetail;
     }
-    
   }
 }

@@ -26,6 +26,9 @@
           <div class="surePostPublish" v-if="surePostPublishButton" @click="postPublishAjax()">
             确认发布{{postAjaxError}}
           </div>
+          <div class="surePostPublish" v-if="surePostPublishButton" @click="postDeletcAjax()">
+              删除{{deletePostAjaxError}}
+            </div>
           <!--评论内容-->
           <div class="comments">
             <div id="comment_form" v-if="!loginStatue">
@@ -132,6 +135,7 @@ export default {
         ue1: "ue1", // 不同编辑器必须不同的id,
         errUeLi:"",
         postAjaxError:"",//确认发布按钮错误提示
+        deletePostAjaxError:"",
         arCons:"<span class='noConRedirct' style='color:red'>内容未找到...(5)</span>",
         replayUeId:null,
         commentsList:[],
@@ -306,6 +310,24 @@ export default {
             location.href="/index";
           }else{
             _this.postAjaxError="-"+result.message;
+          }
+        })
+      },
+      //删除待发布文章
+      postDeletcAjax:function(){
+        let _this=this;
+        axios({
+          method: 'post',
+          url: '/webskill/post/deleteSurePublish',
+          data:{
+            surePostId:_this.postId
+          }
+        }).then((res) => {
+          var result=res.data;
+          if(result.status=="success"){
+            location.href="/index";
+          }else{
+            _this.deletePostAjaxError="-"+result.message;
           }
         })
       }

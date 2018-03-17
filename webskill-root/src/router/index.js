@@ -11,6 +11,7 @@ import Admin from '@/components/admin'
 import Cooperation from '@/components/cooperation'
 import FindPassWord from '@/components/findpassword'
 import ArticleList from '@/components/articlelist'
+import SurePublish from '@/components/surePublish'
 
 
 Vue.use(Router)
@@ -88,6 +89,12 @@ const router = new Router({
     name:'webSkillAdmin',
     components:{
       default: Admin
+    }
+  },{
+    path:'/surePublish',
+    name:'surePublish',
+    components:{
+      default: SurePublish
     }
   }]
 })

@@ -16,9 +16,14 @@
         <a class="coTitleView col-lg-2" href="/cooperation" target="_blank" title="商务合作">合作</a>
       </p>
       <!--用户已登录-->
-      <p class="userLogin  col-lg-2 right" v-if="loginStatue">
+      <p class="userLogin  col-lg-2 right" v-if="loginStatue" @mouseleave="listHide()">
         <span class="loginExit right" @click="loginExit()">退出</span>
-         <span class="userInfo right">[{{username}}]</span>
+        <span class="userInfo right" @mouseover="listShow()">[{{username}}]</span>
+        <ul class="infoList col-lg-offset-4 col-xs-offset-2" v-show="showInfoList">
+          <li>
+              <a class="surePublish" href="/surePublish" target="_blank">我的文章</a>
+          </li>
+        </ul>
       </p>
       <!--未登录或异常-->
       <div class="noLogin col-lg-1 right" v-else>
@@ -40,7 +45,8 @@ export default {
     return {
       msg: "主导航和二级导航展示",
       jbx: true,
-      username:""
+      username:"",
+      showInfoList:false
     };
   },
   created() {
@@ -64,6 +70,12 @@ export default {
           _this.setLoginUserFn(_this.username);
         }
       })
+    },
+    listShow(){
+      this.showInfoList=true;
+    },
+    listHide(){
+      this.showInfoList=false;
     }
   },
   mounted: function() {
@@ -135,9 +147,14 @@ export default {
   }
   }
   .userLogin,.noLogin{
+    position: relative;
     height: 100%;
     .userInfo{
       color:#fff;
+      &:hover{
+        cursor: pointer;
+        color: #02ff00;
+      }
     }
     .loginExit{
       cursor: pointer;
@@ -152,6 +169,24 @@ export default {
     p{
       display: inline-block;
       float: right;
+    }
+  }
+  .infoList{
+    position: absolute;
+    top: 80%;
+    left:8%;
+  }
+  .surePublish{
+    display: inline-block;
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #8929e3;
+    padding-left: 8px;
+    padding-right: 8px;
+    &:hover{
+      background: #9f4fe9;
     }
   }
   .goLogin{

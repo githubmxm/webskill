@@ -59,6 +59,8 @@
                 skillType:this.$route.params.skilltype,
                 //查询类型
                 dynamicTypeCur:0,
+                //我的文章类型查找
+                myPostList:0,
                 // 记录总数
                 totalSize: 0,
                 // 分页请求返回数据
@@ -69,7 +71,7 @@
             this.getData();
         },
         methods: {
-            ...mapActions(['setDynamicDataListFn','setSkillListDetailFn']),
+            ...mapActions(['setDynamicDataListFn','setSkillListDetailFn','setPublishListFn']),
             // 首页
             firstClick: function () {
                 if (this.cur > 1) {
@@ -120,8 +122,18 @@
                 let _this = this;
                 this.param[this.pageParamName[0]] = this.cur;
                 this.param[this.pageParamName[1]] = this.limit;
-                this.param["dynamicTypeCur"]=this.dynamicTypeCur;
-                this.param["skillType"]=this.skillType;
+                if(this.url.indexOf("newestNote")>=0){
+                    //首页
+                    this.param["dynamicTypeCur"]=this.dynamicTypeCur;
+                }
+                if(this.url.indexOf("articleTypeList")>=0){
+                    //文章列表
+                    this.param["skillType"]=this.skillType;
+                }
+                if(this.url.indexOf("getSurePublish")>=0){
+                    //待发布列表
+                    this.param["myPostList"]=this.myPostList;
+                }
                 axios({
                     method: _this.method,
                     url: _this.url,
@@ -131,20 +143,52 @@
                     if(dataResult.status=="success"){
                       // 返回结果数据集
                       _this.dataList = dataResult.data;
-                      _this.setDynamicDataListFn(_this.dataList);
-                      _this.setSkillListDetailFn(_this.dataList);
+                      if(_this.url.indexOf("newestNote")){
+                           //首页
+                           _this.setDynamicDataListFn(_this.dataList);
+                       }
+                       if(_this.url.indexOf("articleTypeList")){
+                           //文章列表
+                           _this.setSkillListDetailFn(_this.dataList);
+                       }
+                       if(_this.url.indexOf("getSurePublish")){
+                           //确认发布文章
+                           _this.setPublishListFn(_this.dataList);
+                       }
+                     
                       // 返回总记录数
                       _this.totalPage = dataResult.count;
                       _this.refreshPageCon();
                       // this.$options.methods.successFn();
                     }else{
-                       _this.setDynamicDataListFn([]);
-                       _this.setSkillListDetailFn([]);
+                        if(_this.url.indexOf("newestNote")){
+                           //首页
+                           _this.setDynamicDataListFn([]);
+                        }
+                        if(_this.url.indexOf("articleTypeList")){
+                           //文章列表
+                           _this.setSkillListDetailFn([]);
+                        }
+                        if(_this.url.indexOf("getSurePublish")){
+                           //确认发布文章
+                           _this.setPublishListFn([]);
+                        }
+                      
                     }
                     //  this.$options.methods.successFn(dataResult);//method方法互调用
                 }).catch((err)=>{
-                   _this.setDynamicDataListFn([]);
-                   _this.setSkillListDetailFn([]);
+                    if(_this.url.indexOf("newestNote")){
+                        //首页
+                        _this.setDynamicDataListFn([]);
+                     }
+                     if(_this.url.indexOf("articleTypeList")){
+                        //文章列表
+                        _this.setSkillListDetailFn([]);
+                     }
+                     if(_this.url.indexOf("getSurePublish")){
+                        //确认发布文章
+                        _this.setPublishListFn([]);
+                    }
                 })
             },
             // 每页显示记录数 下拉
@@ -197,6 +241,7 @@
           isAgainAjax(){
             this.url=this.pageModel.url;
             this.dynamicTypeCur=this.pageModel.dynamicTypeCur;
+            this.myPostList=this.pageModel.myPostList;
             this.cur=this.pageModel.cur;
             this.getData();
           }
