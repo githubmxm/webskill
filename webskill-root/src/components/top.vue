@@ -19,7 +19,7 @@
       <p class="userLogin  col-lg-2 right" v-if="loginStatue" @mouseleave="listHide()">
         <span class="loginExit right" @click="loginExit()">退出</span>
         <span class="userInfo right" @mouseover="listShow()">[{{username}}]</span>
-        <ul class="infoList col-lg-offset-4 col-xs-offset-2" v-show="showInfoList">
+        <ul class="infoList col-lg-offset-4 col-xs-offset-2" v-if="myPostInfoShow" v-show="showInfoList">
           <li>
               <a class="surePublish" href="/surePublish" target="_blank">我的文章</a>
           </li>
@@ -46,7 +46,8 @@ export default {
       msg: "主导航和二级导航展示",
       jbx: true,
       username:"",
-      showInfoList:false
+      showInfoList:false,
+      myPostInfoShow:false
     };
   },
   created() {
@@ -88,6 +89,9 @@ export default {
       if (userState.status == "success") {
         _this.setLoginStatueFn(true);
         _this.username=userState.data.userName;
+        if(userState.data.userGrade<3){
+          _this.myPostInfoShow=true;
+        }
         _this.setLoginUserFn(_this.username)
       }else{
         _this.setLoginStatueFn(false);
