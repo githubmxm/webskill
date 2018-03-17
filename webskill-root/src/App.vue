@@ -65,7 +65,7 @@ export default{
       }
     }
     if(location.pathname=="/login"){
-      document.body.style.background =' url("http://mxm.static.cn/static/images/bl.png") repeat-x';
+      document.body.style.background =' url("/webskill/images/bl.png") repeat-x';
     }
   },
   computed: {
@@ -90,7 +90,7 @@ body{
     height:30px;
     position: relative;
     line-height: 30px;
-    background: url("./assets/images/messageAlert.png") center center;
+    background: url("/webskill/images/messageAlert.png") center center;
     font-size: 14px;
     padding: 0 30px;
     margin:15px auto 20px auto;
@@ -106,7 +106,7 @@ body{
     cursor: pointer;
     // width: 48px;
     // height: 48px;
-    // background:url('./assets/images/leaveWord.jpg') no-repeat 0 0;
+    // background:url('/webskill/images/leaveWord.jpg') no-repeat 0 0;
     color: #fff;
     border-radius: 50%;
   }
