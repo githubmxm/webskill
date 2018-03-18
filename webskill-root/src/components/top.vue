@@ -23,6 +23,9 @@
           <li>
               <a class="surePublish" href="/surePublish" target="_blank">我的文章</a>
           </li>
+          <li>
+            <a class="surePublish" href="/webskillAdmin" target="_blank">发布文章</a>
+        </li>
         </ul>
       </p>
       <!--未登录或异常-->
@@ -179,6 +182,7 @@ export default {
     position: absolute;
     top: 80%;
     left:8%;
+    z-index: 99;
   }
   .surePublish{
     display: inline-block;
