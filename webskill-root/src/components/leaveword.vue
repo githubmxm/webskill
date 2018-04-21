@@ -16,11 +16,19 @@
               </div>
             </div>
         </div>
-        <span class="error">{{error}}</span>
+        <div class="conlists left">
+            <h1 class="title left leavesTitle">标题:</h1>
+            <div class="leaves">
+              <div class="wordType">
+                  <input class="chooseType leaveWordTitle" type="text" v-model="leaveWordTitles" />
+              </div>
+            </div>
+        </div>
         <div class="details left clear">
           <div class="editor-container">
             <UE :config=config :id=ue2 ref="ue2"></UE>
           </div>
+          <span class="error">{{error}}</span>
           <span class="leaveWordSubmit" @click="leaveWordSubmitFn()">提交</span>
         </div>
       </article>
@@ -39,6 +47,7 @@ export default {
         chooseTypeName:'',
         chooseTypeId:'',
         wordOneShow:false,
+        leaveWordTitles:'',
         error:'',
         config: {
           initialFrameWidth: null,
@@ -88,7 +97,8 @@ export default {
           url:'/webskill/leaveWord',
           data:{
             leaveWordType:_this.chooseTypeId,
-            leaveWordCon:ueCon
+            leaveWordCon:ueCon,
+            leaveWordTitle:_this.leaveWordTitles
           }
         }).then((res)=>{
           let resData=res.data;
@@ -97,8 +107,8 @@ export default {
           }
           if(resData.status=="success"){
             //提交成功,等待审核
-            _this.setAalertMsgFn("感谢您的发表！")
-            location.href="/index";
+            // _this.setAalertMsgFn("感谢您的发表！")
+            // location.href="/index";
           }else{
             this.error=resData.message;
             return false;
@@ -134,12 +144,21 @@ export default {
         float: left;
         margin-top: -7px;
       }
+      .leavesTitle{
+        margin-left:18px;
+        
+      }
+      .leaveWordTitle{
+          width:200px !important;
+          text-align: left !important;
+          padding: 0 8px;
+          cursor: auto !important;
+        }
       .wordType{
         cursor: pointer;
         left: 264px;
         float: left;
         margin-left: 10px;
-        width: 80px;
         line-height: 30px;
         color: #fff;
         .chooseType{
@@ -172,7 +191,7 @@ export default {
         color: red;
         font-size: .14rem;
         margin-left: 5px;
-        margin-top: -10px;
+        margin-top: 10px;
         display: inline-block;
       }
       .details{

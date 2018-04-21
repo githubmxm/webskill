@@ -59,6 +59,8 @@
                 skillType:this.$route.params.skilltype,
                 //查询类型
                 dynamicTypeCur:0,
+                //查询内容
+                searchCon:this.pageModel.searchCon ? this.pageModel.searchCon : "",
                 //我的文章类型查找
                 myPostList:0,
                 // 记录总数
@@ -122,9 +124,14 @@
                 let _this = this;
                 this.param[this.pageParamName[0]] = this.cur;
                 this.param[this.pageParamName[1]] = this.limit;
-                if(this.url.indexOf("newestNote")>=0){
+                if(this.url.indexOf("newestNote")>=0 || this.url.indexOf("leaveWordInteract")>=0){
                     //首页
                     this.param["dynamicTypeCur"]=this.dynamicTypeCur;
+                    if(this.dynamicTypeCur==5){
+                        this.param["searchCon"]=this.searchCon;
+                    }else{
+                        this.param["searchCon"]=null;
+                    }
                 }
                 if(this.url.indexOf("articleTypeList")>=0){
                     //文章列表
@@ -243,6 +250,7 @@
             this.dynamicTypeCur=this.pageModel.dynamicTypeCur;
             this.myPostList=this.pageModel.myPostList;
             this.cur=this.pageModel.cur;
+            this.searchCon=this.pageModel.searchCon;
             this.getData();
           }
         },
