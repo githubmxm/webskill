@@ -106,9 +106,9 @@ export default {
             _this.setLoginStatueFn(false);
           }
           if(resData.status=="success"){
-            //提交成功,等待审核
-            // _this.setAalertMsgFn("感谢您的发表！")
-            // location.href="/index";
+            提交成功,等待审核
+            _this.setAalertMsgFn("感谢您的发表！")
+            location.href="/index";
           }else{
             this.error=resData.message;
             return false;

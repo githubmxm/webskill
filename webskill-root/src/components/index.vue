@@ -79,7 +79,7 @@
             <li class="searchs col-sm-2 col-xs-2" :class="{cur:dynamicTypeCur==4||dynamicTypeCur==5}" @click="dynamicType(4)">搜索导航</li>
           </ul>
           <div class="contentsForType clear">
-            <ul class="contentList clear">
+            <div class="contentList clear">
               <!--全部笔录-->
               <!-- <transition-group  enter-active-class="fadeIn" leave-active-class="fadeIn" @before-enter="beforeEnter"> -->
               <div v-if="dynamicDataList.length>0">
@@ -88,23 +88,28 @@
                     <input type="text" name="" v-model="searchCon" id="searchCon" placeholder="输入您要搜索的内容" />
                     <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()">Find</span>
                 </div>
-                <li class="zxbl" v-for="(item,index) in dynamicDataList" :key="index" :arid="item.newNoteId" :animate-delay="(0.3*index)"
-                  :animate-duration="0.5">
-                  <div class="cons">
-                    <p class="titles">
-                      <!-- <a class="intro" target="_blank" :href="'/post?id='+item.newNoteId">{{item.newNoteTitle}}</a> -->
-                      <!-- <span class="left noteType">{{item.newNoteType|newNoteTypeFilter}}</span> -->
-                      <router-link :to="'/post/'+item.newNoteId" target="_blank" class="intro" v-html="newNoteContSlice(item.newNoteTitle,28)"></router-link>
-                      <span class="creatTime right">{{item.newNoteTime}}</span>
-                    </p>
-                    <div class="Summarys" v-if="item.newNoteType==1">
-                      <div class="sum_con">
-                        <div v-html="newNoteContSlice(item.newNoteConts,117)"></div>
+                <ul>
+                    <li class="zxbl" v-for="(item,index) in dynamicDataList" :key="index" :arid="item.newNoteId" :animate-delay="(0.3*index)"
+                    :animate-duration="0.5">
+                    <div class="cons">
+                      <p class="titles">
+                        <!-- <a class="intro" target="_blank" :href="'/post?id='+item.newNoteId">{{item.newNoteTitle}}</a> -->
+                        <!-- <span class="left noteType">{{item.newNoteType|newNoteTypeFilter}}</span> -->
+                        <router-link v-if="dynamicTypeCur==3"  :to="'/interact/'+item.newNoteId" target="_blank" class="intro" v-html="newNoteContSlice(item.newNoteTitle,28)"></router-link>
+  
+                        <router-link v-else :to="'/post/'+item.newNoteId" target="_blank" class="intro" v-html="newNoteContSlice(item.newNoteTitle,28)"></router-link>
+                        <span class="creatTime right">{{item.newNoteTime}}</span>
+                      </p>
+                      <div class="Summarys" v-if="item.newNoteType==1">
+                        <div class="sum_con">
+                          <div v-html="newNoteContSlice(item.newNoteConts,117)"></div>
+                        </div>
+                        <!-- <span>[阅读全部]</span> -->
                       </div>
-                      <!-- <span>[阅读全部]</span> -->
                     </div>
-                  </div>
-                </li>
+                  </li>
+                </ul>
+                
               </div>
               <!-- </transition-group> -->
               <!--互动专区-->
@@ -126,7 +131,7 @@
                 </div>
                 <p v-show="dynamicDataList.length==0" class="noCons">暂 无 数 据！</p>
               </div>
-            </ul>
+            </div>
           </div>
           <Pagebar v-show="dynamicDataList.length>0" :page-model="pageModel" ref="dynamicTypePage"></Pagebar>
         </div>
