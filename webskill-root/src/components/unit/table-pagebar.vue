@@ -31,6 +31,8 @@
         props: ['page-model'],
         data () {
             return {
+                //防重复
+                requestAgain:true,
                 //使用类型
                 pageType:'',
                 // 初始页
@@ -122,6 +124,10 @@
             // 分页请求
             getData: function () {
                 let _this = this;
+                if(!_this.requestAgain){
+                    return false;
+                }
+                _this.requestAgain=false;
                 this.param[this.pageParamName[0]] = this.cur;
                 this.param[this.pageParamName[1]] = this.limit;
                 if(this.url.indexOf("newestNote")>=0 || this.url.indexOf("leaveWordInteract")>=0){
@@ -166,6 +172,7 @@
                       // 返回总记录数
                       _this.totalPage = dataResult.count;
                       _this.refreshPageCon();
+                      
                       // this.$options.methods.successFn();
                     }else{
                         if(_this.url.indexOf("newestNote")){
@@ -182,6 +189,7 @@
                         }
                       
                     }
+                    _this.requestAgain=true;
                     //  this.$options.methods.successFn(dataResult);//method方法互调用
                 }).catch((err)=>{
                     if(_this.url.indexOf("newestNote")){
@@ -196,6 +204,7 @@
                         //确认发布文章
                         _this.setPublishListFn([]);
                     }
+                    _this.requestAgain=true;
                 })
             },
             // 每页显示记录数 下拉
