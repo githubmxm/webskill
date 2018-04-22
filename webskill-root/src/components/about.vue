@@ -10,7 +10,7 @@
     <section class="aboutTaat">
       <h1 class="aboutTitle">关于本站</h1>
       <article class="aboutCon">
-        欢迎来到技百讯前端博客（<a class="red" target="_blank" href="/index">zshom.com</a>）,本博客建立于2018.2.1起步上线,存在或多或少的各类问题，欢迎大家的踊跃提出与建议等(<a class="red" target="_blank" href="/leaveword">前往发表看法</a>)。我们将极力改进。
+        欢迎来到技百讯前端博客（<a class="red" target="_blank" href="/index">zshom.com</a>）,本博客建立于2018.4.22起步上线,存在或多或少的各类问题，欢迎大家的踊跃提出与建议等(<a class="red" target="_blank" href="/leaveword">前往发表看法</a>)。我们将极力改进。
         <br/>
         <br/>
         本博客主要致力于前端及各类技术的跟近与交流学习,其大部分文章内容来源于实践与总结。
@@ -28,6 +28,9 @@
       <div class="aboutCon">
         2018年1月,开始规划本博客
         <br/>
+        <br/>
+        2018年4月22日,本博客初成上线第一版.因还有较多完善之处故现主要以技术文档查看与个人留版为主要目的。应用体系待进一步完善。感谢您的访问.
+        <br/>
       </div>
     </div>
     <section class="aboutTaat">
@@ -44,7 +47,7 @@
              职位:web前端开发工程师
            </li>
            <li>
-             兴趣:阅读,旅游
+             兴趣:阅读,影视,旅游,技术
            </li>
            <li>
              居住:北京
