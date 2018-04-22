@@ -6,7 +6,7 @@
     <section>
       <article class="conPost">
         <h1 class="title">{{arTitle}}</h1>
-        <div class="meta"><span class="creatTime">{{arTime}}</span><span class="pageViewNum">{{arViewNum}}</span> 次浏览<span class="commentNum">{{arComeNum}}</span> 次评论<span class="commentLabel">标签: <i class="labelName">{{arType}}</i> </span></div>
+        <div class="meta"><span class="creatAuthor">{{arAuthor}}</span><span class="creatTime">{{arTime}}</span><span class="pageViewNum">{{arViewNum}}</span> 次浏览<span class="commentNum">{{arComeNum}}</span> 次评论<span class="commentLabel">标签: <i class="labelName">{{arType}}</i> </span></div>
         <div class="details">
           <!--文章内容-->
           <div class="detcom">
@@ -140,6 +140,7 @@ export default {
         firstSofaShow:true,
         postId:parseInt(this.$route.params.id),
         arTitle:"",
+        arAuthor:"",
         arTime:"",
         arType:"内容详情",
         arDownNum:0,
@@ -177,6 +178,7 @@ export default {
                 _this.arCons=postShowDetailData.newNoteCont;
                 _this.arTitle=postShowDetailData.newNoteTitle;
                 _this.arTime=postShowDetailData.newNoteTime;
+                _this.arAuthor=postShowDetailData.newNoteAuthor;
                 _this.arType=postShowDetailData.newNoteLabel!=""?postShowDetailData.newNoteLabel:'内容详情';
                 _this.arDownNum=postShowDetailData.newNoteLikeNum;
                 _this.arLikeNum=postShowDetailData.newNoteDownNum;
@@ -583,6 +585,12 @@ export default {
           margin-bottom: 15px;
           color: #777;
           font-size: .12rem;
+        }
+        .creatAuthor{
+          margin-bottom: 15px;
+          color: #777;
+          font-size: .12rem;
+          margin-right: 20px;
         }
         .pageViewNum{
           margin-left: 20px;
