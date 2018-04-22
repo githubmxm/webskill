@@ -15,7 +15,7 @@
           <div class="rlog">
               <p class="userAcount">
                   <span>账&nbsp;&nbsp;&nbsp;号: </span>
-                  <input type="text" id="account" name="account" placeholder="2-20位中英文" maxlength="20" v-model="user.account"/>
+                  <input type="text" id="account" name="account" placeholder="2-20位中英文下划线" maxlength="20" v-model="user.account"/>
                 </p>
                 <p class="userPassWord">
                   <span>密&nbsp;&nbsp;&nbsp;码: </span>
@@ -176,7 +176,7 @@ export default {
     formValidata (code,source){
       this.errorMsg="";
       //正则
-      var inP1=/^[A-Za-z0-9]+$/,
+      var inP1=/^[A-Za-z0-9_]+$/,
           allEi=/^([A-Za-z0-9]|[\u4E00-\u9FA5])+$/,
           exp = new RegExp("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$");
       function _ChkLengXz(ob,bytesL){
