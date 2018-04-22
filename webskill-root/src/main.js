@@ -15,6 +15,9 @@ import '../static/UE/ueditor.config.js'
 import '../static/UE/ueditor.all.js'
 import '../static/UE/lang/zh-cn/zh-cn.js'
 import '../static/UE/ueditor.parse.min.js'
+import '../static/css/nprogress.css'
+import NProgress from '../static/js/nprogress.js'
+
 Vue.use(animate)
 Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false

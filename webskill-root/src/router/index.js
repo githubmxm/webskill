@@ -12,6 +12,8 @@ import Cooperation from '@/components/cooperation'
 import FindPassWord from '@/components/findpassword'
 import ArticleList from '@/components/articlelist'
 import SurePublish from '@/components/surePublish'
+import '../..//static/css/nprogress.css'
+import NProgress from '../../static/js/nprogress.js'
 
 
 Vue.use(Router)
@@ -102,13 +104,20 @@ const router = new Router({
 /**
  * desc:全局监听
  */
+
 router.beforeEach((to, from, next) => {
   //页面404处理
+  NProgress.start();
   if(!to.name){
     location.href="/index";
   }
   // Store.dispatch('updateHistoryLength')
   next()
-})
+});
+
+router.afterEach((to, from, next) => {
+  NProgress.done(true);
+});
+
 
 export default router
