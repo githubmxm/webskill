@@ -98,14 +98,19 @@
                         <router-link v-if="dynamicTypeCur==3"  :to="'/interact/'+item.newNoteId" target="_blank" class="intro" v-html="newNoteContSlice(item.newNoteTitle,28)"></router-link>
   
                         <router-link v-else :to="'/post/'+item.newNoteId" target="_blank" class="intro" v-html="newNoteContSlice(item.newNoteTitle,28)"></router-link>
+
                         <span class="creatTime right">{{item.newNoteTime}}</span>
                       </p>
+                      
                       <div class="Summarys" v-if="item.newNoteType==1">
                         <div class="sum_con">
                           <div v-html="newNoteContSlice(item.newNoteConts,117)"></div>
                         </div>
                         <!-- <span>[阅读全部]</span> -->
                       </div>
+                      <p class="newAuthor text-right">
+                          {{item.newNoteAuthor}}
+                        </p>
                     </div>
                   </li>
                 </ul>
@@ -486,7 +491,7 @@
                       text-decoration: underline;
                     }
                   }
-                  .creatTime {
+                  .creatTime{
                     color: #bdbdbd;
                     font-size: .14rem;
                     float: right;
@@ -501,6 +506,11 @@
                       color: #333;
                     }
                   }
+                }
+                .newAuthor{
+                  color: #bdbdbd;
+                  font-size: .14rem;
+                  margin-top: 15px;
                 }
               }
             }
