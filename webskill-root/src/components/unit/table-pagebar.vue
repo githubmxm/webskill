@@ -152,6 +152,7 @@
                     url: _this.url,
                     params: _this.param,
                 }).then((res) => {
+                    
                     let dataResult=res.data;
                     if(dataResult.status=="success"){
                       // 返回结果数据集
@@ -187,6 +188,7 @@
                            //确认发布文章
                            _this.setPublishListFn([]);
                         }
+                        location.href="/index";
                       
                     }
                     _this.requestAgain=true;

@@ -161,7 +161,7 @@ export default {
           }
         }).then((res)=>{
           let resData=res.data;
-          if(resData.message=="文章发表成功"){
+          if(resData.status=="success"){
             //提交成功,等待审核
             _this.subPostId=resData.data.postId;
             _this.viewNewPost=true;

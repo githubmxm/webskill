@@ -19,7 +19,7 @@
                 </p>
                 <p class="userPassWord">
                   <span>密&nbsp;&nbsp;&nbsp;码: </span>
-                  <input type="text" id="password" name="password" placeholder="6-20位中英文" maxlength="20" v-model="user.accoutPwd" />
+                  <input type="password" id="password" name="password" autocomplete="off" placeholder="6-20位中英文" maxlength="20" v-model="user.accoutPwd" />
                   <a target="_blank" href="/findpassword" class="findPass">找回密码</a>
                 </p>
                 <p class="userPassWord" v-show="loginTypeCur==1">
