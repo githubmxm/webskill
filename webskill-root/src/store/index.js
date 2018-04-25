@@ -36,7 +36,7 @@ export default new Vuex.Store({
     setLoginUserFn({commit},user){
       commit('setLoginUser',user);
     },
-    setLoginUserFn({commit},grade){
+    setUserGradeFn({commit},grade){
       commit('setUserGrade',grade);
     }
   },

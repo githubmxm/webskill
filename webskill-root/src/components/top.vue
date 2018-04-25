@@ -64,7 +64,7 @@ export default {
     ...mapGetters(['loginStatue'])
   },
   methods: {
-    ...mapActions(['setAalertMsgFn','setLoginStatueFn','setLoginUserFn']),
+    ...mapActions(['setAalertMsgFn','setLoginStatueFn','setLoginUserFn','setUserGradeFn']),
     loginExit(){
       var _this=this;
       axios({
@@ -107,6 +107,7 @@ export default {
         }
       }else{
         _this.setLoginStatueFn(false);
+        _this.setUserGradeFn(0);
         _this.setLoginUserFn("");
       }
     })

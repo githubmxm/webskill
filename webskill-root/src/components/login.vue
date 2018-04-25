@@ -84,7 +84,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(["setUserGrade"]),
+    ...mapActions(["setUserGradeFn"]),
     loginType(index){
       this.loginTypeCur=index;
       this.errorMsg="";
@@ -167,7 +167,7 @@ export default {
         }).then((res) => {
           let logindata = res.data;
           if(logindata.status=="success"){
-            _this.setUserGrade(logindata.data.userGrade);
+            _this.setUserGradeFn(logindata.data.userGrade);
             location.href="/index";
           }else{
             this.errorMsg=logindata.message;
