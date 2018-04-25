@@ -12,6 +12,7 @@ import Cooperation from '@/components/cooperation'
 import FindPassWord from '@/components/findpassword'
 import ArticleList from '@/components/articlelist'
 import SurePublish from '@/components/surePublish'
+import DataMonitor from '@/components/dataMonitor'
 import '../..//static/css/nprogress.css'
 import NProgress from '../../static/js/nprogress.js'
 
@@ -97,6 +98,12 @@ const router = new Router({
     name:'surePublish',
     components:{
       default: SurePublish
+    }
+  },{
+    path:'/dataMonitor',
+    name:'dataMonitor',
+    components:{
+      default: DataMonitor
     }
   }]
 })

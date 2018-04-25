@@ -19,7 +19,7 @@
       </transition>
       <!--广告轮播-->
       <transition enter-active-class="fadeInRight" leave-active-class="fadeInRight">
-        <div class="carousels col-lg-9 col-md-8 col-sm-7" v-show="animationShow">
+        <div class="carousels col-lg-9 col-md-8 col-sm-7 pull-left" v-show="animationShow">
           <swiper :options="swiperOption" ref="carouselsSwiper">
             <swiper-slide>
               <li><a title="StarFire_xm的博客"><img src="/webskill/images/starfire.png" alt=""></a></li>

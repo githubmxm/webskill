@@ -25,7 +25,7 @@
             <div class="aboutCon">
                 支付宝,微信赞助,感谢您的支持,我们将持续改进及完善。
                 <p class="zzimgs">
-                    <img src="/webskill/images/zfb.png" width=150 alt="">
+                    <img class="zfbzf" src="/webskill/images/zfb.png" width=150 alt="">
                     <img class="wxzf" src="/webskill/images/wxrwm.png" width=150 alt="">
                 </p>
             </div>
@@ -61,9 +61,11 @@
           .zzimgs{
               margin-top: 10px;
           }
+          .zfbzf{
+            margin-right: 15px;
+          }
           .wxzf{
               vertical-align: top;
-              margin-left:15px;
           }
           .red{
             color:red;

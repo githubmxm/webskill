@@ -9,7 +9,8 @@ export default new Vuex.Store({
     //设备类型手机电脑判断
     wapOrPc:"pc",
     loginStatue:false,
-    loginUser:""
+    loginUser:"",
+    userGrade:0,
   },
   mutations:{
     setWapOrPc(state,type){
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     setLoginUser(state,user){
       state.loginUser=user;
+    },
+    setUserGrade(state,grade){
+      state.userGrade=grade;
     }
   },
   actions:{
@@ -31,6 +35,9 @@ export default new Vuex.Store({
     },
     setLoginUserFn({commit},user){
       commit('setLoginUser',user);
+    },
+    setLoginUserFn({commit},grade){
+      commit('setUserGrade',grade);
     }
   },
   getters: {
@@ -42,6 +49,9 @@ export default new Vuex.Store({
     },
     loginUser: state =>{
       return state.loginUser;
+    },
+    userGrade: state =>{
+      return state.userGrade;
     }
   },
   modules,

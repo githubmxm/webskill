@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { mapGetters,mapActions } from "vuex";
 import axios from 'axios'
 export default {
   name: "index",
@@ -83,6 +84,7 @@ export default {
     })
   },
   methods: {
+    ...mapActions(["setUserGrade"]),
     loginType(index){
       this.loginTypeCur=index;
       this.errorMsg="";
@@ -165,6 +167,7 @@ export default {
         }).then((res) => {
           let logindata = res.data;
           if(logindata.status=="success"){
+            _this.setUserGrade(logindata.data.userGrade);
             location.href="/index";
           }else{
             this.errorMsg=logindata.message;

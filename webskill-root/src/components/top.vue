@@ -19,13 +19,16 @@
       <p class="userLogin  col-lg-2 right" v-if="loginStatue" @mouseleave="listHide()">
         <span class="loginExit right" @click="loginExit()">退出</span>
         <span class="userInfo right" @mouseover="listShow()">[{{username}}]</span>
-        <ul class="infoList col-lg-offset-4 col-xs-offset-2" v-if="myPostInfoShow" v-show="showInfoList">
+        <ul class="infoList" v-if="myPostInfoShow" v-show="showInfoList">
           <li>
               <a class="surePublish" href="/surePublish" target="_blank">我的文章</a>
           </li>
           <li>
             <a class="surePublish" href="/webskillAdmin" target="_blank">发布文章</a>
-        </li>
+          </li>
+          <li>
+              <a class="surePublish" v-if="dataMonitorShow" href="/dataMonitor" target="_blank">数据监控</a>
+          </li>
         </ul>
       </p>
       <!--未登录或异常-->
@@ -50,7 +53,8 @@ export default {
       jbx: true,
       username:"",
       showInfoList:false,
-      myPostInfoShow:false
+      myPostInfoShow:false,
+      dataMonitorShow:false
     };
   },
   created() {
@@ -95,7 +99,12 @@ export default {
         if(userState.data.userGrade<3){
           _this.myPostInfoShow=true;
         }
-        _this.setLoginUserFn(_this.username)
+        _this.setLoginUserFn(_this.username);
+        if(userState.data.userGrade==1){
+          _this.dataMonitorShow=true;
+        }else{
+          _this.dataMonitorShow=false;
+        }
       }else{
         _this.setLoginStatueFn(false);
         _this.setLoginUserFn("");
@@ -180,28 +189,34 @@ export default {
   }
   .infoList{
     position: absolute;
-    top: 80%;
-    left:8%;
+    top: 100%;
+    left:15px;
     z-index: 99;
   }
-  .surePublish{
-    display: inline-block;
-    color: #fff;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    background: #8929e3;
-    padding-left: 8px;
-    padding-right: 8px;
-    &:hover{
-      background: #9f4fe9;
+  .infoList li{
+    line-height: 1;
+    border-bottom: 1px solid #ccc;
+    .surePublish{
+      display: inline-block;
+      color: #fff;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      background: #8929e3;
+      padding-left: 8px;
+      padding-right: 8px;
+      &:hover{
+        background: #9f4fe9;
+      }
     }
   }
+
   .goLogin{
     display: block;
     color:#fff;
     height: 100%;
     cursor: pointer;
+    padding: 0 15px;
     &:hover{
       color:#5eaeef;
       background: #333;
