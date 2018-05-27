@@ -191,7 +191,7 @@ export default {
   .infoList{
     position: absolute;
     top: 100%;
-    left:15px;
+    right:55px;
     z-index: 99;
   }
   .infoList li{

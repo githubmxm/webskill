@@ -59,7 +59,7 @@
         <a href="/articlelist/Reactjs" target="_blank">Reactjs</a>
       </li>
       <li class="digList textrotate">
-          <a href="/articlelist/Angularjs" target="_blank">Angularjs</a>
+          <a href="/articlelist/Angular" target="_blank">Angular</a>
       </li>
       <li class="digList textrotate">
           <a href="/articlelist/Requirejs" target="_blank">Requirejs</a>
@@ -85,6 +85,13 @@
       <li class="digList textrotate">
           <a href="/articlelist/TouchJs" target="_blank">TouchJs</a>
       </li>
+      <li class="digList textrotate">
+        <a href="/articlelist/性能" target="_blank">性能</a>
+      </li>
+      <li class="digList textrotate">
+        <a href="/articlelist/typescript" target="_blank">typescript</a>
+      </li>
+      
     </ul>
   </div>
 </template>

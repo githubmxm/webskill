@@ -6,7 +6,7 @@
     <section>
       <article class="conPost">
         <h1 class="title">{{arTitle}}</h1>
-        <div class="meta"><span class="creatAuthor">{{arAuthor}}</span><span class="creatTime">{{arTime}}</span><span class="pageViewNum">{{arViewNum}}</span> 次浏览<span class="commentNum">{{arComeNum}}</span> 次评论<span class="commentLabel">标签: <i class="labelName">{{arType}}</i> </span></div>
+        <div class="meta"><span class="creatAuthor">{{arAuthor}}</span><span class="creatTime">{{arTime}}</span><span class="pageViewNum">{{arViewNum}}</span> 次浏览<span class="commentNum">{{arComeNum}}</span> 次评论<span class="commentLabel">技能类型: <i class="labelName">{{arType}}</i> </span></div>
         <div class="details">
           <!--文章内容-->
           <div class="detcom">
