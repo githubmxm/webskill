@@ -5,6 +5,7 @@ import animate from 'animate.css'
 import 'vue2-animate/dist/vue2-animate.min.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+import uploader from 'vue-simple-uploader'
 import App from './App'
 import store from './store/index'
 import router from './router'
@@ -20,6 +21,7 @@ import NProgress from '../static/js/nprogress.js'
 
 Vue.use(animate)
 Vue.use(VueAwesomeSwiper)
+Vue.use(uploader)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

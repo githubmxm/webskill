@@ -27,6 +27,9 @@
             <a class="surePublish" href="/webskillAdmin" target="_blank">发布文章</a>
           </li>
           <li>
+            <a class="surePublish" href="/webskillUpload" target="_blank">上传资源</a>
+          </li>
+          <li>
               <a class="surePublish" v-if="dataMonitorShow" href="/dataMonitor" target="_blank">数据监控</a>
           </li>
         </ul>
@@ -192,7 +195,7 @@ export default {
     position: absolute;
     top: 100%;
     right:55px;
-    z-index: 99;
+    z-index: 9911;
   }
   .infoList li{
     line-height: 1;

@@ -8,6 +8,7 @@ import Login from '@/components/login'
 import About from '@/components/about'
 import Leaveword from '@/components/leaveword'
 import Admin from '@/components/admin'
+import Upload from '@/components/upload'
 import Cooperation from '@/components/cooperation'
 import FindPassWord from '@/components/findpassword'
 import ArticleList from '@/components/articlelist'
@@ -92,6 +93,12 @@ const router = new Router({
     name:'webSkillAdmin',
     components:{
       default: Admin
+    }
+  },{
+    path:'/webSkillUpload',
+    name:'webSkillUpload',
+    components:{
+      default: Upload
     }
   },{
     path:'/surePublish',
