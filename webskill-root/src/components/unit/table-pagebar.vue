@@ -260,7 +260,6 @@
             this.url=this.pageModel.url;
             this.dynamicTypeCur=this.pageModel.dynamicTypeCur;
             this.myPostList=this.pageModel.myPostList;
-            this.cur=this.pageModel.cur;
             this.searchCon=this.pageModel.searchCon;
             this.getData();
           }
@@ -298,7 +297,6 @@
         color: #fff;
         cursor: default;
         background-color: #337ab7;
-        border-color: #337ab7;
     }
 
     .page-bar i {

@@ -44,6 +44,7 @@ export default {
             leaveErr:"",
             pageModel:{
                 url:"/webskill/getSurePublish",
+                limit:15,
                 myPostList:0,
                 againPost:0
             }

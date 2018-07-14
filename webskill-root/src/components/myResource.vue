@@ -2,7 +2,7 @@
 后台数据统计
 -->
 <template>
-  <div class="dataMonitor col-md-12">
+  <div class="dataMonitor col-md-12" hidden>
       <p class="errMsg" v-show="errMsg!==''">{{errMsg}}</p>
       <p class="labels col-md-3 col-xs-6">当前文章总数：<span>{{articleDistribution.articleNum}}</span> 篇</p>
       <p class="labels col-md-3 col-xs-6">今日访客总数：<span>{{articleDistribution.todayVisitor}}</span> 人</p>

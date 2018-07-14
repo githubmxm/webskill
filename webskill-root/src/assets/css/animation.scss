@@ -351,6 +351,48 @@ enter-active-class="动画名" leave-active-class="动画名"
   }
 }
 
+/*下拉菜单动画*/
+@keyframes ul_down {
+  from {
+    height: 0;
+  }
+  to {
+    height:154px;
+  }
+}
+@-moz-keyframes ul_down {
+  from {
+    height: 0;
+  }
+  to {
+    height:154px;
+  }
+}
+@-webkit-keyframes ul_down {
+  from {
+    height: 0;
+  }
+  to {
+    height:154px;
+  }
+}
+@-ms-keyframes ul_down {
+  from {
+    height: 0;
+  }
+  to {
+    height:154px;
+  }
+}
+@-o-keyframes ul_down {
+  from {
+    height: 0;
+  }
+  to {
+    height:154px;
+  }
+}
+
 .textrotate{
   animation:textrotate 2s ease-in-out alternate infinite;  
   /* 其它浏览器兼容性前缀 */
@@ -358,6 +400,15 @@ enter-active-class="动画名" leave-active-class="动画名"
   -moz-animation: textrotate 2s ease-in-out alternate infinite;  
   -ms-animation: textrotate 2s ease-in-out alternate infinite;  
   -o-animation: textrotate 2s ease-in-out alternate infinite;  
+}
+
+.ul_down{
+  animation:ul_down 2s ease-in-out;  
+  /* 其它浏览器兼容性前缀 */
+  -webkit-animation: ul_down 1s ease-in-out;  
+  -moz-animation: ul_down 1s ease-in-out;  
+  -ms-animation: ul_down 1s ease-in-out;  
+  -o-animation: ul_down 21s ease-in-out;  
 }
 
 //http://fontawesome.io/cheatsheet/   http://fontawesome.io/icons/#  图标使用方式  <i class="fa fa-weixin"></i>

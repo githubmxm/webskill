@@ -14,6 +14,7 @@ import FindPassWord from '@/components/findpassword'
 import ArticleList from '@/components/articlelist'
 import SurePublish from '@/components/surePublish'
 import DataMonitor from '@/components/dataMonitor'
+import MyResource from '@/components/myResource'
 import '../..//static/css/nprogress.css'
 import NProgress from '../../static/js/nprogress.js'
 
@@ -111,6 +112,12 @@ const router = new Router({
     name:'dataMonitor',
     components:{
       default: DataMonitor
+    }
+  },{
+    path:'/myResource',
+    name:'myResource',
+    components:{
+      default: MyResource
     }
   }]
 })

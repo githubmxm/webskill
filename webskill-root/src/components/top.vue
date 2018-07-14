@@ -19,12 +19,15 @@
       <p class="userLogin  col-lg-2 right" v-if="loginStatue" @mouseleave="listHide()">
         <span class="loginExit right" @click="loginExit()">退出</span>
         <span class="userInfo right" @mouseover="listShow()">[{{username}}]</span>
-        <ul class="infoList" v-if="myPostInfoShow" v-show="showInfoList">
+        <ul class="infoList ul_down" v-if="myPostInfoShow" v-show="showInfoList">
           <li>
               <a class="surePublish" href="/surePublish" target="_blank">我的文章</a>
           </li>
           <li>
             <a class="surePublish" href="/webskillAdmin" target="_blank">发布文章</a>
+          </li>
+          <li>
+            <a class="surePublish" href="/myResource" target="_blank">我的资源</a>
           </li>
           <li>
             <a class="surePublish" href="/webskillUpload" target="_blank">上传资源</a>
@@ -84,6 +87,7 @@ export default {
     },
     listShow(){
       this.showInfoList=true;
+
     },
     listHide(){
       this.showInfoList=false;
@@ -121,6 +125,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/css/minxin";
+@import '../assets/css/animation';
 .top{
   min-width: 360px;
   background: #45b367;
@@ -196,6 +201,7 @@ export default {
     top: 100%;
     right:55px;
     z-index: 9911;
+    overflow: hidden;
   }
   .infoList li{
     line-height: 1;
