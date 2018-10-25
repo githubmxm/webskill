@@ -58,7 +58,7 @@ export default{
     ...mapActions(["setAalertMsgFn","setwapOrPcFn"])
   },
   mounted () {
-    if(location.pathname!="/login"||!location.pathname=="/webSkillAdmin"){
+    if(!location.pathname.includes("other")&&(location.pathname!="/login"||!location.pathname=="/webSkillAdmin")){
       this.publicView=true;
       if(location.pathname.indexOf("/leaveword")<0){
         this.leaveWord=true;
