@@ -1,81 +1,97 @@
 <!--
-后台数据统计
+我的资源
 -->
 <template>
-  <div class="dataMonitor col-md-12" hidden>
-      <p class="errMsg" v-show="errMsg!==''">{{errMsg}}</p>
-      <p class="labels col-md-3 col-xs-6">当前文章总数：<span>{{articleDistribution.articleNum}}</span> 篇</p>
-      <p class="labels col-md-3 col-xs-6">今日访客总数：<span>{{articleDistribution.todayVisitor}}</span> 人</p>
-      <p class="labels col-md-3 col-xs-6">今日新增文章：<span>{{articleDistribution.todayNewArticle}}</span> 篇</p>
-      <p class="labels col-md-3 col-xs-6">今日新增用户：<span>{{articleDistribution.todayNewUsers}}</span> 人</p>
-  </div>
+    <div class="surePublish row">
+        <p class="navbar-header col-xs-12 text-center">
+         我的资源
+        </p>
+        <ul class="post-list list-group col-xs-12">
+                <li class="list-group-item col-xs-12" v-for="(item,index) in getMyResource" :key="index">
+                    <span class="conDetailLeave">{{item.resourceName}}</span>
+                    <a class="dowenResource" :href="item.resourceUrl | filename">点我下载</a>
+                </li>
+            </ul>
+        <Pagebar v-show="getMyResource.length>0" :page-model="pageModel" ref="publishPostListPage"></Pagebar>
+    </div>    
 </template>
 
+
 <script>
-  import axios from 'axios'
-  export default {
+import Pagebar from '../components/unit/table-pagebar'
+import axios from 'axios'
+import { mapGetters,mapActions } from "vuex"
+export default {
+    name: "surePublish",
     data() {
-      return {
-        articleDistribution:{
-          "articleNum":0,
-          "todayVisitor":0,
-          "todayNewArticle":0,
-          "todayNewUsers":0
-        },
-        errMsg:""
-      }
-    },
-    created() {
-
-    },
-    components: {
-
+        return {
+            error:"",
+            errorHas:"",
+            leaveErr:"",
+            pageModel:{
+                url:"/webskill/getMyResource",
+                limit:15,
+                againPost:0
+            }
+        };
     },
     methods: {
-      getArticleDistribution(){
-        let _this=this;
-        axios({
-          method: 'GET',
-          url: '/webskill/article/distribution',
-          data:{
-            r:Math.random()
-          }
-        }).then((res) => {
-          let result=res.data;
-          if(result.status=="success"){
-            let dataD=result.data;
-            _this.articleDistribution.articleNum=dataD.articlNum;
-            _this.articleDistribution.todayVisitor=dataD.visiterNum;
-             _this.articleDistribution.todayNewArticle=dataD.newArticls;
-             _this.articleDistribution.todayNewUsers=dataD.newUsers;
-          }else{
-            _this.errMsg=res.message;
-          }
-        })
-      }
+        postPublishType(index){
+            this.pageModel.againPost++;
+        }
+    },
+    filters: {
+        filename(file){
+          let fileS=JSON.parse(file)[0];
+          let fileSplit=fileS.split("/");
+          let fileName=fileSplit[fileSplit.length-1]
+          return 'webskill/downloadResource?fileName='+fileName;
+        }
+    },
+    components:{
+      Pagebar
+    },
+    mounted () {
+        // this.getSurePost();
     },
     computed: {
-
-    },
-    mounted() {
-      this.errMsg="";
-      this.getArticleDistribution();
+       ...mapGetters(['getMyResource'])
     }
-  }
-
+};
 </script>
-
+  
 <style lang="scss" scoped>
-  .dataMonitor{
-    .errMsg{
-      color: red;
-      font-size:14px;
-      text-align:center;
-      margin-bottom:18px;
+    .navbar-header{
+      font-size: .18rem;
+      margin-bottom: 10px;
     }
-    .labels{
-      font-size: 14px;
-      margin:12px 0;
+    .dowenResource{
+      float: right;
+      color: blue;
     }
-  }
+    .navbar-brand{
+        float: none;
+        text-align: center;
+        background: #00bfff;
+        color: #fff;
+        cursor: pointer;
+        &:hover{
+            background:#25a4ce;
+        }
+    }
+    .cur{
+            background:#25a4ce;
+    }
+    .conDetailLeave{
+        display: inline-block;
+    }
+    .post-list{
+        font-size: 14px;
+    }
+    .look{
+        &:hover{
+            cursor: pointer;
+            color:#0f49cf;
+        }
+    }
 </style>

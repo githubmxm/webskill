@@ -75,7 +75,7 @@
             this.getData();
         },
         methods: {
-            ...mapActions(['setDynamicDataListFn','setSkillListDetailFn','setPublishListFn']),
+            ...mapActions(['setDynamicDataListFn','setSkillListDetailFn','setPublishListFn','setGetMyResourceFn']),
             // 首页
             firstClick: function () {
                 if (this.cur > 1) {
@@ -169,6 +169,10 @@
                            //确认发布文章
                            _this.setPublishListFn(_this.dataList);
                        }
+                       if(_this.url.indexOf("getMyResource")){
+                           //我的资源下载
+                           _this.setGetMyResourceFn(_this.dataList);
+                       }
                      
                       // 返回总记录数
                       _this.totalPage = dataResult.count;
@@ -188,8 +192,10 @@
                            //确认发布文章
                            _this.setPublishListFn([]);
                         }
-                        location.href="/index";
-                      
+                        if(_this.url.indexOf("getMyResource")){
+                           //我的资源下载
+                           _this.setGetMyResourceFn([]);
+                        }
                     }
                     _this.requestAgain=true;
                     //  this.$options.methods.successFn(dataResult);//method方法互调用
@@ -205,6 +211,10 @@
                      if(_this.url.indexOf("getSurePublish")){
                         //确认发布文章
                         _this.setPublishListFn([]);
+                    }
+                    if(_this.url.indexOf("getMyResource")){
+                           //我的资源下载
+                           _this.setGetMyResourceFn([]);
                     }
                     _this.requestAgain=true;
                 })
