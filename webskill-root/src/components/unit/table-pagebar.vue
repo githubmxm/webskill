@@ -258,6 +258,7 @@
         watch: {
           isAgainAjax(){
             this.url=this.pageModel.url;
+            this.cur=1;
             this.dynamicTypeCur=this.pageModel.dynamicTypeCur;
             this.myPostList=this.pageModel.myPostList;
             this.searchCon=this.pageModel.searchCon;
