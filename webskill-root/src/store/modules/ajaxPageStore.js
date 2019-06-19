@@ -5,7 +5,9 @@ export default{
     //技能类型列表
     skillListDetail:[],
     //待确认发布文章列表
-    publishListDetail:[]
+    publishListDetail:[],
+    //我的资源下载
+    getMyResource:[]
   },
   mutations:{
     setDynamicDataList(state,list){
@@ -16,6 +18,9 @@ export default{
     },
     setPublishListDetail(state,list){
       state.publishListDetail=list;
+    },
+    setGetMyResource(state,list){
+      state.getMyResource=list;
     }
   },
   actions:{
@@ -27,6 +32,9 @@ export default{
     },
     setPublishListFn({commit},list){
       commit('setPublishListDetail',list);
+    },
+    setGetMyResourceFn({commit},list){
+      commit('setGetMyResource',list);
     }
   },
   getters: {
@@ -38,6 +46,9 @@ export default{
     },
     publishListDetail: state => {
   		return state.publishListDetail;
+    },
+    getMyResource: state => {
+  		return state.getMyResource;
     }
   }
 }

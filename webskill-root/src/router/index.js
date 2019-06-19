@@ -15,6 +15,9 @@ import ArticleList from '@/components/articlelist'
 import SurePublish from '@/components/surePublish'
 import DataMonitor from '@/components/dataMonitor'
 import MyResource from '@/components/myResource'
+
+import RoseAnm from '@/components/other/roseAnm'
+
 import '../..//static/css/nprogress.css'
 import NProgress from '../../static/js/nprogress.js'
 
@@ -118,6 +121,12 @@ const router = new Router({
     name:'myResource',
     components:{
       default: MyResource
+    }
+  },{
+    path:'/other/roseAnm',
+    name:'roseAnm',
+    components:{
+      default: RoseAnm
     }
   }]
 })
