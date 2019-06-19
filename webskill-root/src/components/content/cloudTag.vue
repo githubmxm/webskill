@@ -1,14 +1,12 @@
 <!--
 云标签
--->
-<template>
-<div id="box">
-    <ul class="newDigest clear">
-      <li class="digList textrotate">
+
+
+ <li class="digList textrotate">
         <a href="/articlelist/Js" target="_blank">Js</a>
       </li>
       <li class="digList textrotate">
-          <a href="/articlelist/Js" target="_blank">H5</a>
+          <a href="/articlelist/H5" target="_blank">H5</a>
       </li>
       <li class="digList textrotate">
           <a href="/articlelist/Css" target="_blank">Css</a>
@@ -91,7 +89,14 @@
       <li class="digList textrotate">
         <a href="/articlelist/typescript" target="_blank">typescript</a>
       </li>
-      
+
+-->
+<template>
+<div id="box">
+    <ul class="newDigest clear">
+      <li class="digList textrotate"  v-for="(tag,index) in cloudTags" :key="index">
+        <router-link  :to="'/articlelist/'+tag.tagName" target="_blank" class="intro">{{tag.tagName}}</router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -102,15 +107,27 @@ export default {
   name: "cloudTags",
   data() {
     return {
-      msg: "云标签"
+      msg: "云标签",
+      cloudTags:[]
     };
   },
   methods: {
+      getCloudTags:function(){
+          var _this=this;
+          axios({
+            method: 'get',
+            url: '/webskill/getCloudTags',
+          }).then((res) => {
+            let d = res.data;
+            _this.cloudTags=d.data;
+          });
+      }
   },
   components: {
 
   },
   mounted() {
+      this.getCloudTags();
   }
 };
 </script>
