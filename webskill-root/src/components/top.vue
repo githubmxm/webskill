@@ -20,20 +20,8 @@
         <span class="loginExit right" @click="loginExit()">退出</span>
         <span class="userInfo right" @mouseover="listShow()">[{{username}}]</span>
         <ul class="infoList ul_down" v-if="myPostInfoShow" v-show="showInfoList">
-          <li>
-              <a class="surePublish" href="/surePublish" target="_blank">我的文章</a>
-          </li>
-          <li>
-            <a class="surePublish" href="/webskillAdmin" target="_blank">发布文章</a>
-          </li>
-          <li>
-            <a class="surePublish" href="/myResource" target="_blank">我的资源</a>
-          </li>
-          <li>
-            <a class="surePublish" href="/webskillUpload" target="_blank">上传资源</a>
-          </li>
-          <li>
-              <a class="surePublish" v-if="dataMonitorShow" href="/dataMonitor" target="_blank">数据监控</a>
+          <li  v-for="(nav,index) in navs" :key="index">
+              <a class="surePublish" :href="nav.navUrl" target="_blank">{{nav.navName}}</a>
           </li>
         </ul>
       </p>
@@ -58,6 +46,7 @@ export default {
       msg: "主导航和二级导航展示",
       jbx: true,
       username:"",
+      navs:[],
       showInfoList:false,
       myPostInfoShow:false,
       dataMonitorShow:false
@@ -72,7 +61,7 @@ export default {
   methods: {
     ...mapActions(['setAalertMsgFn','setLoginStatueFn','setLoginUserFn','setUserGradeFn']),
     loginExit(){
-      var _this=this;
+      let _this=this;
       axios({
         method: 'post',
         url: '/webskill/loginExit'
@@ -85,6 +74,17 @@ export default {
         }
       })
     },
+
+    getNavs(){
+        let _this=this;
+        axios({
+          method: 'get',
+          url: '/webskill/getNavs',
+        }).then((res) => {
+          _this.navs=res.data.data;
+        })
+    },
+
     listShow(){
       this.showInfoList=true;
 
@@ -95,6 +95,7 @@ export default {
   },
   mounted: function() {
     let _this=this;
+    _this.getNavs();
     axios({
       method: 'get',
       url: '/webskill/loginStatus'
