@@ -3,25 +3,26 @@
 -->
 <template>
   <header class="top container-fluid">
-    <nav class="topType row">
+    <nav class="topType container">
       <p class="alinks clear col-lg-5">
-        <a title="技百讯" class="logo col-lg-4" href="/index">
-          <img src="/webskill/images/jbxLogo.png" alt="技百讯" />
-          <span>技百讯</span>
+        <a title="技百讯" class="logo col-xs-2" href="/index">
+          <span>JBX</span>
         </a>
-        <a class="indexView col-lg-2" href="/index" target="_blank" title="首页">首页</a>
-        <!-- href="/myNotes" href="/newTitle"-->
-        <a class="myNotesView col-lg-2" title="技能摘要" target="_blank" href="/articlelist/all">技库</a>
-        <a class="newTitleView col-lg-2" title="技能快讯" @click="setAalertMsgFn()">资讯</a>
-        <a class="coTitleView col-lg-2" href="/cooperation" target="_blank" title="商务合作">合作</a>
+        <a class="indexView col-xs-2" href="/index" title="首页">首页</a>
+        <a class="myNotesView col-xs-2" title="技能摘要" href="/articlelist/all">技库</a>
+        <a class="newTitleView col-xs-2" title="技能快讯" @click="setAalertMsgFn()">资讯</a>
+        <a class="coTitleView col-xs-2" title="商务合作" href="/cooperation">合作</a>
       </p>
       <!--用户已登录-->
       <p class="userLogin  col-lg-2 right" v-if="loginStatue" @mouseleave="listHide()">
-        <span class="userInfo right" @mouseover="listShow()">[{{username}}]</span>
+        <span class="pull-right">
+            <span class="userInfo left" @mouseover="listShow()">{{username}}</span>
+            <i class="icon iconfont icon-xiaosanjiaodown"></i>
+        </span>
         <ul class="infoList ul_down" v-if="myPostInfoShow" v-show="showInfoList">
           <li  v-for="(nav,index) in navs" :key="index">
               <i class="icon iconfont" :class="nav.navIcon"></i>
-              <a class="surePublish" :href="nav.navUrl" target="_blank">{{nav.navName}}</a>
+              <a class="surePublish" :href="nav.navUrl">{{nav.navName}}</a>
           </li>
           <li>
               <i class="icon iconfont icon-tuichu"></i>
@@ -135,6 +136,9 @@ export default {
   min-width: 360px;
   background: #45b367;
   padding: 0 20px;
+  .icon-xiaosanjiaodown{
+      color: #ccc;
+  }
   .topType{
   height: 50px;
   line-height: 50px;
@@ -148,12 +152,10 @@ export default {
     float: left;
     color: #fff;
     cursor: pointer;
-    text-shadow: 3px 3px 3px #000;
     text-align: center;
     font-size:.16rem;
     .cur,&:hover{
-      color:#5eaeef;
-      background: #333;
+      color:#e80d06;
     }
   }
   .logo{
@@ -183,7 +185,6 @@ export default {
       color:#fff;
       &:hover{
         cursor: pointer;
-        color: #02ff00;
       }
     }
     .loginExit{
@@ -231,36 +232,11 @@ export default {
     cursor: pointer;
     padding: 0 15px;
     &:hover{
-      color:#5eaeef;
-      background: #333;
+      color:#e80d06;
     }
   }
 }
 }
-
-// .top {
-//   background:#acdcac;
-//   .mainNavList{
-//     text-align: center;
-//     cursor: pointer;
-//     float: left;
-//     position: relative;
-//     padding: 10px;
-//     @include sc(18px,#000);
-//     .deputyNavs{
-//       display:none;
-//       position: absolute;
-//       top: 44px;
-//       li{
-//         padding:3px;
-//         background: #ccc;
-//       }
-//     }
-//     &:hover .deputyNavs{
-//       display: block;
-//     }
-//   }
-// }
 @media (max-width: 375px) {
  .top .topType .alinks a{
    padding:0 6px;
