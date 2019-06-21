@@ -2,7 +2,7 @@
   <div id="app">
     <div class="main_blog">
       <!--顶部导航-->
-      <v-top v-if="publicView"></v-top>
+      <v-top v-if="publicView" :key="key"></v-top>
       <!--消息通知-->
       <!-- <transition enter-active-class="bounceInDown" leave-active-class="bounceInDown"> -->
       <!-- <div class="newMsgAlert container" v-if="publicView">
@@ -11,7 +11,7 @@
       <!-- </transition> -->
       <!--内容区-->
       <div class="allConts container">
-        <router-view></router-view>
+        <router-view :key="key"></router-view>
       </div>
     </div>
     <!--底部导航-->
@@ -67,7 +67,13 @@ export default{
 
   },
   computed: {
-    ...mapGetters(['maskZzShow','wapOrPc'])
+    ...mapGetters(['maskZzShow','wapOrPc']),
+    key() {
+      let _that=this;
+      return this.$route.name !== undefined
+        ? this.$route.name + new Date()
+        : this.$route + new Date();
+    }
   },
   components: {
     'v-top':Top,
@@ -80,7 +86,6 @@ export default{
 @import './assets/css/common.scss';
 @import './assets/css/animation';
 body{
-  background: #fff;
   .allConts{
     margin-top: 35px;
   }

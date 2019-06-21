@@ -17,11 +17,15 @@
       </p>
       <!--用户已登录-->
       <p class="userLogin  col-lg-2 right" v-if="loginStatue" @mouseleave="listHide()">
-        <span class="loginExit right" @click="loginExit()">退出</span>
         <span class="userInfo right" @mouseover="listShow()">[{{username}}]</span>
         <ul class="infoList ul_down" v-if="myPostInfoShow" v-show="showInfoList">
           <li  v-for="(nav,index) in navs" :key="index">
+              <i class="icon iconfont" :class="nav.navIcon"></i>
               <a class="surePublish" :href="nav.navUrl" target="_blank">{{nav.navName}}</a>
+          </li>
+          <li>
+              <i class="icon iconfont icon-tuichu"></i>
+              <a class="surePublish" href="javascript:void(0)"  @click="loginExit()">退出登录</a>
           </li>
         </ul>
       </p>
@@ -200,24 +204,22 @@ export default {
   .infoList{
     position: absolute;
     top: 100%;
-    right:55px;
+    right:4px;
     z-index: 9911;
     overflow: hidden;
+    background: #fff;
+    padding: 3px 10px;
   }
   .infoList li{
     line-height: 1;
-    border-bottom: 1px solid #ccc;
     .surePublish{
       display: inline-block;
-      color: #fff;
       height: 30px;
       line-height: 30px;
       text-align: center;
-      background: #8929e3;
-      padding-left: 8px;
-      padding-right: 8px;
+      padding-left: 4px;
+      padding-right: 4px;
       &:hover{
-        background: #9f4fe9;
       }
     }
   }
