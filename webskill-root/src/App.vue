@@ -64,9 +64,7 @@ export default{
         this.leaveWord=true;
       }
     }
-    if(location.pathname=="/login"){
-      document.body.style.background =' url("/webskill/images/bl.png") repeat-x';
-    }
+
   },
   computed: {
     ...mapGetters(['maskZzShow','wapOrPc'])
@@ -82,7 +80,7 @@ export default{
 @import './assets/css/common.scss';
 @import './assets/css/animation';
 body{
-  background: #fafafa;
+  background: #fff;
   .allConts{
     margin-top: 35px;
   }
@@ -104,9 +102,6 @@ body{
     top: 70%;
     left: 50px;
     cursor: pointer;
-    // width: 48px;
-    // height: 48px;
-    // background:url('/webskill/images/leaveWord.jpg') no-repeat 0 0;
     color: #fff;
     border-radius: 50%;
   }

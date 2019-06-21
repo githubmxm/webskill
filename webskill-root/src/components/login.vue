@@ -8,37 +8,37 @@
           <span>代码世界</br><i>code world</i></span>
         </p> -->
         <div class="usersLogin">
-          <p class="loginType">
-            <span class="submit" :class="{cur:loginTypeCur==0}" @click="loginType(0)">登录</span>
-            <span class="goLook" :class="{cur:loginTypeCur==1}" @click="loginType(1)" >注册</span>
+          <p class="loginType row">
+            <span class="submit col-xs-6" :class="{cur:loginTypeCur==0}" @click="loginType(0)">账号登录</span>
+            <span class="goLook col-xs-6" :class="{cur:loginTypeCur==1}" @click="loginType(1)" >注册账号</span>
           </p>
           <div class="rlog">
               <p class="userAcount">
-                  <span>账&nbsp;&nbsp;&nbsp;号: </span>
-                  <input type="text" id="account" name="account" placeholder="2-20位中英文下划线" maxlength="20" v-model="user.account"/>
+                  <input v-if="loginTypeCur==0" type="text" id="account" name="account" placeholder="账号" maxlength="20" v-model="user.account"/>
+                  <input v-if="loginTypeCur==1" type="text" id="account" name="account" placeholder="由2-20位中英文下划线组成的账号" maxlength="20" v-model="user.account"/>
                 </p>
                 <p class="userPassWord">
-                  <span>密&nbsp;&nbsp;&nbsp;码: </span>
-                  <input type="password" id="password" name="password" autocomplete="off" placeholder="6-20位中英文" maxlength="20" v-model="user.accoutPwd" />
-                  <a target="_blank" href="/findpassword" class="findPass">找回密码</a>
+                  <input v-if="loginTypeCur==0" type="password" id="password" name="password" autocomplete="off" placeholder="密码" maxlength="20" v-model="user.accoutPwd" />
+                    <input v-if="loginTypeCur==1" type="password" id="password" name="password" autocomplete="off" placeholder="由6-20位数字英文组成的密码" maxlength="20" v-model="user.accoutPwd" />
                 </p>
                 <p class="userPassWord" v-show="loginTypeCur==1">
-                  <span>邮&nbsp;&nbsp;&nbsp;箱: </span>
-                  <input type="text" id="email" name="email" placeholder="注册邮箱" v-model="user.accoutEmail" maxlength="30" />
-                  <input class="emailCode" @click="emailCode($event)" readonly="readonly" :disabled="emailcodevalue!='获取认证码'"  :value="emailcodevalue"></input>
+                  <input type="text" id="email" name="email" placeholder="请输入注册邮箱" v-model="user.accoutEmail" maxlength="30" />
+                  <input class="emailCode" @click="emailCode($event)" readonly="readonly" :disabled="emailcodevalue!='获取认证码'"  :value="emailcodevalue" />
                 </p>
-                <p class="userPassWord" v-show="loginTypeCur==1">
-                  <span>认证码: </span>
+                <p class="userPassWord" v-show="loginTypeCur==1&&emailCodeShow">
                   <input type="text" id="emailcode" name="emailcode" placeholder="邮箱认证码" v-model="user.accoutEmailCode" maxlength="8" />
                 </p>
                 <p class="userCode">
-                  <span>验证码: </span>
                   <input type="text" id="userCode" name="verification code" placeholder="验证码" maxlength="6" v-model="user.accoutVcode" />
                   <span class="imgCode" @click="refreshVcode()" v-html="vcode"></span>
                 </p>
+               
                 <p class="error" :class="{visible:showError}">{{errorMsg}}</p>
           </div>
           <span class="surSubmit" @click="login">确 定</span>
+           <p class="pull-right">
+                <a target="_blank" href="/findpassword" class="findPass">忘记密码</a>
+            </p>
         </div>
       </div>
   </div>
@@ -64,6 +64,7 @@ export default {
       showError:true,
       loginTypeCur:0,
       loginShow:false,
+      emailCodeShow:false,
       emailcodevalue:"获取认证码",
       keepRepetition:false,
       vcode:""
@@ -127,6 +128,7 @@ export default {
           return false;
         }
         this.keepRepetition=true;
+        this.emailCodeShow=false;
         axios({
           method: 'post',
           url: '/webskill/register',
@@ -142,6 +144,7 @@ export default {
           _this.showError=false;
           if(registerdata.status=="success"){
              _this.countDown(event,60);
+             _this.emailCodeShow=true;
           }else if(_this.errorMsg=="未达到下次发送时间"){
             _this.countDown(event,registerdata.data);
           }else{
@@ -256,10 +259,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 .login_main{
-  display: block;
-  width: 300px;
-  margin: 0 auto;
-  margin-top: 242px;
+    display: block;
+    float: right;
+    width: 450px;
+    height: 444px;
+    position: relative;
+    padding: 30px 60px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    margin-top: 50px;
   .login{
     .codeTitle{
     display: inline-block;
@@ -273,41 +282,56 @@ export default {
     }
    }
    .findPass{
-     color:#3929b5;
+     color:#000;
      cursor: pointer;
      &:hover{
-      text-decoration: underline;
       color:red;
      }
    }
   .usersLogin{
-    display: inline-block;
+    .loginType{
+        padding: 0 5px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #f5f5f5;
+        span.cur{
+            border: none;
+            border-bottom-width: 2px;
+            border-bottom-color: #ca0c16;
+            border-bottom-style: solid;
+        }
+    }
     .emailCode{
       font-size:10px;
       padding:5px;
-      background:#188034;
-      color: #fff;
       cursor: pointer;
       display: inline-block;
       width: 70px;
       text-align: center;
+      margin-top: 3px;
       &:hover{
-        background: #399652;
+        color: #ca0c16;
       }
     }
   .surSubmit{
-    display: inline-block;
-    font-size: 14px;
-    color: #000;
-    background: #ffff;
-    width: 166px;
-    height: 28px;
-    line-height: 28px;
-    margin-left: .57rem;
-    text-align: center;
-    cursor: pointer;
+       display: block;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        cursor: pointer;
+        touch-action: manipulation;
+        padding: 8px 12px;
+        font-size: 14px;
+        font-weight: 400;
+        height: 37px;
+        line-height: 1.5;
+        border-radius: 4px 4px;
+        user-select: none;
+        color: #fff;
+        background-color: #ca0c16;
+        border-color: transparent;
     &:hover{
-      background: blueviolet;
+      background:#ea0d19;
       color: #fff;
     }
   }
@@ -315,24 +339,34 @@ export default {
     margin:10px 0;
     font-size: .16rem;
     #account,#password,#email,#emailcode,#userCode{
-      width: 165px;
-      height: 28px;
-      line-height: 28px;   
-      border: 1px solid #ccc;
-      padding-left: 10px;
-      color: #000;
+     display: block;
+    width: 100%;
+    height: 32px;
+    padding: 8px;
+    border-radius: 4px 4px;
+    line-height: 32px;
+    font-size: 14px;
+    color: #4d4d4d;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    background-image: none;
+   }
+   #email{
+       width: 200px;
+       float: left;
+       margin-right: 57px;
    }
    .userCode{
      margin-top: -7px;
    }
    #userCode{
-     width:95px;
+     width: 208px;
+     float: left;
+     margin-right: 40px;
    }
    .imgCode{
        display: inline-block;
        cursor: pointer;
-       position: relative;
-       top: .08rem;
      }
   }
   .error{
@@ -345,33 +379,20 @@ export default {
     top: -5px;
     width: 165px;
     display: inline-block;
-    margin-left: .58rem;
   }
   .visible{
      visibility: hidden;
   }
   .submit,.goLook{
-    width: 60px;
     height: 28px;
-    border: 1px solid #ccc;
     background: #FFF;
     display: inline-block;
     line-height: 28px;
     cursor: pointer;
     text-align: center;
     &:hover{
-      background: blueviolet;
-      color: #fff;
-    }
-  }
-  .submit{
-    margin-left: .54rem;
-    margin-right: .41rem;
-  }
 
-  .submit.cur,.goLook.cur{
-     background: blueviolet;
-     color: #fff;
+    }
   }
   }
 }
