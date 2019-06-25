@@ -52,7 +52,8 @@ export default {
   .newDigest {
     padding: 8px 0;
     background: url("../../assets/images/indexBgW.png") center center;
-    overflow: hidden;
+    overflow: auto;
+    height: 212px;
     .digList {
       font-size: .13rem;
       color: #2e7cb6;
