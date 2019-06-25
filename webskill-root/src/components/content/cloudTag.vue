@@ -66,7 +66,10 @@ export default {
       }
       a{
         font-size: .13rem;
-      color: #2e7cb6;
+        color: #2e7cb6;
+        &:hover{
+            color: red;
+        }
       }
       .digCon {
         width: 165px;

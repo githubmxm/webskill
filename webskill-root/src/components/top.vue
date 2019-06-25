@@ -8,10 +8,10 @@
         <a title="技百讯" class="logo col-xs-2" href="/index">
           <span>JBX</span>
         </a>
-        <a class="indexView col-xs-2" href="/index" title="首页">首页</a>
-        <a class="myNotesView col-xs-2" title="技能摘要" href="/articlelist/all">技库</a>
+        <a class="indexView col-xs-2" :class="{cur:navUrl=='/index'}" href="/index" title="首页">首页</a>
+        <a class="myNotesView col-xs-2" :class="{cur:navUrl=='/articlelist/all'}" title="技能摘要" href="/articlelist/all">技库</a>
         <a class="newTitleView col-xs-2" title="技能快讯" @click="setAalertMsgFn()">资讯</a>
-        <a class="coTitleView col-xs-2" title="商务合作" href="/cooperation">合作</a>
+        <a class="coTitleView col-xs-2" :class="{cur:navUrl=='/cooperation'}" title="商务合作" href="/cooperation">合作</a>
       </p>
       <!--用户已登录-->
       <p class="userLogin  col-lg-2 right" v-if="loginStatue" @mouseleave="listHide()">
@@ -52,6 +52,7 @@ export default {
       jbx: true,
       username:"",
       navs:[],
+      navUrl:this.$route.path,
       showInfoList:false,
       myPostInfoShow:false,
       dataMonitorShow:false
@@ -136,6 +137,11 @@ export default {
   min-width: 360px;
   background: #45b367;
   padding: 0 20px;
+  position: fixed;
+  width: 100%;
+  top:0;
+  left:0;
+  z-index: 1000;
   .icon-xiaosanjiaodown{
       color: #ccc;
   }
@@ -145,7 +151,6 @@ export default {
   font-size: .14rem;
   .alinks{
     height: 100%;
-    float: left;
     a{
     display: block;
     height: 100%;
@@ -154,8 +159,8 @@ export default {
     cursor: pointer;
     text-align: center;
     font-size:.16rem;
-    .cur,&:hover{
-      color:#e80d06;
+    &.cur,&:hover{
+      color:#2c0ac5;
     }
   }
   .logo{

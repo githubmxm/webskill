@@ -133,6 +133,7 @@ export default {
     }
     .post-list{
         font-size: 14px;
+        padding-left: 15px;
     }
     .look{
         &:hover{

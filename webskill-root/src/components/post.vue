@@ -134,7 +134,7 @@ export default {
         errUeLi:"",
         postAjaxError:"",//确认发布按钮错误提示
         deletePostAjaxError:"",
-        arCons:"<span class='noConRedirct' style='color:red'>内容未找到...(5)</span>",
+        arCons:"",
         replayUeId:null,
         commentsList:[],
         firstSofaShow:true,

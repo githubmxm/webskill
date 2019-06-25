@@ -177,6 +177,7 @@
         pageModel: {
           url: "/webskill/newestNote",
           dynamicTypeCur: 0,
+          limit:8,
           cur: 1,
           searchCon: "",
           againPost: 0
@@ -446,6 +447,10 @@
             cursor: pointer;
             min-width: 60px;
             padding-bottom: 2px;
+            &:hover{
+                border-bottom: 2px solid #5eaeef;
+                color: #5eaeef !important;
+            }
           }
           li.cur {
             border-bottom: 2px solid #5eaeef;

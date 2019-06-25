@@ -148,6 +148,9 @@ export default{
                             font-size:.20rem;
                             color: #3d3d3d;
                             font-weight: bolder;
+                            &:hover{
+                                color: #ea2a2a;
+                            }
                         }
                     }
                     .articleCons{
