@@ -121,4 +121,9 @@ body{
     background: #000;
   }
 }
+@media (max-width: 1200px) {
+    .allConts{
+    margin-top: 125px !important; 
+  }
+  }
 </style>
