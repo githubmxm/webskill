@@ -7,7 +7,9 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import uploader from 'vue-simple-uploader'
 import App from './App'
+import axios from 'axios'
 import store from './store/index'
+import {sync} from 'vuex-router-sync'
 import router from './router'
 import 'font-awesome/css/font-awesome.min.css'
 import Mock from 'mockjs'
@@ -25,6 +27,8 @@ Vue.use(VueAwesomeSwiper)
 Vue.use(uploader)
 Vue.config.productionTip = false
 
+
+sync(store, router)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

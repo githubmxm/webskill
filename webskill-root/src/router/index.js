@@ -1,28 +1,10 @@
-import Vue from 'vue'
 import Router from 'vue-router'
-import Store from '@/store'
-import Index from '@/components'
-import Post from '@/components/post'
-import Privacy from '@/components/privacy'
-import Login from '@/components/login'
-import About from '@/components/about'
-import Leaveword from '@/components/leaveword'
-import Admin from '@/components/admin'
-import Upload from '@/components/upload'
-import Cooperation from '@/components/cooperation'
-import FindPassWord from '@/components/findpassword'
-import ArticleList from '@/components/articlelist'
-import SurePublish from '@/components/surePublish'
-import DataMonitor from '@/components/admin/dataMonitor'
-import MyResource from '@/components/myResource'
-
-import RoseAnm from '@/components/other/roseAnm'
 
 import '../..//static/css/nprogress.css'
 import NProgress from '../../static/js/nprogress.js'
 
 
-Vue.use(Router)
+// Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
@@ -32,102 +14,70 @@ const router = new Router({
   routes: [{
     path: '/login',
     name: 'login',
-    components: {
-      default: Login,
-    }
+    component:  resolve => require(['@/components/login'], resolve)
   },{
     path: '/',
     redirect:'/index'
   },{
     path:'/index',
     name:'index',
-    components:{
-      default: Index
-    }
+    component:  resolve => require(['@/components'], resolve)
   },{
     path:'/findpassword',
     name:'findpassword',
-    components:{
-      default: FindPassWord
-    }
+    component:  resolve => require(['@/components/findpassword'], resolve)
   },{
     path:'/articlelist/:skilltype',
     name:'articlelist',
-    components:{
-      default: ArticleList
-    }
+    component:  resolve => require(['@/components/articlelist'], resolve)
   },{
     path:'/cooperation',
     name:'cooperation',
-    components:{
-      default: Cooperation
-    }
+    component:  resolve => require(['@/components/cooperation'], resolve)
   },{
     path:'/previewpost/:id',
     name:'previewpost',
-    components:{
-      default: Post
-    }
+    component:  resolve => require(['@/components/post'], resolve)
   },,{
     path:'/post/:id',
     name:'post',
-    components:{
-      default: Post
-    }
+    component:  resolve => require(['@/components/post'], resolve)
   },{
     path:'/leaveword',
     name:'leaveword',
-    components:{
-      default: Leaveword
-    }
+    component:  resolve => require(['@/components/leaveword'], resolve)
   },{
     path:'/privacy',
     name:'privacy',
-    components:{
-      default: Privacy
-    }
+    component:  resolve => require(['@/components/privacy'], resolve)
   },{
     path:'/about',
     name:'about',
-    components:{
-      default: About
-    }
+    component:  resolve => require(['@/components/about'], resolve)
   },{
     path:'/webSkillAdmin',
     name:'webSkillAdmin',
-    components:{
-      default: Admin
-    }
+    component:  resolve => require(['@/components/admin'], resolve)
   },{
     path:'/webSkillUpload',
     name:'webSkillUpload',
-    components:{
-      default: Upload
-    }
+    component:  resolve => require(['@/components/upload'], resolve)
   },{
     path:'/surePublish',
     name:'surePublish',
-    components:{
-      default: SurePublish
-    }
+    component:  resolve => require(['@/components/surePublish'], resolve)
   },{
     path:'/admin/dataMonitor',
     name:'dataMonitor',
-    components:{
-      default: DataMonitor
-    }
+    component:  resolve => require(['@/components/admin/dataMonitor'], resolve)
   },{
     path:'/myResource',
     name:'myResource',
-    components:{
-      default: MyResource
-    }
+    component:  resolve => require(['@/components/myResource'], resolve)
   },{
     path:'/other/roseAnm',
     name:'roseAnm',
-    components:{
-      default: RoseAnm
-    }
+    component:  resolve => require(['@/components/other/roseAnm'], resolve)
   }]
 })
 
