@@ -4,6 +4,10 @@
   </div>
 </template>
 <script>
+import '../../../static/UE/ueditor.config.js'
+import '../../../static/UE/ueditor.all.js'
+import '../../../static/UE/lang/zh-cn/zh-cn.js'
+import '../../../static/UE/ueditor.parse.min.js'
   export default {
     name: 'UE',
     data () {
