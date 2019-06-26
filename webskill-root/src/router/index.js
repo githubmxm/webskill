@@ -1,6 +1,4 @@
 import Router from 'vue-router'
-
-import '../..//static/css/nprogress.css'
 import NProgress from '../../static/js/nprogress.js'
 
 
