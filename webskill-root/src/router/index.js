@@ -13,7 +13,7 @@ import Cooperation from '@/components/cooperation'
 import FindPassWord from '@/components/findpassword'
 import ArticleList from '@/components/articlelist'
 import SurePublish from '@/components/surePublish'
-import DataMonitor from '@/components/dataMonitor'
+import DataMonitor from '@/components/admin/dataMonitor'
 import MyResource from '@/components/myResource'
 
 import RoseAnm from '@/components/other/roseAnm'
@@ -111,7 +111,7 @@ const router = new Router({
       default: SurePublish
     }
   },{
-    path:'/dataMonitor',
+    path:'/admin/dataMonitor',
     name:'dataMonitor',
     components:{
       default: DataMonitor
