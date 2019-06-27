@@ -261,7 +261,7 @@ export default {
 .login_main{
     display: block;
     float: right;
-    width: 450px;
+    max-width: 450px;
     height: 444px;
     position: relative;
     padding: 30px 60px;
@@ -401,5 +401,9 @@ export default {
    .submit{
       margin-left: .62rem !important;
    }
+   .login_main{
+       float: none;
+   }
  }
+
 </style>
