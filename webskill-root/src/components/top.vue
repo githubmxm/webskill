@@ -41,7 +41,9 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {
+    tyApi
+  } from "@/apis/api";
 import { mapActions,mapGetters } from "vuex";
 
 export default {
@@ -59,7 +61,9 @@ export default {
     };
   },
   created() {
-    
+      let _this=this;
+    //   _this.getToken();
+     _this.loginStatus();
   },
   computed: {
     ...mapGetters(['loginStatue'])
@@ -68,25 +72,44 @@ export default {
     ...mapActions(['setAalertMsgFn','setLoginStatueFn','setLoginUserFn','setUserGradeFn']),
     loginExit(){
       let _this=this;
-      axios({
-        method: 'post',
-        url: '/webskill/loginExit'
-      }).then((res) => {
+      _this.$axios.post(tyApi().loginExit,{}).then((res) => {
         let userState = res.data
         if (userState.status == "success") {
+            localStorage.setItem("webskillloginstatus",0);
           _this.setLoginStatueFn(false)
           _this.username="";
           _this.setLoginUserFn(_this.username);
         }
       })
     },
-
+    loginStatus(){
+        let _this=this;
+      _this.$axios.get(tyApi().loginStatus,{}).then((res) => {
+      let userState = res.data
+      if (userState.status == "success") {
+          localStorage.setItem("webskillloginstatus",1)
+        _this.setLoginStatueFn(true);
+        _this.username=userState.data.userName;
+        if(userState.data.userGrade<3){
+          _this.myPostInfoShow=true;
+        }
+        _this.setLoginUserFn(_this.username);
+        if(userState.data.userGrade==1){
+          _this.dataMonitorShow=true;
+        }else{
+          _this.dataMonitorShow=false;
+        }
+      }else{
+        localStorage.setItem("webskillloginstatus",0);
+        _this.setLoginStatueFn(false);
+        _this.setUserGradeFn(0);
+        _this.setLoginUserFn("");
+      }
+    })
+    },
     getNavs(){
         let _this=this;
-        axios({
-          method: 'get',
-          url: '/webskill/getNavs',
-        }).then((res) => {
+        _this.$axios.get(tyApi().getNavs,{}).then((res) => {
           _this.navs=res.data.data;
         })
     },
@@ -102,29 +125,6 @@ export default {
   mounted: function() {
     let _this=this;
     _this.getNavs();
-    axios({
-      method: 'get',
-      url: '/webskill/loginStatus'
-    }).then((res) => {
-      let userState = res.data
-      if (userState.status == "success") {
-        _this.setLoginStatueFn(true);
-        _this.username=userState.data.userName;
-        if(userState.data.userGrade<3){
-          _this.myPostInfoShow=true;
-        }
-        _this.setLoginUserFn(_this.username);
-        if(userState.data.userGrade==1){
-          _this.dataMonitorShow=true;
-        }else{
-          _this.dataMonitorShow=false;
-        }
-      }else{
-        _this.setLoginStatueFn(false);
-        _this.setUserGradeFn(0);
-        _this.setLoginUserFn("");
-      }
-    })
   }
  
 };

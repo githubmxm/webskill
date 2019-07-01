@@ -2,7 +2,7 @@
   <div id="app">
     <div class="main_blog">
       <!--顶部导航-->
-      <v-top v-if="publicView" :key="key"></v-top>
+      <v-top v-if="publicView"></v-top>
       <!--消息通知-->
       <!-- <transition enter-active-class="bounceInDown" leave-active-class="bounceInDown"> -->
       <!-- <div class="newMsgAlert container" v-if="publicView">

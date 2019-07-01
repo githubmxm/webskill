@@ -89,7 +89,9 @@
 
 <script>
 import UE from './ue/ue';
-import axios from 'axios';
+import {
+    tyApi
+  } from "@/apis/api";
 import { mapGetters } from "vuex";
 import FormatDataTime from '../tool/formatDataTime';
 export default {
@@ -164,13 +166,9 @@ export default {
       //获取文章详情
       getArticleDetail(){
          var _this=this;
-          axios({
-            method: 'get',
-            url: '/webskill/post/show',
-            params:{
-              id:_this.postId
-            }
-          }).then((res) => {
+         _this.$axios.get(tyApi().postShow,{
+             id:_this.postId
+         }).then((res) => {
             let postshow = res.data;
             if(postshow.status=="success"){
               if(postshow.data){
@@ -188,21 +186,17 @@ export default {
                 _this.prevArticle=postShowDetailData.newNotePrev?"/post/"+(_this.postId-1):"javascript:void(0)";
                 let cclist=postshow.data.articleComment;
                 for(let i=0;i<cclist.length;i++){
-                  axios({
-                    method: 'get',
-                    url: '/webskill/post/replayCommentFloor',
-                    params:{
+                    _this.$axios.get(tyApi().postReplayCommentFloor,{
                       articleId:_this.postId,
                       commentUserFloor:cclist[i].commentId
-                    }
-                  }).then((res) => {
-                    let replayComData=res.data;
-                    if(replayComData.status=="success"){
-                      cclist[i].replayComment=replayComData.data;
-                      if(i==cclist.length-1){
-                        _this.commentList=cclist;
-                      }
-                    }
+                    }).then((res) => {
+                        let replayComData=res.data;
+                        if(replayComData.status=="success"){
+                        cclist[i].replayComment=replayComData.data;
+                        if(i==cclist.length-1){
+                            _this.commentList=cclist;
+                        }
+                        }
                   });
                 }
               }else{
@@ -236,13 +230,9 @@ export default {
           this.error="评论内容不能为空";
           return false;
         }
-        axios({
-          method: 'post',
-          url: '/webskill/post/comment',
-          data:{
+        _this.$axios.post(tyApi().postComment,{
             commentId:_this.postId,
             commentCons:content
-          }
         }).then((res) => {
           let commentdata = res.data;
           if(commentdata.status=="success"){
@@ -274,15 +264,11 @@ export default {
           this.errUeLi="回复评论内容不能为空";
           return false;
         }
-        axios({
-          method: 'post',
-          url: '/webskill/post/replayComment',
-          data:{
-            replayCommentId:_this.postId,
+        _this.$axios.post(tyApi().postReplayComment,{
+             replayCommentId:_this.postId,
             replayCommentFloor:_this.replayUeId,
             replayCommentAuthor:replayAuthor,
             replayCommentCons:refcomCon
-          }
         }).then((res) => {
           let replayCommentdata = res.data;
           if(replayCommentdata.status=="success"){
@@ -298,12 +284,8 @@ export default {
       //确认文章发布
       postPublishAjax:function(){
         let _this=this;
-        axios({
-          method: 'post',
-          url: '/webskill/post/surePublish',
-          data:{
+        _this.$axios.post(tyApi().postSurePublish,{
             surePostId:_this.postId
-          }
         }).then((res) => {
           var result=res.data;
           if(result.status=="success"){
@@ -316,12 +298,8 @@ export default {
       //删除待发布文章
       postDeletcAjax:function(){
         let _this=this;
-        axios({
-          method: 'post',
-          url: '/webskill/post/deleteSurePublish',
-          data:{
-            surePostId:_this.postId
-          }
+        _this.$axios.post(tyApi().postDeleteSurePublish,{
+            urePostId:_this.postId
         }).then((res) => {
           var result=res.data;
           if(result.status=="success"){

@@ -66,7 +66,9 @@
 <script>
 import { mapActions } from "vuex";
 import UE from './ue/ue'
-import axios from 'axios'
+import {
+    tyApi
+  } from "@/apis/api";
 export default {
   data () {
     return {
@@ -100,10 +102,7 @@ export default {
     }
   },
   created () {
-    axios({
-      method: 'get',
-      url: '/webskill/webSkillAdmin'
-    }).then((res) => {
+      this.$axios.get(tyApi().webSkillAdmin,{}).then((res) => {
       let userState = res.data
       if (userState.status == "failed") {
         location.href="/index";
@@ -149,16 +148,12 @@ export default {
         //   this.error='文章发布不能大于5000个';
         //   return false;
         // }
-        axios({
-          method: 'post',
-          url:'/webskill/posts',
-          data:{
-            contitle:_this.contitle,
+        this.$axios.post(tyApi().posts,{
+             contitle:_this.contitle,
             contskilltype:_this.skillType.toLocaleLowerCase(),
             contype:_this.chooseTypeId,
             contlabel:_this.tabTypeName,
             conConts:ueCon
-          }
         }).then((res)=>{
           let resData=res.data;
           if(resData.status=="success"){

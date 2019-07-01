@@ -19,7 +19,6 @@
 
 <script>
 import Pagebar from '../components/unit/table-pagebar'
-import axios from 'axios'
 import { mapGetters,mapActions } from "vuex"
 export default {
     name: "surePublish",
@@ -45,7 +44,7 @@ export default {
           let fileS=JSON.parse(file)[0];
           let fileSplit=fileS.split("/");
           let fileName=fileSplit[fileSplit.length-1]
-          return 'webskill/downloadResource?fileName='+fileName;
+          return 'webskill/downloadResource?fileName='+fileName+'&token='+JSON.parse(localStorage.getItem("webskilltoken")).t;
         }
     },
     components:{

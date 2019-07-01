@@ -35,7 +35,9 @@ https://github.com/simple-uploader/Uploader/blob/develop/README_zh-CN.md
 
 <script>
 import { mapActions } from "vuex";
-import axios from 'axios'
+import {
+    tyApi
+  } from "@/apis/api";
 export default {
   data () {
     return {
@@ -45,7 +47,7 @@ export default {
       pathList:[], //待确认真实资源名路径
       mapPathList:[], //对应得本地文件名
       options: {
-        target: '/webskill/uploading',
+        target: '/webskill/uploading?token='+JSON.parse(localStorage.getItem("webskilltoken")).t,
         testChunks: false
       },
       attrs: {
@@ -97,15 +99,11 @@ export default {
           this.errorMsg="请选择您要上传得资源!";
           return false;
         }
-        axios({
-          method: 'post',
-          url: '/webskill/uploadResource',
-          data:{
-            uploadTitle:_this.uploadTitle,
+        _this.$axios.post(tyApi().uploadResource,{
+                  uploadTitle:_this.uploadTitle,
             uploadResourceType:_this.uploadResourceType,
             uploadResourceUrl:JSON.stringify(_this.pathList)
-          }
-        }).then((res) => {
+          }).then((res) => {
           let uploadData = res.data;
           if(uploadData.status=="success"){
             _this.errorMsg="上传完毕";

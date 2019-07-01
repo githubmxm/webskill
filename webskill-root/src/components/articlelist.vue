@@ -49,7 +49,6 @@
 </template>
 <script>
 import Pagebar from '../components/unit/table-pagebar'
-import axios from 'axios'
 import { mapGetters,mapActions } from "vuex"
 export default{
     name:'articlelist',
@@ -81,21 +80,6 @@ export default{
     },
     mounted () {
       let _this=this;
-    //   axios({
-    //     method: 'get',
-    //     url: '/webskill/articleTypeList',
-    //     params:{
-    //       r:Math.random(),
-    //       skillType:_this.articelSkillType
-    //     }
-    //   }).then((res) => {
-    //     let articleList = res.data;
-    //     if (articleList.status == "success") {
-    //       _this.skillListDetail=articleList.data;
-    //     }else{
-    //      _this.skillListDetail=[];
-    //     }
-    //   })
     },
     computed: {
        ...mapGetters(['skillListDetail'])

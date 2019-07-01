@@ -47,7 +47,9 @@
 
 <script>
 import { mapGetters,mapActions } from "vuex";
-import axios from 'axios'
+import {
+    tyApi
+  } from "@/apis/api";
 export default {
   name: "index",
   data() {
@@ -72,17 +74,8 @@ export default {
   },
   created () {
     let _this=this;
-    axios({
-        method: 'get',
-        url: '/webskill/loginStatus'
-      }).then((res) => {
-        let loginstatus = res.data;
-        if(loginstatus.status=="success"){
-          location.href="/index"
-        }else{
-          _this.loginShow=true;
-        }
-    })
+    // _this.getToken();
+    _this.loginStatus();
   },
   methods: {
     ...mapActions(["setUserGradeFn"]),
@@ -91,16 +84,30 @@ export default {
       this.errorMsg="";
       this.getVcode();
     },
+    loginStatus:function(){
+        let _this=this;
+        _this.$axios.get(tyApi().loginStatus,{}).then((res) => {
+            let loginstatus = res.data;
+            if(loginstatus.status=="success"){
+                localStorage.setItem("webskillloginstatus",1)
+                location.href="/index"
+            }else{
+                localStorage.setItem("webskillloginstatus",0)
+            _this.loginShow=true;
+            }
+        })
+    },
     getVcode:function(){
       let _this=this;
-      axios({
-          method: 'get',
-          url: '/webskill/vcode',
-          params:{
-            r:Math.random()
+      _this.$axios.get(tyApi().vcode,{r:Math.random()}).then((res) => {
+          if(res.data.status=="incorrect-authen"){
+            _this.vcode='验证码'
+            _this.errorMsg='操作异常';
+            _this.showError=false;
+          }else{
+              _this.vcode=res.data;
           }
-        }).then((res) => {
-          _this.vcode=res.data;
+          
       })
     },
     refreshVcode:function(){
@@ -129,16 +136,12 @@ export default {
         }
         this.keepRepetition=true;
         this.emailCodeShow=false;
-        axios({
-          method: 'post',
-          url: '/webskill/register',
-          data:{
-            accoutType:_this.loginTypeCur,
+         _this.$axios.post(tyApi().register,{
+               accoutType:_this.loginTypeCur,
             account:_this.user.account,
             accoutPwd:_this.user.accoutPwd,
             accoutEmail:_this.user.accoutEmail
-          }
-        }).then((res) => {
+         }).then((res) => {
           let registerdata = res.data;
           _this.errorMsg=registerdata.message;
           _this.showError=false;
@@ -156,25 +159,22 @@ export default {
     login (){
       let _this=this;
       if(this.formValidata("","login")){
-          axios({
-          method: 'post',
-          url: '/webskill/login',
-          data:{
-            accoutType:_this.loginTypeCur,
+          _this.$axios.post(tyApi().login,{
+             accoutType:_this.loginTypeCur,
             account:_this.user.account,
             accoutPwd:_this.user.accoutPwd,
             accoutEmail:_this.user.accoutEmail,
             accoutEmailCode:_this.user.accoutEmailCode,
             vcode:_this.user.accoutVcode
-          }
-        }).then((res) => {
+         }).then((res) => {
           let logindata = res.data;
           if(logindata.status=="success"){
+            localStorage.setItem("webskillloginstatus",1);
             _this.setUserGradeFn(logindata.data.userGrade);
-            location.href="/index";
           }else{
             this.errorMsg=logindata.message;
             this.showError=false;
+            this.refreshVcode();
           }
         })
       }
@@ -376,7 +376,6 @@ export default {
     font-size: 12px;
     margin: 0;
     position: relative;
-    top: -5px;
     width: 165px;
     display: inline-block;
   }

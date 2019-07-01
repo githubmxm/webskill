@@ -11,7 +11,7 @@
               <input class="findAcout" type="text" placeholder="请输入认证码" v-model="code" maxlength="8" />
           </div>
           <div class="accout" v-else-if="type=='resetPass'">
-                <input class="findAcout" type="text" placeholder="请输入新密码" v-model="setPass" maxlength="20" />
+                <input class="findAcout" type="password" placeholder="请输入新密码" v-model="setPass" maxlength="20" />
           </div>
           <p class="errMsg">{{errMsg}}</p>
           <span class="findNext" @click="findPassWord()">下一步</span>
@@ -20,7 +20,9 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {
+    tyApi
+  } from "@/apis/api";
 export default {
     name:'findPassWord',
     data(){
@@ -71,14 +73,10 @@ export default {
                 return false;
             }
             this.keepRepetition=true;
-            axios({
-             method: 'post',
-             url: '/webskill/findPassGetCode',
-             data:{
-                 findAccount:_this.accout,
+             _this.$axios.post(tyApi().findPassGetCode,{
+                  findAccount:_this.accout,
                  findEmail:_this.email
-             }
-             }).then((res) => {
+          }).then((res) => {
                  let findGetCode=res.data;
                  _this.errMsg=findGetCode.message;
                  if(findGetCode.status=="success"){
@@ -118,17 +116,13 @@ export default {
                     return false;
                 }
             }
-            axios({
-             method: 'post',
-             url: '/webskill/findPassWordPost',
-             data:{
-                 findLastAccount:_this.accout,
+            _this.$axios.post(tyApi().findPassWordPost,{
+             findLastAccount:_this.accout,
                  findLastEmail:_this.email,
                  findLastCode:_this.code,
                  findLastType:_this.type,
                  findLastPassWord:_this.setPass
-             }
-             }).then((res) => {
+          }).then((res) => {
                  let findPassWordPostData=res.data;
                  _this.errMsg=findPassWordPostData.message;
                  if(_this.type=="resetPass"){

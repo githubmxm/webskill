@@ -32,7 +32,6 @@
 
 <script>
 import Pagebar from '../components/unit/table-pagebar'
-import axios from 'axios'
 import { mapGetters,mapActions } from "vuex"
 export default {
     name: "surePublish",
@@ -69,38 +68,6 @@ export default {
             this.pageModel.myPostList=this.myPostList=index;
             this.pageModel.againPost++;
         }
-      //确认文章发布
-    //   postPublishAjax:function(){
-    //     let _this=this;
-    //     axios({
-    //       method: 'post',
-    //       url: '/webskill/post/surePublish',
-    //       data:{
-    //         surePostId:_this.postId
-    //       }
-    //     }).then((res) => {
-    //       var result=res.data;
-    //       if(result.status=="success"){
-    //         location.href="/index";
-    //       }else{
-    //         _this.postAjaxError="-"+result.message;
-    //       }
-    //     })
-    //   },
-    //   getSurePost:function(){
-    //     let _this=this;
-    //     axios({
-    //       method: 'get',
-    //       url: '/webskill/getSurePublish'
-    //     }).then((res) => {
-    //       var result=res.data;
-    //       if(result.status=="success"){
-    //         _this.publishPostList=result.data;
-    //       }else{
-    //         _this.error="-"+result.message;
-    //       }
-    //     })
-    //   }
     },
     components:{
       Pagebar

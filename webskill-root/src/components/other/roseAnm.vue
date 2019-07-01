@@ -16,6 +16,9 @@
 
 <script>
   import axios from 'axios'
+  import {
+    tyApi
+  } from "@/apis/api";
   export default {
     data() {
       return {
@@ -69,12 +72,7 @@
 
     },
     mounted() {
-       axios({
-        method: 'get',
-        url: '/webskill/loginStatus'
-      }).then((res) => {
-
-    })
+      
     }
   }
 

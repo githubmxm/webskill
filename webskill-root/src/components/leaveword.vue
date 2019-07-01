@@ -39,7 +39,9 @@
 <script>
 import { mapActions } from "vuex";
 import UE from './ue/ue'
-import axios from 'axios'
+import {
+    tyApi
+  } from "@/apis/api";
 export default {
   name:'leaveword',
   data () {
@@ -92,15 +94,11 @@ export default {
           this.error='发表内容不能少于10个字';
           return false;
         }
-        axios({
-          method:'post',
-          url:'/webskill/leaveWord',
-          data:{
-            leaveWordType:_this.chooseTypeId,
+        _this.$axios.post(tyApi().leaveWord,{
+                  leaveWordType:_this.chooseTypeId,
             leaveWordCon:ueCon,
             leaveWordTitle:_this.leaveWordTitles
-          }
-        }).then((res)=>{
+          }).then((res)=>{
           let resData=res.data;
           if(resData.status=="incorrect-login"){
             _this.setLoginStatueFn(false);

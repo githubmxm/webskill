@@ -1,0 +1,151 @@
+/**
+ * axios二次封装
+ * @author StarFire_xm
+ * @param {get,post}
+ * @description: 
+ * get,post请求二次封装，扩展接口通用认证携带与接口拦截处理
+ * 
+ */
+import axios from 'axios'
+import qs from 'qs'
+
+import {
+  tyApi
+} from "@/apis/api.js";
+window.refresh = false; //保证token只在页面加载时调用一次
+let isFirstAjaxToken=true;
+let isFirstAjaxExit=true;
+
+
+// 请求方式的配置
+export default {
+  post(url, data) {
+    let obj = {};
+    obj.url = url;
+    obj.data = data;
+    obj.method = 'post';
+    return this.getAction(obj);
+
+  },
+  get(url, data) {
+    let obj = {};
+    obj.url = url;
+    obj.data = data;
+    obj.method = 'get';
+    return this.getAction(obj);
+
+  },
+  delete(url, data) {
+    let obj = {};
+    obj.url = url;
+    obj.data = data;
+    obj.method = 'delete';
+    return this.getAction(obj);
+  },
+  put(url, data) {
+    let obj = {};
+    obj.url = url;
+    obj.data = data;
+    obj.method = 'put';
+    return this.getAction(obj);
+  },
+
+
+   send(obj) {
+    let ob = {
+      method: obj.method,
+      url: obj.url
+    }
+    if (obj.method == 'post' || obj.method == 'put') {
+      ob.data = qs.stringify(obj.data);
+    } else {
+      ob.params = obj.data;
+    }
+    return new Promise((resolve, reject) => {
+      axios(ob).then(res => {
+          resolve(res);
+          if(obj.url==tyApi().login){
+              if(res.data.status=='success'){
+                resolve(this.getNewToken(function(){
+                    localStorage.setItem("webskillloginstatus",1);
+                    location.href="/index";
+                }));
+              }
+              resolve(res)
+          }
+          if(obj.url==tyApi().loginExit){
+            resolve(this.getNewToken());
+          }
+          if(res.data.status=="incorrect-authen"){
+            localStorage.setItem("webskillloginstatus",0);
+            resolve(this.getNewToken(function(){
+                // location.href='/login';
+            }));
+          }
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+
+  //判断是否过期
+  isExpired() {
+    let thisTime=parseInt(new Date().getTime());
+    return new Promise((resolve, reject) => {
+        if(localStorage.getItem("webskilltoken")){
+            let createTokenTime=parseInt(JSON.parse(localStorage.getItem("webskilltoken")).c);
+            let getTf=localStorage.getItem("webskillloginstatus")==1?((thisTime-createTokenTime)/1000>60*60*24&&(thisTime-createTokenTime)/1000<60*60*24*7):((thisTime-createTokenTime)/1000>60*10&&(thisTime-createTokenTime)/1000<60*60*24*360);
+            if (isFirstAjaxToken&&getTf) {
+                isFirstAjaxToken=false;
+                resolve(this.getNewToken());
+            }else{
+                resolve(true);
+            }
+        }else{
+            isFirstAjaxToken=false;
+            if(isFirstAjaxExit){
+                isFirstAjaxExit=false;
+                resolve(this.getNewToken());
+            }
+            
+            resolve(true);
+        }
+
+      
+     
+    });
+  },
+
+  //获取token
+  getNewToken(fn) {
+    window.refresh = true;
+    return new Promise((resolve, reject) => {
+      axios.get(tyApi().getToken, {}).then(
+        res => {
+            let u={
+                "t":res.data.token,
+                "c":res.data.time
+            }
+            localStorage.setItem("webskilltoken",JSON.stringify(u));
+            if(fn){
+                fn();
+            }
+          resolve(true);
+        }).catch(err => {
+            resolve(false);
+      });
+    })
+  },
+
+  //封装的发送请求方法
+  async getAction(obj) {
+    let _that = this;
+    if (obj.url != tyApi().getToken) {
+      await _that.isExpired();
+      obj.data.token = localStorage.getItem("webskilltoken")?JSON.parse(localStorage.getItem("webskilltoken")).t:'';
+    }
+    return _that.send(obj);
+    
+  }
+}

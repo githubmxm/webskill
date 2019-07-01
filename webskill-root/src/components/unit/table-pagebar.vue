@@ -25,7 +25,6 @@
 </template>
 
 <script>
-    import axios from 'axios'
     import { mapActions } from "vuex";
     export default{
         props: ['page-model'],
@@ -147,11 +146,8 @@
                     //待发布列表
                     this.param["myPostList"]=this.myPostList;
                 }
-                axios({
-                    method: _this.method,
-                    url: _this.url,
-                    params: _this.param,
-                }).then((res) => {
+
+                this.$axios.get(_this.url,_this.param).then((res) => {
                     
                     let dataResult=res.data;
                     if(dataResult.status=="success"){

@@ -12,7 +12,9 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {
+    tyApi
+  } from "@/apis/api";
 export default {
   name: "cloudTags",
   data() {
@@ -24,9 +26,8 @@ export default {
   methods: {
       getCloudTags:function(){
           var _this=this;
-          axios({
-            method: 'get',
-            url: '/webskill/getCloudTags',
+          _this.$axios.get(tyApi().getCloudTags,{
+            r:Math.random()
           }).then((res) => {
             let d = res.data;
             _this.cloudTags=d.data;

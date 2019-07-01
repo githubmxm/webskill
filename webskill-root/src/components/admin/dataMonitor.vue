@@ -12,7 +12,9 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import {
+    tyApi
+  } from "@/apis/api";
   export default {
     data() {
       return {
@@ -34,12 +36,8 @@
     methods: {
       getArticleDistribution(){
         let _this=this;
-        axios({
-          method: 'GET',
-          url: '/webskill/article/distribution',
-          data:{
+        this.$axios.get(tyApi().articleDistribution,{
             r:Math.random()
-          }
         }).then((res) => {
           let result=res.data;
           if(result.status=="success"){
