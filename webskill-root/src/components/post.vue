@@ -131,7 +131,7 @@ export default {
           //默认的编辑区域高度
           initialFrameHeight:60
         },
-        surePostPublishButton:this.$route.name=="previewpost"? true : false,
+        surePostPublishButton:false,
         ue1: "ue1", // 不同编辑器必须不同的id,
         errUeLi:"",
         postAjaxError:"",//确认发布按钮错误提示
@@ -172,6 +172,12 @@ export default {
             let postshow = res.data;
             if(postshow.status=="success"){
               if(postshow.data){
+                  if(_this.$route.name=="previewpost"){
+                    if(postshow.data.userGrade==1){
+                      _this.surePostPublishButton=true;
+                    }
+                  }
+                  
                 let postShowDetailData=postshow.data.newNoteDetail;
                 _this.arCons=postShowDetailData.newNoteCont;
                 _this.arTitle=postShowDetailData.newNoteTitle;

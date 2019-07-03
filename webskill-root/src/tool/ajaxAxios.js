@@ -63,6 +63,9 @@ export default {
     }
     return new Promise((resolve, reject) => {
       axios(ob).then(res => {
+          if(res.data.status=="login-or-authen"){
+            location.href='/index';
+          }
         if(res.data.status=="incorrect-anthen-login"){
             localStorage.setItem("webskillloginstatus",0);
             resolve(this.getNewToken(function(){
