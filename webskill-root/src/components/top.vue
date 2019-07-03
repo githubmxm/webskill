@@ -19,7 +19,7 @@
             <span class="userInfo left" @mouseover="listShow()">{{username}}</span>
             <i class="icon iconfont icon-xiaosanjiaodown"></i>
         </span>
-        <ul class="infoList ul_down" v-if="myPostInfoShow" v-show="showInfoList">
+        <ul class="infoList" v-show="showInfoList">
           <li  v-for="(nav,index) in navs" :key="index">
               <i class="icon iconfont" :class="nav.navIcon"></i>
               <a class="surePublish" :href="nav.navUrl">{{nav.navName}}</a>

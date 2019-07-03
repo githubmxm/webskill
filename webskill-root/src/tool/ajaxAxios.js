@@ -63,6 +63,12 @@ export default {
     }
     return new Promise((resolve, reject) => {
       axios(ob).then(res => {
+        if(res.data.status=="incorrect-anthen-login"){
+            localStorage.setItem("webskillloginstatus",0);
+            resolve(this.getNewToken(function(){
+                location.href='/login';
+            }));
+          }
           resolve(res);
           if(obj.url==tyApi().login){
               if(res.data.status=='success'){
@@ -75,12 +81,6 @@ export default {
           }
           if(obj.url==tyApi().loginExit){
             resolve(this.getNewToken());
-          }
-          if(res.data.status=="incorrect-authen"){
-            localStorage.setItem("webskillloginstatus",0);
-            resolve(this.getNewToken(function(){
-                // location.href='/login';
-            }));
           }
         })
         .catch(err => {

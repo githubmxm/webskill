@@ -299,7 +299,7 @@ export default {
       postDeletcAjax:function(){
         let _this=this;
         _this.$axios.post(tyApi().postDeleteSurePublish,{
-            urePostId:_this.postId
+            delPostId:_this.postId
         }).then((res) => {
           var result=res.data;
           if(result.status=="success"){
