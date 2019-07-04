@@ -34,7 +34,7 @@
                 </p>
                 <p>
                     <a href="/webskill/getQqLogin">
-                        <img src="/static/images/qq.png" alt="">
+                        <img src="/webskill/images/qq.png" alt="">
                     </a>
                 </p>
                 <p class="error" :class="{visible:showError}">{{errorMsg}}</p>
