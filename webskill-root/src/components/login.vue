@@ -32,7 +32,11 @@
                   <input type="text" id="userCode" name="verification code" placeholder="验证码" maxlength="6" v-model="user.accoutVcode" />
                   <span class="imgCode" @click="refreshVcode()" v-html="vcode"></span>
                 </p>
-               
+                <p>
+                    <a href="/webskill/getQqLogin">
+                        <img src="/static/images/qq.png" alt="">
+                    </a>
+                </p>
                 <p class="error" :class="{visible:showError}">{{errorMsg}}</p>
           </div>
           <span class="surSubmit" @click="login">确 定</span>
