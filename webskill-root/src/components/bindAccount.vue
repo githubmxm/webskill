@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group1 form_list">
                          <div id="bind_login_msg">{{errorMsg}}</div>
-                        <span class="btn input-submit" id="bind_old_login" @click="bindLogin()">绑定并登录</span>
+                        <span class="btn input-submit" id="bind_old_login" @click="bindLogin">绑定并登录</span>
                     </div>
                 </div>
                 <div class="tab_wxform_in" style="display: none;">
@@ -103,27 +103,6 @@ export default {
       var inP1=/^[A-Za-z0-9_]+$/,
           allEi=/^([A-Za-z0-9]|[\u4E00-\u9FA5])+$/,
           exp = new RegExp("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$");
-      function _ChkLengXz(ob,bytesL){
-          //初始中文长度
-          var s=0;
-          //默认总长度字符
-          var allL=0;
-          for(var i=0;i<ob.replace(/\s+/g,"").length;i++)
-          {
-              if( /.*[\u4e00-\u9fa5]+.*$/.test(ob.replace(/\s+/g,"").charAt(i))){
-                  s++;
-              };
-          }
-          //英文个数总长
-          var chi= ob.replace(/\s+/g,"").length-s;
-          //总长
-          allL=chi+s*2;
-          if(allL>bytesL)
-          {
-              return false;
-          }
-          return true;
-      };
       if(this.user.account==""||this.user.accoutPwd==""){
         this.errorMsg="账号或密码不能为空";
         return false;
@@ -135,7 +114,7 @@ export default {
     },
     bindLogin(){
       let _this=this;
-      if(this.formValidata()){
+      if(_this.formValidata()){
           _this.$axios.post(tyApi().bindAccountLogin,{
             account:_this.user.account,
             accoutPwd:_this.user.accoutPwd,
