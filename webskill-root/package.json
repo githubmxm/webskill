@@ -28,7 +28,8 @@
     "vue-router": "^2.3.1",
     "vue-simple-uploader": "^0.4.6",
     "vue2-animate": "^1.0.4",
-    "vuex": "^2.3.1"
+    "vuex": "^2.3.1",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
