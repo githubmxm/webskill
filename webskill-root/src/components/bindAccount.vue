@@ -29,11 +29,11 @@
                     </div>
                     <div class="form_list clearfix">
                         <div class="clearfix">
-                            <a href="/findpassword" class="right cl_9">忘记密码？</a>
+                            <a href="/findpassword" target="_blank" class="right cl_9">忘记密码？</a>
                         </div>
                     </div>
                     <div class="form-group1 form_list">
-                         <div id="bind_login_msg">{{errorMsg}}</div>
+                         <div id="bind_login_msg" class="bind_login_msg">{{errorMsg}}</div>
                         <span class="btn input-submit" id="bind_old_login" @click="bindLogin">绑定并登录</span>
                     </div>
                 </div>
@@ -108,9 +108,12 @@ export default {
         return false;
       }else if(!this.user.account||!this.user.accoutPwd||!inP1.test(this.user.accoutPwd)||this.user.accoutPwd.length>20||this.user.accoutPwd.length<6||!inP1.test(this.user.account)||this.user.account.length<2||this.user.account.length>20){
          this.errorMsg="账号或密码格式不对";
+         return false;
       }else if(!this.user.userCode){
           this.errorMsg="参数异常错误,请重试";
+          return false;
       }
+      return true;
     },
     bindLogin(){
       let _this=this;
@@ -124,6 +127,7 @@ export default {
           if(logindata.status=="success"){
             localStorage.setItem("webskillloginstatus",1);
             _this.setUserGradeFn(logindata.data.userGrade);
+            location.href="/index";
           }else{
             this.errorMsg=logindata.message;
           }
@@ -145,6 +149,9 @@ export default {
     border-radius: 5px;
     background: #fff;
     position: relative;
+    .bind_login_msg{
+        color: red;
+    }
     .tit_wx {
         width: 322px;
         margin: 0 auto;
