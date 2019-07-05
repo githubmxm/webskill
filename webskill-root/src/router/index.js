@@ -14,6 +14,10 @@ const router = new Router({
     name: 'login',
     component:  resolve => require(['@/components/login'], resolve)
   },{
+    path: '/bindAccount',
+    name: 'bindAccount',
+    component:  resolve => require(['@/components/bindAccount'], resolve)
+  },{
     path: '/',
     redirect:'/index'
   },{

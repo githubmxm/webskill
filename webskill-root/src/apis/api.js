@@ -15,6 +15,8 @@ export function tyApi() {
         register:baseUrl+"/webskill/register",
         //登录
         login:baseUrl+"/webskill/login",
+        //绑定登录
+        bindAccountLogin:baseUrl+"/webskill/bindAccountLogin",
         //退出
         loginExit:baseUrl+"/webskill/loginExit",
         //返回图片上传配置参数
