@@ -83,8 +83,8 @@ export default {
   data() {
     return {
        user:{
-        headerImg:this.$route.query.hu||"",
-        userName:decodeURI(this.$route.query.count)||"",
+        headerImg:decodeURIComponent(this.$route.query.hu)||"",
+        userName:decodeURIComponent(this.$route.query.count)||"",
         account:"",
         accoutPwd:"",
         userCode:this.$route.query.r||""
