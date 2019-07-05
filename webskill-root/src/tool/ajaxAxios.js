@@ -73,7 +73,7 @@ export default {
             }));
           }
           resolve(res);
-          if(obj.url==tyApi().login||obj.url==tyApi().bindLogin){
+          if(obj.url==tyApi().login||obj.url==tyApi().bindAccountLogin){
               if(res.data.status=='success'){
                 resolve(this.getNewToken(function(){
                     localStorage.setItem("webskillloginstatus",1);
