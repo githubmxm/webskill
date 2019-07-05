@@ -127,7 +127,6 @@ export default {
           if(logindata.status=="success"){
             localStorage.setItem("webskillloginstatus",1);
             _this.setUserGradeFn(logindata.data.userGrade);
-            location.href="/index";
           }else{
             this.errorMsg=logindata.message;
           }
