@@ -61,7 +61,6 @@ export default {
     } else {
       ob.params = obj.data;
     }
-    console.log(location.pathname+location.search)
     return new Promise((resolve, reject) => {
       axios(ob).then(res => {
           if(res.data.status=="login-or-authen"){
@@ -133,7 +132,6 @@ export default {
                 "c":res.data.time
             }
             localStorage.setItem("webskilltoken",JSON.stringify(u));
-            console.log(100)
             if(fn){
                 fn();
             }
@@ -155,7 +153,6 @@ export default {
       if(aaa){
         if (!obj.url != tyApi().getToken) {
           await _that.isExpired();
-          console.log(10000000)
           obj.data.token = localStorage.getItem("webskilltoken")?JSON.parse(localStorage.getItem("webskilltoken")).t:'';
         }
       }
@@ -163,7 +160,6 @@ export default {
     }else{
       if (!obj.url != tyApi().getToken) {
         await _that.isExpired();
-        console.log(10000000)
         obj.data.token = localStorage.getItem("webskilltoken")?JSON.parse(localStorage.getItem("webskilltoken")).t:'';
       }
     }
