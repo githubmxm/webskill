@@ -85,7 +85,7 @@ export default {
     loginStatus(){
         let _this=this;
       _this.$axios.get(tyApi().loginStatus,{}).then((res) => {
-      let userState = res.data
+      let userState = res.data;
       if (userState.status == "success") {
           localStorage.setItem("webskillloginstatus",1)
         _this.setLoginStatueFn(true);

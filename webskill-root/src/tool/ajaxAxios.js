@@ -61,30 +61,32 @@ export default {
     } else {
       ob.params = obj.data;
     }
+    console.log(location.pathname+location.search)
     return new Promise((resolve, reject) => {
       axios(ob).then(res => {
           if(res.data.status=="login-or-authen"){
             location.href='/index';
           }
-        if(res.data.status=="incorrect-anthen-login"){
+          if(res.data.status=="incorrect-anthen-login"){
             localStorage.setItem("webskillloginstatus",0);
             resolve(this.getNewToken(function(){
                 location.href='/login';
             }));
           }
-          resolve(res);
           if(obj.url==tyApi().login||obj.url==tyApi().bindAccountLogin){
               if(res.data.status=='success'){
                 resolve(this.getNewToken(function(){
-                    localStorage.setItem("webskillloginstatus",1);
-                    location.href="/index";
+                  localStorage.setItem("webskillloginstatus",1);
+                  location.href='/index';
                 }));
               }
-              resolve(res)
           }
+          resolve(res);
           if(obj.url==tyApi().loginExit){
+            localStorage.setItem("webskillloginstatus",0);
             resolve(this.getNewToken());
           }
+         
         })
         .catch(err => {
           reject(err);
@@ -131,6 +133,7 @@ export default {
                 "c":res.data.time
             }
             localStorage.setItem("webskilltoken",JSON.stringify(u));
+            console.log(100)
             if(fn){
                 fn();
             }
@@ -144,10 +147,28 @@ export default {
   //封装的发送请求方法
   async getAction(obj) {
     let _that = this;
-    if (obj.url != tyApi().getToken) {
-      await _that.isExpired();
-      obj.data.token = localStorage.getItem("webskilltoken")?JSON.parse(localStorage.getItem("webskilltoken")).t:'';
+   
+
+    if(isFirstAjaxToken&&location.pathname+location.search=="/index?g=t"){
+      let aaa=await  _that.getNewToken();
+      localStorage.setItem("webskillloginstatus",1);
+      if(aaa){
+        if (!obj.url != tyApi().getToken) {
+          await _that.isExpired();
+          console.log(10000000)
+          obj.data.token = localStorage.getItem("webskilltoken")?JSON.parse(localStorage.getItem("webskilltoken")).t:'';
+        }
+      }
+      isFirstAjaxToken=false;
+    }else{
+      if (!obj.url != tyApi().getToken) {
+        await _that.isExpired();
+        console.log(10000000)
+        obj.data.token = localStorage.getItem("webskilltoken")?JSON.parse(localStorage.getItem("webskilltoken")).t:'';
+      }
     }
+  
+
     return _that.send(obj);
     
   }
