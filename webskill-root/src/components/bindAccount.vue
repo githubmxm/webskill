@@ -93,7 +93,9 @@ export default {
     };
   },
   created () {
-    
+    if(localStorage.getItem("webskillloginstatus")==1){
+        location.href="/index";
+    }
   },
   methods:{
     ...mapActions(["setUserGradeFn"]),
