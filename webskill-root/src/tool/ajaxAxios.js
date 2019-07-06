@@ -145,18 +145,18 @@ export default {
   //封装的发送请求方法
   async getAction(obj) {
     let _that = this;
-   
-
-    if(isFirstAjaxToken&&location.pathname+location.search=="/index?g=t"){
+    let uStatus=localStorage.getItem("webskillloginstatus"); //过滤部分无用请求
+    if(isFirstAjaxToken&&uStatus!=1&&location.pathname+location.search=="/index?g=t"){
       let aaa=await  _that.getNewToken();
       localStorage.setItem("webskillloginstatus",1);
+      isFirstAjaxToken=false;
       if(aaa){
         if (!obj.url != tyApi().getToken) {
           await _that.isExpired();
           obj.data.token = localStorage.getItem("webskilltoken")?JSON.parse(localStorage.getItem("webskilltoken")).t:'';
         }
       }
-      isFirstAjaxToken=false;
+      
     }else{
       if (!obj.url != tyApi().getToken) {
         await _that.isExpired();
