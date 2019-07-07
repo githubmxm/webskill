@@ -129,6 +129,7 @@ export default{
                         .headerTitle{
                             display: inline-block;
                             width: 100%;
+                            padding: 2px;
                             overflow: hidden;
                             word-wrap: break-word;
                             font-size:.20rem;
