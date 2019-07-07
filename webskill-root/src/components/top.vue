@@ -135,13 +135,16 @@ export default {
 @import '../assets/css/animation';
 .top{
   min-width: 360px;
-  background: #45b367;
+  background: #fff;
   padding: 0 20px;
   position: fixed;
   width: 100%;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   z-index: 1000;
+  border-top: 1px solid #c7c7c7;
+  border-bottom: 1px solid #c7c7c7;
+  background-color: #fbfbfb;
   .icon-xiaosanjiaodown{
       color: #ccc;
   }
@@ -155,7 +158,7 @@ export default {
     display: block;
     height: 100%;
     float: left;
-    color: #fff;
+    color: #333;
     cursor: pointer;
     text-align: center;
     font-size:.16rem;
@@ -179,7 +182,7 @@ export default {
     }
     span{
       font-size: .22rem;
-      color: #fff;
+      color: #333;
     }
   }
   }
@@ -187,7 +190,7 @@ export default {
     position: relative;
     height: 100%;
     .userInfo{
-      color:#fff;
+      color:#333;
       &:hover{
         cursor: pointer;
       }
@@ -232,7 +235,7 @@ export default {
 
   .goLogin{
     display: block;
-    color:#fff;
+    color:#333;
     height: 100%;
     cursor: pointer;
     padding: 0 15px;
