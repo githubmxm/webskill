@@ -1,5 +1,5 @@
 import Router from 'vue-router'
-import NProgress from '../../static/js/nprogress.js'
+// import NProgress from '../../static/js/nprogress.js'
 
 
 // Vue.use(Router)
