@@ -87,7 +87,7 @@ export default{
 @import './assets/css/animation';
 body{
   .allConts{
-    margin-top: 85px;
+    margin-top: 80px;
   }
   .newMsgAlert{
     height:30px;
@@ -123,7 +123,7 @@ body{
 }
 @media (max-width: 1200px) {
     .allConts{
-    margin-top: 125px !important; 
+    padding-bottom: 30px !important; 
   }
   }
 </style>

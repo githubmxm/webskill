@@ -42,8 +42,10 @@
             </div>
            
         </div>
-        <div class="adverLf left col-lg-3 col-sm-4 col-xs-12">
-            待发布
+        <div class="left col-lg-3 col-sm-4 col-xs-12">
+            <!-- <div class="adverLf col-xs-12">
+                    待发布
+            </div> -->
         </div>
     </div>
 </template>

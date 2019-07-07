@@ -78,7 +78,7 @@
               {{error}}
           </div>
           <div class="clear">
-            <span data-v-7ddd7f1e="" class="leaveWordSubmit" @click="postComment()">提交</span>
+            <span data-v-7ddd7f1e="" class="leaveWordSubmit" @click="postComment()">发表</span>
           </div>
           <p class="firstSofa" v-show="commentList.length==0">还没有评论哦，来抢个沙发吧！</p>
         </div>
@@ -407,10 +407,10 @@ export default {
                 }
               }
         .comments{
-          padding:20px 20px 20px 0;
-          margin:60px 0 35px 0;
+          padding:10px 10px 10px 0;
+          margin:10px 0 10px 0;
           .conTitle{
-            padding: 15px 0;
+            padding: 10px 0;
             text-align:center;
             font-size:.14rem;
           }
@@ -532,15 +532,14 @@ export default {
         }
       .leaveWordSubmit{
         display: inline-block;
-        height: 30px;
-        line-height: 30px;
-        width: 50px;
         text-align: center;
-        background: blueviolet;
+        background: #5d9fec;
         color: #fff;
         float: right;
         margin-top: 10px;
-        cursor:pointer;
+        cursor: pointer;
+        padding: 3px 13px;
+        border-radius: 3px;
         &:hover{
           background: #a876d6;
         }

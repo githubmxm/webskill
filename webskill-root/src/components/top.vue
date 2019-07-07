@@ -4,7 +4,7 @@
 <template>
   <header class="top container-fluid">
     <nav class="topType container">
-      <p class="alinks clear col-lg-5">
+      <p class="alinks clear col-lg-5 col-xs-9">
         <a title="技百讯" class="logo col-xs-2" href="/index">
           <span>JBX</span>
         </a>
@@ -149,10 +149,10 @@ export default {
       color: #ccc;
   }
   .topType{
-  height: 50px;
   line-height: 50px;
   font-size: .14rem;
   .alinks{
+    padding: 0;
     height: 100%;
     a{
     display: block;
@@ -162,6 +162,7 @@ export default {
     cursor: pointer;
     text-align: center;
     font-size:.16rem;
+    padding: 0;
     &.cur,&:hover{
       color:#2c0ac5;
     }
@@ -189,6 +190,7 @@ export default {
   .userLogin,.noLogin{
     position: relative;
     height: 100%;
+    padding: 0;
     .userInfo{
       color:#333;
       &:hover{
@@ -216,11 +218,12 @@ export default {
     right:4px;
     z-index: 9911;
     overflow: hidden;
-    background: #fff;
+    background: #f9f9f9;
     padding: 3px 10px;
   }
   .infoList li{
     line-height: 1;
+    width: 100px;
     .surePublish{
       display: inline-block;
       height: 30px;
@@ -238,7 +241,6 @@ export default {
     color:#333;
     height: 100%;
     cursor: pointer;
-    padding: 0 15px;
     &:hover{
       color:#e80d06;
     }
