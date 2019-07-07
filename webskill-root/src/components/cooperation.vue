@@ -20,7 +20,7 @@
               <br/>
             </div>
           </div>
-          <div class="aboutTaat">
+          <!-- <div class="aboutTaat">
             <h1 class="aboutTitle">赞助</h1>
             <div class="aboutCon">
                 支付宝,微信赞助,感谢您的支持,我们将持续改进及完善。
@@ -35,7 +35,7 @@
             <div class="aboutCon">
                QQ,WX:1123360735(注明来意哦),您也可通过留言与我们联系！
             </div>
-          </div>
+          </div> -->
           <p class="thanks">
             此致：谢礼！！！
           </p>
