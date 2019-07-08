@@ -19,6 +19,8 @@ export function tyApi() {
         bindAccountLogin:baseUrl+"/webskill/bindAccountLogin",
         //退出
         loginExit:baseUrl+"/webskill/loginExit",
+        //开通使用
+        openUse:baseUrl+"/webskill/openUse",
         //返回图片上传配置参数
         ueController:baseUrl+"/webskill/UE/node/controller",
         //用户留言

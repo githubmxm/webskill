@@ -25,7 +25,7 @@
               <a class="surePublish" :href="nav.navUrl">{{nav.navName}}</a>
           </li>
           <li v-if="!navs.length">
-              <i class="icon iconfont icon-tuichu"></i>
+              <i class="icon iconfont icon-kaitongzhong chuliIconStyle"></i>
               <a class="surePublish" href="javascript:void(0)"  @click="openUse()">开通使用</a>
           </li>
           <li>
@@ -76,6 +76,12 @@ export default {
     ...mapActions(['setAalertMsgFn','setLoginStatueFn','setLoginUserFn','setUserGradeFn']),
     openUse(){
         let _this=this;
+        _this.$axios.post(tyApi().openUse,{}).then((res) => {
+        let d = res.data
+        if (d.status == "success") {
+          _this.getNavs();
+        }
+      })
     },
     loginExit(){
       let _this=this;
@@ -203,6 +209,10 @@ export default {
       &:hover{
         cursor: pointer;
       }
+    }
+    .chuliIconStyle{
+        float: left;
+        margin-top: 7px;
     }
     .loginExit{
       cursor: pointer;
