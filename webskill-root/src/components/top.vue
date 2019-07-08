@@ -24,6 +24,10 @@
               <i class="icon iconfont" :class="nav.navIcon"></i>
               <a class="surePublish" :href="nav.navUrl">{{nav.navName}}</a>
           </li>
+          <li v-if="!navs.length">
+              <i class="icon iconfont icon-tuichu"></i>
+              <a class="surePublish" href="javascript:void(0)"  @click="openUse()">开通使用</a>
+          </li>
           <li>
               <i class="icon iconfont icon-tuichu"></i>
               <a class="surePublish" href="javascript:void(0)"  @click="loginExit()">退出登录</a>
@@ -70,6 +74,9 @@ export default {
   },
   methods: {
     ...mapActions(['setAalertMsgFn','setLoginStatueFn','setLoginUserFn','setUserGradeFn']),
+    openUse(){
+        let _this=this;
+    },
     loginExit(){
       let _this=this;
       _this.$axios.post(tyApi().loginExit,{}).then((res) => {

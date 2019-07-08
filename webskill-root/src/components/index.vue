@@ -42,7 +42,7 @@
               <p class="hei blogger"><span>博主:</span> <span class="cor blogName">StarFire_xm</span></p>
               <p class="hei blogger"><span>职业:</span> <span class="cor lookPv">前端工程师</span></p>
               <p class="hei blogger"><span>兴趣:</span> <span class="cor focus">技术,运动</span></p>
-              <p class="hei blogger"><span>联系(qq,wx):</span> <span class="cor lookPv">1123360735</span></p>
+              <p class="hei blogger"><span>联系:</span> <span class="cor lookPv">请留言</span></p>
               <p class="hei blogger"><span>格言:</span> <span class="cor focus">择需,取上态而为之</span></p>
               <!-- <p class="PlayTour clear">
                 <span>微信打赏:</span>
