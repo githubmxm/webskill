@@ -658,17 +658,29 @@ export default {
     z-index: 1000001;   
     .codeConent{
         position: relative;
+        #qrCode{
+          border: 1px solid #ccc;
+          overflow: hidden;
+        }
         .qcColse{
             position: absolute;
             right: -10px;
             font-size: 20px;
-            margin-top: 16px;
+            top: 16px;
             cursor: pointer;
+            transition: transform .2s linear;
+            -moz-transition: transform .2s linear;
+            -webkit-transition: transform .2s linear;
+            &:hover{
+              transform:rotate(-180deg);
+              -moz-transform:rotate(-180deg);
+              -webkit-transform:rotate(-180deg);
+            }
         }
         .codeTitle{
             padding: 5px 8px;
             font-size: 14px;
-            color: #000;
+            color: #d3d4e0;
         }
     }
     

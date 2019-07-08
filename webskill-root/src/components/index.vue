@@ -86,7 +86,7 @@
                 <!--搜索导航-->
                 <div class="search" v-if="dynamicTypeCur==5">
                     <input type="text" name="" v-model="searchCon" id="searchCon" placeholder="输入您要搜索的内容" />
-                    <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()">Find</span>
+                    <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()">点我搜索</span>
                 </div>
                 <ul>
                     <li class="zxbl" v-for="(item,index) in dynamicDataList" :key="index" :arid="item.newNoteId" :animate-delay="(0.3*index)"
@@ -530,17 +530,15 @@
               }
               .searchSubmit {
                 display: inline-block;
-                font-size: .14rem;
+                font-size: .12rem;
                 cursor: pointer;
-                width: 35px;
-                height: 25px;
-                line-height: 25px;
                 text-align: center;
                 background: #cddce0;
                 color: #000;
                 border-radius: 3px;
+                padding: 3px 8px;
                 &:hover {
-                  background: #16E36A;
+                  background: #5d9fec;
                   color: #fff;
                 }
               }
