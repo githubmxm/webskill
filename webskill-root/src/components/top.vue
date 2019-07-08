@@ -79,7 +79,8 @@ export default {
         _this.$axios.post(tyApi().openUse,{}).then((res) => {
         let d = res.data
         if (d.status == "success") {
-          _this.getNavs();
+          localStorage.clear();
+          location.href="/index";
         }
       })
     },

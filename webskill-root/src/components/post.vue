@@ -15,6 +15,15 @@
               <a class="prevAD left" :class="{disableP:prevArticle=='javascript:void(0)'}" :href="prevArticle"><i class="fa fa-angle-double-left"></i> 上一篇</a>
               <a class="nextAD right" :class="{disableN:nextArticle=='javascript:void(0)'}" :href="nextArticle">下一篇 <i class="fa fa-angle-double-right"></i></a>
             </div>
+            <p class="showIcon">
+                <ul>
+                    <li @click="shareType(0)" title="微信分享">
+                        <svg class="icon svg-icon" aria-hidden="true">
+                            <use xlink:href="#icon-weixinfenxiang"></use>
+                        </svg>
+                    </li>
+                </ul>
+            </p>
             <div class="commentHandle clear">
               <p class="commentHandleType right" v-if="false">
                 <span class="comLike">{{arLikeNum}}</span>
@@ -84,6 +93,18 @@
         </div>
       </article>
     </section>
+    <div class="qrCode" v-show="qrCode">
+        <div class="codeConent">
+            <span class="qcColse"  @click="closeQc()">
+                <svg class="icon svg-icon" aria-hidden="true">
+                    <use xlink:href="#icon-guanbi"></use>
+                </svg>
+            </span>
+            <p class="text-center codeTitle">扫描二维码分享</p>
+            <div id="qrCode" ref="qrCodeDiv"></div>
+        </div>
+    </div>
+    
   </div>
 </template>
 
@@ -92,6 +113,8 @@ import UE from './ue/ue';
 import {
     tyApi
   } from "@/apis/api";
+import wxshare from '@/assets/js/wxshare';
+import QRCode from 'qrcodejs2';
 import { mapGetters } from "vuex";
 import FormatDataTime from '../tool/formatDataTime';
 export default {
@@ -131,6 +154,7 @@ export default {
           //默认的编辑区域高度
           initialFrameHeight:60
         },
+        qrCode:false,
         surePostPublishButton:false,
         ue1: "ue1", // 不同编辑器必须不同的id,
         errUeLi:"",
@@ -314,13 +338,40 @@ export default {
             _this.deletePostAjaxError="-"+result.message;
           }
         })
+      },
+      shareType(type){
+          if(type==0){
+              this.qrCode=true;
+              document.getElementsByClassName("maskZZ")[0].style.display="block";
+          }
+      },
+      //生成当前二维码
+      bindQRCode: function () {
+        new QRCode(this.$refs.qrCodeDiv, {
+          text: location.href,
+          width: 180,
+          height: 180,
+          colorDark: "#333333", //二维码颜色
+          colorLight: "#ffffff", //二维码背景色
+          correctLevel: QRCode.CorrectLevel.L//容错率，L/M/H
+        })
+      },
+      closeQc:function(){
+          this.qrCode=false;
+          document.getElementsByClassName("maskZZ")[0].style.display="none";
       }
+
   },
   computed: {
     ...mapGetters(['loginStatue','loginUser'])
   },
   mounted () {
-   this.getArticleDetail();
+    wxshare.do("",'http://www.zshom.com/webskill/images/photo.png',this.arTitle,'技百讯分享');
+    this.getArticleDetail();
+    this.$nextTick(function () {
+        this.bindQRCode();
+        
+    })
   }
 }
 </script>
@@ -351,9 +402,19 @@ export default {
         .noConRedirct{
           color: red;
         }
+        .showIcon{
+            padding: 8px 0;
+            li{
+                font-size: 22px;
+                float: left;
+                margin-right: 5px;
+                cursor: pointer;
+            }
+        }
         .nextPrev{
           margin-top:30px;
           font-size: .14rem;
+          overflow: hidden;
           .prevAD,.nextAD{
             color:#5d9fec;
           }
@@ -586,6 +647,31 @@ export default {
         }
       }
     }
+  }
+  .qrCode{
+   position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: -180px 0 0 -90px;
+    width: 180px;
+    height: 180px;
+    z-index: 1000001;   
+    .codeConent{
+        position: relative;
+        .qcColse{
+            position: absolute;
+            right: -10px;
+            font-size: 20px;
+            margin-top: 16px;
+            cursor: pointer;
+        }
+        .codeTitle{
+            padding: 5px 8px;
+            font-size: 14px;
+            color: #000;
+        }
+    }
+    
   }
 }
 </style>

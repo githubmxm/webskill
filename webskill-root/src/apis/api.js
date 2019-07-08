@@ -17,6 +17,8 @@ export function tyApi() {
         login:baseUrl+"/webskill/login",
         //绑定登录
         bindAccountLogin:baseUrl+"/webskill/bindAccountLogin",
+        //微信分享信息获取
+        getWxInfo:baseUrl+"/webskill/getWxInfo",
         //退出
         loginExit:baseUrl+"/webskill/loginExit",
         //开通使用
