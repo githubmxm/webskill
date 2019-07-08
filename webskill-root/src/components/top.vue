@@ -10,7 +10,7 @@
         </a>
         <a class="indexView col-xs-2" :class="{cur:navUrl=='/index'}" href="/index" title="首页">首页</a>
         <a class="myNotesView col-xs-2" :class="{cur:navUrl=='/articlelist/all'}" title="技能摘要" href="/articlelist/all">技库</a>
-        <a class="newTitleView col-xs-2" title="技能快讯" @click="setAalertMsgFn()">资讯</a>
+        <!-- <a class="newTitleView col-xs-2" title="技能快讯" @click="setAalertMsgFn()">资讯</a> -->
         <a class="coTitleView col-xs-2" :class="{cur:navUrl=='/cooperation'}" title="商务合作" href="/cooperation">合作</a>
       </p>
       <!--用户已登录-->

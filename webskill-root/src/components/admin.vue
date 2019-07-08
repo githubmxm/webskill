@@ -54,7 +54,7 @@
           </div>
           <div class="buttonEror clear">
               <router-link v-show="viewNewPost"  class="submitResult" :to="'/previewpost/'+subPostId" target="_blank">提交成功,点击阅览,确认发布</router-link>
-              <span class="leaveWordSubmit" @click="postArticle()">提交</span>
+              <span class="leaveWordSubmit" @click="postArticle()">发布</span>
           </div>
          
         </div>
@@ -289,14 +289,16 @@ export default {
       }
     }
     .leaveWordSubmit{
-      display: inline-block;
-      height: 30px;
-      line-height: 30px;
-      width: 50px;
-      text-align: center;
-      background: blueviolet;
-      color: #fff;
-      float: left;
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+    background: #5d9fec;
+    color: #fff;
+    float: right;
+    margin-top: 10px;
+    cursor: pointer;
+    padding: 3px 13px;
+    border-radius: 3px;
       cursor:pointer;
       &:hover{
         background: black;
