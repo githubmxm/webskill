@@ -32,7 +32,7 @@
     <p class="maskZZ" v-show='maskZzShow'></p>
     <!--右侧固定悬浮-->
     <div class="ws-side-toolbar">
-        <a class="option-box" data-type="app" @mouseover="showRwm()" @mouseleave="hideRwm()">
+        <a class="option-box" v-if="wapOrPc=='pc'" @mouseover="showRwm()" @mouseleave="hideRwm()">
           <img src="/webskill/images/webskill_rwm.png" alt="" srcset="">
           <span class="show-txt" :class="{opricty1:sjView}">用手机</span>
           <div class="app-qr-box" v-show="sjView">
@@ -68,10 +68,11 @@ export default{
   created () {
     if (navigator.platform.indexOf('Win32') != -1 || navigator.platform.indexOf('Win64') != -1 || navigator.platform.indexOf('MacPPC') != -1 || navigator.platform.indexOf('MacIntel') != -1) {
       //PC
-      this.setwapOrPcFn("pc")
+      this.setwapOrPcFn("pc");
     } else {
       //Wap
-      this.setwapOrPcFn("wap")
+
+      this.setwapOrPcFn("wap");
     }
   },
   methods: {
