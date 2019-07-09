@@ -90,6 +90,10 @@
               </li>
             </ul>
           </div>
+          <p v-if="vcodeShow">
+            <input type="text" v-model="inCode" id="vcode" placeholder="请输入验证码" maxlength="6" />
+              <span class="imgCode" @click="refreshVcode()" v-html="vcode"></span>
+          </p>
           <div class="editor-container" id="editor-container">
             <UE  :config=config :id=ue1 ref="ue"></UE>
           </div>
@@ -171,6 +175,9 @@ export default {
         postAjaxError:"",//确认发布按钮错误提示
         deletePostAjaxError:"",
         arCons:"",
+        vcodeShow:false,
+        vcode:"",
+        inCode:"",
         replayUeId:null,
         commentsList:[],
         firstSofaShow:true,
@@ -193,6 +200,22 @@ export default {
     UE
   },
   methods: {
+      getVcode:function(){
+      let _this=this;
+      _this.$axios.get(tyApi().vcode,{r:Math.random()}).then((res) => {
+          if(res.data.status=="incorrect-authen"){
+            _this.vcode='验证码'
+            _this.errorMsg='操作异常';
+            _this.showError=false;
+          }else{
+              _this.vcode=res.data;
+          }
+          
+      })
+    },
+    refreshVcode:function(){
+      this.getVcode();
+    },
       formatmodel(str,model){
             for(var k in model){
                 var re = new RegExp("{"+k+"}","g");
@@ -279,16 +302,25 @@ export default {
         }
         _this.$axios.post(tyApi().postComment,{
             commentId:_this.postId,
-            commentCons:content
+            commentCons:content,
+            vcode:_this.inCode
         }).then((res) => {
           let commentdata = res.data;
           if(commentdata.status=="success"){
             //文章评论成功
+            _this.refreshVcode();
+            _this.inCode="";
             _this.commentList.push({"commentAuthor":_this.loginUser,"commentTime":FormatDataTime(new Date().getTime()),"commentCon":content});
             _this.$refs.ue.clearContent();
             _this.replayUeId=10000000000;
           }else{
-            _this.error=commentdata.message;
+               _this.error=commentdata.message;
+            if(commentdata.status=="code-error"){
+                _this.vcodeShow=true;
+                _this.inCode="";
+                _this.refreshVcode();
+            }
+            
           }
         })
       },
@@ -492,9 +524,17 @@ export default {
                   }
                 }
               }
+              #vcode{
+                display: inline-block;
+                width: 160px;
+                border: 1px solid #cdc5c5;
+                padding: 5px;
+                position: relative;
+                top: -10px;
+              }
         .comments{
           padding:10px 10px 10px 0;
-          margin:10px 0 10px 0;
+          margin:10px 0 15px 0;
           .conTitle{
             padding: 10px 0;
             text-align:center;
@@ -600,20 +640,20 @@ export default {
           }
         }
         .surePostPublish{
-            float: right;
-            display: inline-block;
             position: relative;
             margin-right: 10px;
-            height: 30px;
-            line-height: 30px;
-            padding: 0 10px;
+            line-height: 23px;
+            display: inline-block;
             text-align: center;
-            background: blueviolet;
+            background: #5d9fec;
             color: #fff;
+            float: right;
+            margin-top: 10px;
             cursor: pointer;
-            margin-top:20px;
+            padding: 3px 13px;
+            border-radius: 3px;
             &:hover{
-              background: black;
+              background: blueviolet;
             }
         }
       .leaveWordSubmit{

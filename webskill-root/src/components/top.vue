@@ -24,7 +24,7 @@
               <i class="icon iconfont" :class="nav.navIcon"></i>
               <a class="surePublish" :href="nav.navUrl">{{nav.navName}}</a>
           </li>
-          <li v-if="!navs.length">
+          <li v-if="myPostInfoShow">
               <i class="icon iconfont icon-kaitongzhong chuliIconStyle"></i>
               <a class="surePublish" href="javascript:void(0)"  @click="openUse()">开通使用</a>
           </li>
@@ -60,8 +60,7 @@ export default {
       navs:[],
       navUrl:this.$route.path,
       showInfoList:false,
-      myPostInfoShow:false,
-      dataMonitorShow:false
+      myPostInfoShow:false
     };
   },
   created() {
@@ -104,15 +103,10 @@ export default {
           localStorage.setItem("webskillloginstatus",1)
         _this.setLoginStatueFn(true);
         _this.username=userState.data.userName;
-        if(userState.data.userGrade<3){
+        if(userState.data.userGrade==3){
           _this.myPostInfoShow=true;
         }
         _this.setLoginUserFn(_this.username);
-        if(userState.data.userGrade==1){
-          _this.dataMonitorShow=true;
-        }else{
-          _this.dataMonitorShow=false;
-        }
       }else{
         localStorage.setItem("webskillloginstatus",0);
         _this.setLoginStatueFn(false);

@@ -15,7 +15,7 @@ import {
 window.refresh = false; //保证token只在页面加载时调用一次
 let isFirstAjaxToken=true;
 let isFirstAjaxExit=true;
-
+let forLogin="['/leaveword','/surePublish','/webSkillAdmin','/webSkillUpload','/dataMonitor','/myResource']";
 
 // 请求方式的配置
 export default {
@@ -64,9 +64,10 @@ export default {
     return new Promise((resolve, reject) => {
       axios(ob).then(res => {
           if(res.data.status=="login-or-authen"){
+            localStorage.setItem("webskillloginstatus",0);
             location.href='/index';
           }
-          if(res.data.status=="incorrect-anthen-login"){
+          if(res.data.status=="no-logine"||location.pathname!="/"&&forLogin.includes(location.pathname)&&res.data.status=="incorrect-login"||res.data.status=="incorrect-anthen-login"){
             localStorage.setItem("webskillloginstatus",0);
             resolve(this.getNewToken(function(){
                 location.href='/login';
@@ -82,13 +83,14 @@ export default {
           }
           resolve(res);
           if(obj.url==tyApi().loginExit){
+            localStorage.clear();
             localStorage.setItem("webskillloginstatus",0);
             resolve(this.getNewToken());
           }
          
         })
         .catch(err => {
-          reject(err);
+          reject(this.getNewToken());
         });
     });
   },
