@@ -64,9 +64,6 @@
             <p class="blogCl">快速通道案</p>
             <div class="conTxt">
                 <p>
-                    <a href="https://blog.csdn.net/blogdevteam/article/details/90369522" target="_blank">版权申诉</a>
-                </p>
-                <p>
                   <a href="http://www.cyberpolice.cn/" target="_blank">网络110报警服务</a>
                 </p>
                 <p>
