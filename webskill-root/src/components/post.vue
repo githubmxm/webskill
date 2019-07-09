@@ -22,9 +22,14 @@
                             <use xlink:href="#icon-weixinfenxiang"></use>
                         </svg>
                     </li>
-                    <li title="qq分享"  onclick="buttonShare('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey')">
+                    <li @click="shareType(1)" title="qq空间分享" >
                          <svg class="icon svg-icon" aria-hidden="true">
                             <use xlink:href="#icon-qqkongjianfenxiang"></use>
+                        </svg>  
+                    </li>
+                    <li @click="shareType(2)" title="微博分享" >
+                         <svg class="icon svg-icon" aria-hidden="true">
+                            <use xlink:href="#icon-weixinfenxiang1"></use>
                         </svg>
                     </li>
                 </ul>
@@ -188,6 +193,13 @@ export default {
     UE
   },
   methods: {
+      formatmodel(str,model){
+            for(var k in model){
+                var re = new RegExp("{"+k+"}","g");
+                str = str.replace(re,model[k]);
+            }
+            return str;
+      },
       //获取编辑器内容
       getUEContent() {
         let content = this.$refs.ue.getUEContent(); // 调用子组件方法
@@ -345,9 +357,16 @@ export default {
         })
       },
       shareType(type){
+          let _this=this;
           if(type==0){
               this.qrCode=true;
               document.getElementsByClassName("maskZZ")[0].style.display="block";
+          }
+          if(type==1){
+              window.open(this.formatmodel("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={url}&title={title}",{title:_this.arTitle,url:location.href}))
+          }
+          if(type==2){
+              window.open(this.formatmodel("http://service.weibo.com/share/share.php?title={title}&url={url}&source=bookmark&appkey=2171139250",{title:_this.arTitle,url:location.href}))
           }
       },
       //生成当前二维码
@@ -414,6 +433,7 @@ export default {
                 float: left;
                 margin-right: 5px;
                 cursor: pointer;
+                margin-right: 8px;
             }
         }
         .nextPrev{
