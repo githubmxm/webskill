@@ -84,7 +84,8 @@ export default{
         this.sjView=false;
     },
     goTop(){
-         document.documentElement.scrollTop=0; 
+         document.documentElement.scrollTop=0;
+         document.body.scrollTop=0;
     }
   },
   mounted () {
