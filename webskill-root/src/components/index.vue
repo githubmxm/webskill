@@ -124,7 +124,7 @@
                <!--搜索导航-->
                <div class="search" v-if="dynamicTypeCur==4">
                   <input type="text" name="" v-model="searchCon" id="searchCon" placeholder="输入您要搜索的内容" />
-                  <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()">Find</span>
+                  <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()">点我搜索</span>
               </div>
              
               <!--敬请期待-->
@@ -132,7 +132,7 @@
                 <!--搜索导航-->
                 <div class="search" v-if="dynamicTypeCur==5">
                     <input type="text" name="" v-model="searchCon" id="searchCon" placeholder="输入您要搜索的内容" />
-                    <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()">Find</span>
+                    <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()">点我搜索</span>
                 </div>
                 <p v-show="dynamicDataList.length==0" class="noCons">暂 无 数 据！</p>
               </div>
