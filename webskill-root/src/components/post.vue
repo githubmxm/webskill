@@ -22,6 +22,11 @@
                             <use xlink:href="#icon-weixinfenxiang"></use>
                         </svg>
                     </li>
+                    <li title="qq分享"  onclick="buttonShare('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey')">
+                         <svg class="icon svg-icon" aria-hidden="true">
+                            <use xlink:href="#icon-qqkongjianfenxiang"></use>
+                        </svg>
+                    </li>
                 </ul>
             </p>
             <div class="commentHandle clear">
@@ -649,24 +654,25 @@ export default {
     }
   }
   .qrCode{
-   position: fixed;
+    position: fixed;
     left: 50%;
     top: 50%;
     margin: -180px 0 0 -90px;
-    width: 180px;
-    height: 180px;
-    z-index: 1000001;   
+    width: 234px;
+    height: 239px;
+    z-index: 1000001;
+    background: #fff;  
     .codeConent{
         position: relative;
         #qrCode{
-          border: 1px solid #ccc;
           overflow: hidden;
+          padding-left: 27px;
         }
         .qcColse{
             position: absolute;
             right: -10px;
             font-size: 20px;
-            top: 16px;
+            top: -14px;
             cursor: pointer;
             transition: transform .2s linear;
             -moz-transition: transform .2s linear;

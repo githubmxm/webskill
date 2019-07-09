@@ -86,7 +86,7 @@
                 <!--搜索导航-->
                 <div class="search" v-if="dynamicTypeCur==5">
                     <input type="text" name="" v-model="searchCon" id="searchCon" placeholder="输入您要搜索的内容" />
-                    <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()">点我搜索</span>
+                    <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()"></span>
                 </div>
                 <ul>
                     <li class="zxbl" v-for="(item,index) in dynamicDataList" :key="index" :arid="item.newNoteId" :animate-delay="(0.3*index)"
@@ -124,7 +124,7 @@
                <!--搜索导航-->
                <div class="search" v-if="dynamicTypeCur==4">
                   <input type="text" name="" v-model="searchCon" id="searchCon" placeholder="输入您要搜索的内容" />
-                  <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()">点我搜索</span>
+                  <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()"></span>
               </div>
              
               <!--敬请期待-->
@@ -132,7 +132,7 @@
                 <!--搜索导航-->
                 <div class="search" v-if="dynamicTypeCur==5">
                     <input type="text" name="" v-model="searchCon" id="searchCon" placeholder="输入您要搜索的内容" />
-                    <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()">点我搜索</span>
+                    <span class="searchSubmit" @click="searchDetail()" @keyup.13="searchDetail()"></span>
                 </div>
                 <p v-show="dynamicDataList.length==0" class="noCons">暂 无 数 据！</p>
               </div>
@@ -520,26 +520,37 @@
               }
             }
             .search {
+              position: relative;
               display: inline-block;
               margin-bottom: 15px;
               #searchCon {
+                display: inline-block;
+                width: 205px;
                 height: 27px;
                 line-height: 27px;
                 border: 1px solid #ccc;
                 padding-left: 8px;
+                background-image: url(/webskill/images/icon_my.png);
+                background-repeat: no-repeat;
+                background-position: 180px -184px;
+                padding-right: 30px;
               }
               .searchSubmit {
                 display: inline-block;
                 font-size: .12rem;
                 cursor: pointer;
                 text-align: center;
-                background: #cddce0;
                 color: #000;
                 border-radius: 3px;
                 padding: 3px 8px;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 33px;
+                height: 27px;
                 &:hover {
-                  background: #5d9fec;
-                  color: #fff;
+                //   background: #5d9fec;
+                //   color: #fff;
                 }
               }
             }
