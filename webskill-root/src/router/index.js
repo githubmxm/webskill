@@ -48,6 +48,10 @@ const router = new Router({
     path:'/leaveword',
     name:'leaveword',
     component:  resolve => require(['@/components/leaveword'], resolve)
+  },,{
+    path:'/leaveDetail/:id',
+    name:'leaveDetail',
+    component:  resolve => require(['@/components/leaveDetail'], resolve)
   },{
     path:'/privacy',
     name:'privacy',

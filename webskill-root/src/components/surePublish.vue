@@ -20,9 +20,9 @@
         <ul class="post-list list-group col-xs-12" v-if="myPostList==2">
                 <li class="list-group-item col-xs-12" v-for="(item,index) in publishListDetail" :key="index">
                     <span class="title col-xs-8 col-md-9 col-lg-11"><div class="conDetailLeave" v-html="item.leaveCon"></div>【{{item.leaveAuthor}}】-【{{item.leaveType | chainLeaveType}}】</span>
-                    <!-- <span class="look col-xs-4 col-md-3 col-lg-1 text-center">
-                        <router-link v-if="myPostList==0" :to="'/previewpost/'+item.publishPostId" target="_blank" class="headerTitle">查看详情</router-link>
-                    </span> -->
+                    <span class="look col-xs-4 col-md-3 col-lg-1 text-center">
+                        <router-link  :to="'/leaveDetail/'+item.leaveId" target="_blank" class="headerTitle">查看详情</router-link>
+                    </span>
                 </li>
             </ul>
         <Pagebar v-show="publishListDetail.length>0" :page-model="pageModel" ref="publishPostListPage"></Pagebar>

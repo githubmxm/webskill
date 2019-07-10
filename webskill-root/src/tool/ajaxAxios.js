@@ -67,6 +67,9 @@ export default {
             localStorage.setItem("webskillloginstatus",0);
             location.href='/index';
           }
+          if(res.data.status=="no-leave"){
+            location.href='/surePublish';
+          }
           if(res.data.status=="no-logine"||location.pathname!="/"&&forLogin.includes(location.pathname)&&res.data.status=="incorrect-login"||res.data.status=="incorrect-anthen-login"){
             localStorage.setItem("webskillloginstatus",0);
             resolve(this.getNewToken(function(){

@@ -27,6 +27,10 @@ export function tyApi() {
         ueController:baseUrl+"/webskill/UE/node/controller",
         //用户留言
         leaveWord:baseUrl+"/webskill/leaveWord",
+        //留言详情
+        leavewordDetail:baseUrl+"/webskill/leavewordDetail",
+        //删除留言
+        deleteLeave:baseUrl+"/webskill/deleteLeave",
         //获取云标签
         getCloudTags:baseUrl+"/webskill/getCloudTags",
         //获取导航菜单
