@@ -24,6 +24,15 @@
               </div>
             </div>
         </div>
+             <div class="conlists left"  v-if="vcodeShow">
+            <div class="leaves">
+              <div class="wordType">
+                   <input type="text" v-model="inCode" id="vcode" placeholder="请输入验证码" maxlength="6" />
+              <span class="imgCode" @click="refreshVcode()" v-html="vcode"></span>
+              </div>
+            </div>
+        </div>
+       
         <div class="details left clear">
           <div class="editor-container">
             <UE :config=config :id=ue2 ref="ue2"></UE>
@@ -50,6 +59,9 @@ export default {
         chooseTypeId:'',
         wordOneShow:false,
         leaveWordTitles:'',
+         vcode:"",
+        inCode:"",
+        vcodeShow:false,
         error:'',
         config: {
           initialFrameWidth: null,
@@ -79,6 +91,21 @@ export default {
       wordOneShowFn(){
         this.wordOneShow=!this.wordOneShow;
       },
+      refreshVcode:function(){
+        this.getVcode();
+      },
+      getVcode:function(){
+      let _this=this;
+      _this.$axios.get(tyApi().vcode,{r:Math.random()}).then((res) => {
+          if(res.data.status=="incorrect-authen"){
+            _this.vcode='验证码'
+             this.error='操作异常';
+          }else{
+              _this.vcode=res.data;
+          }
+          
+      })
+    },
       leaveWordSubmitFn(){
         let _this=this;
         let ueCon=this.$refs.ue2.getUEContent();
@@ -94,10 +121,12 @@ export default {
           this.error='发表内容不能少于10个字';
           return false;
         }
+        this.error="";
         _this.$axios.post(tyApi().leaveWord,{
-                  leaveWordType:_this.chooseTypeId,
+            leaveWordType:_this.chooseTypeId,
             leaveWordCon:ueCon,
-            leaveWordTitle:_this.leaveWordTitles
+            leaveWordTitle:_this.leaveWordTitles,
+            vcode:_this.inCode
           }).then((res)=>{
           let resData=res.data;
           if(resData.status=="incorrect-login"){
@@ -109,6 +138,11 @@ export default {
               location.href="/index";
             },3000);
           }else{
+            if(resData.status=="code-error"){
+                _this.vcodeShow=true;
+                _this.inCode="";
+                _this.refreshVcode();
+            }
             this.error=resData.message;
             return false;
           }
@@ -132,6 +166,15 @@ export default {
       .conlists{
         display: inline-block;
       }
+      #vcode{
+                   display: inline-block;
+    width: 160px;
+    border: 1px solid #cdc5c5;
+    padding: 5px;
+    position: relative;
+    top: -8px;
+    height: 30px;
+              }
       .title{
         margin-bottom: .3rem;
         font-weight: bold;

@@ -66,7 +66,7 @@
             <ul class="commentList">
               <li class="commentD" v-for="(comment,index) in commentList" :key="index">
                 <p class="commentInfo clear">
-                  <span class="commentUser left">{{comment.commentAuthor}}.<i>[F{{index+1}}]</i></span>
+                  <span class="commentUser left">{{comment.commentAuthor}}<i style="display:none;">.[F{{index+1}}]</i></span>
                   <span class="commentTime right">评论于 <i class="time">{{comment.commentTime}}</i></span>
                 </p>
                 <div class="comcon" v-html="comment.commentCon"></div>
@@ -79,8 +79,11 @@
                       <div class="comcon" v-html="replayComment.replayCommentCon"></div>
                     </li>
                 </ul>
+              
                 <p class="clear">
-                  <span class="replayComment right" @click="replayComment(comment.commentAuthor,comment.commentId)">回复楼主</span>
+                  <span v-if="comment.commentAuthor!=loginUser" class="replayComment right commentCz" @click="replayComment(comment.commentAuthor,comment.commentId)">回复楼主</span>
+                  <span v-if="comment.commentAuthor==loginUser" class="replayComment right commentCz" @click="delComment(comment.commentId)">删除</span>
+                  <!-- <span class="replayComment right commentCz">举报</span> -->
                 </p>
                 <div class="clear" v-if="comment.commentId==replayUeId">
                   <UE  :config=config2 :id="'replay'+comment.commentId" :ref="'uec'+comment.commentId"></UE>
@@ -157,7 +160,7 @@ export default {
           toolbars:[['test','emotion']],
           //focus时自动清空初始化时的内容
           autoClearinitialContent:true,
-          maximumWords:200,
+          maximumWords:300,
           pasteplain:true,
           initialContent:'<span style="color:#ccc; onlyRed">回复:</span>',
           //关闭字数统计
@@ -206,7 +209,6 @@ export default {
           if(res.data.status=="incorrect-authen"){
             _this.vcode='验证码'
             _this.errorMsg='操作异常';
-            _this.showError=false;
           }else{
               _this.vcode=res.data;
           }
@@ -300,6 +302,7 @@ export default {
           this.error="评论内容不能为空";
           return false;
         }
+        this.error="";
         _this.$axios.post(tyApi().postComment,{
             commentId:_this.postId,
             commentCons:content,
@@ -310,7 +313,7 @@ export default {
             //文章评论成功
             _this.refreshVcode();
             _this.inCode="";
-            _this.commentList.push({"commentAuthor":_this.loginUser,"commentTime":FormatDataTime(new Date().getTime()),"commentCon":content});
+            _this.commentList.push({"commentAuthor":_this.loginUser,"commentTime":FormatDataTime(new Date().getTime()),"commentCon":content,commentId:commentdata.data.commentId});
             _this.$refs.ue.clearContent();
             _this.replayUeId=10000000000;
           }else{
@@ -330,6 +333,21 @@ export default {
         this.errUeLi="";
         this.replayUeId=commentid;
       },
+      //删除评论
+      delComment(commentid){
+          let _this=this;
+        _this.$axios.post(tyApi().delComment,{
+             delCommentId:commentid
+        }).then((res) => {
+          let delCommentData = res.data;
+          if(delCommentData.status=="success"){
+            //删除评论成功
+            _this.commentList.splice(_this.commentList.findIndex(item => item.commentId == commentid), 1);
+          }else{
+             _this.errUeLi=delCommentData.message;
+          }
+        })
+      },
       //确认回复评论内容
       replayCommentSure(refcom,replayAuthor,index){
         let _this=this;
@@ -343,6 +361,7 @@ export default {
           this.errUeLi="回复评论内容不能为空";
           return false;
         }
+        this.errUeLi="";
         _this.$axios.post(tyApi().postReplayComment,{
              replayCommentId:_this.postId,
             replayCommentFloor:_this.replayUeId,
@@ -352,7 +371,6 @@ export default {
           let replayCommentdata = res.data;
           if(replayCommentdata.status=="success"){
             //回复评论成功
-            console.log(_this.commentList)
             _this.commentList[index].replayComment.push({"replayCommentId":_this.replayUeId,"replayCommentAuthor":_this.loginUser,"replayCommentTime":FormatDataTime(new Date().getTime()),"replayCommentCon":refcomCon})
             _this.$refs[refcom][0].clearContent();
           }else{
@@ -623,6 +641,12 @@ export default {
                 margin: 8px 0;
                 color:#5d9fec;
                 cursor: pointer;
+                &:hover{
+                    color: #b231b3;
+                }
+              }
+              .commentCz{
+                  margin-left: 10px;
               }
               .replayCommentSure{
                  display: inline-block;

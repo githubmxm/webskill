@@ -41,6 +41,8 @@ export function tyApi() {
         postComment:baseUrl+"/webskill/post/comment",
         //回复评论
         postReplayComment:baseUrl+"/webskill/post/replayComment",
+        //删除评论
+        delComment:baseUrl+"/webskill/post/delComment",
         //获取指定楼层回复评论内容
         postReplayCommentFloor:baseUrl+"/webskill/post/replayCommentFloor",
         //找回密码-获取邮箱认证码
