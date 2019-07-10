@@ -121,6 +121,10 @@ export default {
           this.error='发表内容不能少于10个字';
           return false;
         }
+        if(ueCon.length>300){
+          this.error='留言字数过长';
+          return false;
+        }
         this.error="";
         _this.$axios.post(tyApi().leaveWord,{
             leaveWordType:_this.chooseTypeId,

@@ -302,6 +302,10 @@ export default {
           this.error="评论内容不能为空";
           return false;
         }
+        if(content.length>300){
+          this.error="评论内容过长";
+          return false;
+        }
         this.error="";
         _this.$axios.post(tyApi().postComment,{
             commentId:_this.postId,
