@@ -81,7 +81,7 @@
                 </ul>
               
                 <p class="clear">
-                  <span v-if="comment.commentAuthor!=loginUser" class="replayComment right commentCz" @click="replayComment(comment.commentAuthor,comment.commentId)">回复楼主</span>
+                  <span v-if="loginUser&&comment.commentAuthor!=loginUser" class="replayComment right commentCz" @click="replayComment(comment.commentAuthor,comment.commentId)">回复楼主</span>
                   <span v-if="comment.commentAuthor==loginUser" class="replayComment right commentCz" @click="delComment(comment.commentId)">删除</span>
                   <!-- <span class="replayComment right commentCz">举报</span> -->
                 </p>
