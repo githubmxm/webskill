@@ -16,7 +16,7 @@
               <a class="nextAD right" :class="{disableN:nextArticle=='javascript:void(0)'}" :href="nextArticle">下一篇 <i class="fa fa-angle-double-right"></i></a>
             </div>
             <p class="showIcon" v-if="arTitleStatus==1">
-                <ul>
+                <ul class="overflow">
                     <li @click="shareType(0)" title="微信分享">
                         <svg class="icon svg-icon" aria-hidden="true">
                             <use xlink:href="#icon-weixinfenxiang"></use>
@@ -33,7 +33,16 @@
                         </svg>
                     </li>
                 </ul>
+                <ul class="overflow pull-right">
+                    <li @click="enshrine()" title="收藏" >
+                         <svg class="icon svg-icon" aria-hidden="true">
+                            <use v-if="isEnshrine" xlink:href="#icon-shoucang-copy"></use>
+                            <use v-else xlink:href="#icon-shoucang"></use>
+                        </svg>
+                    </li>
+                </ul>
             </p>
+
             <div class="commentHandle clear">
               <p class="commentHandleType right" v-if="false">
                 <span class="comLike">{{arLikeNum}}</span>
@@ -187,6 +196,7 @@ export default {
           initialFrameHeight:60
         },
         qrCode:false,
+        isEnshrine:false,//是否已收藏
         surePostPublishButton:false,
         ue1: "ue1", // 不同编辑器必须不同的id,
         errUeLi:"",
@@ -201,6 +211,7 @@ export default {
         commentsList:[],
         firstSofaShow:true,
         postId:parseInt(this.$route.params.id),
+        postOId:"",
         arTitle:"",
         arTitleStatus:"",
         arAuthor:"",
@@ -220,7 +231,7 @@ export default {
     UE
   },
   methods: {
-      getVcode:function(){
+    getVcode:function(){
       let _this=this;
       _this.$axios.get(tyApi().vcode,{r:Math.random()}).then((res) => {
           if(res.data.status=="incorrect-authen"){
@@ -231,6 +242,20 @@ export default {
           }
           
       })
+    },
+    enshrine:function(){
+        let _this=this;
+        _this.$axios.post(tyApi().toEnshrine,{articleId:_this.postId,articleOId:_this.postOId}).then((res) => {
+            let dD=res.data;
+          if(dD.status=="success"){
+              if(dD.message=="取消收藏成功"){
+                    _this.isEnshrine=false;
+              }else{
+                  _this.isEnshrine=true;
+              }
+              
+          }
+       })
     },
     refreshVcode:function(){
       this.getVcode();
@@ -267,6 +292,7 @@ export default {
                  _this.arTitleStatus=postShowDetailData.newNoteStatus;
                 _this.arTime=postShowDetailData.newNoteTime;
                 _this.arAuthor=postShowDetailData.newNoteAuthor;
+                _this.postOId=postShowDetailData.newNoteOId;
                 _this.arType=postShowDetailData.newNoteLabel!=""?postShowDetailData.newNoteLabel:'内容详情';
                 _this.arDownNum=postShowDetailData.newNoteLikeNum;
                 _this.arLikeNum=postShowDetailData.newNoteDownNum;

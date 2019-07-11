@@ -4,9 +4,10 @@
 <template>
     <div class="surePublish row">
         <p class="navbar-header col-xs-12">
-          <span class="navbar-brand  pull-left" :class="{'cur':myPostList==0,'col-xs-6':userGrade!=1,'col-xs-4':userGrade==1}"  @click="postPublishType(0)">待发布{{error}}</span>
-          <span class="navbar-brand pull-left" :class="{'cur':myPostList==1,'col-xs-6':userGrade!=1,'col-xs-4':userGrade==1}" @click="postPublishType(1)">已发布{{errorHas}}</span>
-          <span class="navbar-brand pull-left col-xs-4" v-if="userGrade==1" :class="{'cur':myPostList==2}" @click="postPublishType(2)">留言区{{leaveErr}}</span>
+          <span class="navbar-brand  pull-left" :class="{'cur':myPostList==0,'col-xs-4':userGrade!=1,'col-xs-3':userGrade==1}"  @click="postPublishType(0)">待发布{{error}}</span>
+          <span class="navbar-brand pull-left" :class="{'cur':myPostList==1,'col-xs-4':userGrade!=1,'col-xs-3':userGrade==1}" @click="postPublishType(1)">已发布{{errorHas}}</span>
+          <span class="navbar-brand pull-left" :class="{'cur':myPostList==3,'col-xs-4':userGrade!=1,'col-xs-3':userGrade==1}" @click="postPublishType(3)">已收藏{{errorEn}}</span>
+          <span class="navbar-brand pull-left col-xs-3" v-if="userGrade==1" :class="{'cur':myPostList==2}" @click="postPublishType(2)">留言区{{leaveErr}}</span>
         </p>
         <ul class="post-list list-group col-xs-12" v-if="myPostList<2">
             <li class="list-group-item col-xs-12" v-for="(item,index) in publishListDetail" :key="index">
@@ -40,6 +41,7 @@ export default {
         return {
             error:"",
             errorHas:"",
+            errorEn:"",
             myPostList:0,
             leaveErr:"",
             pageModel:{
@@ -74,7 +76,14 @@ export default {
     },
     methods: {
         postPublishType(index){
-            this.pageModel.myPostList=this.myPostList=index;
+            this.myPostList=index;
+            this.pageModel.myPostList=index;
+            if(index==3){
+                this.pageModel.url="/webskill/getEnshrine"
+            }else{
+                this.pageModel.url="/webskill/getSurePublish"
+            }
+            
             this.pageModel.againPost++;
         }
     },

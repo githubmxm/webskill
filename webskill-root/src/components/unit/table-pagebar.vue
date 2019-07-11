@@ -142,7 +142,7 @@
                     //文章列表
                     this.param["skillType"]=this.skillType;
                 }
-                if(this.url.indexOf("getSurePublish")>=0){
+                if(this.url.indexOf("getSurePublish")>=0||this.url.indexOf("getEnshrine")>=0){
                     //待发布列表
                     this.param["myPostList"]=this.myPostList;
                 }

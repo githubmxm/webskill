@@ -73,6 +73,8 @@ export function tyApi() {
         postDeleteSurePublish:baseUrl+"/webskill/post/deleteSurePublish",
         //驳回待发布文章
         postRejectSurePublish:baseUrl+"/webskill/post/rejectSurePublish",
+        //文章收藏
+        toEnshrine:baseUrl+"/webskill/post/toEnshrine",
         //数据分布
         articleDistribution:baseUrl+"/webskill/article/distribution",
         //个人资源预上传
