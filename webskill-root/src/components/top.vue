@@ -106,6 +106,7 @@ export default {
         if(userState.data.userGrade==3){
           _this.myPostInfoShow=true;
         }
+         _this.setUserGradeFn(userState.data.userGrade);
         _this.setLoginUserFn(_this.username);
       }else{
         localStorage.setItem("webskillloginstatus",0);

@@ -4,9 +4,9 @@
 <template>
     <div class="surePublish row">
         <p class="navbar-header col-xs-12">
-          <span class="navbar-brand col-xs-4 pull-left" :class="{cur:myPostList==0}"  @click="postPublishType(0)">待发布{{error}}</span>
-          <span class="navbar-brand col-xs-4 pull-left" :class="{cur:myPostList==1}" @click="postPublishType(1)">已发布{{errorHas}}</span>
-          <span class="navbar-brand col-xs-4 pull-left" :class="{cur:myPostList==2}" @click="postPublishType(2)">留言区{{leaveErr}}</span>
+          <span class="navbar-brand  pull-left" :class="{'cur':myPostList==0,'col-xs-6':userGrade!=1,'col-xs-4':userGrade==1}"  @click="postPublishType(0)">待发布{{error}}</span>
+          <span class="navbar-brand pull-left" :class="{'cur':myPostList==1,'col-xs-6':userGrade!=1,'col-xs-4':userGrade==1}" @click="postPublishType(1)">已发布{{errorHas}}</span>
+          <span class="navbar-brand pull-left col-xs-4" v-if="userGrade==1" :class="{'cur':myPostList==2}" @click="postPublishType(2)">留言区{{leaveErr}}</span>
         </p>
         <ul class="post-list list-group col-xs-12" v-if="myPostList<2">
             <li class="list-group-item col-xs-12" v-for="(item,index) in publishListDetail" :key="index">
@@ -76,7 +76,7 @@ export default {
         // this.getSurePost();
     },
     computed: {
-       ...mapGetters(['publishListDetail'])
+       ...mapGetters(['publishListDetail','userGrade'])
     }
 };
 </script>
