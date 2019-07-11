@@ -58,7 +58,7 @@
                 </div>
             </div>
           </div>
-          <div v-else>
+          <div v-if="arTitleStatus==-1">
             <div class="postStatus">
                 已驳回
             </div>
