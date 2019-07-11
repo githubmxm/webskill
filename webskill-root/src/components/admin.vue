@@ -53,7 +53,7 @@
             <UE :config=config :id=ue3 ref="ue3"></UE>
           </div>
           <div class="buttonEror clear">
-              <router-link v-show="viewNewPost"  class="submitResult" :to="'/previewpost/'+subPostId" target="_blank">提交成功,点击阅览,确认发布</router-link>
+              <!-- <router-link v-show="viewNewPost"  class="submitResult" :to="'/previewpost/'+subPostId" target="_blank">提交成功,点击阅览,确认发布</router-link> -->
               <span class="leaveWordSubmit" @click="postArticle()">发布</span>
           </div>
          
@@ -159,6 +159,7 @@ export default {
           if(resData.status=="success"){
             //提交成功,等待审核
             _this.subPostId=resData.data.postId;
+            location.href="/previewpost/"+resData.data.postId;
             _this.viewNewPost=true;
           }else{
               _this.viewNewPost=false;
