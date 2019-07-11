@@ -133,7 +133,7 @@
               <!-- </transition-group> -->
               <!--互动专区-->
               <!-- <div class="wordDynamic clear"  v-else-if="dynamicTypeCur==2">
-                <a class="goLeaveWords blink" href="/leaveword" target="_blank">我要发表</a>
+                <a class="goLeaveWords blink" href="/leaveword" target="_blank">我要留言</a>
               </div> -->
                <!--搜索导航-->
                <div class="search" v-if="dynamicTypeCur==4">
