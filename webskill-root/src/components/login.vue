@@ -401,9 +401,6 @@ export default {
 }
 }
  @media (max-width: 413px) {
-   .submit{
-      margin-left: .62rem !important;
-   }
    .login_main{
        float: none;
    }
