@@ -71,6 +71,8 @@ export function tyApi() {
         getSurePublish:baseUrl+"/webskill/getSurePublish",
         //删除待发布文章
         postDeleteSurePublish:baseUrl+"/webskill/post/deleteSurePublish",
+        //驳回待发布文章
+        postRejectSurePublish:baseUrl+"/webskill/post/rejectSurePublish",
         //数据分布
         articleDistribution:baseUrl+"/webskill/article/distribution",
         //个人资源预上传

@@ -11,6 +11,7 @@
         <ul class="post-list list-group col-xs-12" v-if="myPostList<2">
             <li class="list-group-item col-xs-12" v-for="(item,index) in publishListDetail" :key="index">
                 <span class="title col-xs-8 col-md-9 col-lg-11">{{item.publishPostTitle}}【{{item.publishPostAuthor}}】</span>
+                <span v-if="myPostList==0" class="title col-xs-8 col-md-9 col-lg-11 articlVerStatus">审核状态: <i class="verStatus">{{item.publishPostStatus | filterPostStatus}}</i></span>
                 <span class="look col-xs-4 col-md-3 col-lg-1 text-center">
                     <router-link v-if="myPostList==0" :to="'/previewpost/'+item.publishPostId" target="_blank" class="headerTitle">查看详情</router-link>
                     <router-link v-if="myPostList==1" :to="'/post/'+item.publishPostId" target="_blank" class="headerTitle">查看详情</router-link>
@@ -61,6 +62,14 @@ export default {
                 case 3: return '技能解答';
                 break;
             }
+        },
+        filterPostStatus(status){
+            switch(status){
+                case -1: return '驳回';
+                break;
+                case 0: return '审核中';
+                break;
+            }
         }
     },
     methods: {
@@ -101,6 +110,12 @@ export default {
     .post-list{
         font-size: 14px;
         padding-left: 15px;
+        .articlVerStatus{
+            margin-top: 3px;
+            .verStatus{
+                color: #00bfff;
+            }
+        }
     }
     .look{
         &:hover{

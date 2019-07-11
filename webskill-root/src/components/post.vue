@@ -42,12 +42,27 @@
               </p>
             </div>
           </div>
-          <div class="surePostPublish" v-if="surePostPublishButton" @click="postPublishAjax()">
-            确认发布{{postAjaxError}}
-          </div>
-          <div class="surePostPublish" v-if="surePostPublishButton" @click="postDeletcAjax()">
-              删除{{deletePostAjaxError}}
+          <div class="cz" v-if="arTitleStatus==0">
+            <div class="surePostPublish" v-if="surePostPublishButton" @click="postPublishAjax()">
+                确认发布{{postAjaxError}}
             </div>
+            <div class="surePostPublish" v-if="surePostPublishButton" @click="postDeletcAjax()">
+                删除{{deletePostAjaxError}}
+            </div>
+            <div class="surePostPublish" v-if="surePostPublishButton" @click="postRejectAjax()">
+                驳回{{deleteRejectAjaxError}}
+            </div>
+            <div v-else>
+                <div class="postStatus">
+                    审核中
+                </div>
+            </div>
+          </div>
+          <div v-else>
+            <div class="postStatus">
+                已驳回
+            </div>
+          </div>
           <!--评论内容-->
           <div class="comments">
             <div id="comment_form" v-if="!loginStatue">
@@ -177,6 +192,7 @@ export default {
         errUeLi:"",
         postAjaxError:"",//确认发布按钮错误提示
         deletePostAjaxError:"",
+        deleteRejectAjaxError:"",
         arCons:"",
         vcodeShow:false,
         vcode:"",
@@ -186,6 +202,7 @@ export default {
         firstSofaShow:true,
         postId:parseInt(this.$route.params.id),
         arTitle:"",
+        arTitleStatus:"",
         arAuthor:"",
         arTime:"",
         arType:"内容详情",
@@ -247,6 +264,7 @@ export default {
                 let postShowDetailData=postshow.data.newNoteDetail;
                 _this.arCons=postShowDetailData.newNoteCont;
                 _this.arTitle=postShowDetailData.newNoteTitle;
+                 _this.arTitleStatus=postShowDetailData.newNoteStatus;
                 _this.arTime=postShowDetailData.newNoteTime;
                 _this.arAuthor=postShowDetailData.newNoteAuthor;
                 _this.arType=postShowDetailData.newNoteLabel!=""?postShowDetailData.newNoteLabel:'内容详情';
@@ -407,6 +425,20 @@ export default {
             location.href="/index";
           }else{
             _this.deletePostAjaxError="-"+result.message;
+          }
+        })
+      },
+      //驳回待发布文章
+      postRejectAjax:function(){
+          let _this=this;
+        _this.$axios.post(tyApi().postRejectSurePublish,{
+            rejectPostId:_this.postId
+        }).then((res) => {
+          var result=res.data;
+          if(result.status=="success"){
+            location.href="/surePublish";
+          }else{
+            _this.deleteRejectAjaxError="-"+result.message;
           }
         })
       },
@@ -683,6 +715,19 @@ export default {
             &:hover{
               background: blueviolet;
             }
+        }
+        .postStatus{
+            position: relative;
+            margin-right: 10px;
+            line-height: 23px;
+            display: inline-block;
+            text-align: center;
+            color: #000;
+            float: right;
+            margin-top: 10px;
+            padding: 3px 13px;
+            border-radius: 3px;
+            font-size: 16px;
         }
       .leaveWordSubmit{
         display: inline-block;
