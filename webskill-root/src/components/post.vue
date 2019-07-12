@@ -293,6 +293,7 @@ export default {
                 _this.arTime=postShowDetailData.newNoteTime;
                 _this.arAuthor=postShowDetailData.newNoteAuthor;
                 _this.postOId=postShowDetailData.newNoteOId;
+                _this.isEnshrine=postShowDetailData.isEnshrine;
                 _this.arType=postShowDetailData.newNoteLabel!=""?postShowDetailData.newNoteLabel:'内容详情';
                 _this.arDownNum=postShowDetailData.newNoteLikeNum;
                 _this.arLikeNum=postShowDetailData.newNoteDownNum;
