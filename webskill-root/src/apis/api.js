@@ -79,6 +79,12 @@ export function tyApi() {
         followUser:baseUrl+"/webskill/followUser",
         //查看当前文章的用户是否被当用户关注
         userIsFollow:baseUrl+"/webskill/userIsFollow",
+        //查询已发布文章总数
+        getArticleNumber:baseUrl+"/webskill/getArticleNumber",
+        //查询我的粉丝数
+        getMyFansNumber:baseUrl+"/webskill/getMyFansNumber",
+        //查询我的评论数
+        getMyCommentNumber:baseUrl+"/webskill/getMyCommentNumber",
         //数据分布
         articleDistribution:baseUrl+"/webskill/article/distribution",
         //个人资源预上传

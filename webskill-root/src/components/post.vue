@@ -14,6 +14,18 @@
                 </svg>
             </span>
         </div>
+        <div class="user bg_fff overflow">
+            <ul  class="text-center">
+                <li class="col-xs-4">文章</li>
+                <li class="col-xs-4">粉丝</li>
+                <li class="col-xs-4">评论</li>
+            </ul>
+             <ul class="text-center">
+                <li class="col-xs-4">{{articleNum}}</li>
+                <li class="col-xs-4">{{fansNum}}</li>
+                <li class="col-xs-4">{{myCommentNum}}</li>
+            </ul>
+        </div>
     </div>
     <section class="col-xs-12 col-md-8 col-lg-9">
       <article class="conPost">
@@ -208,6 +220,10 @@ export default {
           initialFrameHeight:60
         },
         qrCode:false,
+        articleNum:"",
+        fansNum:"",
+        commentNum:"",
+        myCommentNum:"",
         isEnshrine:false,//是否已收藏
         isGuanZhu:false,//是否已关注
         surePostPublishButton:false,
@@ -298,6 +314,40 @@ export default {
           }
        })
     },
+    getArticleNumber:function(){
+         let _this=this;
+        _this.$axios.get(tyApi().getArticleNumber,{r:Math.random(),userName:_this.arAuthor}).then((res) => {
+          let dD=res.data;
+          if(dD.status=="success"){
+              _this.articleNum=dD.data;
+          }else{
+              _this.articleNum="";
+          }
+       })
+    },
+    getMyFansNumber:function(){
+         let _this=this;
+        _this.$axios.get(tyApi().getMyFansNumber,{r:Math.random(),userName:_this.arAuthor}).then((res) => {
+          let dD=res.data;
+          if(dD.status=="success"){
+              _this.fansNum=dD.data;
+          }else{
+              _this.fansNum="";
+          }
+       })
+    },
+     getMyCommentNumber:function(){
+         let _this=this;
+        _this.$axios.get(tyApi().getMyCommentNumber,{r:Math.random(),userName:_this.arAuthor}).then((res) => {
+          let dD=res.data;
+          if(dD.status=="success"){
+              _this.myCommentNum=dD.data;
+          }else{
+              _this.myCommentNum="";
+          }
+       })
+    },
+    
     refreshVcode:function(){
       this.getVcode();
     },
@@ -344,6 +394,9 @@ export default {
                 _this.prevArticle=postShowDetailData.newNotePrev?"/post/"+(_this.postId-1):"javascript:void(0)";
                 let cclist=postshow.data.articleComment;
                 _this.userIsFollow();
+                _this.getArticleNumber();
+                _this.getMyFansNumber();
+                _this.getMyCommentNumber();
                 for(let i=0;i<cclist.length;i++){
                     _this.$axios.get(tyApi().postReplayCommentFloor,{
                       articleId:_this.postId,
