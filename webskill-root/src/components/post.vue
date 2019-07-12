@@ -2,11 +2,23 @@
 文章详情
 -->
 <template>
-  <div class="conDetails">
-    <section>
+  <div class="conDetails overflow">
+    <div class="col-xs-12 col-md-4 col-lg-3 overflow lCon">
+        <!--用户信息-->
+        <div class="user bg_fff overflow">
+            <span class="pull-left">{{arAuthor}}</span>
+            <span title="加关注" class="pull-right addGZ" @click="followUser()">
+                 <svg class="icon svg-icon" aria-hidden="true">
+                    <use  v-if="!isGuanZhu" xlink:href="#icon-guanzhu"></use>
+                    <use v-else xlink:href="#icon-guanzhu1"></use>
+                </svg>
+            </span>
+        </div>
+    </div>
+    <section class="col-xs-12 col-md-8 col-lg-9">
       <article class="conPost">
         <h1 class="title">{{arTitle}}</h1>
-        <div class="meta"><span class="creatAuthor">{{arAuthor}}</span><span class="creatTime">{{arTime}}</span><span class="pageViewNum">{{arViewNum}}</span> 次浏览<span class="commentNum">{{arComeNum}}</span> 次评论<span class="commentLabel">技能类型: <i class="labelName">{{arType}}</i> </span></div>
+        <div class="meta"><span class="creatAuthor" hidden>{{arAuthor}}</span><span class="creatTime">{{arTime}}</span><span class="pageViewNum">{{arViewNum}}</span> 次浏览<span class="commentNum">{{arComeNum}}</span> 次评论<span class="commentLabel">技能类型: <i class="labelName">{{arType}}</i> </span></div>
         <div class="details">
           <!--文章内容-->
           <div class="detcom">
@@ -197,6 +209,7 @@ export default {
         },
         qrCode:false,
         isEnshrine:false,//是否已收藏
+        isGuanZhu:false,//是否已关注
         surePostPublishButton:false,
         ue1: "ue1", // 不同编辑器必须不同的id,
         errUeLi:"",
@@ -257,6 +270,34 @@ export default {
           }
        })
     },
+    followUser:function(){
+        let _this=this;
+        _this.$axios.post(tyApi().followUser,{userName:_this.arAuthor}).then((res) => {
+          let dD=res.data;
+          if(dD.status=="success"){
+              if(dD.message=="关注成功"){
+                    _this.isGuanZhu=true;
+              }else{
+                  _this.isGuanZhu=false;
+              }
+              
+          }
+       })
+    },
+    userIsFollow:function(){
+         let _this=this;
+        _this.$axios.get(tyApi().userIsFollow,{r:Math.random(),userName:_this.arAuthor}).then((res) => {
+          let dD=res.data;
+          if(dD.status=="success"){
+              if(dD.message=="已关注"){
+                    _this.isGuanZhu=true;
+              }else{
+                  _this.isGuanZhu=false;
+              }
+              
+          }
+       })
+    },
     refreshVcode:function(){
       this.getVcode();
     },
@@ -302,6 +343,7 @@ export default {
                 _this.nextArticle=postShowDetailData.newNoteNext?"/post/"+(_this.postId+1):"javascript:void(0)";
                 _this.prevArticle=postShowDetailData.newNotePrev?"/post/"+(_this.postId-1):"javascript:void(0)";
                 let cclist=postshow.data.articleComment;
+                _this.userIsFollow();
                 for(let i=0;i<cclist.length;i++){
                     _this.$axios.get(tyApi().postReplayCommentFloor,{
                       articleId:_this.postId,
@@ -507,16 +549,34 @@ export default {
     this.getArticleDetail();
     this.$nextTick(function () {
         this.bindQRCode();
-        
-    })
+    });
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .conDetails{
+    .lCon{
+        margin-bottom: 15px;
+        .bg_fff{
+            background: #fff;
+        }
+        .user{
+            padding: 5px 10px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            font-size: 14px;
+            border-bottom: 1px solid #ccc;
+            .addGZ{
+                font-size: 18px;
+                cursor: pointer;
+            }
+        }
+    }
   section{
     background: #fcfcfa;
+    padding-left: 0;
+    padding-right: 0;
     box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
     .conPost{
       background: #fff;

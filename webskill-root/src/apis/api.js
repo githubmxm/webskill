@@ -75,6 +75,10 @@ export function tyApi() {
         postRejectSurePublish:baseUrl+"/webskill/post/rejectSurePublish",
         //文章收藏
         toEnshrine:baseUrl+"/webskill/post/toEnshrine",
+        //关注用户
+        followUser:baseUrl+"/webskill/followUser",
+        //查看当前文章的用户是否被当用户关注
+        userIsFollow:baseUrl+"/webskill/userIsFollow",
         //数据分布
         articleDistribution:baseUrl+"/webskill/article/distribution",
         //个人资源预上传
