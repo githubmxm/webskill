@@ -4,6 +4,7 @@
       <ul class="col-xs-4 col-md-3 col-lg-2 bg_write padding-0 type_msg">
           <li :class="{'cur':typeMsg==0}" @click="typeMsgs(0)">我的关注</li>
           <li :class="{'cur':typeMsg==1}" @click="typeMsgs(1)">我的评论</li>
+          <li :class="{'cur':typeMsg==2}" @click="typeMsgs(2)">系统消息</li>
       </ul>
       <div class="col-xs-8 col-md-9 col-lg-10 padding-0 bg_write msg_con">
         
@@ -21,6 +22,9 @@
                      <router-link :to="'/post/'+item.articleId" target="_blank" class="headerTitle">查看详情</router-link>
                 </p>
             </li>
+        </ul>
+         <ul class="post-list list-group col-xs-12" v-if="typeMsg==2">
+          
         </ul>
         <Pagebar v-show="publishListDetail.length>0" :page-model="pageModel" ref="publishPostListPage"></Pagebar>
           <div class="noCon"  v-if="publishListDetail.length==0">
@@ -72,6 +76,8 @@
         this.typeMsg=type;
             if(type==1){
                 this.pageModel.url="/webskill/getMyComments"
+            }else if(type==2){
+                this.pageModel.url="/webskill/getSysMsgs"
             }else{
                 this.pageModel.url="/webskill/getMyMsgs"
             }
