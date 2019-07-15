@@ -261,6 +261,9 @@ export default {
 }
 }
 @media (max-width: 375px) {
+.top .topType{
+        line-height: 35px;
+}
  .top .topType .alinks a{
    padding:0 6px;
  }

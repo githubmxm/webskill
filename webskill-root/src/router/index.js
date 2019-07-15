@@ -81,6 +81,10 @@ const router = new Router({
     name:'myResource',
     component:  resolve => require(['@/components/myResource'], resolve)
   },{
+    path:'/myMsgs',
+    name:'myMsgs',
+    component:  resolve => require(['@/components/myMsgs'], resolve)
+  },{
     path:'/other/roseAnm',
     name:'roseAnm',
     component:  resolve => require(['@/components/other/roseAnm'], resolve)

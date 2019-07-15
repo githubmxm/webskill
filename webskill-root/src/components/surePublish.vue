@@ -26,7 +26,7 @@
                         <router-link  :to="'/leaveDetail/'+item.leaveId" target="_blank" class="headerTitle">查看详情</router-link>
                     </span>
                 </li>
-            </ul>
+        </ul>
         <Pagebar v-show="publishListDetail.length>0" :page-model="pageModel" ref="publishPostListPage"></Pagebar>
     </div>    
 </template>

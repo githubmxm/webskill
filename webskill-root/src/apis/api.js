@@ -95,6 +95,10 @@ export function tyApi() {
         getMyResource:baseUrl+"/webskill/getMyResource",
         //资源读取
         downloadResource:baseUrl+"/webskill/downloadResource",
+        //我的消息
+        getMyMsgs:baseUrl+"/webskill/getMyMsgs",
+        //取消关注
+        cancelFollow:baseUrl+"/webskill/cancelFollow",
         //other
         other:baseUrl+"/webskill/other"
 
