@@ -191,7 +191,7 @@ export default {
           toolbars:[['test','emotion']],
           //focus时自动清空初始化时的内容
           autoClearinitialContent:true,
-          maximumWords:300,
+          maximumWords:1000,
           pasteplain:true,
           initialContent:'<span style="color:#ccc; onlyRed">畅言一下吧...</span>',
           //关闭字数统计
@@ -208,7 +208,7 @@ export default {
           toolbars:[['test','emotion']],
           //focus时自动清空初始化时的内容
           autoClearinitialContent:true,
-          maximumWords:300,
+          maximumWords:1000,
           pasteplain:true,
           initialContent:'<span style="color:#ccc; onlyRed">回复:</span>',
           //关闭字数统计
@@ -442,7 +442,7 @@ export default {
           this.error="评论内容不能为空";
           return false;
         }
-        if(content.length>300){
+        if(content.length>1000){
           this.error="评论内容过长";
           return false;
         }
