@@ -49,6 +49,7 @@ import {
     tyApi
   } from "@/apis/api";
 import { mapActions,mapGetters } from "vuex";
+import { setInterval } from 'timers';
 
 export default {
   name: "top",
@@ -59,6 +60,7 @@ export default {
       username:"",
       navs:[],
       navUrl:this.$route.path,
+      noReadNum:0, //未读消息条数
       showInfoList:false,
       myPostInfoShow:false
     };
@@ -95,12 +97,24 @@ export default {
         }
       })
     },
+    getNoReadMsg(){
+      let _this=this;
+      _this.$axios.get(tyApi().getNoReadMsg,{r:Math.random()}).then((res) => {
+        let d = res.data
+        if (d.status == "success") {
+            _this.noReadNum=d.data;
+        }
+      })
+    },
     loginStatus(){
         let _this=this;
       _this.$axios.get(tyApi().loginStatus,{}).then((res) => {
       let userState = res.data;
       if (userState.status == "success") {
-          localStorage.setItem("webskillloginstatus",1)
+        setInterval(function(){
+            _this.getNoReadMsg()
+        },3000);
+        localStorage.setItem("webskillloginstatus",1)
         _this.setLoginStatueFn(true);
         _this.username=userState.data.userName;
         if(userState.data.userGrade==3){

@@ -99,6 +99,10 @@ export function tyApi() {
         getMyMsgs:baseUrl+"/webskill/getMyMsgs",
         //取消关注
         cancelFollow:baseUrl+"/webskill/cancelFollow",
+        //是否存在未读消息
+        getNoReadMsg:baseUrl+"/webskill/getNoReadMsg",
+        //消息读取后更新
+        readThisMsg:baseUrl+"/webskill/readThisMsg",
         //other
         other:baseUrl+"/webskill/other"
 

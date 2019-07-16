@@ -25,9 +25,9 @@
         </ul>
          <ul class="post-list list-group col-xs-12" v-if="typeMsg==2">
               <li class="list-group-item col-xs-12" v-for="(item,index) in publishListDetail" :key="index">
-                <div class="typeComment">{{item.sys_name}}</div>
+                <div class="typeComment sysMsgHeader">{{item.sys_name}}<i v-if="item.sys_status==0" class="noRead"></i></div>
                  <p class="text-right">
-                     <router-link v-if="item.sys_url" :to="item.sys_url" target="_blank" class="headerTitle">查看详情</router-link>
+                     <span v-if="item.sys_url" @click="readThisMsg(item.sys_id,item.sys_url)" target="_blank" class="headerTitle">查看详情</span>
                 </p>
             </li>
         </ul>
@@ -79,15 +79,23 @@
       },
      typeMsgs(type){
         this.typeMsg=type;
-            if(type==1){
-                this.pageModel.url="/webskill/getMyComments"
-            }else if(type==2){
-                this.pageModel.url="/webskill/getSysMsgs"
-            }else{
-                this.pageModel.url="/webskill/getMyMsgs"
-            }
-            
-            this.pageModel.againPost++;
+        if(type==1){
+            this.pageModel.url="/webskill/getMyComments"
+        }else if(type==2){
+            this.pageModel.url="/webskill/getSysMsgs"
+        }else{
+            this.pageModel.url="/webskill/getMyMsgs"
+        }
+        
+        this.pageModel.againPost++;
+      },
+      readThisMsg(id,url){
+          let _this=this;
+          _this.$axios.post(tyApi().readThisMsg,{
+              msgId:id
+          }).then((res) => {
+              location.href=url;
+          })
       },
       cancelFollow(id){
           let _this=this;
@@ -97,8 +105,7 @@
               if(res.data.status=="success"){
                 _this.pageModel.againPost++;
               }
-               
-        })
+          })
       }
     },
     computed: {
@@ -114,6 +121,24 @@
 <style lang="scss" scoped>
 .padding-0{
      padding: 0;
+ }
+ .noRead{
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: red;
+    left: -10px;
+    top: 6px;
+    border-radius: 50%;
+ }
+ .headerTitle{
+     cursor: pointer;
+     &:hover{
+         color: #b83241;
+     }
+ }
+ .sysMsgHeader{
+     position: relative;
  }
 .type_msg{
     border-right: 1px solid #ccc;
