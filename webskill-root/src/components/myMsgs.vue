@@ -26,6 +26,9 @@
          <ul class="post-list list-group col-xs-12" v-if="typeMsg==2">
               <li class="list-group-item col-xs-12" v-for="(item,index) in publishListDetail" :key="index">
                 <div class="typeComment">{{item.sys_name}}</div>
+                 <p class="text-right">
+                     <router-link v-if="item.sys_url" :to="item.sys_url" target="_blank" class="headerTitle">查看详情</router-link>
+                </p>
             </li>
         </ul>
         <Pagebar v-show="publishListDetail.length>0" :page-model="pageModel" ref="publishPostListPage"></Pagebar>
