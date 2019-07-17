@@ -15,6 +15,7 @@
       </p>
       <!--用户已登录-->
       <p class="userLogin  col-lg-2 right" v-if="loginStatue" @mouseleave="listHide()">
+        <i title="您有未读消息" v-if="noReadNum" class="noRead"></i>
         <span class="pull-right">
             <span class="userInfo left" @mouseover="listShow()">{{username}}</span>
             <i class="icon iconfont icon-xiaosanjiaodown"></i>
@@ -214,6 +215,16 @@ export default {
     position: relative;
     height: 100%;
     padding: 0;
+    .noRead{
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #e80d06;
+        border-radius: 50%;
+        position: absolute;
+        top: 11px;
+        left: -11px;
+    }
     .userInfo{
       color:#333;
       &:hover{
