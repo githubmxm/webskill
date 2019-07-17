@@ -35,7 +35,7 @@
           <!--文章内容-->
           <div class="detcom">
             <div class="detCon" v-html="arCons"></div>
-            <div class="nextPrev">
+            <div  v-if="arTitleStatus==1" class="nextPrev">
               <a class="prevAD left" :class="{disableP:prevArticle=='javascript:void(0)'}" :href="prevArticle"><i class="fa fa-angle-double-left"></i> 上一篇</a>
               <a class="nextAD right" :class="{disableN:nextArticle=='javascript:void(0)'}" :href="nextArticle">下一篇 <i class="fa fa-angle-double-right"></i></a>
             </div>
@@ -154,7 +154,7 @@
           <div class="clear">
             <span data-v-7ddd7f1e="" class="leaveWordSubmit" @click="postComment()">发表</span>
           </div>
-          <p class="firstSofa" v-show="commentList.length==0">还没有评论哦，来抢个沙发吧！</p>
+          <p v-if="arTitleStatus==1" class="firstSofa" v-show="commentList.length==0">还没有评论哦，来抢个沙发吧！</p>
         </div>
       </article>
     </section>
