@@ -15,9 +15,9 @@
       </p>
       <!--用户已登录-->
       <p class="userLogin  col-lg-2 right" v-if="loginStatue" @mouseleave="listHide()">
-        <i title="您有未读消息" v-if="noReadNum" class="noRead"></i>
+        
         <span class="pull-right">
-            <span class="userInfo left" @mouseover="listShow()">{{username}}</span>
+            <span class="userInfo left" @mouseover="listShow()">{{username}}<i title="您有未读消息" v-if="noReadNum" class="noRead"></i></span>
             <i class="icon iconfont icon-xiaosanjiaodown"></i>
         </span>
         <ul class="infoList" v-show="showInfoList">
@@ -227,6 +227,7 @@ export default {
     }
     .userInfo{
       color:#333;
+      position: relative;
       &:hover{
         cursor: pointer;
       }
